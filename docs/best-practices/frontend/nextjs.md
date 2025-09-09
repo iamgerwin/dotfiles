@@ -1,10 +1,11 @@
-# Next.js Best Practices
+# Next.js 15 Best Practices
 
 ## Official Documentation
 - **Next.js Documentation**: https://nextjs.org/docs
 - **Next.js Learn**: https://nextjs.org/learn
 - **Next.js Examples**: https://github.com/vercel/next.js/tree/canary/examples
 - **Vercel Documentation**: https://vercel.com/docs
+- **Next.js 15 Release Notes**: https://nextjs.org/blog/next-15
 
 ## Project Structure
 
@@ -87,7 +88,151 @@ project-root/
 
 ## Core Best Practices
 
-### 1. App Router Best Practices (Next.js 14+)
+## Next.js 15 New Features & Best Practices
+
+### 1. Turbopack Build System (Beta)
+
+```javascript
+// next.config.js - Enable Turbopack for development
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Enable Turbopack for development (much faster builds)
+  experimental: {
+    turbo: {
+      // Configure Turbopack loaders
+      loaders: {
+        '.svg': ['@svgr/webpack'],
+      },
+      // Configure Turbopack resolveAlias
+      resolveAlias: {
+        '@': './src',
+        '@/components': './src/components',
+      },
+    },
+  },
+}
+
+module.exports = nextConfig
+```
+
+```bash
+# Use Turbopack for faster development builds
+npm run dev --turbo
+# or
+yarn dev --turbo
+```
+
+### 2. Node.js Middleware (Stable)
+
+```typescript
+// middleware.ts - Enhanced middleware with Node.js APIs
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+import { headers } from 'next/headers'
+
+export async function middleware(request: NextRequest) {
+  // Access Node.js APIs directly in middleware
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('x-pathname', request.nextUrl.pathname)
+  
+  // Enhanced geolocation and user agent detection
+  const country = request.geo?.country || 'US'
+  const city = request.geo?.city || 'Unknown'
+  
+  // Rate limiting with enhanced request info
+  const ip = request.ip || request.headers.get('x-forwarded-for') || '127.0.0.1'
+  
+  // Advanced routing logic
+  if (request.nextUrl.pathname.startsWith('/api/')) {
+    // API-specific middleware logic
+    requestHeaders.set('x-api-route', 'true')
+    requestHeaders.set('x-user-country', country)
+  }
+  
+  return NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  })
+}
+
+export const config = {
+  matcher: [
+    '/((?!_next/static|_next/image|favicon.ico).*)',
+  ],
+}
+```
+
+### 3. Enhanced TypeScript Support
+
+```typescript
+// Enhanced TypeScript configuration for Next.js 15
+// tsconfig.json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["dom", "dom.iterable", "es6", "ES2022"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/types/*": ["./src/types/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
+
+// Enhanced type definitions
+// types/next.d.ts
+import type { NextRequest } from 'next/server'
+
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv {
+      DATABASE_URL: string
+      NEXTAUTH_SECRET: string
+      NEXTAUTH_URL: string
+      NEXT_PUBLIC_API_URL: string
+    }
+  }
+}
+
+// Enhanced request types
+interface CustomNextRequest extends NextRequest {
+  user?: {
+    id: string
+    email: string
+    role: string
+  }
+}
+```
+
+### 4. App Router Best Practices (Next.js 15)
 
 ```typescript
 // app/layout.tsx - Root Layout
@@ -590,21 +735,52 @@ const StyledButton = styled.button`
 `
 ```
 
-### 11. Deployment Configuration
+### 11. Next.js 15 Configuration & Deployment
 
 ```javascript
-// next.config.js
+// next.config.js - Next.js 15 optimized configuration
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Enable React Strict Mode for better development experience
   reactStrictMode: true,
+  
+  // Use SWC for minification (faster than Terser)
   swcMinify: true,
-  images: {
-    domains: ['images.example.com'],
-    formats: ['image/avif', 'image/webp'],
-  },
+  
+  // Enable Turbopack for development (Next.js 15)
   experimental: {
-    serverActions: true,
+    turbo: {
+      loaders: {
+        '.svg': ['@svgr/webpack'],
+      },
+      resolveAlias: {
+        '@': './src',
+      },
+    },
+    // Server Actions are now stable
+    serverActions: {
+      allowedOrigins: ['localhost:3000', 'yourdomain.com'],
+      bodySizeLimit: '2mb',
+    },
   },
+  
+  // Enhanced image optimization
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.example.com',
+        port: '',
+        pathname: '/uploads/**',
+      },
+    ],
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 31536000, // 1 year
+  },
+  
+  // Security headers
   headers: async () => [
     {
       source: '/(.*)',
@@ -621,15 +797,504 @@ const nextConfig = {
           key: 'X-XSS-Protection',
           value: '1; mode=block',
         },
+        {
+          key: 'Strict-Transport-Security',
+          value: 'max-age=31536000; includeSubDomains',
+        },
+        {
+          key: 'Content-Security-Policy',
+          value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';",
+        },
       ],
     },
   ],
+  
+  // Optimized bundling
+  webpack: (config, { isServer }) => {
+    // Optimize bundle splitting
+    if (!isServer) {
+      config.optimization.splitChunks.cacheGroups = {
+        ...config.optimization.splitChunks.cacheGroups,
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          priority: 10,
+          chunks: 'all',
+        },
+      }
+    }
+    return config
+  },
+  
+  // Output settings for static export if needed
+  // output: 'export', // Uncomment for static export
+  
+  // Environment variable validation
+  env: {
+    CUSTOM_KEY: process.env.CUSTOM_KEY,
+  },
 }
 
 module.exports = nextConfig
 ```
 
-### Common Pitfalls to Avoid
+## Vercel Deployment Best Practices
+
+### 1. Project Configuration
+
+```json
+// vercel.json - Comprehensive Vercel configuration
+{
+  "version": 2,
+  "framework": "nextjs",
+  "buildCommand": "next build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
+  "regions": ["iad1"],
+  "functions": {
+    "app/api/**/*.ts": {
+      "runtime": "nodejs18.x",
+      "maxDuration": 30
+    }
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/old-page",
+      "destination": "/new-page",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/proxy/:path*",
+      "destination": "https://external-api.com/:path*"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/cleanup",
+      "schedule": "0 2 * * *"
+    }
+  ]
+}
+```
+
+### 2. Environment Variables Management
+
+```bash
+# .env.example - Document all required environment variables
+# Database
+DATABASE_URL=postgresql://user:password@localhost:5432/database
+
+# Authentication
+NEXTAUTH_SECRET=your-secret-key-here
+NEXTAUTH_URL=http://localhost:3000
+
+# External APIs
+STRIPE_SECRET_KEY=sk_test_...
+STRIPE_PUBLIC_KEY=pk_test_...
+
+# Analytics
+GOOGLE_ANALYTICS_ID=GA-XXXXXXXXX
+
+# Feature flags
+FEATURE_NEW_DASHBOARD=false
+
+# Vercel-specific
+VERCEL_URL=your-app.vercel.app
+VERCEL_ENV=development
+```
+
+```typescript
+// lib/env.ts - Type-safe environment validation
+import { z } from 'zod'
+
+const envSchema = z.object({
+  // Database
+  DATABASE_URL: z.string().url(),
+  
+  // Auth
+  NEXTAUTH_SECRET: z.string().min(32),
+  NEXTAUTH_URL: z.string().url(),
+  
+  // External services
+  STRIPE_SECRET_KEY: z.string().startsWith('sk_'),
+  
+  // Public variables
+  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z.string().startsWith('pk_'),
+  NEXT_PUBLIC_APP_URL: z.string().url(),
+  
+  // Vercel
+  VERCEL_URL: z.string().optional(),
+  VERCEL_ENV: z.enum(['development', 'preview', 'production']).optional(),
+})
+
+export const env = envSchema.parse({
+  DATABASE_URL: process.env.DATABASE_URL,
+  NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+  NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+  STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+  NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
+  NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+  VERCEL_URL: process.env.VERCEL_URL,
+  VERCEL_ENV: process.env.VERCEL_ENV,
+})
+```
+
+### 3. Build Optimization & Cost Control
+
+```javascript
+// vercel-build.js - Custom build script with optimization
+const { execSync } = require('child_process')
+
+async function build() {
+  console.log('🚀 Starting optimized build...')
+  
+  // Analyze bundle before build
+  if (process.env.ANALYZE === 'true') {
+    execSync('npx @next/bundle-analyzer', { stdio: 'inherit' })
+  }
+  
+  // Build with specific optimizations
+  execSync('next build', { 
+    stdio: 'inherit',
+    env: {
+      ...process.env,
+      NODE_OPTIONS: '--max-old-space-size=4096',
+    }
+  })
+  
+  // Post-build optimizations
+  console.log('✨ Build optimization complete!')
+}
+
+build().catch(console.error)
+```
+
+```json
+// package.json - Optimized scripts
+{
+  "scripts": {
+    "dev": "next dev --turbo",
+    "build": "node vercel-build.js",
+    "build:analyze": "ANALYZE=true npm run build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "test": "jest --passWithNoTests",
+    "test:e2e": "playwright test",
+    "postinstall": "prisma generate"
+  }
+}
+```
+
+### 4. Performance Monitoring & Cost Optimization
+
+```typescript
+// lib/analytics.ts - Performance monitoring
+export function trackWebVitals(metric: any) {
+  // Track Core Web Vitals
+  const { name, value, id } = metric
+  
+  // Send to analytics service
+  if (typeof window !== 'undefined') {
+    window.gtag?.('event', name, {
+      event_category: 'Web Vitals',
+      event_label: id,
+      value: Math.round(name === 'CLS' ? value * 1000 : value),
+      non_interaction: true,
+    })
+  }
+  
+  // Log to Vercel Analytics
+  if (process.env.NODE_ENV === 'production') {
+    console.log(`[Web Vitals] ${name}: ${value}`)
+  }
+}
+
+// app/layout.tsx - Add web vitals tracking
+export function reportWebVitals(metric: any) {
+  trackWebVitals(metric)
+}
+```
+
+```typescript
+// lib/vercel-edge.ts - Edge function optimization
+import { NextRequest, NextResponse } from 'next/server'
+
+// Edge function for geolocation-based redirects
+export function middleware(request: NextRequest) {
+  const country = request.geo?.country
+  const city = request.geo?.city
+  
+  // Redirect users to region-specific content
+  if (country === 'GB' && !request.nextUrl.pathname.startsWith('/uk')) {
+    return NextResponse.redirect(new URL('/uk', request.url))
+  }
+  
+  // Add geolocation headers for personalization
+  const response = NextResponse.next()
+  response.headers.set('x-user-country', country || 'unknown')
+  response.headers.set('x-user-city', city || 'unknown')
+  
+  return response
+}
+
+export const config = {
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  runtime: 'edge', // Use Edge Runtime for better performance
+}
+```
+
+### 5. Database & External Service Integration
+
+```typescript
+// lib/db-edge.ts - Database connection for Edge Runtime
+import { PrismaClient } from '@prisma/client/edge'
+import { withAccelerate } from '@prisma/extension-accelerate'
+
+// Use Prisma Accelerate for Edge Runtime
+const prisma = new PrismaClient().$extends(withAccelerate())
+
+export { prisma }
+
+// lib/redis-edge.ts - Redis for Edge caching
+import { Redis } from '@upstash/redis'
+
+export const redis = new Redis({
+  url: process.env.UPSTASH_REDIS_REST_URL!,
+  token: process.env.UPSTASH_REDIS_REST_TOKEN!,
+})
+```
+
+### 6. Vercel-Specific Optimizations
+
+```typescript
+// app/api/edge-api/route.ts - Optimized Edge API Route
+import { NextRequest, NextResponse } from 'next/server'
+
+export const runtime = 'edge'
+export const dynamic = 'force-dynamic'
+
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url)
+  const id = searchParams.get('id')
+  
+  // Use Vercel KV for caching
+  const cached = await kv.get(`item:${id}`)
+  if (cached) {
+    return NextResponse.json(cached, {
+      headers: {
+        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+      },
+    })
+  }
+  
+  // Fetch from external API with timeout
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), 5000)
+  
+  try {
+    const response = await fetch(`https://api.example.com/items/${id}`, {
+      signal: controller.signal,
+    })
+    const data = await response.json()
+    
+    // Cache the result
+    await kv.set(`item:${id}`, data, { ex: 3600 })
+    
+    return NextResponse.json(data)
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Failed to fetch data' },
+      { status: 500 }
+    )
+  } finally {
+    clearTimeout(timeoutId)
+  }
+}
+```
+
+### 7. Deployment Workflow
+
+```yaml
+# .github/workflows/vercel.yml - CI/CD with Vercel
+name: Vercel Deployment
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run type checking
+        run: npm run type-check
+      
+      - name: Run linting
+        run: npm run lint
+      
+      - name: Run tests
+        run: npm run test
+      
+      - name: Build project
+        run: npm run build
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+      
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./
+```
+
+## Vercel Cost Optimization & Pitfalls
+
+### Common Vercel Cost Pitfalls to Avoid
+
+1. **Excessive Function Execution Time**
+   ```typescript
+   // ❌ Bad: Long-running function
+   export async function GET() {
+     const data = await heavyComputation() // Takes 45 seconds
+     return Response.json(data)
+   }
+   
+   // ✅ Good: Optimize for function timeouts
+   export async function GET() {
+     const cached = await redis.get('heavy-data')
+     if (cached) return Response.json(cached)
+     
+     const data = await Promise.race([
+       heavyComputation(),
+       new Promise((_, reject) => 
+         setTimeout(() => reject(new Error('Timeout')), 25000)
+       )
+     ])
+     
+     await redis.setex('heavy-data', 3600, data)
+     return Response.json(data)
+   }
+   ```
+
+2. **Bandwidth Overuse**
+   ```typescript
+   // ❌ Bad: Large unoptimized responses
+   export async function GET() {
+     const users = await db.user.findMany({
+       include: { posts: true, profile: true, settings: true }
+     })
+     return Response.json(users) // Potentially huge response
+   }
+   
+   // ✅ Good: Paginated and optimized responses
+   export async function GET(request: Request) {
+     const { searchParams } = new URL(request.url)
+     const page = parseInt(searchParams.get('page') || '1')
+     const limit = Math.min(parseInt(searchParams.get('limit') || '10'), 100)
+     
+     const users = await db.user.findMany({
+       skip: (page - 1) * limit,
+       take: limit,
+       select: { id: true, name: true, email: true, createdAt: true }
+     })
+     
+     return Response.json(users, {
+       headers: { 'Cache-Control': 'public, s-maxage=300' }
+     })
+   }
+   ```
+
+3. **Unnecessary Edge Function Usage**
+   ```typescript
+   // ❌ Bad: Using Edge Runtime for database operations
+   export const runtime = 'edge' // Don't use for DB queries
+   
+   export async function GET() {
+     const users = await prisma.user.findMany() // This will be slow/fail
+     return Response.json(users)
+   }
+   
+   // ✅ Good: Use Node.js runtime for database operations
+   export async function GET() {
+     const users = await prisma.user.findMany()
+     return Response.json(users)
+   }
+   ```
+
+### Cost Monitoring & Alerts
+
+```typescript
+// lib/cost-monitor.ts - Monitor Vercel usage
+export async function logUsageMetrics() {
+  const metrics = {
+    timestamp: new Date().toISOString(),
+    functionInvocations: process.env.VERCEL_FUNCTION_INVOCATIONS || 0,
+    bandwidth: process.env.VERCEL_BANDWIDTH_USAGE || 0,
+    buildTime: process.env.VERCEL_BUILD_TIME || 0,
+  }
+  
+  // Log to external monitoring service
+  if (process.env.NODE_ENV === 'production') {
+    await fetch('https://monitoring-service.com/metrics', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(metrics)
+    })
+  }
+}
+
+// app/api/health/route.ts - Health check with usage logging
+export async function GET() {
+  await logUsageMetrics()
+  
+  return Response.json({
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    region: process.env.VERCEL_REGION,
+  })
+}
+```
+
+### Common Next.js 15 Pitfalls to Avoid
 
 1. **Not understanding Server vs Client Components**
 2. **Fetching data in client components when server components would be better**
@@ -637,33 +1302,118 @@ module.exports = nextConfig
 4. **Importing large libraries in client components**
 5. **Not implementing proper error boundaries**
 6. **Forgetting to add 'use client' directive**
-7. **Not optimizing bundle size**
+7. **Not optimizing bundle size with Turbopack**
 8. **Using useEffect for data fetching instead of server components**
 9. **Not implementing proper loading states**
-10. **Ignoring TypeScript errors**
+10. **Ignoring TypeScript errors in Next.js 15**
+11. **Overusing Edge Runtime for database operations**
+12. **Not implementing proper caching strategies**
+13. **Excessive function execution times on Vercel**
+14. **Not monitoring Vercel usage and costs**
+15. **Missing environment variable validation**
 
-### Performance Tips
+### Next.js 15 Performance Tips
 
-1. **Use Static Generation when possible**
-2. **Implement Incremental Static Regeneration (ISR)**
-3. **Optimize images with next/image**
-4. **Use dynamic imports for code splitting**
-5. **Implement proper caching strategies**
-6. **Minimize client-side JavaScript**
-7. **Use React Server Components effectively**
-8. **Implement streaming for better perceived performance**
-9. **Use Edge Runtime for faster responses**
-10. **Monitor Core Web Vitals**
+1. **Use Turbopack for faster development builds**
+2. **Leverage Server Components for data fetching**
+3. **Implement Incremental Static Regeneration (ISR) with revalidateTag**
+4. **Optimize images with next/image and AVIF format**
+5. **Use dynamic imports for code splitting**
+6. **Implement proper caching with Cache API**
+7. **Minimize client-side JavaScript bundle size**
+8. **Use Edge Runtime for geolocation and simple logic**
+9. **Implement streaming with Suspense boundaries**
+10. **Monitor Core Web Vitals with Vercel Analytics**
+11. **Use Server Actions for form handling**
+12. **Implement proper error boundaries at component level**
+13. **Use React.memo() and useMemo() judiciously**
+14. **Optimize font loading with next/font**
+15. **Implement service worker for offline functionality**
 
-### Useful Libraries
+### Essential Next.js 15 Libraries
 
-- **@tanstack/react-query**: Data fetching and caching
-- **swr**: Data fetching with caching
-- **zod**: Schema validation
-- **react-hook-form**: Form handling
-- **next-auth**: Authentication
-- **prisma**: Database ORM
-- **tailwindcss**: Utility-first CSS
-- **framer-motion**: Animations
-- **react-testing-library**: Testing utilities
+**Core Dependencies**
+- **next@15.x**: The framework itself
+- **react@18.x**: React with concurrent features
+- **typescript**: Type safety and developer experience
+
+**Data Fetching & State Management**
+- **@tanstack/react-query@5.x**: Server state management
+- **swr@2.x**: Data fetching with caching
+- **zustand**: Lightweight client state management
+- **jotai**: Atomic state management
+
+**Forms & Validation**
+- **react-hook-form@7.x**: Performant form library
+- **zod@3.x**: TypeScript-first schema validation
+- **@hookform/resolvers**: Form validation resolvers
+
+**Authentication & Security**
+- **next-auth@5.x**: Authentication for Next.js
+- **@auth/core**: Core authentication library
+- **jose**: JWT utilities
+- **bcryptjs**: Password hashing
+
+**Database & ORM**
+- **prisma@5.x**: Next-generation ORM
+- **@prisma/client**: Database client
+- **@vercel/postgres**: Vercel's PostgreSQL client
+- **drizzle-orm**: Lightweight TypeScript ORM
+
+**Styling & UI**
+- **tailwindcss@3.x**: Utility-first CSS framework
+- **@headlessui/react**: Unstyled UI components
+- **framer-motion@11.x**: Motion library
+- **lucide-react**: Icon library
+- **class-variance-authority**: Variant-based styling
+
+**Development & Testing**
+- **@types/node**: Node.js type definitions
+- **@types/react**: React type definitions
+- **jest**: Testing framework
+- **@testing-library/react**: React testing utilities
 - **playwright**: E2E testing
+- **eslint-config-next**: ESLint configuration
+- **prettier**: Code formatting
+
+**Performance & Monitoring**
+- **@vercel/analytics**: Vercel Analytics
+- **@sentry/nextjs**: Error monitoring
+- **@next/bundle-analyzer**: Bundle analysis
+- **sharp**: Image optimization (auto-installed)
+
+**Utilities**
+- **date-fns**: Date utility library
+- **lodash**: Utility functions (use specific imports)
+- **clsx**: Conditional className utility
+- **nanoid**: Unique ID generation
+
+### Next.js 15 Migration Checklist
+
+1. **Update to Next.js 15**
+   ```bash
+   npm install next@15 react@18 react-dom@18
+   ```
+
+2. **Enable Turbopack (optional)**
+   ```bash
+   npm run dev --turbo
+   ```
+
+3. **Update TypeScript configuration**
+   ```json
+   {
+     "compilerOptions": {
+       "target": "ES2022",
+       "moduleResolution": "bundler"
+     }
+   }
+   ```
+
+4. **Update middleware for Node.js APIs**
+5. **Review and optimize bundle size**
+6. **Test Edge Runtime compatibility**
+7. **Update error handling patterns**
+8. **Implement new caching strategies**
+9. **Review Vercel deployment settings**
+10. **Monitor performance metrics**
