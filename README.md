@@ -20,6 +20,7 @@ This repository contains my personal dotfiles configuration, designed with modul
 - **Laravel/PHP Ready**: Aliases and tools for Laravel development workflow
 - **Custom Preservation**: Automatically detects and preserves your existing aliases, functions, and tools
 - **AI Prompts Management**: Organized system for managing AI prompts and context scripts by company/project
+- **Best Practices Documentation**: Comprehensive guides for modern development technologies and frameworks
 
 ## Structure
 
@@ -39,6 +40,21 @@ dotfiles/
 ├── AI_PROMPTS.md       # AI prompts management documentation
 ├── TEMPLATES.md        # Quick reference for all prompt templates
 ├── setup.sh            # Automated setup script
+├── docs/               # Documentation directory
+│   └── best-practices/ # Comprehensive technology guides
+│       ├── frontend/   # Frontend frameworks and libraries
+│       ├── backend/    # Backend frameworks and APIs
+│       ├── mobile/     # Mobile development platforms
+│       ├── database/   # Database technologies
+│       ├── devops/     # DevOps and cloud platforms
+│       ├── cms/        # Content Management Systems
+│       ├── enterprise/ # Enterprise software platforms
+│       ├── security/   # Security frameworks and compliance
+│       ├── testing/    # Testing frameworks and tools
+│       ├── languages/  # Programming languages
+│       ├── system-architecture/ # API design and architecture
+│       └── machine-learning/    # AI/ML best practices
+├── ai-prompts/         # AI prompts management system
 └── scripts/
     ├── install-brew.sh # Homebrew installation script
     ├── backup.sh       # Backup management script
@@ -229,6 +245,81 @@ ai-prompt copy development/code-review
 ```
 
 See [AI_PROMPTS.md](AI_PROMPTS.md) for complete documentation.
+
+### Best Practices Documentation
+
+Access comprehensive development guides for modern technologies:
+
+```bash
+# Browse documentation
+open ~/dotfiles/docs/best-practices/
+
+# Quick reference by category:
+ls ~/dotfiles/docs/best-practices/frontend/    # React, Vue, Angular, etc.
+ls ~/dotfiles/docs/best-practices/backend/     # Laravel, Django, NestJS, etc.
+ls ~/dotfiles/docs/best-practices/mobile/      # Flutter, React Native, etc.
+ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
+```
+
+#### Available Technologies
+
+**Frontend & UI**
+- React ecosystem (Next.js, Jotai), Vue.js (Nuxt.js)
+- UI libraries: shadcn/ui, Bootstrap, Tailwind CSS
+- Animation: GSAP
+- Data management: TanStack (Query, Router, Start, DB)
+- Legacy: jQuery
+
+**Backend & APIs**
+- PHP: Laravel, Symfony with API Platform
+- JavaScript/TypeScript: NestJS, Hono.js
+- Python: Django, general Python best practices
+- Ruby: Ruby on Rails
+- Elixir: Ash framework
+- .NET: ASP.NET Core with C#
+
+**Mobile Development**
+- Cross-platform: Flutter, React Native, .NET MAUI
+- Native: Swift (iOS), Kotlin (Android)
+
+**Database & Storage**
+- Relational: PostgreSQL
+- Backend as a Service: Supabase
+
+**DevOps & Cloud**
+- Containerization: Docker
+- Cloud platforms: AWS, Azure, DigitalOcean
+- Edge computing: Cloudflare (Workers, Pages, D1, R2)
+
+**Content Management**
+- WordPress: Core development, plugin development, theme development
+- Drupal: Module and theme development
+
+**Enterprise Systems**
+- SAP: ABAP, SAPUI5/OpenUI5
+- Integration: MuleSoft
+- CRM: Salesforce Lightning, Zoho
+
+**Security & Compliance**
+- Frameworks: NIST, ISO 27001, SOC 2, HIPAA, GDPR
+- Application security: OWASP Top 10, OWASP ASVS
+- Payment security: PCI DSS
+
+**Testing & Quality**
+- E2E testing: Playwright, Cypress
+- Performance testing: JMeter
+
+**System Architecture**
+- API design: RESTful APIs, GraphQL, gRPC
+- Documentation: OpenAPI/Swagger
+
+**Languages**
+- Systems programming: Rust, Go
+
+**AI & Machine Learning**
+- RAG (Retrieval-Augmented Generation) best practices
+
+Each guide includes practical examples, project structures, common pitfalls, performance optimization, and production-ready patterns.
 
 ## Maintenance
 
