@@ -264,14 +264,15 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 #### Available Technologies
 
 **Frontend & UI**
-- React ecosystem (Next.js, Jotai), Vue.js (Nuxt.js)
+- React ecosystem (Next.js, Jotai), Vue.js (Nuxt.js v4)
+- Authentication: Clerk, Better Auth
 - UI libraries: shadcn/ui, Bootstrap, Tailwind CSS
 - Animation: GSAP
 - Data management: TanStack (Query, Router, Start, DB)
 - Legacy: jQuery
 
 **Backend & APIs**
-- PHP: Laravel, Symfony with API Platform
+- PHP: Laravel, Laravel Filament v4, Symfony with API Platform
 - JavaScript/TypeScript: NestJS, Hono.js
 - Python: Django, general Python best practices
 - Ruby: Ruby on Rails
@@ -283,7 +284,9 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 - Native: Swift (iOS), Kotlin (Android)
 
 **Database & Storage**
-- Relational: PostgreSQL
+- ORM: Prisma
+- Relational: PostgreSQL, Neon (serverless PostgreSQL)
+- Edge Database: Turso (libSQL/SQLite)
 - Backend as a Service: Supabase
 
 **DevOps & Cloud**

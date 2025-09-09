@@ -58,10 +58,6 @@ gac() {
     git add . && git commit -m "$*"
 }
 
-# Show PATH entries, one per line
-path() {
-    echo $PATH | tr ':' '\n'
-}
 
 # Get weather
 weather() {

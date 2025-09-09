@@ -79,7 +79,8 @@ alias psg='ps aux | grep'
 alias port='lsof -i -P -n | grep LISTEN'
 
 # Custom tools
-alias clauded='claude --dangerously-skip-permissions'
+alias clauded='SHELL=/bin/bash claude --dangerously-skip-permissions'
+alias claude='SHELL=/bin/bash claude'
 
 # AI Prompts Management
 alias aip='ai-prompt'

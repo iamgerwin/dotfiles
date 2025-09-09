@@ -1,7 +1,8 @@
-# Nuxt.js + Pinia Best Practices
+# Nuxt.js v4 + Pinia Best Practices
 
 ## Official Documentation
-- **Nuxt.js Documentation**: https://nuxt.com/docs
+- **Nuxt.js v4 Documentation**: https://nuxt.com/docs
+- **Nuxt v4 Migration Guide**: https://nuxt.com/docs/getting-started/upgrade
 - **Nuxt Examples**: https://nuxt.com/docs/examples
 - **Pinia Documentation**: https://pinia.vuejs.org
 - **Vue 3 Documentation**: https://vuejs.org/guide
@@ -91,24 +92,58 @@ export default defineNuxtConfig({
   // CSS frameworks
   css: ['~/assets/css/main.css'],
   
-  // Modules
+  // Modules (v4 compatible)
   modules: [
     '@pinia/nuxt',
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
     '@nuxt/image',
     '@nuxtjs/color-mode',
+    '@nuxt/eslint',
+    '@nuxt/fonts',
   ],
   
-  // Runtime config
+  // New v4 features
+  experimental: {
+    scanPageMeta: true,
+    sharedPrerenderData: false,
+    compileTemplate: true,
+    resetAsyncDataToUndefined: true,
+    templateUtils: true,
+    relativeWatchPaths: true,
+    defaults: {
+      useAsyncData: {
+        deep: true
+      }
+    }
+  },
+  
+  // Future compatibility
+  future: {
+    compatibilityVersion: 4,
+  },
+  
+  // Runtime config (enhanced in v4)
   runtimeConfig: {
     // Private keys (only available on server-side)
     apiSecret: process.env.API_SECRET,
+    databaseUrl: process.env.DATABASE_URL,
     
     // Public keys (exposed to client-side)
     public: {
       apiBase: process.env.API_BASE || 'http://localhost:3001',
       appName: 'My Nuxt App',
+      version: process.env.npm_package_version || '1.0.0',
+    }
+  },
+  
+  // Enhanced Nitro configuration for v4
+  nitro: {
+    experimental: {
+      wasm: true
+    },
+    future: {
+      nativeSWR: true
     }
   },
   
@@ -133,7 +168,7 @@ export default defineNuxtConfig({
     transpile: ['@headlessui/vue']
   },
   
-  // Vite configuration
+  // Enhanced Vite configuration for v4
   vite: {
     css: {
       preprocessorOptions: {
@@ -141,8 +176,20 @@ export default defineNuxtConfig({
           additionalData: '@use "~/assets/scss/_vars.scss" as *;'
         }
       }
+    },
+    optimizeDeps: {
+      include: ['vue', 'vue-router']
     }
-  }
+  },
+  
+  // Type checking (v4 improvement)
+  typescript: {
+    strict: true,
+    typeCheck: true
+  },
+  
+  // Enhanced compatibility
+  compatibilityDate: '2024-04-03'
 })
 ```
 
@@ -325,7 +372,7 @@ export const useProductsStore = defineStore('products', {
 ### 3. Composables Pattern
 
 ```typescript
-// composables/useAuth.ts
+// composables/useAuth.ts (v4 enhanced)
 export const useAuth = () => {
   const authStore = useAuthStore()
   
@@ -341,9 +388,9 @@ export const useAuth = () => {
     return await authStore.logout()
   }
 
-  // Auto-initialize on composable use
+  // Auto-initialize on composable use (v4 optimized)
   onMounted(async () => {
-    if (!authStore.user && process.client) {
+    if (!authStore.user && import.meta.client) {
       await authStore.initializeAuth()
     }
   })
@@ -487,10 +534,14 @@ useSeoMeta({
 </template>
 
 <script setup lang="ts">
+// v4 enhanced data fetching with better caching
 const { data: featuredProducts, pending: loading } = await useFetch<Product[]>('/api/products/featured', {
   key: 'featured-products',
   server: true,
   default: () => [],
+  getCachedData(key) {
+    return nuxtApp.ssrContext?.cache?.[key] ?? nuxtApp.static.data[key]
+  },
 })
 
 // SEO
@@ -591,7 +642,7 @@ useSchemaOrg([
 ### 5. Server API Routes
 
 ```typescript
-// server/api/auth/login.post.ts
+// server/api/auth/login.post.ts (v4 enhanced)
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
@@ -957,7 +1008,7 @@ const handleSubmit = async () => {
 </script>
 ```
 
-### Common Pitfalls to Avoid
+### Common Pitfalls to Avoid (v4 Specific)
 
 1. **Not using server-side rendering when beneficial**
 2. **Forgetting to handle loading and error states**
@@ -969,6 +1020,10 @@ const handleSubmit = async () => {
 8. **Poor store organization**
 9. **Not implementing proper error handling**
 10. **Mixing server and client logic incorrectly**
+11. **Not setting compatibilityVersion: 4 for future-proofing**
+12. **Using deprecated process.client instead of import.meta.client**
+13. **Not utilizing enhanced caching strategies in v4**
+14. **Ignoring new experimental features that improve performance**
 
 ### Performance Tips
 
@@ -983,7 +1038,7 @@ const handleSubmit = async () => {
 9. **Implement proper loading states**
 10. **Monitor Core Web Vitals**
 
-### Useful Libraries
+### Useful Libraries (v4 Compatible)
 
 - **@pinia/nuxt**: State management
 - **@vueuse/nuxt**: Composition utilities
@@ -991,7 +1046,10 @@ const handleSubmit = async () => {
 - **@nuxt/image**: Image optimization
 - **@nuxtjs/color-mode**: Dark/light mode
 - **@nuxtjs/i18n**: Internationalization
-- **@nuxtjs/google-fonts**: Font optimization
+- **@nuxt/fonts**: Font optimization (replaces @nuxtjs/google-fonts)
 - **@nuxt/content**: Content management
+- **@nuxt/eslint**: ESLint integration
 - **nuxt-security**: Security headers
 - **@nuxtjs/robots**: SEO robots.txt
+- **@nuxt/test-utils**: Testing utilities
+- **@nuxt/devtools**: Enhanced development tools
