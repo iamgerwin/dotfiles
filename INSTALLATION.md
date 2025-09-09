@@ -125,6 +125,13 @@ After installation, verify everything is working:
    # Should show your backup history
    ```
 
+5. **Configure terminal font**:
+   ```bash
+   # Install required font
+   brew install --cask font-meslo-lg-nerd-font
+   ```
+   Then configure your terminal to use **MesloLGS NF** font. See [TERMINAL_SETUP.md](TERMINAL_SETUP.md) for detailed instructions.
+
 ## Rollback / Uninstall
 
 If something goes wrong or you want to revert:

@@ -106,6 +106,7 @@ cask "vlc"
 cask "transmission"            # BitTorrent client
 
 # Fonts
+cask "font-meslo-lg-nerd-font"      # Required for Powerlevel10k
 cask "font-monaspace"
 cask "font-monaspace-nerd-font"
 cask "font-fira-code"

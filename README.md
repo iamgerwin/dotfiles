@@ -96,6 +96,17 @@ Every installation automatically:
 - **Provides instant rollback** capability via `uninstall.sh`
 - **Never overwrites** without backing up first
 
+### 📖 Important: Terminal Font Setup
+
+**Powerlevel10k requires a Nerd Font** to display icons correctly. Without it, you'll see question marks in your prompt.
+
+Quick fix:
+```bash
+brew install --cask font-meslo-lg-nerd-font
+```
+
+Then set your terminal font to **MesloLGS NF**. See [TERMINAL_SETUP.md](TERMINAL_SETUP.md) for detailed instructions.
+
 ### 📖 Detailed Installation Guide
 
 For step-by-step instructions and troubleshooting, see [INSTALLATION.md](INSTALLATION.md)

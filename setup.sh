@@ -332,6 +332,15 @@ main() {
     echo "  2. Customize ~/.zshrc.local for machine-specific settings"
     echo "  3. Add sensitive data to ~/.zshrc.private (not tracked by git)"
     echo
+    # Check for Nerd Font
+    if ! ls ~/Library/Fonts 2>/dev/null | grep -qi "meslo.*nerd"; then
+        print_warning "Terminal font not installed!"
+        echo "  Install with: brew install --cask font-meslo-lg-nerd-font"
+        echo "  Then set your terminal font to: MesloLGS NF"
+        echo "  See TERMINAL_SETUP.md for details"
+        echo
+    fi
+    
     print_info "Useful commands:"
     echo "  • Update packages: brew update && brew upgrade"
     echo "  • Sync dotfiles: cd ~/dotfiles && git pull"
