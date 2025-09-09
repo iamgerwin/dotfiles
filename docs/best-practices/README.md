@@ -6,8 +6,9 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 
 ### Frontend
 - **Frameworks**: Next.js, Vue.js, Nuxt.js, Angular, AngularJS, Svelte, SolidJS, Astro
-- **Libraries**: React, jQuery, Alpine.js, shadcn/ui
+- **Libraries**: React, jQuery, Alpine.js, shadcn/ui, GSAP
 - **CSS Frameworks**: Tailwind CSS, Bootstrap
+- **State Management & Data**: TanStack Query, TanStack Router, TanStack Start, TanStack DB
 
 ### Backend
 - **PHP**: Laravel, Symfony with API Platform
@@ -30,6 +31,7 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **Containerization**: Docker, Kubernetes
 - **CI/CD**: GitHub Actions, GitLab CI
 - **Cloud Platforms**: AWS, Azure, Google Cloud Platform, DigitalOcean
+- **Edge Computing**: Cloudflare Workers, Cloudflare Pages, Cloudflare D1, Cloudflare R2
 
 ### Testing
 - **E2E Testing**: Playwright, Cypress
@@ -48,8 +50,15 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **Machine Learning**: RAG, AI/ML Best Practices
 
 ### CMS
-- WordPress
-- SharePoint
+- **WordPress**: Core development, Plugin development, Theme development
+- **Drupal**: Module and theme development
+- **SharePoint**
+
+### Security Frameworks
+- **Compliance Standards**: NIST Cybersecurity Framework, ISO 27001, SOC 2, HIPAA, GDPR
+- **Application Security**: OWASP Top 10, OWASP ASVS
+- **Payment Security**: PCI DSS
+- **Government Standards**: Battle-tested, government-grade security implementations
 
 ## 🚀 Quick Start
 
