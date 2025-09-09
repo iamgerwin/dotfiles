@@ -41,9 +41,39 @@ dotfiles/
 
 ## Quick Start
 
-### New Machine Setup
+### ⚠️ For Users with Existing .zshrc Configuration
 
-For a fresh macOS installation, run this single command:
+If you already have a working .zshrc file on your Mac, follow these steps:
+
+#### Step 1: Pre-Installation Check (Recommended)
+```bash
+# Download and run the pre-check script
+curl -fsSL https://raw.githubusercontent.com/iamgerwin/dotfiles/main/scripts/pre-check.sh | bash
+```
+This will analyze your current setup and provide recommendations.
+
+#### Step 2: Backup Your Custom Settings
+```bash
+# Create a backup of your current configuration
+cp ~/.zshrc ~/.zshrc.personal.backup
+
+# Extract your custom aliases and functions to preserve them
+grep -E '^(alias|export|function)' ~/.zshrc > ~/.zshrc.local
+```
+
+#### Step 3: Install Dotfiles
+```bash
+# Clone and install
+git clone https://github.com/iamgerwin/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+./setup.sh
+```
+
+Your existing .zshrc will be automatically backed up to `~/.dotfiles-backup/`
+
+### 🆕 For New Mac or Fresh Installation
+
+Run this single command:
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/iamgerwin/dotfiles/main/setup.sh)"
@@ -52,36 +82,23 @@ For a fresh macOS installation, run this single command:
 This will:
 1. Install Homebrew (if not present)
 2. Clone this repository
-3. **Create backups of existing configurations**
+3. Create backups of any existing configurations
 4. Install all packages from Brewfile
 5. Set up symbolic links
 6. Configure your shell environment
 
-### Manual Installation
+### 🔒 Safety Features
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/iamgerwin/dotfiles.git ~/dotfiles
-   cd ~/dotfiles
-   ```
+Every installation automatically:
+- **Creates timestamped backups** before making any changes
+- **Stores backups** in `~/.dotfiles-backup/` with a JSON manifest
+- **Preserves all original files** with timestamps
+- **Provides instant rollback** capability via `uninstall.sh`
+- **Never overwrites** without backing up first
 
-2. **Run the setup script**:
-   ```bash
-   ./setup.sh
-   ```
+### 📖 Detailed Installation Guide
 
-3. **Reload your shell**:
-   ```bash
-   source ~/.zshrc
-   ```
-
-### Safe Deployment on Working Mac
-
-The setup script automatically:
-- **Creates timestamped backups** of all existing configuration files
-- **Stores backups** in `~/.dotfiles-backup/` with a manifest file
-- **Preserves original files** before creating symbolic links
-- **Allows rollback** to previous configuration at any time
+For step-by-step instructions and troubleshooting, see [INSTALLATION.md](INSTALLATION.md)
 
 ## Configuration Files
 

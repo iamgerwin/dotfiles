@@ -28,6 +28,10 @@ print_info() {
     echo -e "${YELLOW}ℹ${NC} $1"
 }
 
+print_warning() {
+    echo -e "${YELLOW}⚠${NC} $1"
+}
+
 print_header() {
     echo
     echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
@@ -232,6 +236,53 @@ final_setup() {
     print_success "Created local configuration files"
 }
 
+# Check for existing configuration
+check_existing_config() {
+    print_header "Checking Existing Configuration"
+    
+    if [[ -f "$HOME/.zshrc" ]] && [[ ! -L "$HOME/.zshrc" ]]; then
+        print_warning "Found existing .zshrc configuration"
+        echo
+        echo "Your current .zshrc contains $(wc -l < "$HOME/.zshrc" | tr -d ' ') lines"
+        echo
+        echo "What would you like to do?"
+        echo "  1) Backup and proceed (recommended)"
+        echo "  2) View existing .zshrc first"
+        echo "  3) Cancel installation"
+        echo
+        read -p "Enter choice [1-3]: " choice
+        
+        case $choice in
+            1)
+                print_info "Proceeding with backup..."
+                ;;
+            2)
+                less "$HOME/.zshrc"
+                echo
+                read -p "Continue with installation? (y/n) " -n 1 -r
+                echo
+                if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+                    print_info "Installation cancelled"
+                    exit 0
+                fi
+                ;;
+            3)
+                print_info "Installation cancelled"
+                print_info "To preserve custom settings before installing:"
+                echo "  1. Copy custom aliases/functions to ~/.zshrc.local"
+                echo "  2. Run this setup again"
+                exit 0
+                ;;
+            *)
+                print_error "Invalid choice"
+                exit 1
+                ;;
+        esac
+    else
+        print_success "No existing .zshrc found or already using dotfiles"
+    fi
+}
+
 # Main installation flow
 main() {
     clear
@@ -240,7 +291,21 @@ main() {
     echo -e "${BLUE}╚════════════════════════════════════════╝${NC}"
     echo
     
+    print_info "This setup will:"
+    echo "  • Backup any existing configuration files"
+    echo "  • Install required dependencies"
+    echo "  • Create symlinks to dotfiles"
+    echo "  • Configure your development environment"
+    echo
+    read -p "Continue? (y/n) " -n 1 -r
+    echo
+    if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+        print_info "Installation cancelled"
+        exit 0
+    fi
+    
     check_os
+    check_existing_config
     setup_dotfiles
     backup_existing
     install_homebrew
@@ -254,6 +319,14 @@ main() {
     
     echo "Your development environment has been set up successfully!"
     echo
+    
+    if [[ -f "$HOME/.dotfiles-backup/manifest.json" ]]; then
+        print_success "Your original configuration has been backed up"
+        echo "  Location: ~/.dotfiles-backup/"
+        echo "  Restore: ~/dotfiles/scripts/uninstall.sh restore"
+        echo
+    fi
+    
     print_info "Next steps:"
     echo "  1. Restart your terminal or run: source ~/.zshrc"
     echo "  2. Customize ~/.zshrc.local for machine-specific settings"
