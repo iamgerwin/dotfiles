@@ -38,20 +38,22 @@ aipa development/new-feature  # or ai-prompt add development/new-feature
 
 ```
 ~/ai-prompts/
-├── common/                 # Shared prompts for all projects
-│   ├── development/       # Code generation, reviews, refactoring
-│   ├── documentation/     # README, API docs, comments
-│   ├── testing/          # Unit tests, integration tests
-│   ├── utilities/        # Data processing, formatting
-│   ├── devops/          # CI/CD, deployment, infrastructure
-│   └── data/            # Data analysis, processing
-├── companies/            # Company-specific prompts
-│   ├── shakewell/       # Shakewell-specific workflows
-│   ├── [company-name]/  # Other companies
-│   └── template/        # Template for new companies
-├── scripts/             # Helper scripts
-└── .secrets/           # API keys and tokens (gitignored)
-    └── api-keys.env    # Never committed to git
+├── templates/              # Reusable prompt templates
+│   ├── clickup/           # ClickUp ticket management
+│   ├── development/       # API endpoints, migrations
+│   ├── workflows/         # Developer workflows
+│   ├── testing/           # Test strategies, unit tests
+│   ├── debugging/         # Bug investigation
+│   ├── refactoring/       # Code refactoring plans
+│   ├── reviews/           # Code review checklists
+│   └── documentation/     # README, API docs
+├── projects/              # Project-specific content
+│   ├── shakewell/        # Shakewell project
+│   ├── [project-name]/   # Other projects
+│   └── template/         # Template for new projects
+├── scripts/              # Helper scripts
+└── .secrets/            # API keys and tokens (gitignored)
+    └── api-keys.env     # Never committed to git
 ```
 
 ## Managing Sensitive Data
@@ -78,29 +80,37 @@ CLICKUP_API_KEY=pk_...
 source ~/ai-prompts/scripts/load-secrets.sh
 ```
 
-## Company Management
+## Project Management
 
-### Add New Company
+### Add New Project
 
 ```bash
-# Create company structure
-mkdir -p ~/ai-prompts/companies/new-company
+# Create project structure
+mkdir -p ~/ai-prompts/projects/new-project
 
 # Copy template
-cp -r ~/ai-prompts/companies/template/* ~/ai-prompts/companies/new-company/
+cp -r ~/ai-prompts/projects/template/* ~/ai-prompts/projects/new-project/
 
-# Set as current company
-export AI_PROMPT_COMPANY=new-company
+# Set as current project
+export AI_PROMPT_PROJECT=new-project
+
+# Edit project README
+vim ~/ai-prompts/projects/new-project/README.md
 ```
 
-### Share Prompts Between Companies
+### Share Templates to Projects
 
 ```bash
-# Share a prompt from current company to another
-ai-prompt share workflows/deploy-process.md other-company
+# Share a template to a project
+ai-prompt share create-ticket.md my-project
 
-# Share from common to company
-ai-prompt share common/development/code-review.md shakewell
+# Share workflow to project
+ai-prompt share laravel-backend-developer.md shakewell
+
+# Copy all testing templates to project
+for template in ~/ai-prompts/templates/testing/*.md; do
+    ai-prompt share "testing/$(basename $template)" my-project
+done
 ```
 
 ## Syncing and Backup
@@ -139,49 +149,48 @@ git commit -m "Update prompts"
 git push
 ```
 
-## Categories Guide
+## Template Categories
 
-### Development (`common/development/`)
-- Code generation and scaffolding
-- Code reviews and refactoring
-- Debugging and troubleshooting
+### ClickUp (`templates/clickup/`)
+- **create-ticket.md** - Comprehensive ticket creation template
+- Bug reports, features, tasks, documentation tickets
+- Acceptance criteria and priority setting
+
+### Development (`templates/development/`)
+- **api-endpoint.md** - REST API endpoint development
+- **database-migration.md** - Database schema changes
+- Model creation, service layers, controllers
+
+### Workflows (`templates/workflows/`)
+- **laravel-backend-developer.md** - Complete Laravel workflow
+- Frontend developer workflows
+- DevOps deployment workflows
+
+### Testing (`templates/testing/`)
+- **test-strategy.md** - Comprehensive testing approach
+- Unit test generators
+- Integration test scenarios
+- E2E test automation
+
+### Debugging (`templates/debugging/`)
+- **bug-investigation.md** - Systematic bug analysis
+- Performance troubleshooting
+- Memory leak detection
+
+### Refactoring (`templates/refactoring/`)
+- **refactor-plan.md** - Code refactoring strategy
+- Technical debt reduction
 - Performance optimization
+
+### Reviews (`templates/reviews/`)
+- **code-review.md** - Code review checklist
+- Architecture reviews
 - Security audits
 
-### Documentation (`common/documentation/`)
+### Documentation (`templates/documentation/`)
 - README generators
 - API documentation
-- Code comments
-- User guides
 - Technical specifications
-
-### Testing (`common/testing/`)
-- Unit test generation
-- Integration test scenarios
-- E2E test scripts
-- Test data generation
-- QA checklists
-
-### Utilities (`common/utilities/`)
-- Data formatting and conversion
-- Text processing
-- File operations
-- Automation scripts
-- Analysis tools
-
-### DevOps (`common/devops/`)
-- CI/CD pipelines
-- Deployment scripts
-- Infrastructure as Code
-- Monitoring and logging
-- Container configurations
-
-### Data (`common/data/`)
-- Data analysis prompts
-- ETL processes
-- Database queries
-- Data visualization
-- Report generation
 
 ## Best Practices
 
@@ -244,14 +253,14 @@ git reset --hard HEAD
 ## Environment Variables
 
 ```bash
-# Set default company
-export AI_PROMPT_COMPANY=shakewell
+# Set default project
+export AI_PROMPT_PROJECT=shakewell
 
 # Set custom prompts directory
 export AI_PROMPTS_DIR=~/custom-prompts
 
 # Add to ~/.zshrc.local for persistence
-echo "export AI_PROMPT_COMPANY=shakewell" >> ~/.zshrc.local
+echo "export AI_PROMPT_PROJECT=shakewell" >> ~/.zshrc.local
 ```
 
 ## Advanced Usage

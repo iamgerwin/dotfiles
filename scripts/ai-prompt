@@ -7,7 +7,7 @@ set -e
 # Configuration
 AI_PROMPTS_DIR="${AI_PROMPTS_DIR:-$HOME/ai-prompts}"
 DOTFILES_DIR="$HOME/dotfiles"
-CURRENT_COMPANY="${AI_PROMPT_COMPANY:-}"
+CURRENT_PROJECT="${AI_PROMPT_PROJECT:-}"
 
 # Colors
 RED='\033[0;31m'
@@ -47,32 +47,36 @@ init_check() {
 # List prompts
 list_prompts() {
     init_check
-    local company="${1:-}"
+    local project="${1:-}"
     
     echo -e "${BLUE}Available AI Prompts:${NC}"
     echo
     
-    if [[ -n "$company" ]]; then
-        echo -e "${MAGENTA}Company: $company${NC}"
-        if [[ -d "$AI_PROMPTS_DIR/companies/$company" ]]; then
-            find "$AI_PROMPTS_DIR/companies/$company" -name "*.md" -o -name "*.txt" | \
-                sed "s|$AI_PROMPTS_DIR/companies/$company/||" | sort
+    if [[ -n "$project" ]]; then
+        echo -e "${MAGENTA}Project: $project${NC}"
+        if [[ -d "$AI_PROMPTS_DIR/projects/$project" ]]; then
+            find "$AI_PROMPTS_DIR/projects/$project" -name "*.md" -o -name "*.txt" | \
+                sed "s|$AI_PROMPTS_DIR/projects/$project/||" | sort
         else
-            print_error "Company '$company' not found"
+            print_error "Project '$project' not found"
         fi
     else
-        echo -e "${MAGENTA}Common Prompts:${NC}"
-        find "$AI_PROMPTS_DIR/common" -name "*.md" -o -name "*.txt" 2>/dev/null | \
-            sed "s|$AI_PROMPTS_DIR/common/||" | sort || true
+        echo -e "${MAGENTA}Templates:${NC}"
+        for template_dir in "$AI_PROMPTS_DIR/templates"/*; do
+            if [[ -d "$template_dir" ]]; then
+                local category=$(basename "$template_dir")
+                echo "  ${CYAN}$category:${NC}"
+                find "$template_dir" -name "*.md" -o -name "*.txt" 2>/dev/null | \
+                    sed "s|$template_dir/||" | sed 's/^/    /' || true
+            fi
+        done
         
         echo
-        echo -e "${MAGENTA}Company-Specific:${NC}"
-        for company_dir in "$AI_PROMPTS_DIR/companies"/*; do
-            if [[ -d "$company_dir" ]] && [[ "$(basename "$company_dir")" != "template" ]]; then
-                local company_name=$(basename "$company_dir")
-                echo "  $company_name:"
-                find "$company_dir" -name "*.md" -o -name "*.txt" 2>/dev/null | \
-                    sed "s|$company_dir/||" | sed 's/^/    /' | head -5 || true
+        echo -e "${MAGENTA}Projects:${NC}"
+        for project_dir in "$AI_PROMPTS_DIR/projects"/*; do
+            if [[ -d "$project_dir" ]] && [[ "$(basename "$project_dir")" != "template" ]]; then
+                local project_name=$(basename "$project_dir")
+                echo "  $project_name"
             fi
         done
     fi
@@ -117,13 +121,23 @@ show_prompt() {
     local full_path=""
     if [[ -f "$AI_PROMPTS_DIR/$prompt_path" ]]; then
         full_path="$AI_PROMPTS_DIR/$prompt_path"
-    elif [[ -f "$AI_PROMPTS_DIR/common/$prompt_path" ]]; then
-        full_path="$AI_PROMPTS_DIR/common/$prompt_path"
-    elif [[ -f "$AI_PROMPTS_DIR/companies/$CURRENT_COMPANY/$prompt_path" ]]; then
-        full_path="$AI_PROMPTS_DIR/companies/$CURRENT_COMPANY/$prompt_path"
+    elif [[ -f "$AI_PROMPTS_DIR/templates/$prompt_path" ]]; then
+        full_path="$AI_PROMPTS_DIR/templates/$prompt_path"
+    elif [[ -f "$AI_PROMPTS_DIR/projects/$CURRENT_PROJECT/$prompt_path" ]]; then
+        full_path="$AI_PROMPTS_DIR/projects/$CURRENT_PROJECT/$prompt_path"
     else
-        print_error "Prompt not found: $prompt_path"
-        exit 1
+        # Try to find in any template category
+        for template_dir in "$AI_PROMPTS_DIR/templates"/*; do
+            if [[ -f "$template_dir/$prompt_path" ]]; then
+                full_path="$template_dir/$prompt_path"
+                break
+            fi
+        done
+        
+        if [[ -z "$full_path" ]]; then
+            print_error "Prompt not found: $prompt_path"
+            exit 1
+        fi
     fi
     
     echo -e "${BLUE}Prompt: $prompt_path${NC}"
@@ -145,13 +159,23 @@ copy_prompt() {
     local full_path=""
     if [[ -f "$AI_PROMPTS_DIR/$prompt_path" ]]; then
         full_path="$AI_PROMPTS_DIR/$prompt_path"
-    elif [[ -f "$AI_PROMPTS_DIR/common/$prompt_path" ]]; then
-        full_path="$AI_PROMPTS_DIR/common/$prompt_path"
-    elif [[ -f "$AI_PROMPTS_DIR/companies/$CURRENT_COMPANY/$prompt_path" ]]; then
-        full_path="$AI_PROMPTS_DIR/companies/$CURRENT_COMPANY/$prompt_path"
+    elif [[ -f "$AI_PROMPTS_DIR/templates/$prompt_path" ]]; then
+        full_path="$AI_PROMPTS_DIR/templates/$prompt_path"
+    elif [[ -f "$AI_PROMPTS_DIR/projects/$CURRENT_PROJECT/$prompt_path" ]]; then
+        full_path="$AI_PROMPTS_DIR/projects/$CURRENT_PROJECT/$prompt_path"
     else
-        print_error "Prompt not found: $prompt_path"
-        exit 1
+        # Try to find in any template category
+        for template_dir in "$AI_PROMPTS_DIR/templates"/*; do
+            if [[ -f "$template_dir/$prompt_path" ]]; then
+                full_path="$template_dir/$prompt_path"
+                break
+            fi
+        done
+        
+        if [[ -z "$full_path" ]]; then
+            print_error "Prompt not found: $prompt_path"
+            exit 1
+        fi
     fi
     
     # Copy to clipboard
@@ -177,13 +201,16 @@ add_prompt() {
     
     # Determine target directory
     local target_dir=""
-    if [[ "$prompt_path" == common/* ]]; then
+    if [[ "$prompt_path" == templates/* ]]; then
         target_dir="$AI_PROMPTS_DIR/$prompt_path"
-    elif [[ "$prompt_path" == */* ]]; then
-        # Assume company-specific if contains slash
-        target_dir="$AI_PROMPTS_DIR/companies/$CURRENT_COMPANY/$prompt_path"
+    elif [[ "$prompt_path" == projects/* ]]; then
+        target_dir="$AI_PROMPTS_DIR/$prompt_path"
+    elif [[ -n "$CURRENT_PROJECT" ]]; then
+        # Add to current project if set
+        target_dir="$AI_PROMPTS_DIR/projects/$CURRENT_PROJECT/$prompt_path"
     else
-        target_dir="$AI_PROMPTS_DIR/common/$prompt_path"
+        # Default to templates directory
+        target_dir="$AI_PROMPTS_DIR/templates/$prompt_path"
     fi
     
     # Create directory if needed
@@ -197,35 +224,47 @@ add_prompt() {
     fi
 }
 
-# Share prompt between companies
+# Share prompt between projects
 share_prompt() {
     init_check
     local source_prompt="$1"
-    local target_company="$2"
+    local target_project="$2"
     
-    if [[ -z "$source_prompt" ]] || [[ -z "$target_company" ]]; then
-        print_error "Usage: ai-prompt share <source-prompt> <target-company>"
+    if [[ -z "$source_prompt" ]] || [[ -z "$target_project" ]]; then
+        print_error "Usage: ai-prompt share <source-prompt> <target-project>"
         exit 1
     fi
     
     # Find source
     local source_path=""
-    if [[ -f "$AI_PROMPTS_DIR/companies/$CURRENT_COMPANY/$source_prompt" ]]; then
-        source_path="$AI_PROMPTS_DIR/companies/$CURRENT_COMPANY/$source_prompt"
+    if [[ -f "$AI_PROMPTS_DIR/templates/$source_prompt" ]]; then
+        source_path="$AI_PROMPTS_DIR/templates/$source_prompt"
+    elif [[ -f "$AI_PROMPTS_DIR/projects/$CURRENT_PROJECT/$source_prompt" ]]; then
+        source_path="$AI_PROMPTS_DIR/projects/$CURRENT_PROJECT/$source_prompt"
     elif [[ -f "$AI_PROMPTS_DIR/$source_prompt" ]]; then
         source_path="$AI_PROMPTS_DIR/$source_prompt"
     else
-        print_error "Source prompt not found: $source_prompt"
-        exit 1
+        # Try to find in any template category
+        for template_dir in "$AI_PROMPTS_DIR/templates"/*; do
+            if [[ -f "$template_dir/$source_prompt" ]]; then
+                source_path="$template_dir/$source_prompt"
+                break
+            fi
+        done
+        
+        if [[ -z "$source_path" ]]; then
+            print_error "Source prompt not found: $source_prompt"
+            exit 1
+        fi
     fi
     
     # Create target directory
-    local target_dir="$AI_PROMPTS_DIR/companies/$target_company/$(dirname "$source_prompt")"
+    local target_dir="$AI_PROMPTS_DIR/projects/$target_project/$(dirname "$source_prompt")"
     mkdir -p "$target_dir"
     
     # Copy prompt
     cp "$source_path" "$target_dir/"
-    print_success "Shared to $target_company: $source_prompt"
+    print_success "Shared to project $target_project: $source_prompt"
 }
 
 # Export prompts (excluding secrets)
@@ -354,18 +393,24 @@ case "${1:-}" in
         echo "Usage: ai-prompt <command> [options]"
         echo
         echo "Commands:"
-        echo "  list [company]     List available prompts"
+        echo "  list [project]     List available prompts"
         echo "  search <query>     Search prompts"
         echo "  show <path>        Display prompt content"
         echo "  copy <path>        Copy prompt to clipboard"
         echo "  add <path>         Add new prompt"
-        echo "  share <src> <dst>  Share prompt to another company"
+        echo "  share <src> <prj>  Share prompt to another project"
         echo "  export [file]      Export prompts (backup)"
         echo "  import <file>      Import prompts"
         echo "  sync              Sync with git"
         echo
+        echo "Quick Examples:"
+        echo "  ai-prompt list                     # List all templates"
+        echo "  ai-prompt list shakewell           # List project prompts"
+        echo "  ai-prompt copy create-ticket       # Copy template to clipboard"
+        echo "  ai-prompt show laravel-backend     # Show workflow template"
+        echo
         echo "Environment:"
         echo "  AI_PROMPTS_DIR     Base directory (default: ~/ai-prompts)"
-        echo "  AI_PROMPT_COMPANY  Current company context"
+        echo "  AI_PROMPT_PROJECT  Current project context"
         ;;
 esac

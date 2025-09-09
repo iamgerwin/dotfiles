@@ -1,35 +1,67 @@
 # AI Prompts & Context Management
 
-A structured system for managing, organizing, and sharing AI prompts and context scripts across different companies and projects.
+A structured, project-based system for managing AI prompts, templates, and workflows for efficient development.
 
 ## Overview
 
-This system provides a clean, organized way to:
-- Store and version control AI prompts and context
-- Share common prompts between companies/projects
-- Keep sensitive data secure and out of git
-- Maintain company-specific customizations
-- Quickly access and deploy prompts
+This system provides:
+- **Ready-to-use templates** for common development tasks
+- **Project-based organization** for team collaboration
+- **Secure API key management** (never committed to git)
+- **Quick access** via CLI commands and aliases
+- **Workflow automation** for repetitive tasks
 
 ## Directory Structure
 
 ```
 ~/ai-prompts/
-├── common/                  # Shared prompts across all companies
-│   ├── development/        # Development-related prompts
-│   ├── documentation/      # Documentation prompts
-│   ├── testing/           # Testing and QA prompts
-│   └── utilities/         # General utility prompts
-├── companies/             # Company-specific prompts
-│   ├── shakewell/        # Shakewell-specific
-│   ├── company-b/        # Another company
-│   └── template/         # Template for new companies
-├── scripts/              # Management scripts
-│   ├── sync.sh          # Sync prompts
-│   ├── share.sh         # Share prompts between companies
-│   └── secure.sh        # Manage sensitive data
-└── .secrets/            # Sensitive data (gitignored)
-    └── api-keys.env     # API keys and tokens
+├── templates/              # Reusable prompt templates
+│   ├── clickup/           # ClickUp ticket templates
+│   ├── development/       # API, database, feature templates
+│   ├── workflows/         # Complete developer workflows
+│   ├── testing/           # Test strategies and generators
+│   ├── debugging/         # Bug investigation templates
+│   ├── refactoring/       # Code improvement plans
+│   │── reviews/           # Code review checklists
+│   └── documentation/     # Doc generation templates
+├── projects/              # Project-specific content
+│   ├── [project-name]/   # Your project folders
+│   └── template/         # Template for new projects
+├── scripts/              # Helper scripts
+└── .secrets/            # API keys (gitignored)
+    └── api-keys.env     # Your secret keys
+```
+
+## Key Templates Available
+
+### 🎯 ClickUp Ticket Creation
+Perfect structured tickets every time:
+```bash
+aipc create-ticket  # Copy template and fill in details
+```
+
+### 👨‍💻 Laravel Backend Workflow
+Complete development workflow from ticket to PR:
+```bash
+aipc laravel-backend-developer  # Full workflow template
+```
+
+### 🐛 Bug Investigation
+Systematic approach to debugging:
+```bash
+aipc bug-investigation  # Structured debugging process
+```
+
+### 🚀 API Endpoint Development
+Consistent API implementation:
+```bash
+aipc api-endpoint  # REST API template with all considerations
+```
+
+### 🧪 Testing Strategy
+Comprehensive test planning:
+```bash
+aipc test-strategy  # Testing pyramid approach
 ```
 
 ## Quick Start
@@ -41,63 +73,73 @@ This system provides a clean, organized way to:
 ~/dotfiles/scripts/ai-prompts-init.sh
 ```
 
-2. Import existing prompts:
+2. Configure your API keys:
 ```bash
-~/dotfiles/scripts/ai-prompts-import.sh ~/ai_scripts_shakewell shakewell
+vim ~/ai-prompts/.secrets/api-keys.env
+# Add your ClickUp, GitHub, and other API keys
 ```
 
-3. Configure sensitive data:
+3. Set your current project (optional):
 ```bash
-cp ~/ai-prompts/.secrets/api-keys.env.example ~/ai-prompts/.secrets/api-keys.env
-# Edit with your actual API keys
+export AI_PROMPT_PROJECT=myproject
+echo "export AI_PROMPT_PROJECT=myproject" >> ~/.zshrc.local
 ```
 
 ### Daily Usage
 
-#### Access a prompt
+#### Access templates quickly
 ```bash
-# List available prompts
-ai-prompt list
+# List all templates
+aip list                    # or ai-prompt list
 
-# View a specific prompt
-ai-prompt show development/laravel-migration
+# View a specific template
+aip show create-ticket      # Shows ClickUp ticket template
 
-# Copy prompt to clipboard
-ai-prompt copy testing/unit-test-generator
+# Copy template to clipboard (ready to paste)
+aipc create-ticket          # or ai-prompt copy create-ticket
+aipc laravel-backend        # Copy Laravel workflow
 ```
 
-#### Add new prompt
+#### Add new content
 ```bash
-# Add to common prompts
-ai-prompt add common/development/new-feature-prompt.md
+# Add to templates
+aipa development/new-api-template.md
 
-# Add company-specific prompt
-ai-prompt add shakewell/specific-workflow.md
+# Add to current project
+export AI_PROMPT_PROJECT=myproject
+aipa workflows/custom-workflow.md
 ```
 
-#### Share prompt between companies
+#### Share templates to projects
 ```bash
-# Share a prompt from shakewell to company-b
-ai-prompt share shakewell/useful-prompt.md company-b
+# Share a template to your project
+ai-prompt share create-ticket myproject
+
+# Share workflow template
+ai-prompt share laravel-backend myproject
 ```
 
 ## Organization Guidelines
 
-### Common Prompts
+### Templates
 
-Store in `common/` directory, organized by category:
-- **development/**: Code generation, refactoring, debugging
-- **documentation/**: README, API docs, comments
-- **testing/**: Test generation, QA scenarios
-- **utilities/**: Data processing, formatting, analysis
+Reusable templates in `templates/` directory:
+- **clickup/**: Ticket creation and management
+- **development/**: API endpoints, migrations, features
+- **workflows/**: Complete developer workflows
+- **testing/**: Test strategies and generators
+- **debugging/**: Bug investigation processes
+- **refactoring/**: Code improvement plans
+- **reviews/**: Code review checklists
+- **documentation/**: README and API doc generators
 
-### Company-Specific Prompts
+### Project-Specific Content
 
-Store in `companies/<company-name>/`:
-- Proprietary workflows
-- Company-specific context
-- Custom integrations
-- Team-specific standards
+Store in `projects/<project-name>/`:
+- Project-specific workflows
+- Custom context and requirements
+- API integrations
+- Team conventions
 
 ### Naming Convention
 
@@ -132,7 +174,7 @@ The following are automatically gitignored:
 - `*.key`
 - `*.token`
 - `*-secret.*`
-- `companies/*/private/`
+- `projects/*/private/`
 
 ## Syncing Between Machines
 
@@ -153,21 +195,21 @@ git pull
 git push
 ```
 
-## Company Template
+## Project Template
 
-When starting with a new company:
+When starting with a new project:
 
 1. Copy the template:
 ```bash
-cp -r ~/ai-prompts/companies/template ~/ai-prompts/companies/new-company
+cp -r ~/ai-prompts/projects/template ~/ai-prompts/projects/new-project
 ```
 
-2. Update the metadata:
+2. Update the project README:
 ```bash
-echo "Company: New Company" > ~/ai-prompts/companies/new-company/README.md
+vim ~/ai-prompts/projects/new-project/README.md
 ```
 
-3. Add company-specific prompts
+3. Add project-specific content and scripts
 
 ## Best Practices
 
@@ -176,7 +218,7 @@ echo "Company: New Company" > ~/ai-prompts/companies/new-company/README.md
 3. **Modularity**: Keep prompts focused and reusable
 4. **Organization**: Use clear directory structure and naming
 5. **Security**: Never hardcode API keys or credentials
-6. **Sharing**: Use common/ for universally useful prompts
+6. **Sharing**: Use templates/ for reusable prompts
 7. **Testing**: Validate prompts before committing
 
 ## Command Reference
@@ -185,7 +227,7 @@ echo "Company: New Company" > ~/ai-prompts/companies/new-company/README.md
 
 ```bash
 # List all prompts
-ai-prompt list [--company=shakewell]
+ai-prompt list [project-name]
 
 # Search prompts
 ai-prompt search "laravel"
