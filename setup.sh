@@ -86,6 +86,9 @@ setup_dotfiles() {
         git clone "$DOTFILES_REPO" "$DOTFILES_DIR"
         print_success "Dotfiles cloned successfully"
     fi
+    
+    # Make scripts executable
+    chmod +x "$DOTFILES_DIR/scripts/"*.sh 2>/dev/null || true
 }
 
 # Install Homebrew packages from Brewfile
@@ -102,36 +105,54 @@ install_packages() {
     fi
 }
 
+# Backup existing configuration
+backup_existing() {
+    print_header "Backing Up Existing Configuration"
+    
+    if [[ -f "$DOTFILES_DIR/scripts/backup.sh" ]]; then
+        bash "$DOTFILES_DIR/scripts/backup.sh"
+        print_success "Backup completed"
+    else
+        print_info "Backup script not found, using simple backup"
+        # Fallback to simple backup
+        for file in .zshrc .gitconfig .tmux.conf; do
+            if [[ -f "$HOME/$file" ]] && [[ ! -L "$HOME/$file" ]]; then
+                cp "$HOME/$file" "$HOME/$file.backup.$(date +%Y%m%d_%H%M%S)"
+                print_success "Backed up $file"
+            fi
+        done
+    fi
+}
+
 # Create symbolic links
 create_symlinks() {
     print_header "Creating Symbolic Links"
     
-    # Backup existing files
-    backup_file() {
+    # Remove existing files/links
+    remove_existing() {
         local file="$1"
-        if [[ -f "$file" ]] || [[ -L "$file" ]]; then
+        if [[ -e "$file" ]] || [[ -L "$file" ]]; then
             if [[ ! -L "$file" ]] || [[ "$(readlink "$file")" != "$DOTFILES_DIR/$(basename "$file")" ]]; then
-                print_info "Backing up existing $(basename "$file")"
-                mv "$file" "$file.backup.$(date +%Y%m%d_%H%M%S)"
+                rm -f "$file"
             fi
         fi
     }
     
     # Create .zshrc symlink
-    backup_file "$HOME/.zshrc"
+    remove_existing "$HOME/.zshrc"
     ln -sf "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
     print_success "Linked .zshrc"
     
     # Create .gitconfig symlink if it exists
     if [[ -f "$DOTFILES_DIR/.gitconfig" ]]; then
-        backup_file "$HOME/.gitconfig"
+        remove_existing "$HOME/.gitconfig"
         ln -sf "$DOTFILES_DIR/.gitconfig" "$HOME/.gitconfig"
         print_success "Linked .gitconfig"
     fi
     
     # Create .tmux.conf symlink if it exists
     if [[ -f "$DOTFILES_DIR/.tmux.conf" ]]; then
-        backup_file "$HOME/.tmux.conf"
+        remove_existing "$HOME/.tmux.conf"
         ln -sf "$DOTFILES_DIR/.tmux.conf" "$HOME/.tmux.conf"
         print_success "Linked .tmux.conf"
     fi
@@ -214,6 +235,7 @@ main() {
     
     check_os
     setup_dotfiles
+    backup_existing
     install_homebrew
     install_packages
     create_symlinks
@@ -234,6 +256,8 @@ main() {
     echo "  • Update packages: brew update && brew upgrade"
     echo "  • Sync dotfiles: cd ~/dotfiles && git pull"
     echo "  • Update Brewfile: brew bundle dump --force --file=~/dotfiles/Brewfile"
+    echo "  • Uninstall dotfiles: ~/dotfiles/scripts/uninstall.sh"
+    echo "  • View backups: ~/dotfiles/scripts/backup.sh list"
     echo
     print_success "Happy coding! 🚀"
 }

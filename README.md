@@ -30,7 +30,9 @@ dotfiles/
 ├── Brewfile            # Homebrew package definitions
 ├── setup.sh            # Automated setup script
 └── scripts/
-    └── install-brew.sh # Homebrew installation script
+    ├── install-brew.sh # Homebrew installation script
+    ├── backup.sh       # Backup management script
+    └── uninstall.sh    # Uninstall and rollback script
 ```
 
 ## Quick Start
@@ -46,9 +48,10 @@ For a fresh macOS installation, run this single command:
 This will:
 1. Install Homebrew (if not present)
 2. Clone this repository
-3. Install all packages from Brewfile
-4. Set up symbolic links
-5. Configure your shell environment
+3. **Create backups of existing configurations**
+4. Install all packages from Brewfile
+5. Set up symbolic links
+6. Configure your shell environment
 
 ### Manual Installation
 
@@ -67,6 +70,14 @@ This will:
    ```bash
    source ~/.zshrc
    ```
+
+### Safe Deployment on Working Mac
+
+The setup script automatically:
+- **Creates timestamped backups** of all existing configuration files
+- **Stores backups** in `~/.dotfiles-backup/` with a manifest file
+- **Preserves original files** before creating symbolic links
+- **Allows rollback** to previous configuration at any time
 
 ## Configuration Files
 
@@ -177,6 +188,42 @@ echo "export SECRET_API_KEY=xxx" >> ~/.zshrc.private
    brew bundle cleanup
    ```
 
+## Backup and Rollback
+
+### Viewing Backups
+
+List all available backups:
+```bash
+~/dotfiles/scripts/backup.sh list
+```
+
+### Manual Backup
+
+Create a backup of current configuration:
+```bash
+~/dotfiles/scripts/backup.sh
+```
+
+### Uninstalling Dotfiles
+
+Complete removal with automatic restoration of original files:
+```bash
+~/dotfiles/scripts/uninstall.sh
+```
+
+This will:
+1. Restore your original configuration files from backup
+2. Remove all symbolic links
+3. Optionally remove the dotfiles repository
+4. Optionally clean up backup files
+
+### Quick Restore
+
+Restore configuration without full uninstall:
+```bash
+~/dotfiles/scripts/uninstall.sh restore
+```
+
 ## Troubleshooting
 
 ### Shell Not Loading Configuration
@@ -199,6 +246,18 @@ Re-run the Homebrew installation:
 Fix permissions on the dotfiles directory:
 ```bash
 chmod -R 755 ~/dotfiles
+```
+
+### Backup Recovery
+
+If something goes wrong, backups are stored in:
+```bash
+~/.dotfiles-backup/
+```
+
+View backup manifest:
+```bash
+cat ~/.dotfiles-backup/manifest.json | jq
 ```
 
 ## Contributing
