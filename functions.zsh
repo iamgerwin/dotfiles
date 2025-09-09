@@ -49,7 +49,7 @@ git_branch() {
 }
 
 # Quick git commit with message
-gcm() {
+gcmsg_quick() {
     git commit -m "$*"
 }
 

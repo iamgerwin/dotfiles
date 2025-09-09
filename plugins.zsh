@@ -18,7 +18,6 @@ if [[ -d "$HOME/.oh-my-zsh" ]]; then
         brew
         composer
         laravel
-        php
         python
         pip
         zsh-autosuggestions

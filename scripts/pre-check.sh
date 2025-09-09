@@ -185,8 +185,8 @@ check_backups() {
     fi
     
     # Check for old-style backups
-    local old_backups=$(ls -la $HOME/.*.backup.* 2>/dev/null | wc -l | tr -d ' ')
-    if [[ $old_backups -gt 0 ]]; then
+    local old_backups=$(ls $HOME/.*.backup.* 2>/dev/null | wc -l | tr -d ' ')
+    if [[ "$old_backups" -gt "0" ]]; then
         print_info "Found $old_backups old-style backup file(s)"
     fi
 }
