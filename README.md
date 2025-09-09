@@ -8,6 +8,8 @@ This repository contains my personal dotfiles configuration, designed with modul
 
 ## Features
 
+- **Adaptive Setup**: Intelligently learns from and preserves existing user customizations
+- **Zero Disruption**: Integrates with your current workflow without breaking anything
 - **Modular Configuration**: Shell settings are organized into separate files by functionality
 - **Cross-Machine Sync**: Easy synchronization between personal and work computers
 - **Automated Setup**: One-command installation for new machines
@@ -16,6 +18,7 @@ This repository contains my personal dotfiles configuration, designed with modul
 - **Oh My Zsh Integration**: Pre-configured with useful plugins and Powerlevel10k theme
 - **Development Tools**: NVM, Pyenv, Herd PHP, and other development environment managers
 - **Laravel/PHP Ready**: Aliases and tools for Laravel development workflow
+- **Custom Preservation**: Automatically detects and preserves your existing aliases, functions, and tools
 
 ## Structure
 
@@ -41,35 +44,33 @@ dotfiles/
 
 ## Quick Start
 
-### ⚠️ For Users with Existing .zshrc Configuration
+### 🎯 Adaptive Setup for Existing Configurations
 
-If you already have a working .zshrc file on your Mac, follow these steps:
+If you already have a working .zshrc and custom setup, use our **Adaptive Setup** that preserves everything:
 
-#### Step 1: Pre-Installation Check (Recommended)
 ```bash
-# Download and run the pre-check script
-curl -fsSL https://raw.githubusercontent.com/iamgerwin/dotfiles/main/scripts/pre-check.sh | bash
-```
-This will analyze your current setup and provide recommendations.
-
-#### Step 2: Backup Your Custom Settings
-```bash
-# Create a backup of your current configuration
-cp ~/.zshrc ~/.zshrc.personal.backup
-
-# Extract your custom aliases and functions to preserve them
-grep -E '^(alias|export|function)' ~/.zshrc > ~/.zshrc.local
-```
-
-#### Step 3: Install Dotfiles
-```bash
-# Clone and install
+# Clone the repository
 git clone https://github.com/iamgerwin/dotfiles.git ~/dotfiles
 cd ~/dotfiles
-./setup.sh
+
+# Run adaptive setup - learns from your existing configuration
+./scripts/adaptive-setup.sh
 ```
 
-Your existing .zshrc will be automatically backed up to `~/.dotfiles-backup/`
+This will:
+- ✅ Detect and preserve all your custom aliases and functions
+- ✅ Capture your installed packages (Homebrew, npm, VS Code extensions)
+- ✅ Keep sensitive data separate and secure
+- ✅ Create restoration scripts for your complete environment
+- ✅ Integrate dotfiles without disrupting your workflow
+
+#### Alternative: Standard Setup with Migration
+
+```bash
+# Run the main setup - it will offer adaptive mode
+./setup.sh
+# Choose option 1: "Adaptive setup - Preserve all customizations"
+```
 
 ### 🆕 For New Mac or Fresh Installation
 

@@ -246,17 +246,32 @@ check_existing_config() {
         echo "Your current .zshrc contains $(wc -l < "$HOME/.zshrc" | tr -d ' ') lines"
         echo
         echo "What would you like to do?"
-        echo "  1) Backup and proceed (recommended)"
-        echo "  2) View existing .zshrc first"
-        echo "  3) Cancel installation"
+        echo "  1) Adaptive setup - Preserve all customizations (recommended)"
+        echo "  2) Standard setup - Backup and replace"
+        echo "  3) View existing .zshrc first"
+        echo "  4) Cancel installation"
         echo
-        read -p "Enter choice [1-3]: " choice
+        read -p "Enter choice [1-4]: " choice
         
         case $choice in
             1)
-                print_info "Proceeding with backup..."
+                print_info "Running adaptive setup..."
+                if [[ -f "$DOTFILES_DIR/scripts/adaptive-setup.sh" ]]; then
+                    bash "$DOTFILES_DIR/scripts/adaptive-setup.sh"
+                    print_success "Adaptive setup complete!"
+                    echo
+                    print_info "Your customizations have been preserved."
+                    print_info "Run 'source ~/.zshrc' to reload your configuration."
+                    exit 0
+                else
+                    print_warning "Adaptive setup script not found, using standard setup"
+                    print_info "Proceeding with backup..."
+                fi
                 ;;
             2)
+                print_info "Proceeding with standard setup (backup and replace)..."
+                ;;
+            3)
                 less "$HOME/.zshrc"
                 echo
                 read -p "Continue with installation? (y/n) " -n 1 -r
@@ -266,11 +281,11 @@ check_existing_config() {
                     exit 0
                 fi
                 ;;
-            3)
+            4)
                 print_info "Installation cancelled"
                 print_info "To preserve custom settings before installing:"
-                echo "  1. Copy custom aliases/functions to ~/.zshrc.local"
-                echo "  2. Run this setup again"
+                echo "  1. Run adaptive setup: ~/dotfiles/scripts/adaptive-setup.sh"
+                echo "  2. Or manually copy to ~/.zshrc.local"
                 exit 0
                 ;;
             *)
