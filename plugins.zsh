@@ -1,12 +1,10 @@
 #!/usr/bin/env zsh
 # Plugin configuration
 
-# Oh My Zsh configuration (if using Oh My Zsh)
+# Oh My Zsh configuration
 if [[ -d "$HOME/.oh-my-zsh" ]]; then
-    export ZSH="$HOME/.oh-my-zsh"
-    
     # Theme
-    ZSH_THEME="robbyrussell"
+    ZSH_THEME="powerlevel10k/powerlevel10k"
     
     # Plugins
     plugins=(
@@ -18,6 +16,11 @@ if [[ -d "$HOME/.oh-my-zsh" ]]; then
         node
         macos
         brew
+        composer
+        laravel
+        php
+        python
+        pip
         zsh-autosuggestions
         zsh-syntax-highlighting
         z
@@ -25,6 +28,20 @@ if [[ -d "$HOME/.oh-my-zsh" ]]; then
     
     # Load Oh My Zsh
     source $ZSH/oh-my-zsh.sh
+fi
+
+# NVM (Node Version Manager)
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Pyenv initialization
+if command -v pyenv >/dev/null; then
+    eval "$(pyenv init -)"
+fi
+
+# rbenv initialization
+if command -v rbenv >/dev/null; then
+    eval "$(rbenv init - zsh)"
 fi
 
 # Homebrew completions
@@ -41,3 +58,8 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # Enable extended globbing
 setopt EXTENDED_GLOB
+
+# FZF integration
+if [[ -f ~/.fzf.zsh ]]; then
+    source ~/.fzf.zsh
+fi

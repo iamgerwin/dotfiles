@@ -156,6 +156,13 @@ create_symlinks() {
         ln -sf "$DOTFILES_DIR/.tmux.conf" "$HOME/.tmux.conf"
         print_success "Linked .tmux.conf"
     fi
+    
+    # Create .p10k.zsh symlink if it exists
+    if [[ -f "$DOTFILES_DIR/p10k.zsh" ]]; then
+        remove_existing "$HOME/.p10k.zsh"
+        ln -sf "$DOTFILES_DIR/p10k.zsh" "$HOME/.p10k.zsh"
+        print_success "Linked .p10k.zsh"
+    fi
 }
 
 # Configure Git

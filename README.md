@@ -13,20 +13,24 @@ This repository contains my personal dotfiles configuration, designed with modul
 - **Automated Setup**: One-command installation for new machines
 - **Package Management**: Centralized Homebrew package management via Brewfile
 - **Version Control**: All configurations tracked in Git for easy rollback and history
+- **Oh My Zsh Integration**: Pre-configured with useful plugins and Powerlevel10k theme
+- **Development Tools**: NVM, Pyenv, Herd PHP, and other development environment managers
+- **Laravel/PHP Ready**: Aliases and tools for Laravel development workflow
 
 ## Structure
 
 ```
 dotfiles/
 ├── .zshrc              # Main configuration file that sources all modules
-├── aliases.zsh         # Command shortcuts and aliases
+├── aliases.zsh         # Command shortcuts and aliases (git, Laravel, Docker)
 ├── exports.zsh         # Environment variables and PATH configuration
 ├── functions.zsh       # Custom shell functions and utilities
 ├── options.zsh         # Zsh shell options and settings
-├── plugins.zsh         # Plugin configurations (Oh My Zsh, etc.)
+├── plugins.zsh         # Plugin configurations (Oh My Zsh, NVM, Pyenv)
 ├── keybindings.zsh     # Custom keyboard shortcuts
 ├── prompt.zsh          # Shell prompt appearance and behavior
 ├── custom.zsh          # Machine-specific configurations
+├── p10k.zsh            # Powerlevel10k prompt configuration
 ├── Brewfile            # Homebrew package definitions
 ├── setup.sh            # Automated setup script
 └── scripts/
@@ -83,14 +87,27 @@ The setup script automatically:
 
 ### Core Modules
 
-- **aliases.zsh**: Common command shortcuts (git, docker, navigation)
-- **exports.zsh**: PATH modifications and environment variables
+- **aliases.zsh**: Command shortcuts including:
+  - Git workflow aliases (gc, gpod, gdog, gclean, gdp)
+  - Laravel/PHP development (art, sail, pint, pbc)
+  - Docker shortcuts (dps, dpsa, di, dex)
+  - System utilities (brewu, reload, dotfiles)
+- **exports.zsh**: PATH and environment variables for:
+  - Herd PHP configuration (multiple PHP versions)
+  - NVM (Node Version Manager)
+  - Pyenv (Python Version Manager)
+  - Windsurf, Homebrew, and other tools
 - **functions.zsh**: Reusable shell functions for productivity
 - **options.zsh**: Zsh behavior settings (history, completion, etc.)
-- **plugins.zsh**: External plugin configurations
+- **plugins.zsh**: Configurations for:
+  - Oh My Zsh with Powerlevel10k theme
+  - Development plugins (git, docker, laravel, composer)
+  - Auto-suggestions and syntax highlighting
+  - NVM and Pyenv initialization
 - **keybindings.zsh**: Terminal keyboard shortcuts
-- **prompt.zsh**: Prompt theming and git integration
+- **prompt.zsh**: Additional prompt customization
 - **custom.zsh**: Local overrides and machine-specific settings
+- **p10k.zsh**: Powerlevel10k prompt configuration
 
 ### Package Management
 

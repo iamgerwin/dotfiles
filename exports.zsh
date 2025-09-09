@@ -16,11 +16,26 @@ export HISTSIZE=10000
 export SAVEHIST=10000
 export HISTFILE=~/.zsh_history
 
+# Oh My Zsh installation path
+export ZSH="$HOME/.oh-my-zsh"
+
 # PATH additions
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+
+# Windsurf
+export PATH="/Users/gerwin/.codeium/windsurf/bin:$PATH"
+
+# Herd PHP Configuration
+export PATH="/Users/gerwin/Library/Application Support/Herd/bin/:$PATH"
+
+# Herd injected PHP configurations
+export HERD_PHP_84_INI_SCAN_DIR="/Users/gerwin/Library/Application Support/Herd/config/php/84/"
+export HERD_PHP_83_INI_SCAN_DIR="/Users/gerwin/Library/Application Support/Herd/config/php/83/"
+export HERD_PHP_82_INI_SCAN_DIR="/Users/gerwin/Library/Application Support/Herd/config/php/82/"
+export HERD_PHP_81_INI_SCAN_DIR="/Users/gerwin/Library/Application Support/Herd/config/php/81/"
 
 # Homebrew (if on macOS)
 if [[ "$(uname)" == "Darwin" ]]; then
@@ -31,19 +46,17 @@ if [[ "$(uname)" == "Darwin" ]]; then
     fi
 fi
 
-# Node.js
+# NVM (Node Version Manager)
+export NVM_DIR="$HOME/.nvm"
 export PATH="$HOME/.npm-global/bin:$PATH"
-if command -v nvm &> /dev/null; then
-    export NVM_DIR="$HOME/.nvm"
-fi
+
+# Pyenv configuration
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 
 # Python
 export PYTHONDONTWRITEBYTECODE=1
 export PYTHONUNBUFFERED=1
-if [[ -d "$HOME/.pyenv" ]]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-fi
 
 # Ruby
 if [[ -d "$HOME/.rbenv" ]]; then
@@ -84,3 +97,6 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
+
+# Compilation flags
+export ARCHFLAGS="-arch $(uname -m)"
