@@ -19,6 +19,7 @@ This repository contains my personal dotfiles configuration, designed with modul
 - **Development Tools**: NVM, Pyenv, Herd PHP, and other development environment managers
 - **Laravel/PHP Ready**: Aliases and tools for Laravel development workflow
 - **Custom Preservation**: Automatically detects and preserves your existing aliases, functions, and tools
+- **AI Prompts Management**: Organized system for managing AI prompts and context scripts by company/project
 
 ## Structure
 
@@ -35,11 +36,14 @@ dotfiles/
 ├── custom.zsh          # Machine-specific configurations
 ├── p10k.zsh            # Powerlevel10k prompt configuration
 ├── Brewfile            # Homebrew package definitions
+├── AI_PROMPTS.md       # AI prompts management documentation
 ├── setup.sh            # Automated setup script
 └── scripts/
     ├── install-brew.sh # Homebrew installation script
     ├── backup.sh       # Backup management script
-    └── uninstall.sh    # Uninstall and rollback script
+    ├── uninstall.sh    # Uninstall and rollback script
+    ├── ai-prompt       # AI prompts CLI tool
+    └── ai-prompts-init.sh # AI prompts initialization
 ```
 
 ## Quick Start
@@ -203,6 +207,26 @@ Store sensitive information in `~/.zshrc.private` (not tracked by Git):
 ```bash
 echo "export SECRET_API_KEY=xxx" >> ~/.zshrc.private
 ```
+
+### AI Prompts Management
+
+Manage AI prompts and context scripts organized by company/project:
+
+```bash
+# Initialize AI prompts system
+~/dotfiles/scripts/ai-prompts-init.sh
+
+# List available prompts
+ai-prompt list
+
+# Search for prompts
+ai-prompt search "laravel"
+
+# Copy prompt to clipboard
+ai-prompt copy development/code-review
+```
+
+See [AI_PROMPTS.md](AI_PROMPTS.md) for complete documentation.
 
 ## Maintenance
 

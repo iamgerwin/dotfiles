@@ -80,3 +80,10 @@ alias port='lsof -i -P -n | grep LISTEN'
 
 # Custom tools
 alias clauded='claude --dangerously-skip-permissions'
+
+# AI Prompts Management
+alias aip='ai-prompt'
+alias aipl='ai-prompt list'
+alias aips='ai-prompt search'
+alias aipc='ai-prompt copy'
+alias aipa='ai-prompt add'

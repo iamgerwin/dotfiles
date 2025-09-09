@@ -1,0 +1,371 @@
+#!/usr/bin/env bash
+# AI Prompt Management CLI
+# Manage, organize, and share AI prompts across companies
+
+set -e
+
+# Configuration
+AI_PROMPTS_DIR="${AI_PROMPTS_DIR:-$HOME/ai-prompts}"
+DOTFILES_DIR="$HOME/dotfiles"
+CURRENT_COMPANY="${AI_PROMPT_COMPANY:-}"
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+MAGENTA='\033[0;35m'
+NC='\033[0m'
+
+# Functions
+print_success() {
+    echo -e "${GREEN}✓${NC} $1"
+}
+
+print_error() {
+    echo -e "${RED}✗${NC} $1"
+}
+
+print_info() {
+    echo -e "${CYAN}ℹ${NC} $1"
+}
+
+print_warning() {
+    echo -e "${YELLOW}⚠${NC} $1"
+}
+
+# Ensure AI prompts directory exists
+init_check() {
+    if [[ ! -d "$AI_PROMPTS_DIR" ]]; then
+        print_error "AI prompts directory not found at $AI_PROMPTS_DIR"
+        print_info "Run: ~/dotfiles/scripts/ai-prompts-init.sh"
+        exit 1
+    fi
+}
+
+# List prompts
+list_prompts() {
+    init_check
+    local company="${1:-}"
+    
+    echo -e "${BLUE}Available AI Prompts:${NC}"
+    echo
+    
+    if [[ -n "$company" ]]; then
+        echo -e "${MAGENTA}Company: $company${NC}"
+        if [[ -d "$AI_PROMPTS_DIR/companies/$company" ]]; then
+            find "$AI_PROMPTS_DIR/companies/$company" -name "*.md" -o -name "*.txt" | \
+                sed "s|$AI_PROMPTS_DIR/companies/$company/||" | sort
+        else
+            print_error "Company '$company' not found"
+        fi
+    else
+        echo -e "${MAGENTA}Common Prompts:${NC}"
+        find "$AI_PROMPTS_DIR/common" -name "*.md" -o -name "*.txt" 2>/dev/null | \
+            sed "s|$AI_PROMPTS_DIR/common/||" | sort || true
+        
+        echo
+        echo -e "${MAGENTA}Company-Specific:${NC}"
+        for company_dir in "$AI_PROMPTS_DIR/companies"/*; do
+            if [[ -d "$company_dir" ]] && [[ "$(basename "$company_dir")" != "template" ]]; then
+                local company_name=$(basename "$company_dir")
+                echo "  $company_name:"
+                find "$company_dir" -name "*.md" -o -name "*.txt" 2>/dev/null | \
+                    sed "s|$company_dir/||" | sed 's/^/    /' | head -5 || true
+            fi
+        done
+    fi
+}
+
+# Search prompts
+search_prompts() {
+    init_check
+    local query="$1"
+    
+    if [[ -z "$query" ]]; then
+        print_error "Search query required"
+        exit 1
+    fi
+    
+    echo -e "${BLUE}Searching for: $query${NC}"
+    echo
+    
+    # Search in filenames and content
+    grep -r "$query" "$AI_PROMPTS_DIR" --include="*.md" --include="*.txt" 2>/dev/null | \
+        grep -v ".git" | \
+        sed "s|$AI_PROMPTS_DIR/||" | \
+        head -20 || true
+    
+    echo
+    find "$AI_PROMPTS_DIR" -name "*$query*.md" -o -name "*$query*.txt" 2>/dev/null | \
+        grep -v ".git" | \
+        sed "s|$AI_PROMPTS_DIR/||" || true
+}
+
+# Show prompt content
+show_prompt() {
+    init_check
+    local prompt_path="$1"
+    
+    if [[ -z "$prompt_path" ]]; then
+        print_error "Prompt path required"
+        exit 1
+    fi
+    
+    # Try different locations
+    local full_path=""
+    if [[ -f "$AI_PROMPTS_DIR/$prompt_path" ]]; then
+        full_path="$AI_PROMPTS_DIR/$prompt_path"
+    elif [[ -f "$AI_PROMPTS_DIR/common/$prompt_path" ]]; then
+        full_path="$AI_PROMPTS_DIR/common/$prompt_path"
+    elif [[ -f "$AI_PROMPTS_DIR/companies/$CURRENT_COMPANY/$prompt_path" ]]; then
+        full_path="$AI_PROMPTS_DIR/companies/$CURRENT_COMPANY/$prompt_path"
+    else
+        print_error "Prompt not found: $prompt_path"
+        exit 1
+    fi
+    
+    echo -e "${BLUE}Prompt: $prompt_path${NC}"
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    cat "$full_path"
+}
+
+# Copy prompt to clipboard
+copy_prompt() {
+    init_check
+    local prompt_path="$1"
+    
+    if [[ -z "$prompt_path" ]]; then
+        print_error "Prompt path required"
+        exit 1
+    fi
+    
+    # Find the prompt
+    local full_path=""
+    if [[ -f "$AI_PROMPTS_DIR/$prompt_path" ]]; then
+        full_path="$AI_PROMPTS_DIR/$prompt_path"
+    elif [[ -f "$AI_PROMPTS_DIR/common/$prompt_path" ]]; then
+        full_path="$AI_PROMPTS_DIR/common/$prompt_path"
+    elif [[ -f "$AI_PROMPTS_DIR/companies/$CURRENT_COMPANY/$prompt_path" ]]; then
+        full_path="$AI_PROMPTS_DIR/companies/$CURRENT_COMPANY/$prompt_path"
+    else
+        print_error "Prompt not found: $prompt_path"
+        exit 1
+    fi
+    
+    # Copy to clipboard
+    if command -v pbcopy &> /dev/null; then
+        cat "$full_path" | pbcopy
+        print_success "Copied to clipboard: $prompt_path"
+    else
+        print_error "pbcopy not available on this system"
+        exit 1
+    fi
+}
+
+# Add new prompt
+add_prompt() {
+    init_check
+    local prompt_path="$1"
+    
+    if [[ -z "$prompt_path" ]]; then
+        print_error "Prompt path required"
+        print_info "Usage: ai-prompt add <category>/<name>.md"
+        exit 1
+    fi
+    
+    # Determine target directory
+    local target_dir=""
+    if [[ "$prompt_path" == common/* ]]; then
+        target_dir="$AI_PROMPTS_DIR/$prompt_path"
+    elif [[ "$prompt_path" == */* ]]; then
+        # Assume company-specific if contains slash
+        target_dir="$AI_PROMPTS_DIR/companies/$CURRENT_COMPANY/$prompt_path"
+    else
+        target_dir="$AI_PROMPTS_DIR/common/$prompt_path"
+    fi
+    
+    # Create directory if needed
+    mkdir -p "$(dirname "$target_dir")"
+    
+    # Open editor
+    ${EDITOR:-vim} "$target_dir"
+    
+    if [[ -f "$target_dir" ]]; then
+        print_success "Added prompt: $prompt_path"
+    fi
+}
+
+# Share prompt between companies
+share_prompt() {
+    init_check
+    local source_prompt="$1"
+    local target_company="$2"
+    
+    if [[ -z "$source_prompt" ]] || [[ -z "$target_company" ]]; then
+        print_error "Usage: ai-prompt share <source-prompt> <target-company>"
+        exit 1
+    fi
+    
+    # Find source
+    local source_path=""
+    if [[ -f "$AI_PROMPTS_DIR/companies/$CURRENT_COMPANY/$source_prompt" ]]; then
+        source_path="$AI_PROMPTS_DIR/companies/$CURRENT_COMPANY/$source_prompt"
+    elif [[ -f "$AI_PROMPTS_DIR/$source_prompt" ]]; then
+        source_path="$AI_PROMPTS_DIR/$source_prompt"
+    else
+        print_error "Source prompt not found: $source_prompt"
+        exit 1
+    fi
+    
+    # Create target directory
+    local target_dir="$AI_PROMPTS_DIR/companies/$target_company/$(dirname "$source_prompt")"
+    mkdir -p "$target_dir"
+    
+    # Copy prompt
+    cp "$source_path" "$target_dir/"
+    print_success "Shared to $target_company: $source_prompt"
+}
+
+# Export prompts (excluding secrets)
+export_prompts() {
+    init_check
+    local output_file="${1:-$HOME/Desktop/ai-prompts-backup-$(date +%Y%m%d).tar.gz}"
+    
+    print_info "Exporting prompts to $output_file"
+    
+    # Create temporary directory
+    local temp_dir=$(mktemp -d)
+    
+    # Copy everything except secrets
+    rsync -av \
+        --exclude='.secrets' \
+        --exclude='*.key' \
+        --exclude='*.token' \
+        --exclude='*-secret.*' \
+        --exclude='.git' \
+        "$AI_PROMPTS_DIR/" "$temp_dir/"
+    
+    # Create archive
+    tar -czf "$output_file" -C "$temp_dir" .
+    
+    # Cleanup
+    rm -rf "$temp_dir"
+    
+    print_success "Exported to: $output_file"
+}
+
+# Import prompts
+import_prompts() {
+    init_check
+    local input_file="$1"
+    
+    if [[ ! -f "$input_file" ]]; then
+        print_error "Import file not found: $input_file"
+        exit 1
+    fi
+    
+    print_info "Importing prompts from $input_file"
+    
+    # Backup current prompts
+    if [[ -d "$AI_PROMPTS_DIR" ]]; then
+        mv "$AI_PROMPTS_DIR" "$AI_PROMPTS_DIR.backup.$(date +%Y%m%d_%H%M%S)"
+        print_info "Backed up existing prompts"
+    fi
+    
+    # Extract
+    mkdir -p "$AI_PROMPTS_DIR"
+    tar -xzf "$input_file" -C "$AI_PROMPTS_DIR"
+    
+    print_success "Imported prompts successfully"
+}
+
+# Sync with git
+sync_prompts() {
+    init_check
+    
+    if [[ ! -d "$AI_PROMPTS_DIR/.git" ]]; then
+        print_warning "AI prompts directory is not a git repository"
+        print_info "Initializing git..."
+        cd "$AI_PROMPTS_DIR"
+        git init
+        git add .
+        git commit -m "Initial commit of AI prompts"
+    fi
+    
+    cd "$AI_PROMPTS_DIR"
+    
+    # Pull latest changes
+    if git remote get-url origin &>/dev/null; then
+        print_info "Pulling latest changes..."
+        git pull
+    fi
+    
+    # Add and commit changes
+    git add .
+    if ! git diff-index --quiet HEAD --; then
+        git commit -m "Update AI prompts $(date +%Y-%m-%d)"
+        
+        # Push if remote exists
+        if git remote get-url origin &>/dev/null; then
+            print_info "Pushing changes..."
+            git push
+        fi
+        
+        print_success "Synced prompts with git"
+    else
+        print_info "No changes to sync"
+    fi
+}
+
+# Main command handler
+case "${1:-}" in
+    list)
+        list_prompts "${2:-}"
+        ;;
+    search)
+        search_prompts "${2:-}"
+        ;;
+    show)
+        show_prompt "${2:-}"
+        ;;
+    copy)
+        copy_prompt "${2:-}"
+        ;;
+    add)
+        add_prompt "${2:-}"
+        ;;
+    share)
+        share_prompt "${2:-}" "${3:-}"
+        ;;
+    export)
+        export_prompts "${2:-}"
+        ;;
+    import)
+        import_prompts "${2:-}"
+        ;;
+    sync)
+        sync_prompts
+        ;;
+    *)
+        echo "AI Prompt Management CLI"
+        echo
+        echo "Usage: ai-prompt <command> [options]"
+        echo
+        echo "Commands:"
+        echo "  list [company]     List available prompts"
+        echo "  search <query>     Search prompts"
+        echo "  show <path>        Display prompt content"
+        echo "  copy <path>        Copy prompt to clipboard"
+        echo "  add <path>         Add new prompt"
+        echo "  share <src> <dst>  Share prompt to another company"
+        echo "  export [file]      Export prompts (backup)"
+        echo "  import <file>      Import prompts"
+        echo "  sync              Sync with git"
+        echo
+        echo "Environment:"
+        echo "  AI_PROMPTS_DIR     Base directory (default: ~/ai-prompts)"
+        echo "  AI_PROMPT_COMPANY  Current company context"
+        ;;
+esac
