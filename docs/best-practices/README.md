@@ -1,6 +1,6 @@
 # Best Practices Documentation
 
-Comprehensive documentation for full-stack development, organized by technology category.
+Comprehensive documentation for full-stack development, enterprise systems, and modern technology stacks, organized by category for easy reference and implementation.
 
 ## 📁 Documentation Structure
 
@@ -29,12 +29,7 @@ Comprehensive documentation for full-stack development, organized by technology 
 ### DevOps
 - **Containerization**: Docker, Kubernetes
 - **CI/CD**: GitHub Actions, GitLab CI
-
-### Cloud Platforms
-- AWS (Amazon Web Services)
-- Microsoft Azure
-- Google Cloud Platform
-- DigitalOcean
+- **Cloud Platforms**: AWS, Azure, Google Cloud Platform, DigitalOcean
 
 ### Testing
 - **E2E Testing**: Playwright, Cypress
@@ -45,6 +40,12 @@ Comprehensive documentation for full-stack development, organized by technology 
 - **Authentication**: JWT, OAuth 2.0
 - **Documentation**: OpenAPI/Swagger
 - **Web Standards**: Web Components
+
+### Enterprise Systems
+- **SAP**: ABAP, SAPUI5/OpenUI5
+- **Integration**: MuleSoft
+- **CRM/Platform**: Salesforce Lightning, Zoho
+- **Machine Learning**: RAG, AI/ML Best Practices
 
 ### CMS
 - WordPress
@@ -72,12 +73,14 @@ Each documentation file includes:
 ## 🎯 Purpose
 
 This documentation serves as a comprehensive reference for:
-- Setting up new projects
-- Following industry best practices
-- Avoiding common mistakes
-- Understanding proper project structure
-- Implementing patterns correctly
-- Writing maintainable code
+- Setting up new projects with modern tech stacks
+- Following industry best practices and patterns  
+- Avoiding common mistakes and pitfalls
+- Understanding proper project structure and architecture
+- Implementing enterprise-grade solutions
+- Writing maintainable, scalable code
+- Integrating with enterprise systems (SAP, Salesforce, etc.)
+- Building robust full-stack applications
 
 ## 📝 Contributing
 
