@@ -87,3 +87,12 @@ alias aipl='ai-prompt list'
 alias aips='ai-prompt search'
 alias aipc='ai-prompt copy'
 alias aipa='ai-prompt add'
+
+# Quick template copy
+alias pc='prompt-copy'
+alias pct='prompt-copy create-ticket'
+alias pcl='prompt-copy laravel-backend'
+alias pcb='prompt-copy bug'
+alias pcf='prompt-copy feature'
+alias pca='prompt-copy api'
+alias pcd='prompt-copy deployment'

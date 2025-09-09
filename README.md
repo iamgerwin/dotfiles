@@ -37,13 +37,15 @@ dotfiles/
 ├── p10k.zsh            # Powerlevel10k prompt configuration
 ├── Brewfile            # Homebrew package definitions
 ├── AI_PROMPTS.md       # AI prompts management documentation
+├── TEMPLATES.md        # Quick reference for all prompt templates
 ├── setup.sh            # Automated setup script
 └── scripts/
     ├── install-brew.sh # Homebrew installation script
     ├── backup.sh       # Backup management script
     ├── uninstall.sh    # Uninstall and rollback script
     ├── ai-prompt       # AI prompts CLI tool
-    └── ai-prompts-init.sh # AI prompts initialization
+    ├── ai-prompts-init.sh # AI prompts initialization
+    └── prompt-copy     # Quick template copy to clipboard
 ```
 
 ## Quick Start
