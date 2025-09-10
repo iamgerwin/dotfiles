@@ -17,7 +17,8 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **Python**: Django, Python General
 - **Ruby**: Ruby on Rails
 - **Elixir**: Ash/Phoenix
-- **.NET**: ASP.NET Core, C#
+- **.NET**: ASP.NET Core, C#, Entity Framework Core
+- **BaaS**: Appwrite
 
 ### Languages
 - **Systems Languages**: Rust, Go, Zig
@@ -31,8 +32,12 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 
 ### Database
 - **Relational**: PostgreSQL, MySQL
-- **NoSQL**: Firestore (Google Cloud Firestore)
+- **NoSQL**: MongoDB, Firestore (Google Cloud Firestore), CouchDB
+- **Key-Value Store**: Redis
+- **Analytics Database**: DuckDB
 - **Backend as a Service**: Supabase, PocketBase
+- **Low-Code Database**: Airtable
+- **ORM**: Prisma, Entity Framework Core
 
 ### DevOps
 - **Containerization**: Docker, Kubernetes
@@ -83,6 +88,14 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **Architecture Documentation**: C4 Model, UML diagrams, Entity Relationship Diagrams
 - **Process Modeling**: Sequence diagrams, timing diagrams, state machines, flowcharts
 - **Collaboration**: Mind mapping, wireframing, technical documentation standards
+
+### Technology Stacks
+- **Traditional Web**: LAMP (Linux, Apache, MySQL, PHP)
+- **JavaScript Stacks**: MERN (MongoDB, Express, React, Node.js), MEAN (MongoDB, Express, Angular, Node.js), MEVN (MongoDB, Express, Vue, Node.js)
+- **Modern Architectures**: JAMstack (JavaScript, APIs, Markup), T3 Stack (TypeScript, Next.js, tRPC, Prisma, Tailwind, NextAuth)
+- **SQL-based Stacks**: PERN (PostgreSQL, Express, React, Node.js)
+- **Laravel Stacks**: TALL (Tailwind, Alpine.js, Laravel, Livewire), VILT (Vue, Inertia, Laravel, Tailwind)
+- **Enterprise Stacks**: .NET Stack, Java Spring Stack, Django Stack, Ruby on Rails Stack
 
 ### Monitoring & Observability
 - **Application Performance Monitoring**: Datadog, New Relic  

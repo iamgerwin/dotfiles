@@ -321,19 +321,23 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 - Python: Django, general Python best practices
 - Ruby: Ruby on Rails
 - Elixir: Ash framework
-- .NET: ASP.NET Core with C#
+- .NET: ASP.NET Core with C#, Entity Framework Core
 - Java: Modern Java features, Spring Boot integration
+- BaaS: Appwrite (open-source Firebase alternative)
 
 **Mobile Development**
 - Cross-platform: Flutter, React Native, .NET MAUI
 - Native: Swift (iOS), Kotlin (Android)
 
 **Database & Storage**
-- ORM: Prisma
+- ORM: Prisma, Entity Framework Core
 - Relational: PostgreSQL, Neon (serverless PostgreSQL)
-- NoSQL: Firestore (Google Cloud Firestore)
+- NoSQL: MongoDB, Firestore, CouchDB
+- Key-Value: Redis (caching, sessions, pub/sub)
+- Analytics: DuckDB (OLAP, data analysis)
 - Edge Database: Turso (libSQL/SQLite)
-- Backend as a Service: Supabase
+- Backend as a Service: Supabase, PocketBase, Appwrite
+- Low-Code Database: Airtable
 
 **DevOps & Cloud**
 - Containerization: Docker
@@ -387,6 +391,14 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 - Architecture: C4 Model, UML diagrams, ERD tools
 - Timing & Sequence: Sequence diagrams, timing diagrams, state machines
 - Mind mapping and flowcharts for technical documentation
+
+**Technology Stacks**
+- Traditional: LAMP (Linux, Apache, MySQL, PHP)
+- JavaScript: MERN (MongoDB, Express, React, Node.js), MEAN (Angular), MEVN (Vue)
+- Modern: JAMstack (JavaScript, APIs, Markup), T3 Stack (TypeScript, Next.js, tRPC, Prisma)
+- Full-Stack: PERN (PostgreSQL, Express, React, Node.js), Django Stack, Rails Stack
+- Laravel: TALL Stack (Tailwind, Alpine.js, Laravel, Livewire), VILT (Vue, Inertia, Laravel, Tailwind)
+- Enterprise: .NET Stack, Java Spring Stack
 
 **Monitoring & Observability**
 - Application Performance Monitoring: Datadog, New Relic
