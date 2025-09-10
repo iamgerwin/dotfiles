@@ -306,7 +306,7 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 #### Available Technologies
 
 **Frontend & UI**
-- React ecosystem (Next.js, Jotai), Vue.js (Nuxt.js v4)
+- React ecosystem (Next.js, Jotai), Vue.js (Nuxt.js v4), Vaadin
 - Authentication: Clerk, Better Auth
 - UI libraries: shadcn/ui, Bootstrap, Tailwind CSS
 - Animation: GSAP
@@ -314,8 +314,8 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 - Legacy: jQuery
 
 **Backend & APIs**
-- PHP: Laravel, Laravel Filament v4, Symfony with API Platform, CodeIgniter 4
-- JavaScript/TypeScript: NestJS, Hono.js
+- PHP: Laravel, Laravel Nova, Laravel Filament v4, Symfony with API Platform, CodeIgniter 4
+- JavaScript/TypeScript: NestJS, Hono.js, Meteor.js
 - Python: Django, general Python best practices
 - Ruby: Ruby on Rails
 - Elixir: Ash framework
@@ -362,6 +362,7 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 **Languages**
 - Systems programming: Rust, Go, Zig
 - Web development: TypeScript
+- Enterprise: Java
 
 **AI & Machine Learning**
 - RAG (Retrieval-Augmented Generation) best practices
@@ -376,6 +377,16 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 - DRY Principle: Don't Repeat Yourself implementation strategies
 - DDD: Domain-Driven Design patterns and practices
 - Gang of Four Design Patterns: 23 classic object-oriented design patterns
+
+**Monitoring & Observability**
+- Application Performance Monitoring: Datadog, New Relic
+- Error Tracking: Sentry, Rollbar
+- Logging and Analytics: Complete monitoring stack implementation
+
+**SEO & Web Optimization**
+- Technical SEO: Site architecture, Core Web Vitals, structured data
+- Content Optimization: Keyword research, content structure
+- Tools & Analytics: Google Search Console, performance monitoring
 
 Each guide includes practical examples, project structures, common pitfalls, performance optimization, and production-ready patterns.
 
