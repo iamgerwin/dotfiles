@@ -4,12 +4,6 @@
 # Cleanup: brew bundle cleanup
 
 # Taps
-tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/cask-fonts"
-tap "homebrew/cask-versions"
-tap "homebrew/core"
-tap "homebrew/services"
 tap "oven-sh/bun"
 
 # Core Development Tools
@@ -27,7 +21,6 @@ brew "python@3.12"
 brew "pyenv"                   # Python Version Manager
 brew "elixir"
 brew "oven-sh/bun/bun"        # JavaScript runtime & package manager
-brew "flutter"
 
 # PHP & Web Development
 brew "composer"
@@ -124,7 +117,4 @@ cask "transmission"            # BitTorrent client
 
 # Fonts
 cask "font-meslo-lg-nerd-font"      # Required for Powerlevel10k
-cask "font-monaspace"
-cask "font-monaspace-nerd-font"
 cask "font-fira-code"
-cask "font-fira-code-nerd-font"
