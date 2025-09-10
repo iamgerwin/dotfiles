@@ -334,8 +334,8 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 **Database & Storage**
 - ORM: Prisma, Entity Framework Core
 - Relational: PostgreSQL, Neon (serverless PostgreSQL)
-- NoSQL: MongoDB, Firestore, CouchDB
-- Key-Value: Redis (caching, sessions, pub/sub)
+- NoSQL: MongoDB, Firestore, CouchDB, DynamoDB (AWS managed NoSQL)
+- Key-Value: Redis (caching, sessions, pub/sub), Valkey (open-source Redis fork)
 - Analytics: DuckDB (OLAP, data analysis)
 - Edge Database: Turso (libSQL/SQLite)
 - Backend as a Service: Supabase, PocketBase, Appwrite

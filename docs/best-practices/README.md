@@ -32,8 +32,8 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 
 ### Database
 - **Relational**: PostgreSQL, MySQL
-- **NoSQL**: MongoDB, Firestore (Google Cloud Firestore), CouchDB
-- **Key-Value Store**: Redis
+- **NoSQL**: MongoDB, Firestore (Google Cloud Firestore), CouchDB, DynamoDB (AWS)
+- **Key-Value Store**: Redis, Valkey (Redis-compatible, open-source)
 - **Analytics Database**: DuckDB
 - **Backend as a Service**: Supabase, PocketBase
 - **Low-Code Database**: Airtable
