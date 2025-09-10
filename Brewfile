@@ -56,6 +56,13 @@ brew "curl"
 brew "watchman"                # File watching service
 brew "gd"                      # Graphics library
 
+# System Monitoring Tools
+brew "htop"                     # Interactive process viewer
+brew "btop"                     # Resource monitor with GPU support
+brew "bottom"                   # Cross-platform graphical process/system monitor
+brew "glances"                  # System monitoring tool with web UI
+brew "zenith"                   # Terminal system monitor with charts
+
 # Cloud & Deployment
 brew "flyctl"                  # Fly.io CLI
 
