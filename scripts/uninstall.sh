@@ -233,11 +233,60 @@ quick_restore() {
     fi
 }
 
+# Restore tmux configuration specifically
+restore_tmux() {
+    local backup_dir="${1:-}"
+    
+    print_header "Restoring Tmux Configuration"
+    
+    # Find tmux backup directory if not specified
+    if [[ -z "$backup_dir" ]]; then
+        backup_dir=$(find "$BACKUP_DIR" -maxdepth 1 -type d -name "tmux-*" | sort -r | head -n1)
+    fi
+    
+    if [[ ! -d "$backup_dir" ]]; then
+        print_error "No tmux backup found"
+        return 1
+    fi
+    
+    print_info "Restoring from: $backup_dir"
+    
+    # Remove current tmux setup
+    if [[ -L "$HOME/.tmux.conf" ]]; then
+        rm "$HOME/.tmux.conf"
+        print_success "Removed tmux.conf symlink"
+    fi
+    
+    # Restore original tmux.conf if it exists
+    if [[ -f "$backup_dir/.tmux.conf.backup" ]]; then
+        cp -P "$backup_dir/.tmux.conf.backup" "$HOME/.tmux.conf"
+        print_success "Restored original .tmux.conf"
+    fi
+    
+    # Restore .tmux directory if it exists
+    if [[ -d "$backup_dir/.tmux.backup" ]]; then
+        rm -rf "$HOME/.tmux"
+        cp -r "$backup_dir/.tmux.backup" "$HOME/.tmux"
+        print_success "Restored original .tmux directory"
+    fi
+    
+    # Kill tmux server to apply changes
+    if command -v tmux &> /dev/null && tmux list-sessions &> /dev/null; then
+        print_info "Killing tmux server to apply changes..."
+        tmux kill-server
+    fi
+    
+    print_success "Tmux configuration restored"
+}
+
 # Main execution
 main() {
     case "${1:-}" in
         restore)
             quick_restore "${2:-}"
+            ;;
+        restore-tmux)
+            restore_tmux "${2:-}"
             ;;
         list)
             if [[ -f "$MANIFEST_FILE" ]]; then
@@ -246,6 +295,12 @@ main() {
             else
                 print_error "No backups found"
             fi
+            # Also list tmux-specific backups
+            echo
+            print_info "Tmux-specific backups:"
+            find "$BACKUP_DIR" -maxdepth 1 -type d -name "tmux-*" 2>/dev/null | while read -r dir; do
+                echo "  - $(basename "$dir")"
+            done || echo "  None found"
             ;;
         *)
             uninstall

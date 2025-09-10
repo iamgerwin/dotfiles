@@ -4,7 +4,7 @@ This guide will help you safely install these dotfiles on your Mac, whether you 
 
 ## Before You Begin
 
-**IMPORTANT**: This setup will modify your shell configuration. All existing files will be backed up automatically.
+**IMPORTANT**: This setup will modify your shell configuration. All existing files will be backed up automatically before any changes are made, ensuring you can always rollback to your original configuration.
 
 ## Installation Options
 
@@ -90,7 +90,13 @@ Your original .zshrc will be saved as `~/.zshrc.backup.[timestamp]`
 ### Backups Created
 All existing files are backed up to:
 - `~/.dotfiles-backup/[timestamp]/` - Complete backup with manifest
+- `~/.dotfiles-backup/tmux-[timestamp]/` - Tmux-specific backups (when setting up tmux)
 - Individual `.backup.[timestamp]` files
+
+Each backup includes:
+- Original configuration files
+- Timestamp and manifest for easy identification
+- Restore instructions in the manifest
 
 ### Dependencies Installed
 - Homebrew packages (from Brewfile)
@@ -155,14 +161,36 @@ After installation, verify everything is working:
 
 ## Rollback / Uninstall
 
-If something goes wrong or you want to revert:
+The dotfiles system maintains comprehensive backups of all your original configurations, making it safe to experiment and easy to rollback if needed.
+
+### View Available Backups
+```bash
+# List all backups
+~/dotfiles/scripts/uninstall.sh list
+
+# Check backup directory
+ls -la ~/.dotfiles-backup/
+```
 
 ### Quick Rollback
 ```bash
+# Restore from the latest backup
 ~/dotfiles/scripts/uninstall.sh restore
+
+# Restore from a specific backup
+~/dotfiles/scripts/uninstall.sh restore [timestamp]
 ```
 
-This restores your original configuration from the latest backup.
+This restores your original configuration from the backup.
+
+### Tmux-Specific Restore
+```bash
+# Restore only tmux configuration
+~/dotfiles/scripts/uninstall.sh restore-tmux
+
+# Restore from a specific tmux backup
+~/dotfiles/scripts/uninstall.sh restore-tmux ~/.dotfiles-backup/tmux-[timestamp]
+```
 
 ### Complete Uninstall
 ```bash
@@ -170,22 +198,35 @@ This restores your original configuration from the latest backup.
 ```
 
 This will:
-1. Restore all original configuration files
-2. Remove all symlinks
+1. Restore all original configuration files from backup
+2. Remove all symbolic links created by dotfiles
 3. Optionally remove the dotfiles repository
-4. Optionally clean up backups
+4. Optionally clean up all backup files
+5. Restore your system to its pre-installation state
 
 ### Manual Rollback
 ```bash
-# Restore your original .zshrc
+# Restore specific files manually
 cp ~/.zshrc.backup.[timestamp] ~/.zshrc
+cp ~/.tmux.conf.backup.[timestamp] ~/.tmux.conf
 
 # Or restore from the backup directory
 cp ~/.dotfiles-backup/[timestamp]/.zshrc ~/.zshrc
+cp ~/.dotfiles-backup/tmux-[timestamp]/.tmux.conf.backup ~/.tmux.conf
 
 # Reload your shell
 source ~/.zshrc
+
+# Restart tmux if needed
+tmux kill-server
 ```
+
+### Safety Features
+- **Automatic Backups**: Every installation and update creates timestamped backups
+- **Non-Destructive**: Original files are never deleted, only renamed or backed up
+- **Manifest Tracking**: Each backup includes a manifest with restore instructions
+- **Incremental Backups**: Each component (tmux, zsh, etc.) maintains separate backups
+- **Complete Restoration**: One command restores your entire original setup
 
 ## Troubleshooting
 

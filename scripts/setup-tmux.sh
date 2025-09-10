@@ -25,6 +25,36 @@ print_info() {
 
 print_info "Setting up tmux configuration..."
 
+# Create backup directory with timestamp
+BACKUP_DIR="$HOME/.dotfiles-backup/tmux-$(date +%Y%m%d_%H%M%S)"
+mkdir -p "$BACKUP_DIR"
+print_info "Creating backups in $BACKUP_DIR"
+
+# Backup existing tmux configuration files if they exist
+if [ -f "$HOME/.tmux.conf" ] || [ -L "$HOME/.tmux.conf" ]; then
+    cp -P "$HOME/.tmux.conf" "$BACKUP_DIR/.tmux.conf.backup" 2>/dev/null || true
+    print_success "Backed up existing .tmux.conf"
+fi
+
+if [ -d "$HOME/.tmux" ]; then
+    cp -r "$HOME/.tmux" "$BACKUP_DIR/.tmux.backup" 2>/dev/null || true
+    print_success "Backed up existing .tmux directory"
+fi
+
+# Create backup manifest
+cat > "$BACKUP_DIR/manifest.json" << EOF
+{
+  "timestamp": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+  "type": "tmux-setup",
+  "files_backed_up": [
+    ".tmux.conf",
+    ".tmux/"
+  ],
+  "restore_command": "~/dotfiles/scripts/uninstall.sh restore-tmux $BACKUP_DIR"
+}
+EOF
+print_success "Created backup manifest"
+
 # Create tmux config directory if it doesn't exist
 if [ ! -d "$HOME/.tmux" ]; then
     mkdir -p "$HOME/.tmux"
