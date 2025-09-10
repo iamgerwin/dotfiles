@@ -3,6 +3,50 @@
 ## Overview
 Tmux (Terminal Multiplexer) is a powerful tool that enables multiple terminal sessions within a single window. These best practices help maximize productivity, maintain persistent sessions, and create efficient development workflows.
 
+## Quick Reference - Essential Commands
+
+### Session Management
+```bash
+# Creating and managing sessions
+tmux new -s name          # Create new named session
+tmux ls                    # List all sessions
+tmux attach -t name        # Attach to named session
+tmux detach               # Detach from session (Ctrl-a d)
+tmux rename-session -t old new  # Rename session
+tmux kill-session -t name  # Kill specific session
+
+# Within tmux
+Ctrl-a $                   # Rename current session
+Ctrl-a s                   # Show session list
+Ctrl-a (                   # Switch to previous session
+Ctrl-a )                   # Switch to next session
+```
+
+### Window Management
+```bash
+# Creating and navigating windows
+Ctrl-a c                   # Create new window
+Ctrl-a ,                   # Rename current window
+Ctrl-a n                   # Next window
+Ctrl-a p                   # Previous window
+Ctrl-a 0-9                 # Switch to window by number
+Ctrl-a w                   # List windows
+Ctrl-a &                   # Kill current window
+```
+
+### Pane Management  
+```bash
+# Splitting and navigating panes
+Ctrl-a |                   # Split vertically
+Ctrl-a -                   # Split horizontally
+Ctrl-a h/j/k/l            # Navigate panes (vim style)
+Ctrl-a H/J/K/L            # Resize panes
+Ctrl-a z                   # Toggle pane zoom
+Ctrl-a x                   # Kill current pane
+Ctrl-a q                   # Show pane numbers
+Ctrl-a !                   # Convert pane to window
+```
+
 ## Configuration
 
 ### Basic Tmux Configuration

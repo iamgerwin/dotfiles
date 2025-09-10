@@ -13,6 +13,35 @@ alias la='ls -A'
 alias l='ls -CF'
 alias lt='ls -ltr'
 
+# Modern replacements (if installed)
+if command -v eza &> /dev/null; then
+    alias ls='eza --icons'
+    alias ll='eza -lah --icons'
+    alias la='eza -a --icons'
+    alias lt='eza -lah --sort=modified --icons'
+    alias tree='eza --tree --icons'
+fi
+
+if command -v bat &> /dev/null; then
+    alias cat='bat'
+fi
+
+if command -v zoxide &> /dev/null; then
+    alias cd='z'
+fi
+
+if command -v dust &> /dev/null; then
+    alias du='dust'
+fi
+
+if command -v delta &> /dev/null; then
+    alias diff='delta'
+fi
+
+if command -v httpie &> /dev/null; then
+    alias http='httpie'
+fi
+
 # Git shortcuts
 alias gs='git status'
 alias ga='git add'
@@ -42,8 +71,25 @@ alias h='history'
 alias which='type -a'
 alias path='echo -e ${PATH//:/\\n}'
 
+# Neovim
+if command -v nvim &> /dev/null; then
+    alias vim='nvim'
+    alias vi='nvim'
+    alias v='nvim'
+    alias nv='nvim'
+    alias nvconf='cd ~/.config/nvim && nvim'
+fi
+
+# Lazygit
+if command -v lazygit &> /dev/null; then
+    alias lg='lazygit'
+fi
+
 # Package Management
 alias brewu='brew update && brew upgrade && brew cleanup'
+alias update-all='~/dotfiles/scripts/update-all.sh'
+alias ua='update-all'
+alias update='update-all'
 
 # Safety nets
 alias rm='rm -i'
@@ -108,3 +154,17 @@ alias tkss='tmux kill-session -t'
 alias tmuxconf='$EDITOR ~/.tmux.conf'
 alias tdev='~/.tmux/scripts/dev-session.sh'
 alias tproject='~/.tmux/scripts/project-launcher.sh'
+alias trn='tmux rename-session -t'
+alias trw='tmux rename-window -t'
+alias tn='tmux new-window -n'
+alias tsp='tmux split-window -h'
+alias tspv='tmux split-window -v'
+alias tsw='tmux swap-window -t'
+alias tlw='tmux list-windows'
+alias tlp='tmux list-panes'
+alias tkw='tmux kill-window -t'
+alias tkp='tmux kill-pane -t'
+alias trs='tmux resize-pane'
+alias tcap='tmux capture-pane -t'
+alias tsave='tmux save-buffer'
+alias tshow='tmux show-buffer'

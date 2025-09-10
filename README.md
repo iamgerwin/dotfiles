@@ -53,6 +53,8 @@ dotfiles/
 │       ├── security/   # Security frameworks and compliance
 │       ├── testing/    # Testing frameworks and tools
 │       ├── languages/  # Programming languages
+│       ├── editors/    # Code editors and IDEs
+│       ├── stacks/     # Technology stacks (LAMP, MERN, etc.)
 │       ├── system-architecture/ # API design and architecture
 │       ├── machine-learning/    # AI/ML best practices
 │       ├── version-control/ # Git workflows and best practices
@@ -399,6 +401,10 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 - Full-Stack: PERN (PostgreSQL, Express, React, Node.js), Django Stack, Rails Stack
 - Laravel: TALL Stack (Tailwind, Alpine.js, Laravel, Livewire), VILT (Vue, Inertia, Laravel, Tailwind)
 - Enterprise: .NET Stack, Java Spring Stack
+
+**Code Editors & IDEs**
+- Neovim: Modern vim with Lua configuration, LSP support, and extensive plugin ecosystem
+- Terminal Tools: Tmux (multiplexer), Lazygit (git UI), and modern CLI replacements
 
 **Monitoring & Observability**
 - Application Performance Monitoring: Datadog, New Relic

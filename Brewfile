@@ -49,6 +49,16 @@ brew "fd"                      # Fast find alternative
 brew "ripgrep"                 # Fast grep alternative
 brew "jq"                      # JSON processor
 brew "zoxide"                  # Smarter cd command
+brew "eza"                     # Modern ls replacement
+brew "bat"                     # Cat with syntax highlighting
+brew "delta"                   # Better git diff
+brew "dust"                    # Modern du replacement
+brew "httpie"                  # Modern curl replacement
+brew "lazygit"                 # Terminal UI for git
+brew "tokei"                   # Code statistics
+brew "procs"                   # Modern ps replacement
+brew "sd"                      # Modern sed replacement
+brew "tealdeer"                # Fast tldr pages
 
 # System Utilities
 brew "coreutils"
