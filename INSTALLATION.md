@@ -84,6 +84,7 @@ Your original .zshrc will be saved as `~/.zshrc.backup.[timestamp]`
 ### Files Created/Modified
 - `~/.zshrc` - Main configuration (symlink to ~/dotfiles/.zshrc)
 - `~/.p10k.zsh` - Powerlevel10k theme config (symlink)
+- `~/.tmux.conf` - Tmux configuration (symlink to ~/dotfiles/tmux.conf)
 - `~/.gitconfig` - Git configuration (symlink, if exists)
 
 ### Backups Created
@@ -96,6 +97,8 @@ All existing files are backed up to:
 - Oh My Zsh (optional, prompted during setup)
 - Powerlevel10k theme
 - Zsh plugins (autosuggestions, syntax highlighting)
+- Tmux with Tmux Plugin Manager (TPM)
+- Tmux plugins (resurrect, continuum, vim-navigator)
 
 ## Verification Steps
 
@@ -125,7 +128,25 @@ After installation, verify everything is working:
    # Should show your backup history
    ```
 
-5. **Configure terminal font**:
+5. **Test tmux configuration**:
+   ```bash
+   # Start a new tmux session
+   tmux new -s test
+   
+   # Verify zsh is the default shell
+   echo $SHELL
+   # Should show: /opt/homebrew/bin/zsh or /usr/local/bin/zsh
+   
+   # Test key bindings (Ctrl-a is the prefix)
+   # Ctrl-a | - Split horizontally
+   # Ctrl-a - - Split vertically
+   # Ctrl-a r - Reload config
+   
+   # Exit tmux
+   exit
+   ```
+
+6. **Configure terminal font**:
    ```bash
    # Install required font
    brew install --cask font-meslo-lg-nerd-font
@@ -199,6 +220,38 @@ sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.
 # Then install packages
 cd ~/dotfiles
 brew bundle install
+```
+
+### Tmux Using Wrong Shell
+```bash
+# If tmux opens with fish or another shell instead of zsh
+# Check current default shell
+echo $SHELL
+
+# Verify tmux.conf is linked
+ls -la ~/.tmux.conf
+
+# Reload tmux config (inside tmux)
+# Press Ctrl-a, then r
+
+# Or manually set shell in tmux
+tmux set-option -g default-shell /opt/homebrew/bin/zsh
+
+# Kill all tmux sessions and restart
+tmux kill-server
+tmux new -s main
+```
+
+### Tmux Plugins Not Installing
+```bash
+# Install TPM if missing
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+# Inside tmux, install plugins manually
+# Press Ctrl-a (prefix), then Shift-i
+
+# Or run the setup script again
+~/dotfiles/scripts/setup-tmux.sh
 ```
 
 ## Customization After Installation
