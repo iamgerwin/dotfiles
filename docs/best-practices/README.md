@@ -11,12 +11,13 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **State Management & Data**: TanStack Query, TanStack Router, TanStack Start, TanStack DB
 
 ### Backend
-- **PHP**: Laravel, Symfony with API Platform
+- **PHP**: Laravel, Symfony with API Platform, CodeIgniter 4
 - **JavaScript/TypeScript**: NestJS, Hono.js, Elysia (Bun)
 - **Python**: Django, Python General
 - **Ruby**: Ruby on Rails
 - **Elixir**: Ash/Phoenix
-- **Systems Languages**: Rust, Go
+- **Systems Languages**: Rust, Go, Zig
+- **Web Languages**: TypeScript
 - **.NET**: ASP.NET Core, C#
 
 ### Mobile
@@ -25,6 +26,7 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 
 ### Database
 - **Relational**: PostgreSQL, MySQL
+- **NoSQL**: Firestore (Google Cloud Firestore)
 - **Backend as a Service**: Supabase, PocketBase
 
 ### DevOps
@@ -59,6 +61,17 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **Application Security**: OWASP Top 10, OWASP ASVS
 - **Payment Security**: PCI DSS
 - **Government Standards**: Battle-tested, government-grade security implementations
+
+### Version Control
+- **Git Workflows**: Git worktrees for parallel development and feature isolation
+
+### Programming Principles
+- **SOLID Principles**: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion
+- **CUPID Principles**: Composable, Unix philosophy, Predictable, Idiomatic, Domain-based
+- **GRASP Patterns**: Information Expert, Creator, Controller, Low Coupling, High Cohesion, Polymorphism, Pure Fabrication, Indirection, Protected Variations
+- **DRY Principle**: Don't Repeat Yourself implementation strategies and when to avoid over-abstraction
+- **Domain-Driven Design**: Strategic and tactical patterns for complex domain modeling
+- **Gang of Four Design Patterns**: 23 classic creational, structural, and behavioral patterns
 
 ## 🚀 Quick Start
 

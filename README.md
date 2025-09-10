@@ -54,7 +54,9 @@ dotfiles/
 │       ├── testing/    # Testing frameworks and tools
 │       ├── languages/  # Programming languages
 │       ├── system-architecture/ # API design and architecture
-│       └── machine-learning/    # AI/ML best practices
+│       ├── machine-learning/    # AI/ML best practices
+│       ├── version-control/ # Git workflows and best practices
+│       └── programming-principles/ # Core programming principles and patterns
 ├── ai-prompts/         # AI prompts management system
 └── scripts/
     ├── install-brew.sh # Homebrew installation script
@@ -312,7 +314,7 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 - Legacy: jQuery
 
 **Backend & APIs**
-- PHP: Laravel, Laravel Filament v4, Symfony with API Platform
+- PHP: Laravel, Laravel Filament v4, Symfony with API Platform, CodeIgniter 4
 - JavaScript/TypeScript: NestJS, Hono.js
 - Python: Django, general Python best practices
 - Ruby: Ruby on Rails
@@ -326,6 +328,7 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 **Database & Storage**
 - ORM: Prisma
 - Relational: PostgreSQL, Neon (serverless PostgreSQL)
+- NoSQL: Firestore (Google Cloud Firestore)
 - Edge Database: Turso (libSQL/SQLite)
 - Backend as a Service: Supabase
 
@@ -357,10 +360,22 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 - Documentation: OpenAPI/Swagger
 
 **Languages**
-- Systems programming: Rust, Go
+- Systems programming: Rust, Go, Zig
+- Web development: TypeScript
 
 **AI & Machine Learning**
 - RAG (Retrieval-Augmented Generation) best practices
+
+**Version Control**
+- Git workflows: Git worktrees for parallel development
+
+**Programming Principles**
+- SOLID Principles: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion
+- CUPID Principles: Composable, Unix philosophy, Predictable, Idiomatic, Domain-based
+- GRASP Patterns: Information Expert, Creator, Controller, Low Coupling, High Cohesion, Polymorphism, Pure Fabrication, Indirection, Protected Variations
+- DRY Principle: Don't Repeat Yourself implementation strategies
+- DDD: Domain-Driven Design patterns and practices
+- Gang of Four Design Patterns: 23 classic object-oriented design patterns
 
 Each guide includes practical examples, project structures, common pitfalls, performance optimization, and production-ready patterns.
 
