@@ -36,6 +36,7 @@ dotfiles/
 ├── prompt.zsh          # Shell prompt appearance and behavior
 ├── custom.zsh          # Machine-specific configurations
 ├── p10k.zsh            # Powerlevel10k prompt configuration
+├── tmux.conf           # Tmux configuration with best practices
 ├── Brewfile            # Homebrew package definitions
 ├── AI_PROMPTS.md       # AI prompts management documentation
 ├── TEMPLATES.md        # Quick reference for all prompt templates
@@ -57,6 +58,7 @@ dotfiles/
 ├── ai-prompts/         # AI prompts management system
 └── scripts/
     ├── install-brew.sh # Homebrew installation script
+    ├── setup-tmux.sh   # Tmux setup and configuration script
     ├── backup.sh       # Backup management script
     ├── uninstall.sh    # Uninstall and rollback script
     ├── ai-prompt       # AI prompts CLI tool
@@ -159,6 +161,13 @@ For step-by-step instructions and troubleshooting, see [INSTALLATION.md](INSTALL
 - **prompt.zsh**: Additional prompt customization
 - **custom.zsh**: Local overrides and machine-specific settings
 - **p10k.zsh**: Powerlevel10k prompt configuration
+- **tmux.conf**: Professional tmux configuration with:
+  - Vim-style keybindings and smart pane navigation
+  - Enhanced status bar with system information
+  - macOS clipboard integration
+  - Session persistence with tmux-resurrect
+  - Optimized performance settings
+  - Custom development layouts and scripts
 
 ### Package Management
 
@@ -245,6 +254,37 @@ ai-prompt copy development/code-review
 ```
 
 See [AI_PROMPTS.md](AI_PROMPTS.md) for complete documentation.
+
+### Tmux Configuration
+
+The dotfiles include a comprehensive tmux setup with productivity-focused features:
+
+```bash
+# Setup tmux (automatically done during installation)
+~/dotfiles/scripts/setup-tmux.sh
+
+# Quick commands
+tl              # List all sessions
+ts myproject    # Create new session named 'myproject'
+ta myproject    # Attach to session
+tdev            # Launch development session with predefined layout
+tproject name ~/path  # Create project-specific session
+
+# Key bindings (after pressing Ctrl-a)
+|     # Split pane horizontally
+-     # Split pane vertically
+h/j/k/l  # Navigate panes (vim-style)
+H/J/K/L  # Resize panes
+z     # Toggle pane zoom
+r     # Reload configuration
+```
+
+The configuration includes:
+- **TPM (Tmux Plugin Manager)** for plugin management
+- **tmux-resurrect** for session persistence across restarts
+- **tmux-continuum** for automatic session saves
+- **vim-tmux-navigator** for seamless vim/tmux navigation
+- **Custom scripts** for development workflows
 
 ### Best Practices Documentation
 

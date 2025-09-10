@@ -234,6 +234,14 @@ final_setup() {
     touch "$HOME/.zshrc.private"
     
     print_success "Created local configuration files"
+    
+    # Setup tmux if installed
+    if command -v tmux &> /dev/null; then
+        print_info "Setting up tmux configuration..."
+        if [[ -x "$DOTFILES_DIR/scripts/setup-tmux.sh" ]]; then
+            "$DOTFILES_DIR/scripts/setup-tmux.sh"
+        fi
+    fi
 }
 
 # Check for existing configuration
