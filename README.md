@@ -307,6 +307,8 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 
 **Frontend & UI**
 - React ecosystem (Next.js, Jotai), Vue.js (Nuxt.js v4), Vaadin
+- State Management: Redux Toolkit, Zustand, MobX, Context API
+- Svelte & SvelteKit with Runes reactivity system
 - Authentication: Clerk, Better Auth
 - UI libraries: shadcn/ui, Bootstrap, Tailwind CSS
 - Animation: GSAP
@@ -314,12 +316,13 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 - Legacy: jQuery
 
 **Backend & APIs**
-- PHP: Laravel, Laravel Nova, Laravel Filament v4, Symfony with API Platform, CodeIgniter 4
+- PHP: Laravel, Laravel Nova, Laravel Eloquent ORM, Laravel Filament v4, Symfony with API Platform, CodeIgniter 4
 - JavaScript/TypeScript: NestJS, Hono.js, Meteor.js
 - Python: Django, general Python best practices
 - Ruby: Ruby on Rails
 - Elixir: Ash framework
 - .NET: ASP.NET Core with C#
+- Java: Modern Java features, Spring Boot integration
 
 **Mobile Development**
 - Cross-platform: Flutter, React Native, .NET MAUI
@@ -340,6 +343,7 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 **Content Management**
 - WordPress: Core development, plugin development, theme development
 - Drupal: Module and theme development
+- SharePoint: SPFx development, REST API, PnP JS library
 
 **Enterprise Systems**
 - SAP: ABAP, SAPUI5/OpenUI5
@@ -361,8 +365,8 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 
 **Languages**
 - Systems programming: Rust, Go, Zig
-- Web development: TypeScript
-- Enterprise: Java
+- Web development: TypeScript, PHP (PSR standards, Swoole, Laravel Octane)
+- Enterprise: Java (Java 8-17+ features, design patterns)
 
 **AI & Machine Learning**
 - RAG (Retrieval-Augmented Generation) best practices
@@ -377,6 +381,12 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 - DRY Principle: Don't Repeat Yourself implementation strategies
 - DDD: Domain-Driven Design patterns and practices
 - Gang of Four Design Patterns: 23 classic object-oriented design patterns
+
+**Project Management & Documentation**
+- Diagramming: Mermaid, PlantUML, dbdiagram.io
+- Architecture: C4 Model, UML diagrams, ERD tools
+- Timing & Sequence: Sequence diagrams, timing diagrams, state machines
+- Mind mapping and flowcharts for technical documentation
 
 **Monitoring & Observability**
 - Application Performance Monitoring: Datadog, New Relic

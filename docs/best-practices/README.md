@@ -5,20 +5,25 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 ## 📁 Documentation Structure
 
 ### Frontend
-- **Frameworks**: Next.js, Vue.js, Nuxt.js, Angular, AngularJS, Svelte, SolidJS, Astro, Vaadin
+- **Frameworks**: Next.js, Vue.js, Nuxt.js, Angular, AngularJS, Svelte, SvelteKit, SolidJS, Astro, Vaadin
 - **Libraries**: React, jQuery, Alpine.js, shadcn/ui, GSAP
 - **CSS Frameworks**: Tailwind CSS, Bootstrap
-- **State Management & Data**: TanStack Query, TanStack Router, TanStack Start, TanStack DB
+- **State Management**: Redux Toolkit, Zustand, MobX, Context API, Svelte Runes
+- **Data Management**: TanStack Query, TanStack Router, TanStack Start, TanStack DB
 
 ### Backend
-- **PHP**: Laravel, Laravel Nova, Symfony with API Platform, CodeIgniter 4
+- **PHP**: Laravel, Laravel Nova, Laravel Eloquent ORM, Symfony with API Platform, CodeIgniter 4
 - **JavaScript/TypeScript**: NestJS, Hono.js, Meteor.js, Elysia (Bun)
 - **Python**: Django, Python General
 - **Ruby**: Ruby on Rails
 - **Elixir**: Ash/Phoenix
-- **Systems Languages**: Rust, Go, Zig
-- **Web Languages**: TypeScript, Java
 - **.NET**: ASP.NET Core, C#
+
+### Languages
+- **Systems Languages**: Rust, Go, Zig
+- **Web Languages**: TypeScript, JavaScript
+- **Enterprise Languages**: Java (Modern features, Spring Boot)
+- **PHP**: PSR Standards, Best Practices, Swoole, Laravel Octane
 
 ### Mobile
 - **Cross-Platform**: Flutter, React Native, .NET MAUI
@@ -54,7 +59,7 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 ### CMS
 - **WordPress**: Core development, Plugin development, Theme development
 - **Drupal**: Module and theme development
-- **SharePoint**
+- **SharePoint**: SPFx development, REST API, PnP JS library
 
 ### Security Frameworks
 - **Compliance Standards**: NIST Cybersecurity Framework, ISO 27001, SOC 2, HIPAA, GDPR
@@ -72,6 +77,12 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **DRY Principle**: Don't Repeat Yourself implementation strategies and when to avoid over-abstraction
 - **Domain-Driven Design**: Strategic and tactical patterns for complex domain modeling
 - **Gang of Four Design Patterns**: 23 classic creational, structural, and behavioral patterns
+
+### Project Management & Documentation
+- **Diagramming Tools**: Mermaid, PlantUML, dbdiagram.io, Lucidchart, draw.io
+- **Architecture Documentation**: C4 Model, UML diagrams, Entity Relationship Diagrams
+- **Process Modeling**: Sequence diagrams, timing diagrams, state machines, flowcharts
+- **Collaboration**: Mind mapping, wireframing, technical documentation standards
 
 ### Monitoring & Observability
 - **Application Performance Monitoring**: Datadog, New Relic  
