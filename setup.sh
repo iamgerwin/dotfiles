@@ -213,6 +213,16 @@ setup_oh_my_zsh() {
             sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
             print_success "Oh My Zsh installed"
             
+            # Install Powerlevel10k theme
+            print_info "Installing Powerlevel10k theme..."
+            if [[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]]; then
+                git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
+                    "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+                print_success "Installed Powerlevel10k theme"
+            else
+                print_success "Powerlevel10k theme already installed"
+            fi
+            
             # Install popular plugins
             print_info "Installing zsh plugins..."
             

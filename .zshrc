@@ -14,7 +14,7 @@ fpath=(
 )
 
 # Load essential Zsh modules
-autoload -Uz compinit && compinit -C
+autoload -Uz compinit && compinit -u
 autoload -Uz bashcompinit && bashcompinit
 autoload -Uz add-zsh-hook
 autoload -Uz vcs_info

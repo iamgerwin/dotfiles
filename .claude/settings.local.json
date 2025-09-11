@@ -11,7 +11,9 @@
       "Bash(echo $SHELL)",
       "Bash(exec zsh)",
       "Bash(bash:*)",
-      "Read(//private/etc/**)"
+      "Read(//private/etc/**)",
+      "Read(//Applications/Docker.app/Contents/Resources/etc/**)",
+      "Read(//Users/gerwin/.oh-my-zsh/custom/themes/**)"
     ],
     "deny": [],
     "ask": []
