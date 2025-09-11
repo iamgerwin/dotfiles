@@ -342,8 +342,11 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 - Low-Code Database: Airtable
 
 **DevOps & Cloud**
-- Containerization: Docker
-- Cloud platforms: AWS, Azure, DigitalOcean
+- Load Balancers & Proxies: Traefik, NGINX
+- Containerization: Docker, Kubernetes
+- CI/CD: Jenkins, CircleCI, GitHub Actions, GitLab CI
+- Infrastructure as Code: Terraform, AWS CloudFormation, Ansible
+- Cloud platforms: AWS, Azure, Google Cloud Platform, DigitalOcean
 - Edge computing: Cloudflare (Workers, Pages, D1, R2)
 
 **Content Management**
@@ -364,6 +367,7 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 **Testing & Quality**
 - E2E testing: Playwright, Cypress
 - Performance testing: JMeter
+- Code Quality: SonarQube
 
 **System Architecture**
 - API design: RESTful APIs, GraphQL, gRPC
@@ -403,13 +407,25 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 - Enterprise: .NET Stack, Java Spring Stack
 
 **Code Editors & IDEs**
+- Claude Code: Anthropic's official CLI with comprehensive slash commands and AI-powered development
 - Neovim: Modern vim with Lua configuration, LSP support, and extensive plugin ecosystem
 - Terminal Tools: Tmux (multiplexer), Lazygit (git UI), and modern CLI replacements
 
 **Monitoring & Observability**
+- Metrics & Visualization: Prometheus, Grafana
+- Log Management: ELK Stack (Elasticsearch, Logstash, Kibana)
 - Application Performance Monitoring: Datadog, New Relic
 - Error Tracking: Sentry, Rollbar
 - Logging and Analytics: Complete monitoring stack implementation
+
+**Security & Secrets Management**
+- Secrets Management: HashiCorp Vault
+- Certificate Management: Let's Encrypt, cert-manager
+
+**Project Management & Collaboration**
+- Project Management: JIRA, ClickUp
+- Team Communication: Slack integrations and webhooks
+- Documentation: Confluence, Notion
 
 **SEO & Web Optimization**
 - Technical SEO: Site architecture, Core Web Vitals, structured data

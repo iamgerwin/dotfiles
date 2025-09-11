@@ -40,14 +40,17 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **ORM**: Prisma, Entity Framework Core
 
 ### DevOps
+- **Load Balancers & Proxies**: Traefik, NGINX
 - **Containerization**: Docker, Kubernetes
-- **CI/CD**: GitHub Actions, GitLab CI
+- **CI/CD**: Jenkins, CircleCI, GitHub Actions, GitLab CI
+- **Infrastructure as Code**: Terraform, AWS CloudFormation, Ansible
 - **Cloud Platforms**: AWS, Azure, Google Cloud Platform, DigitalOcean
 - **Edge Computing**: Cloudflare Workers, Cloudflare Pages, Cloudflare D1, Cloudflare R2
 
 ### Testing
 - **E2E Testing**: Playwright, Cypress
 - **Performance Testing**: JMeter
+- **Code Quality**: SonarQube
 
 ### System Architecture
 - **API Design**: RESTful APIs, GraphQL, gRPC
@@ -66,11 +69,6 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **Drupal**: Module and theme development
 - **SharePoint**: SPFx development, REST API, PnP JS library
 
-### Security Frameworks
-- **Compliance Standards**: NIST Cybersecurity Framework, ISO 27001, SOC 2, HIPAA, GDPR
-- **Application Security**: OWASP Top 10, OWASP ASVS
-- **Payment Security**: PCI DSS
-- **Government Standards**: Battle-tested, government-grade security implementations
 
 ### Version Control
 - **Git Workflows**: Git worktrees for parallel development and feature isolation
@@ -98,10 +96,29 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **Enterprise Stacks**: .NET Stack, Java Spring Stack, Django Stack, Ruby on Rails Stack
 
 ### Monitoring & Observability
+- **Metrics & Visualization**: Prometheus, Grafana
+- **Log Management**: ELK Stack (Elasticsearch, Logstash, Kibana)
 - **Application Performance Monitoring**: Datadog, New Relic  
 - **Error Tracking**: Sentry, Rollbar
 - **Request Logging**: Implementation patterns for debugging and analytics
 - **Metrics Collection**: Best practices for monitoring application health
+
+### Editors & IDEs
+- **Claude Code**: Anthropic's official CLI with comprehensive slash commands and AI-powered development
+- **Neovim**: Modern vim with Lua configuration, LSP support, and extensive plugin ecosystem
+
+### Security & Secrets Management
+- **Secrets Management**: HashiCorp Vault
+- **Security Frameworks**: NIST Cybersecurity Framework, ISO 27001, SOC 2, HIPAA, GDPR
+- **Application Security**: OWASP Top 10, OWASP ASVS
+- **Payment Security**: PCI DSS
+
+### Project Management & Collaboration
+- **Project Management**: JIRA, ClickUp
+- **Team Communication**: Slack integrations and webhooks
+
+### Integrations
+- **Slack**: Bot development, webhooks, slash commands, interactive messages
 
 ### SEO & Web Optimization
 - **Technical SEO**: Site architecture, crawlability, indexing, Core Web Vitals
