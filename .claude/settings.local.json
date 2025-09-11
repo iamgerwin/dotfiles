@@ -7,7 +7,11 @@
       "Bash(zsh:*)",
       "Bash(export:*)",
       "Bash(brew bundle:*)",
-      "Bash(brew:*)"
+      "Bash(brew:*)",
+      "Bash(echo $SHELL)",
+      "Bash(exec zsh)",
+      "Bash(bash:*)",
+      "Read(//private/etc/**)"
     ],
     "deny": [],
     "ask": []

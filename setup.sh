@@ -233,6 +233,43 @@ setup_oh_my_zsh() {
     fi
 }
 
+# Change default shell to Homebrew Zsh
+setup_shell() {
+    print_header "Shell Configuration"
+    
+    # Determine correct Zsh path
+    local ZSH_PATH=""
+    if [[ -f "/opt/homebrew/bin/zsh" ]]; then
+        ZSH_PATH="/opt/homebrew/bin/zsh"
+    elif [[ -f "/usr/local/bin/zsh" ]]; then
+        ZSH_PATH="/usr/local/bin/zsh"
+    else
+        print_warning "Homebrew Zsh not found, using system Zsh"
+        ZSH_PATH="/bin/zsh"
+    fi
+    
+    # Check if Zsh is in /etc/shells
+    if ! grep -q "$ZSH_PATH" /etc/shells; then
+        print_info "Adding $ZSH_PATH to /etc/shells..."
+        echo "$ZSH_PATH" | sudo tee -a /etc/shells > /dev/null
+        print_success "Added $ZSH_PATH to /etc/shells"
+    fi
+    
+    # Change default shell if not already set
+    if [[ "$SHELL" != "$ZSH_PATH" ]]; then
+        print_info "Changing default shell to $ZSH_PATH..."
+        if chsh -s "$ZSH_PATH"; then
+            print_success "Default shell changed to $ZSH_PATH"
+            print_info "Please restart your terminal for the change to take effect"
+        else
+            print_warning "Could not change default shell automatically"
+            print_info "Run this command manually: chsh -s $ZSH_PATH"
+        fi
+    else
+        print_success "Shell is already set to $ZSH_PATH"
+    fi
+}
+
 # Final setup steps
 final_setup() {
     print_header "Final Setup"
@@ -346,6 +383,7 @@ main() {
     install_homebrew
     install_packages
     create_symlinks
+    setup_shell
     configure_git
     setup_oh_my_zsh
     final_setup
