@@ -215,12 +215,36 @@ setup_oh_my_zsh() {
             
             # Install Powerlevel10k theme
             print_info "Installing Powerlevel10k theme..."
-            if [[ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]]; then
-                git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
-                    "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
-                print_success "Installed Powerlevel10k theme"
+            local P10K_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+            if [[ ! -d "$P10K_DIR" ]]; then
+                if git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$P10K_DIR"; then
+                    print_success "Installed Powerlevel10k theme"
+                    # Verify the theme file exists
+                    if [[ -f "$P10K_DIR/powerlevel10k.zsh-theme" ]]; then
+                        print_success "Powerlevel10k theme file verified"
+                    else
+                        print_error "Powerlevel10k theme file not found after installation"
+                    fi
+                else
+                    print_error "Failed to install Powerlevel10k theme"
+                    print_info "You can install it manually later with:"
+                    echo "  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $P10K_DIR"
+                fi
             else
                 print_success "Powerlevel10k theme already installed"
+                # Verify the existing installation
+                if [[ -f "$P10K_DIR/powerlevel10k.zsh-theme" ]]; then
+                    print_success "Existing Powerlevel10k installation verified"
+                else
+                    print_warning "Powerlevel10k directory exists but theme file is missing"
+                    print_info "Removing incomplete installation and reinstalling..."
+                    rm -rf "$P10K_DIR"
+                    if git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "$P10K_DIR"; then
+                        print_success "Reinstalled Powerlevel10k theme"
+                    else
+                        print_error "Failed to reinstall Powerlevel10k theme"
+                    fi
+                fi
             fi
             
             # Install popular plugins
@@ -428,17 +452,32 @@ main() {
     echo "  After restarting your terminal, run: p10k configure"
     echo "  This interactive wizard will help you customize your prompt"
     echo
-    read -p "Would you like to configure Powerlevel10k now? (y/n) " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        if command -v p10k &> /dev/null; then
-            print_info "Starting Powerlevel10k configuration..."
-            p10k configure
+    
+    # Check if Powerlevel10k is properly installed
+    if [[ -f "$HOME/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme" ]]; then
+        read -p "Would you like to configure Powerlevel10k now? (y/n) " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            print_info "Loading Powerlevel10k and starting configuration..."
+            # Try to start configuration in a new zsh session
+            if zsh -c "source ~/.zshrc 2>/dev/null; command -v p10k &> /dev/null" 2>/dev/null; then
+                print_success "Powerlevel10k loaded successfully, starting configuration..."
+                zsh -ic "p10k configure"
+            else
+                print_warning "Powerlevel10k not ready yet. This is normal on first installation."
+                print_info "Please restart your terminal and run: p10k configure"
+                echo
+                print_info "Troubleshooting steps if p10k configure doesn't work:"
+                echo "  1. Ensure you're using Zsh: echo \$SHELL"
+                echo "  2. Check theme is loaded: echo \$ZSH_THEME"
+                echo "  3. Verify installation: ls ~/.oh-my-zsh/custom/themes/powerlevel10k/"
+            fi
         else
-            print_warning "Please restart your terminal first, then run: p10k configure"
+            print_info "You can configure Powerlevel10k later by running: p10k configure"
         fi
     else
-        print_info "You can configure Powerlevel10k later by running: p10k configure"
+        print_warning "Powerlevel10k theme not found. Please run the setup again or install manually."
+        print_info "Manual installation: git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k"
     fi
     echo
     
