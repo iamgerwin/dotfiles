@@ -48,9 +48,6 @@ if type brew &>/dev/null; then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
-# Load completions
-autoload -Uz compinit && compinit
-
 # zsh-autosuggestions configuration
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#999"
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)

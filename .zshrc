@@ -1,4 +1,27 @@
 #!/usr/bin/env zsh
+
+# Check if Oh My Zsh is installed and set ZSH variable
+export ZSH="$HOME/.oh-my-zsh"
+
+# Set up FPATH for Zsh functions (must be done before autoload)
+# Add standard Zsh function paths
+typeset -U fpath
+fpath=(
+    /usr/share/zsh/5.9/functions
+    /opt/homebrew/share/zsh/site-functions
+    /opt/homebrew/Cellar/zsh/5.9/share/zsh/functions
+    $fpath
+)
+
+# Load essential Zsh modules
+autoload -Uz compinit && compinit -C
+autoload -Uz bashcompinit && bashcompinit
+autoload -Uz add-zsh-hook
+autoload -Uz vcs_info
+autoload -Uz colors && colors
+autoload -Uz is-at-least
+autoload -Uz select-word-style
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -44,3 +67,18 @@ DOTFILES_DIR="$HOME/dotfiles"
 
 # Performance profiling (uncomment to debug slow startup)
 # zprof
+
+# Herd injected PHP 8.4 configuration.
+export HERD_PHP_84_INI_SCAN_DIR="/Users/gerwin/Library/Application Support/Herd/config/php/84/"
+
+
+# Herd injected PHP 8.3 configuration.
+export HERD_PHP_83_INI_SCAN_DIR="/Users/gerwin/Library/Application Support/Herd/config/php/83/"
+
+
+# Herd injected PHP 8.2 configuration.
+export HERD_PHP_82_INI_SCAN_DIR="/Users/gerwin/Library/Application Support/Herd/config/php/82/"
+
+
+# Herd injected PHP 8.1 configuration.
+export HERD_PHP_81_INI_SCAN_DIR="/Users/gerwin/Library/Application Support/Herd/config/php/81/"
