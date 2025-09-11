@@ -69,6 +69,11 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **Drupal**: Module and theme development
 - **SharePoint**: SPFx development, REST API, PnP JS library
 
+### Security Frameworks
+- **Compliance Standards**: NIST Cybersecurity Framework, ISO 27001, SOC 2, HIPAA, GDPR
+- **Application Security**: OWASP Top 10, OWASP ASVS
+- **Payment Security**: PCI DSS
+- **Government Standards**: Battle-tested, government-grade security implementations
 
 ### Version Control
 - **Git Workflows**: Git worktrees for parallel development and feature isolation
