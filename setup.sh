@@ -64,6 +64,10 @@ install_homebrew() {
             # Add to PATH for Apple Silicon Macs
             if [[ -f "/opt/homebrew/bin/brew" ]]; then
                 eval "$(/opt/homebrew/bin/brew shellenv)"
+                export PATH="/opt/homebrew/bin:$PATH"
+            elif [[ -f "/usr/local/bin/brew" ]]; then
+                eval "$(/usr/local/bin/brew shellenv)"
+                export PATH="/usr/local/bin:$PATH"
             fi
         else
             print_success "Homebrew is already installed"
@@ -102,6 +106,14 @@ install_packages() {
     if [[ -f "$DOTFILES_DIR/Brewfile" ]]; then
         print_info "Installing packages from Brewfile..."
         cd "$DOTFILES_DIR"
+        
+        # Ensure Homebrew is in PATH
+        if [[ -f "/opt/homebrew/bin/brew" ]]; then
+            export PATH="/opt/homebrew/bin:$PATH"
+        elif [[ -f "/usr/local/bin/brew" ]]; then
+            export PATH="/usr/local/bin:$PATH"
+        fi
+        
         brew bundle install
         print_success "All packages installed"
     else
