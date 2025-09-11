@@ -106,6 +106,12 @@ Each backup includes:
 - Tmux with Tmux Plugin Manager (TPM)
 - Tmux plugins (resurrect, continuum, vim-navigator)
 
+### Final Configuration Steps
+After installation completes, you'll need to:
+1. Install the MesloLGS NF font and configure your terminal
+2. Run `p10k configure` to customize your prompt theme
+3. Restart your terminal to activate all changes
+
 ## Verification Steps
 
 After installation, verify everything is working:
@@ -152,12 +158,27 @@ After installation, verify everything is working:
    exit
    ```
 
-6. **Configure terminal font**:
+6. **Configure terminal font and theme**:
    ```bash
    # Install required font
    brew install --cask font-meslo-lg-nerd-font
    ```
-   Then configure your terminal to use **MesloLGS NF** font. See [TERMINAL_SETUP.md](TERMINAL_SETUP.md) for detailed instructions.
+   
+   **Important**: After installing the font:
+   
+   a. Configure your terminal to use **MesloLGS NF** font (see [TERMINAL_SETUP.md](TERMINAL_SETUP.md))
+   
+   b. **Configure your Powerlevel10k theme**:
+   ```bash
+   p10k configure
+   ```
+   This interactive wizard will help you:
+   - Choose your prompt style (lean, classic, etc.)
+   - Select icons and colors
+   - Configure layout and information display
+   - Customize appearance to your preferences
+   
+   c. **Restart your terminal** to see the final result
 
 ## Rollback / Uninstall
 

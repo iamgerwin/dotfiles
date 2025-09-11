@@ -410,19 +410,42 @@ main() {
         echo
     fi
     
-    print_info "Next steps:"
+    print_info "Final setup steps:"
     echo "  1. Restart your terminal or run: source ~/.zshrc"
-    echo "  2. Customize ~/.zshrc.local for machine-specific settings"
-    echo "  3. Add sensitive data to ~/.zshrc.private (not tracked by git)"
     echo
+    
     # Check for Nerd Font
     if ! ls ~/Library/Fonts 2>/dev/null | grep -qi "meslo.*nerd"; then
-        print_warning "Terminal font not installed!"
+        print_warning "Terminal font required for optimal display!"
         echo "  Install with: brew install --cask font-meslo-lg-nerd-font"
         echo "  Then set your terminal font to: MesloLGS NF"
         echo "  See TERMINAL_SETUP.md for details"
         echo
     fi
+    
+    # Prompt for Powerlevel10k configuration
+    print_info "Powerlevel10k theme configuration:"
+    echo "  After restarting your terminal, run: p10k configure"
+    echo "  This interactive wizard will help you customize your prompt"
+    echo
+    read -p "Would you like to configure Powerlevel10k now? (y/n) " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        if command -v p10k &> /dev/null; then
+            print_info "Starting Powerlevel10k configuration..."
+            p10k configure
+        else
+            print_warning "Please restart your terminal first, then run: p10k configure"
+        fi
+    else
+        print_info "You can configure Powerlevel10k later by running: p10k configure"
+    fi
+    echo
+    
+    print_info "Additional customization:"
+    echo "  • Machine-specific settings: ~/.zshrc.local"
+    echo "  • Private/sensitive data: ~/.zshrc.private (not tracked by git)"
+    echo
     
     print_info "Useful commands:"
     echo "  • Update packages: brew update && brew upgrade"

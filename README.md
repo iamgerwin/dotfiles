@@ -115,6 +115,7 @@ This will:
 4. Install all packages from Brewfile
 5. Set up symbolic links
 6. Configure your shell environment
+7. Prompt you to configure Powerlevel10k theme
 
 ### 🔒 Safety Features
 
@@ -125,16 +126,26 @@ Every installation automatically:
 - **Provides instant rollback** capability via `uninstall.sh`
 - **Never overwrites** without backing up first
 
-### 📖 Important: Terminal Font Setup
+### 📖 Important: Terminal Font & Theme Setup
 
 **Powerlevel10k requires a Nerd Font** to display icons correctly. Without it, you'll see question marks in your prompt.
 
-Quick fix:
-```bash
-brew install --cask font-meslo-lg-nerd-font
-```
+**After installation, complete these final steps:**
 
-Then set your terminal font to **MesloLGS NF**. See [TERMINAL_SETUP.md](TERMINAL_SETUP.md) for detailed instructions.
+1. **Install the required font**:
+   ```bash
+   brew install --cask font-meslo-lg-nerd-font
+   ```
+
+2. **Set your terminal font** to **MesloLGS NF**. See [TERMINAL_SETUP.md](TERMINAL_SETUP.md) for detailed instructions.
+
+3. **Configure your prompt theme**:
+   ```bash
+   p10k configure
+   ```
+   This interactive wizard will help you customize your prompt appearance with icons, colors, and layout options.
+
+4. **Restart your terminal** to see the final result.
 
 ### 📖 Detailed Installation Guide
 
