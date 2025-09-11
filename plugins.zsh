@@ -1,6 +1,9 @@
 #!/usr/bin/env zsh
 # Plugin configuration
 
+# Disable Oh My Zsh completion security checks
+export ZSH_DISABLE_COMPFIX="true"
+
 # Oh My Zsh configuration
 if [[ -d "$HOME/.oh-my-zsh" ]]; then
     # Theme
