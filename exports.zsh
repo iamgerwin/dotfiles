@@ -25,6 +25,9 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 
+# Dotfiles scripts
+export PATH="$HOME/dotfiles/scripts:$PATH"
+
 # Windsurf
 export PATH="$HOME/.codeium/windsurf/bin:$PATH"
 
