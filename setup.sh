@@ -438,12 +438,47 @@ main() {
     echo "  1. Restart your terminal or run: source ~/.zshrc"
     echo
     
-    # Check for Nerd Font
-    if ! ls ~/Library/Fonts 2>/dev/null | grep -qi "meslo.*nerd"; then
+    # Check for Nerd Font and configure terminals
+    FONT_FOUND=false
+    if ls ~/Library/Fonts 2>/dev/null | grep -qi "meslo.*nerd" || \
+       ls /Library/Fonts 2>/dev/null | grep -qi "meslo.*nerd" 2>/dev/null || \
+       ls /System/Library/Fonts 2>/dev/null | grep -qi "meslo.*nerd" 2>/dev/null; then
+        FONT_FOUND=true
+        print_success "MesloLGS NF font is installed"
+    fi
+    
+    if [[ "$FONT_FOUND" == "false" ]]; then
         print_warning "Terminal font required for optimal display!"
-        echo "  Install with: brew install --cask font-meslo-lg-nerd-font"
-        echo "  Then set your terminal font to: MesloLGS NF"
-        echo "  See TERMINAL_SETUP.md for details"
+        print_info "Installing Powerlevel10k fonts..."
+        if command -v brew &> /dev/null; then
+            brew install --cask font-meslo-lg-nerd-font font-meslo-for-powerlevel10k
+            print_success "Fonts installed successfully"
+            FONT_FOUND=true
+        else
+            echo "  Install manually with: brew install --cask font-meslo-lg-nerd-font font-meslo-for-powerlevel10k"
+        fi
+    fi
+    
+    # Offer to configure terminal fonts automatically
+    if [[ "$FONT_FOUND" == "true" ]]; then
+        echo
+        read -p "Would you like to automatically configure terminal fonts? (y/n) " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            print_info "Configuring terminal fonts for iTerm2 and Terminal.app..."
+            if [[ -x "$DOTFILES_DIR/scripts/configure-terminal-fonts.sh" ]]; then
+                "$DOTFILES_DIR/scripts/configure-terminal-fonts.sh"
+            else
+                print_warning "Font configuration script not found"
+                print_info "Manual setup: Set your terminal font to 'MesloLGS NF Regular'"
+                print_info "See TERMINAL_SETUP.md for detailed instructions"
+            fi
+        else
+            print_info "Manual font setup required:"
+            echo "  1. Set your terminal font to: MesloLGS NF Regular"
+            echo "  2. See TERMINAL_SETUP.md for detailed instructions"
+            echo "  3. Or run: ~/dotfiles/scripts/configure-terminal-fonts.sh"
+        fi
         echo
     fi
     

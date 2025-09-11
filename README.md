@@ -132,12 +132,19 @@ Every installation automatically:
 
 **After installation, complete these final steps:**
 
-1. **Install the required font**:
+1. **Install the required fonts** (included in setup):
    ```bash
-   brew install --cask font-meslo-lg-nerd-font
+   brew install --cask font-meslo-lg-nerd-font font-meslo-for-powerlevel10k
    ```
 
-2. **Set your terminal font** to **MesloLGS NF**. See [TERMINAL_SETUP.md](TERMINAL_SETUP.md) for detailed instructions.
+2. **Configure your terminal font** automatically or manually:
+   ```bash
+   # Automatic configuration (recommended)
+   ~/dotfiles/scripts/configure-terminal-fonts.sh
+   
+   # Or manually set your terminal font to: MesloLGS NF Regular
+   ```
+   See [TERMINAL_SETUP.md](TERMINAL_SETUP.md) for detailed manual instructions.
 
 3. **Configure your prompt theme**:
    ```bash
