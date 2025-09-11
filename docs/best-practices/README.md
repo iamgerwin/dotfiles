@@ -119,8 +119,10 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **Payment Security**: PCI DSS
 
 ### Project Management & Collaboration
-- **Project Management**: JIRA, ClickUp
+- **Agile Methodologies**: Scrum Framework, Kanban, SAFe, LeSS
+- **Project Management Tools**: JIRA, ClickUp, Azure DevOps, Monday.com
 - **Team Communication**: Slack integrations and webhooks
+- **Documentation Standards**: Confluence, Notion, technical writing best practices
 
 ### Integrations
 - **Slack**: Bot development, webhooks, slash commands, interactive messages

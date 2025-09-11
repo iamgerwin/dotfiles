@@ -441,7 +441,8 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 - Certificate Management: Let's Encrypt, cert-manager
 
 **Project Management & Collaboration**
-- Project Management: JIRA, ClickUp
+- Agile Methodologies: Scrum Framework, Sprint Planning, Retrospectives
+- Project Management Tools: JIRA, ClickUp, Azure DevOps
 - Team Communication: Slack integrations and webhooks
 - Documentation: Confluence, Notion
 
