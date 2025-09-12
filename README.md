@@ -588,4 +588,7 @@ This is a personal configuration, but feel free to fork and adapt it for your ow
 
 ## License
 
-MIT - Feel free to use any part of this configuration for your own dotfiles.
+MIT - Feel free to use any part of this configuration for your own dotfiles.- Uappwrite : docs/appwrite-best-practices.md
+- Uconvex : docs/convex-best-practices.md
+- UadonisUjs : docs/adonisjs-best-practices.md
+- Ustrapi : docs/strapi-best-practices.md
