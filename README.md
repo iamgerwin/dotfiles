@@ -48,6 +48,7 @@ dotfiles/
 │       ├── mobile/     # Mobile development platforms
 │       ├── database/   # Database technologies
 │       ├── devops/     # DevOps and cloud platforms
+│       ├── backend-services/ # Backend-as-a-Service platforms
 │       ├── cms/        # Content Management Systems
 │       ├── enterprise/ # Enterprise software platforms
 │       ├── security/   # Security frameworks and compliance
@@ -364,13 +365,12 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 
 **Backend & APIs**
 - PHP: Laravel, Laravel Nova, Laravel Eloquent ORM, Laravel Filament v4, Symfony with API Platform, CodeIgniter 4
-- JavaScript/TypeScript: NestJS, Hono.js, Meteor.js
+- JavaScript/TypeScript: NestJS, Hono.js, Meteor.js, AdonisJS
 - Python: Django, general Python best practices
 - Ruby: Ruby on Rails
 - Elixir: Ash framework
 - .NET: ASP.NET Core with C#, Entity Framework Core
 - Java: Modern Java features, Spring Boot integration
-- BaaS: Appwrite (open-source Firebase alternative)
 
 **Mobile Development**
 - Cross-platform: Flutter, React Native, .NET MAUI
@@ -383,8 +383,11 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 - Key-Value: Redis (caching, sessions, pub/sub), Valkey (open-source Redis fork)
 - Analytics: DuckDB (OLAP, data analysis)
 - Edge Database: Turso (libSQL/SQLite)
-- Backend as a Service: Supabase, PocketBase, Appwrite
 - Low-Code Database: Airtable
+
+**Backend-as-a-Service (BaaS)**
+- Real-time platforms: Convex (real-time backend with reactive queries)
+- Open-source Firebase alternatives: Appwrite, Supabase, PocketBase
 
 **DevOps & Cloud**
 - Load Balancers & Proxies: Traefik, NGINX
@@ -395,6 +398,7 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 - Edge computing: Cloudflare (Workers, Pages, D1, R2)
 
 **Content Management**
+- Headless CMS: Strapi (customizable API-first CMS)
 - WordPress: Core development, plugin development, theme development
 - Drupal: Module and theme development
 - SharePoint: SPFx development, REST API, PnP JS library
