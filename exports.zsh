@@ -113,10 +113,11 @@ export ANTHROPIC_API_KEY="${ANTHROPIC_API_KEY:-}"
 export CLAUDE_MODEL="${CLAUDE_MODEL:-claude-3-opus-20240229}"
 export CLAUDE_WORKSPACE="${CLAUDE_WORKSPACE:-$HOME/Development}"
 
-# OpenAI Configuration (set your API key in ~/.zshrc.private)
+# OpenAI & Codex Configuration (set your API key in ~/.zshrc.private)
 export OPENAI_API_KEY="${OPENAI_API_KEY:-}"
 export OPENAI_ORG_ID="${OPENAI_ORG_ID:-}"
 export OPENAI_MODEL="${OPENAI_MODEL:-gpt-4-turbo-preview}"
+export CODEX_MODEL="${CODEX_MODEL:-code-davinci-002}"
 
 # GitHub Copilot Configuration
 export COPILOT_ENABLED="${COPILOT_ENABLED:-true}"

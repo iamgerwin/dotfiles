@@ -138,7 +138,23 @@ alias clh='claude help'
 
 ### Installation Options
 
-#### Option 1: OpenAI CLI (Official)
+#### Option 1: OpenAI Codex CLI (Official)
+
+```bash
+# Install via Homebrew (recommended for macOS)
+brew tap openai/tap
+brew install openai-codex-cli
+
+# Alternative: Install via npm
+npm install -g @openai/codex-cli
+
+# Verify installation
+codex --version
+```
+
+For more details, visit: https://developers.openai.com/codex/cli/
+
+#### Option 2: OpenAI Python CLI
 
 ```bash
 # Install via pip
@@ -151,7 +167,7 @@ pipx install openai-cli
 openai --version
 ```
 
-#### Option 2: GitHub Copilot CLI
+#### Option 3: GitHub Copilot CLI
 
 ```bash
 # Install GitHub CLI first
@@ -165,20 +181,42 @@ gh auth login
 gh copilot config
 ```
 
-#### Option 3: GPT CLI Tools
+#### Option 4: Alternative GPT CLI Tools
 
 ```bash
-# Install gpt-cli via npm
-npm install -g gpt-cli
+# Install gpt-cli via Homebrew
+brew install gpt-cli
 
-# Or using yarn
-yarn global add gpt-cli
+# Alternative: Install via npm
+npm install -g gpt-cli
 
 # Alternative: ai-cli tool
 npm install -g @alexrudall/ai-cli
 ```
 
 ### Configuration
+
+#### Codex CLI Configuration
+
+1. **Set API Key**
+```bash
+# Set OpenAI API key for Codex
+export OPENAI_API_KEY="sk-your-api-key-here"
+
+# Add to shell configuration
+echo 'export OPENAI_API_KEY="sk-your-api-key-here"' >> ~/.zshrc
+```
+
+2. **Initialize Codex CLI**
+```bash
+# Initialize configuration
+codex init
+
+# Configure settings
+codex config set model "code-davinci-002"
+codex config set temperature 0.5
+codex config set max_tokens 2048
+```
 
 #### OpenAI CLI Configuration
 
@@ -221,6 +259,12 @@ gh copilot suggest --enable
 ### Usage Examples
 
 ```bash
+# Codex CLI
+codex complete "Write a function to calculate fibonacci"
+codex explain "What does this regex do: ^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"
+codex fix "Fix the syntax error in this code" < broken.js
+codex translate --from python --to javascript < script.py
+
 # OpenAI CLI
 openai complete "Write a function to calculate fibonacci"
 openai chat "Explain this code: $(cat script.js)"
@@ -266,11 +310,14 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 # CLI Tool Aliases
 alias ai='claude'
 alias gpt='openai'
+alias cdx='codex'
 alias cop='gh copilot'
 
 # Quick commands
 alias ai-review='claude review --files'
 alias ai-commit='claude commit --generate'
+alias cdx-fix='codex fix'
+alias cdx-explain='codex explain'
 alias gpt-explain='openai explain --verbose'
 alias cop-suggest='gh copilot suggest'
 
@@ -470,6 +517,14 @@ else
     echo "NOT INSTALLED"
 fi
 
+# Check Codex CLI
+echo -n "Codex CLI: "
+if command -v codex &> /dev/null; then
+    codex --version 2>/dev/null || echo "Installed"
+else
+    echo "NOT INSTALLED"
+fi
+
 # Check OpenAI CLI
 echo -n "OpenAI CLI: "
 if command -v openai &> /dev/null; then
@@ -507,6 +562,10 @@ chmod +x verify-cli-tools.sh
 # Test Claude Code
 claude --help
 claude chat "Hello, test message"
+
+# Test Codex CLI
+codex --help
+echo "print('Hello World')" | codex explain
 
 # Test OpenAI CLI
 openai --help

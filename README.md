@@ -131,7 +131,8 @@ Every installation automatically:
 
 For detailed installation and configuration of development CLI tools:
 - **Claude Code** - Anthropic's official development CLI
-- **GPT Codex CLI** - OpenAI and GitHub Copilot CLI tools
+- **OpenAI Codex CLI** - Official Codex CLI with Homebrew installation
+- **GPT CLI Tools** - OpenAI and GitHub Copilot CLI tools
 - **Environment Configuration** - API keys and secure storage
 - **OS-Specific Instructions** - macOS, Linux, and Windows setup
 
