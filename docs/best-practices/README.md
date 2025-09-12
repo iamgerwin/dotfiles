@@ -13,12 +13,11 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 
 ### Backend
 - **PHP**: Laravel, Laravel Nova, Laravel Eloquent ORM, Symfony with API Platform, CodeIgniter 4
-- **JavaScript/TypeScript**: NestJS, Hono.js, Meteor.js, Elysia (Bun)
+- **JavaScript/TypeScript**: NestJS, Hono.js, Meteor.js, Elysia (Bun), AdonisJS
 - **Python**: Django, Python General
 - **Ruby**: Ruby on Rails
 - **Elixir**: Ash/Phoenix
 - **.NET**: ASP.NET Core, C#, Entity Framework Core
-- **BaaS**: Appwrite
 
 ### Languages
 - **Systems Languages**: Rust, Go, Zig
@@ -35,9 +34,12 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **NoSQL**: MongoDB, Firestore (Google Cloud Firestore), CouchDB, DynamoDB (AWS)
 - **Key-Value Store**: Redis, Valkey (Redis-compatible, open-source)
 - **Analytics Database**: DuckDB
-- **Backend as a Service**: Supabase, PocketBase
 - **Low-Code Database**: Airtable
 - **ORM**: Prisma, Entity Framework Core
+
+### Backend Services
+- **Real-time Platforms**: Convex (real-time backend with reactive queries)
+- **Backend as a Service**: Appwrite, Supabase, PocketBase
 
 ### DevOps
 - **Load Balancers & Proxies**: Traefik, NGINX
@@ -65,6 +67,7 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **Machine Learning**: RAG, AI/ML Best Practices
 
 ### CMS
+- **Headless CMS**: Strapi (customizable API-first CMS)
 - **WordPress**: Core development, Plugin development, Theme development
 - **Drupal**: Module and theme development
 - **SharePoint**: SPFx development, REST API, PnP JS library
