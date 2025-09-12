@@ -1,0 +1,359 @@
+#!/bin/bash
+
+# SSH Connection Helper Script
+# Simplifies SSH connections to remote servers with interactive prompts
+# Supports both password and key-based authentication
+
+# Color codes for output formatting
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
+
+# Configuration file for saved connections
+CONFIG_FILE="$HOME/.ssh_connections"
+
+# Function to print colored output
+print_color() {
+    local color=$1
+    local message=$2
+    echo -e "${color}${message}${NC}"
+}
+
+# Function to validate IP address format
+validate_ip() {
+    local ip=$1
+    if [[ $ip =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+# Function to save connection details
+save_connection() {
+    local name=$1
+    local user=$2
+    local host=$3
+    local key=$4
+    local port=$5
+    
+    # Create config file if it doesn't exist
+    touch "$CONFIG_FILE"
+    chmod 600 "$CONFIG_FILE"
+    
+    # Check if connection name already exists
+    if grep -q "^$name:" "$CONFIG_FILE" 2>/dev/null; then
+        print_color "$YELLOW" "Connection '$name' already exists. Overwrite? (y/n): "
+        read -r overwrite
+        if [[ $overwrite != "y" ]]; then
+            return 1
+        fi
+        # Remove existing entry
+        sed -i.bak "/^$name:/d" "$CONFIG_FILE"
+    fi
+    
+    # Add new connection
+    echo "$name:$user:$host:$key:$port" >> "$CONFIG_FILE"
+    print_color "$GREEN" "✓ Connection saved as '$name'"
+}
+
+# Function to list saved connections
+list_connections() {
+    if [[ ! -f "$CONFIG_FILE" ]] || [[ ! -s "$CONFIG_FILE" ]]; then
+        print_color "$YELLOW" "No saved connections found."
+        return 1
+    fi
+    
+    print_color "$CYAN" "\n📋 Saved Connections:"
+    print_color "$CYAN" "────────────────────"
+    
+    local index=1
+    while IFS=':' read -r name user host key port; do
+        if [[ -n $name ]]; then
+            echo -e "${BLUE}[$index]${NC} $name"
+            echo "    User: $user"
+            echo "    Host: $host"
+            if [[ -n $key ]]; then
+                echo "    Key: $(basename "$key")"
+            fi
+            if [[ -n $port ]] && [[ $port != "22" ]]; then
+                echo "    Port: $port"
+            fi
+            echo ""
+            ((index++))
+        fi
+    done < "$CONFIG_FILE"
+    
+    return 0
+}
+
+# Function to load connection by name or index
+load_connection() {
+    local selection=$1
+    
+    if [[ ! -f "$CONFIG_FILE" ]]; then
+        print_color "$RED" "No saved connections found."
+        return 1
+    fi
+    
+    local connection_data=""
+    
+    # Check if selection is a number (index)
+    if [[ $selection =~ ^[0-9]+$ ]]; then
+        connection_data=$(sed -n "${selection}p" "$CONFIG_FILE")
+    else
+        # Selection is a name
+        connection_data=$(grep "^$selection:" "$CONFIG_FILE")
+    fi
+    
+    if [[ -z $connection_data ]]; then
+        print_color "$RED" "Connection not found."
+        return 1
+    fi
+    
+    # Parse connection data
+    IFS=':' read -r name user host key port <<< "$connection_data"
+    
+    # Set global variables
+    SSH_USER="$user"
+    SSH_HOST="$host"
+    SSH_KEY="$key"
+    SSH_PORT="${port:-22}"
+    
+    return 0
+}
+
+# Function to execute SSH connection
+connect_ssh() {
+    local user=$1
+    local host=$2
+    local key=$3
+    local port=${4:-22}
+    local extra_args=$5
+    
+    local ssh_cmd="ssh"
+    
+    # Add port if not default
+    if [[ $port != "22" ]]; then
+        ssh_cmd="$ssh_cmd -p $port"
+    fi
+    
+    # Add key if provided
+    if [[ -n $key ]]; then
+        if [[ ! -f $key ]]; then
+            print_color "$RED" "Error: Key file not found: $key"
+            return 1
+        fi
+        ssh_cmd="$ssh_cmd -i $key"
+    fi
+    
+    # Add extra arguments if provided
+    if [[ -n $extra_args ]]; then
+        ssh_cmd="$ssh_cmd $extra_args"
+    fi
+    
+    # Build final command
+    ssh_cmd="$ssh_cmd ${user}@${host}"
+    
+    print_color "$GREEN" "🔗 Connecting to ${user}@${host}..."
+    print_color "$CYAN" "Command: $ssh_cmd"
+    echo ""
+    
+    # Execute SSH connection
+    eval "$ssh_cmd"
+}
+
+# Function to show usage information
+show_usage() {
+    echo "SSH Connection Helper"
+    echo ""
+    echo "Usage: $(basename "$0") [OPTIONS]"
+    echo ""
+    echo "Options:"
+    echo "  -h, --help           Show this help message"
+    echo "  -l, --list           List saved connections"
+    echo "  -c, --connect NAME   Connect using saved connection"
+    echo "  -d, --delete NAME    Delete saved connection"
+    echo "  -q, --quick          Quick connect (skip saving prompt)"
+    echo ""
+    echo "Interactive mode:"
+    echo "  Run without arguments to enter interactive mode"
+    echo ""
+    echo "Examples:"
+    echo "  $(basename "$0")                  # Interactive mode"
+    echo "  $(basename "$0") -l                # List saved connections"
+    echo "  $(basename "$0") -c myserver       # Connect to saved connection"
+    echo "  $(basename "$0") -q                # Quick connect without saving"
+}
+
+# Main script logic
+main() {
+    # Parse command line arguments
+    case "$1" in
+        -h|--help)
+            show_usage
+            exit 0
+            ;;
+        -l|--list)
+            list_connections
+            exit 0
+            ;;
+        -c|--connect)
+            if [[ -z $2 ]]; then
+                print_color "$RED" "Error: Connection name required"
+                exit 1
+            fi
+            if load_connection "$2"; then
+                connect_ssh "$SSH_USER" "$SSH_HOST" "$SSH_KEY" "$SSH_PORT"
+            fi
+            exit $?
+            ;;
+        -d|--delete)
+            if [[ -z $2 ]]; then
+                print_color "$RED" "Error: Connection name required"
+                exit 1
+            fi
+            if [[ -f "$CONFIG_FILE" ]]; then
+                sed -i.bak "/^$2:/d" "$CONFIG_FILE"
+                print_color "$GREEN" "✓ Connection '$2' deleted"
+            else
+                print_color "$RED" "No saved connections found"
+            fi
+            exit 0
+            ;;
+        -q|--quick)
+            QUICK_MODE=true
+            ;;
+    esac
+    
+    # Interactive mode
+    print_color "$CYAN" "╔════════════════════════════════╗"
+    print_color "$CYAN" "║   SSH Connection Helper        ║"
+    print_color "$CYAN" "╚════════════════════════════════╝"
+    echo ""
+    
+    # Check for saved connections
+    if [[ "$1" != "-q" ]] && [[ "$1" != "--quick" ]]; then
+        if list_connections; then
+            echo ""
+            print_color "$YELLOW" "Select a saved connection (number), enter a name, or press Enter for new connection: "
+            read -r selection
+            
+            if [[ -n $selection ]]; then
+                if load_connection "$selection"; then
+                    connect_ssh "$SSH_USER" "$SSH_HOST" "$SSH_KEY" "$SSH_PORT"
+                    exit $?
+                fi
+            fi
+        fi
+    fi
+    
+    # Get connection details
+    print_color "$BLUE" "\n📝 Enter connection details:"
+    print_color "$BLUE" "────────────────────────────"
+    
+    # Get hostname or IP
+    while true; do
+        print_color "$YELLOW" "Server (hostname or IP address): "
+        read -r host
+        
+        if [[ -z $host ]]; then
+            print_color "$RED" "Server address is required"
+            continue
+        fi
+        
+        # Validate if it's an IP address
+        if [[ $host =~ \. ]]; then
+            if ! validate_ip "$host"; then
+                print_color "$YELLOW" "Warning: Invalid IP format. Continue anyway? (y/n): "
+                read -r continue_anyway
+                if [[ $continue_anyway != "y" ]]; then
+                    continue
+                fi
+            fi
+        fi
+        break
+    done
+    
+    # Get username
+    print_color "$YELLOW" "Username [ubuntu]: "
+    read -r user
+    user=${user:-ubuntu}
+    
+    # Get SSH port
+    print_color "$YELLOW" "Port [22]: "
+    read -r port
+    port=${port:-22}
+    
+    # Get authentication method
+    print_color "$YELLOW" "Use SSH key authentication? (y/n) [y]: "
+    read -r use_key
+    use_key=${use_key:-y}
+    
+    key_file=""
+    if [[ $use_key == "y" ]]; then
+        # Get key file
+        print_color "$YELLOW" "SSH key file path (or press Enter to browse ~/.ssh): "
+        read -r key_input
+        
+        if [[ -z $key_input ]]; then
+            # List available keys
+            print_color "$CYAN" "\nAvailable SSH keys:"
+            local key_index=1
+            local key_files=()
+            
+            for key in ~/.ssh/*.pem ~/.ssh/*.key ~/.ssh/id_* ; do
+                if [[ -f $key ]] && [[ ! $key == *.pub ]]; then
+                    echo "[$key_index] $(basename "$key")"
+                    key_files+=("$key")
+                    ((key_index++))
+                fi
+            done
+            
+            if [[ ${#key_files[@]} -eq 0 ]]; then
+                print_color "$YELLOW" "No SSH keys found in ~/.ssh"
+            else
+                print_color "$YELLOW" "Select key number (or press Enter to skip): "
+                read -r key_selection
+                
+                if [[ -n $key_selection ]] && [[ $key_selection =~ ^[0-9]+$ ]]; then
+                    key_file="${key_files[$key_selection-1]}"
+                fi
+            fi
+        else
+            # Expand tilde if present
+            key_file="${key_input/#\~/$HOME}"
+            
+            # Check if file exists
+            if [[ ! -f $key_file ]]; then
+                print_color "$RED" "Key file not found: $key_file"
+                exit 1
+            fi
+        fi
+    fi
+    
+    # Ask if user wants to save the connection
+    if [[ "$QUICK_MODE" != "true" ]]; then
+        print_color "$YELLOW" "\nSave this connection for future use? (y/n): "
+        read -r save_conn
+        
+        if [[ $save_conn == "y" ]]; then
+            print_color "$YELLOW" "Connection name (e.g., myserver): "
+            read -r conn_name
+            
+            if [[ -n $conn_name ]]; then
+                save_connection "$conn_name" "$user" "$host" "$key_file" "$port"
+            fi
+        fi
+    fi
+    
+    # Connect
+    echo ""
+    connect_ssh "$user" "$host" "$key_file" "$port"
+}
+
+# Run main function
+main "$@"
