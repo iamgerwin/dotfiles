@@ -589,3 +589,6 @@ This is a personal configuration, but feel free to fork and adapt it for your ow
 ## License
 
 MIT - Feel free to use any part of this configuration for your own dotfiles.
+
+## Docker DB Import
+See docs/docker-db-import.md for usage of the import script.
