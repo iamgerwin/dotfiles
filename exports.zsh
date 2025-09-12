@@ -103,3 +103,28 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 # Compilation flags
 export ARCHFLAGS="-arch $(uname -m)"
+
+# =================================================================
+# CLI Tools Configuration
+# =================================================================
+
+# Claude Code Configuration (set your API key in ~/.zshrc.private)
+export ANTHROPIC_API_KEY="${ANTHROPIC_API_KEY:-}"
+export CLAUDE_MODEL="${CLAUDE_MODEL:-claude-3-opus-20240229}"
+export CLAUDE_WORKSPACE="${CLAUDE_WORKSPACE:-$HOME/Development}"
+
+# OpenAI Configuration (set your API key in ~/.zshrc.private)
+export OPENAI_API_KEY="${OPENAI_API_KEY:-}"
+export OPENAI_ORG_ID="${OPENAI_ORG_ID:-}"
+export OPENAI_MODEL="${OPENAI_MODEL:-gpt-4-turbo-preview}"
+
+# GitHub Copilot Configuration
+export COPILOT_ENABLED="${COPILOT_ENABLED:-true}"
+export GITHUB_TOKEN="${GITHUB_TOKEN:-}"
+
+# CLI Tools Cache Configuration
+export CLAUDE_CACHE_DIR="${CLAUDE_CACHE_DIR:-$HOME/.cache/claude}"
+export CLAUDE_CACHE_TTL="${CLAUDE_CACHE_TTL:-3600}"
+
+# Source private environment variables if they exist
+[[ -f ~/.env.cli-tools ]] && source ~/.env.cli-tools

@@ -338,6 +338,19 @@ export AWS_SECRET_KEY="your-key-here"
 
 Both files are automatically sourced but never tracked in git.
 
+## Development CLI Tools
+
+### Installing Claude Code and GPT CLI Tools
+
+For comprehensive setup instructions for development CLI tools including:
+- Claude Code (Anthropic's official CLI)
+- GPT Codex CLI and GitHub Copilot CLI
+- OpenAI CLI tools
+- API key management
+- OS-specific installation guides
+
+See [CLI_TOOLS_SETUP.md](CLI_TOOLS_SETUP.md) for detailed instructions.
+
 ## Keeping Your Dotfiles Updated
 
 ### Pull Latest Changes

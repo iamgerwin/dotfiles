@@ -127,6 +127,16 @@ Every installation automatically:
 - **Provides instant rollback** capability via `uninstall.sh`
 - **Never overwrites** without backing up first
 
+### 🤖 CLI Tools Setup
+
+For detailed installation and configuration of development CLI tools:
+- **Claude Code** - Anthropic's official development CLI
+- **GPT Codex CLI** - OpenAI and GitHub Copilot CLI tools
+- **Environment Configuration** - API keys and secure storage
+- **OS-Specific Instructions** - macOS, Linux, and Windows setup
+
+See [CLI_TOOLS_SETUP.md](CLI_TOOLS_SETUP.md) for comprehensive installation guide
+
 ### 📖 Important: Terminal Font & Theme Setup
 
 **Powerlevel10k requires a Nerd Font** to display icons correctly. Without it, you'll see question marks in your prompt.
