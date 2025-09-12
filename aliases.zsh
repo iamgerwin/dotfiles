@@ -144,6 +144,11 @@ alias pcf='prompt-copy feature'
 alias pca='prompt-copy api'
 alias pcd='prompt-copy deployment'
 
+# SSH Management
+alias sshc='~/dotfiles/scripts/ssh-connect'
+alias sshl='~/dotfiles/scripts/ssh-connect --list'
+alias sshq='~/dotfiles/scripts/ssh-connect --quick'
+
 # Tmux aliases
 alias ta='tmux attach -t'
 alias tad='tmux attach -d -t'

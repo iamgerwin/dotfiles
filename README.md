@@ -67,7 +67,8 @@ dotfiles/
     ├── uninstall.sh    # Uninstall and rollback script
     ├── ai-prompt       # AI prompts CLI tool
     ├── ai-prompts-init.sh # AI prompts initialization
-    └── prompt-copy     # Quick template copy to clipboard
+    ├── prompt-copy     # Quick template copy to clipboard
+    └── ssh-connect     # SSH connection helper with saved profiles
 ```
 
 ## Quick Start
@@ -276,6 +277,32 @@ ai-prompt copy development/code-review
 ```
 
 See [AI_PROMPTS.md](AI_PROMPTS.md) for complete documentation.
+
+### SSH Connection Management
+
+Simplified SSH connection management with saved profiles:
+
+```bash
+# Interactive connection with saved profiles
+sshc                    # Launch interactive SSH helper
+
+# Quick commands
+sshl                    # List saved connections
+sshq                    # Quick connect without saving
+sshc -c myserver        # Connect to saved profile
+
+# Managing connections
+sshc -d myserver        # Delete saved connection
+
+# Features
+- Save frequently used connections with custom names
+- Automatic SSH key detection from ~/.ssh directory
+- Support for both password and key-based authentication
+- Interactive mode with user-friendly prompts
+- Port customization (default: 22)
+```
+
+The SSH helper stores connections in `~/.ssh_connections` for quick access.
 
 ### Tmux Configuration
 
