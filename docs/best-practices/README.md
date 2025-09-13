@@ -41,6 +41,12 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **Real-time Platforms**: Convex (real-time backend with reactive queries)
 - **Backend as a Service**: Appwrite, Supabase, PocketBase
 
+### Automation
+- **Workflow Automation**: N8N (fair-code workflow automation platform with visual programming)
+
+### Build Tools
+- **Monorepo Management**: Turborepo (high-performance build system), Nx (extensible build system with first-class monorepo support)
+
 ### DevOps
 - **Load Balancers & Proxies**: Traefik, NGINX
 - **Containerization**: Docker, Kubernetes
