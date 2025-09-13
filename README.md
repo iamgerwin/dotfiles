@@ -51,6 +51,8 @@ dotfiles/
 │       ├── backend-services/ # Backend-as-a-Service platforms
 │       ├── cms/        # Content Management Systems
 │       ├── enterprise/ # Enterprise software platforms
+│       ├── automation/ # Workflow automation platforms
+│       ├── build-tools/ # Build systems and monorepo tools
 │       ├── security/   # Security frameworks and compliance
 │       ├── testing/    # Testing frameworks and tools
 │       ├── languages/  # Programming languages
@@ -388,6 +390,13 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 **Backend-as-a-Service (BaaS)**
 - Real-time platforms: Convex (real-time backend with reactive queries)
 - Open-source Firebase alternatives: Appwrite, Supabase, PocketBase
+
+**Automation & Workflow**
+- Workflow automation: N8N (fair-code workflow automation platform)
+
+**Build Tools & Monorepo Management**
+- High-performance build systems: Turborepo (JavaScript/TypeScript monorepos)
+- Extensible build system: Nx (enterprise-grade monorepo tools with computation caching)
 
 **DevOps & Cloud**
 - Load Balancers & Proxies: Traefik, NGINX
