@@ -1,0 +1,446 @@
+#!/bin/bash
+
+# SSH Key Manager for Git Profiles
+# Manages SSH keys in dotfiles/ssh-keys with automatic symlinking to ~/.ssh
+
+DOTFILES_SSH_DIR="$HOME/dotfiles/ssh-keys"
+SYSTEM_SSH_DIR="$HOME/.ssh"
+SCRIPT_NAME=$(basename "$0")
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+NC='\033[0m' # No Color
+
+# Function to print colored output
+print_color() {
+    local color=$1
+    shift
+    echo -e "${color}$*${NC}"
+}
+
+# Function to show usage
+usage() {
+    print_color "$CYAN" "SSH Key Manager - Manage SSH keys for Git profiles"
+    echo ""
+    echo "Usage: $SCRIPT_NAME [COMMAND] [OPTIONS]"
+    echo ""
+    print_color "$YELLOW" "Commands:"
+    echo "  generate         Generate a new SSH key"
+    echo "  list            List all SSH keys"
+    echo "  link            Create symlinks to ~/.ssh"
+    echo "  unlink          Remove symlinks from ~/.ssh"
+    echo "  test            Test SSH connection to GitHub"
+    echo "  copy-public     Copy public key to clipboard"
+    echo "  migrate         Migrate existing SSH keys to dotfiles"
+    echo "  help            Show this help message"
+    echo ""
+    print_color "$YELLOW" "Examples:"
+    echo "  $SCRIPT_NAME generate        # Interactive key generation"
+    echo "  $SCRIPT_NAME list           # List all keys"
+    echo "  $SCRIPT_NAME link github-personal  # Link specific key"
+    echo "  $SCRIPT_NAME test github-personal  # Test specific key"
+    echo "  $SCRIPT_NAME migrate        # Move existing keys to dotfiles"
+    exit 0
+}
+
+# Ensure directories exist
+ensure_directories() {
+    if [ ! -d "$DOTFILES_SSH_DIR" ]; then
+        mkdir -p "$DOTFILES_SSH_DIR"
+        print_color "$GREEN" "Created SSH keys directory: $DOTFILES_SSH_DIR"
+    fi
+
+    if [ ! -d "$SYSTEM_SSH_DIR" ]; then
+        mkdir -p "$SYSTEM_SSH_DIR"
+        chmod 700 "$SYSTEM_SSH_DIR"
+        print_color "$GREEN" "Created system SSH directory: $SYSTEM_SSH_DIR"
+    fi
+}
+
+# Generate a new SSH key
+generate_key() {
+    ensure_directories
+
+    print_color "$CYAN" "=== Generate New SSH Key ==="
+    echo ""
+
+    # Get key name
+    read -p "Key name (e.g., github-personal, gitlab-work): " key_name
+    if [ -z "$key_name" ]; then
+        print_color "$RED" "Key name cannot be empty"
+        exit 1
+    fi
+
+    local key_path="$DOTFILES_SSH_DIR/$key_name"
+
+    if [ -f "$key_path" ]; then
+        print_color "$RED" "Key '$key_name' already exists"
+        read -p "Overwrite? (y/N): " overwrite
+        if [[ ! "$overwrite" =~ ^[Yy]$ ]]; then
+            exit 1
+        fi
+    fi
+
+    # Get email for the key
+    read -p "Email address for this key: " email
+    if [ -z "$email" ]; then
+        print_color "$RED" "Email cannot be empty"
+        exit 1
+    fi
+
+    # Choose key type
+    print_color "$YELLOW" "Key type:"
+    echo "  1) ed25519 (recommended)"
+    echo "  2) rsa (4096 bit)"
+    read -p "Choose [1]: " key_type_choice
+
+    case "$key_type_choice" in
+        2)
+            key_type="rsa"
+            key_bits="-b 4096"
+            ;;
+        *)
+            key_type="ed25519"
+            key_bits=""
+            ;;
+    esac
+
+    # Generate the key
+    print_color "$YELLOW" "Generating $key_type key..."
+    ssh-keygen -t "$key_type" $key_bits -C "$email" -f "$key_path"
+
+    if [ $? -eq 0 ]; then
+        # Set correct permissions
+        chmod 600 "$key_path"
+        chmod 644 "$key_path.pub"
+
+        print_color "$GREEN" "✓ SSH key generated: $key_name"
+
+        # Ask to create symlink
+        read -p "Create symlink in ~/.ssh? (Y/n): " create_link
+        if [[ ! "$create_link" =~ ^[Nn]$ ]]; then
+            link_key "$key_name"
+        fi
+
+        # Ask to add to ssh-agent
+        read -p "Add to ssh-agent? (Y/n): " add_agent
+        if [[ ! "$add_agent" =~ ^[Nn]$ ]]; then
+            ssh-add "$key_path"
+            print_color "$GREEN" "✓ Key added to ssh-agent"
+        fi
+
+        # Show public key
+        echo ""
+        print_color "$CYAN" "Public key (add this to GitHub/GitLab):"
+        cat "$key_path.pub"
+
+        # Offer to copy to clipboard if pbcopy is available
+        if command -v pbcopy &> /dev/null; then
+            echo ""
+            read -p "Copy public key to clipboard? (Y/n): " copy_clip
+            if [[ ! "$copy_clip" =~ ^[Nn]$ ]]; then
+                cat "$key_path.pub" | pbcopy
+                print_color "$GREEN" "✓ Public key copied to clipboard"
+            fi
+        fi
+    else
+        print_color "$RED" "Failed to generate SSH key"
+        exit 1
+    fi
+}
+
+# List all SSH keys
+list_keys() {
+    ensure_directories
+
+    print_color "$CYAN" "=== SSH Keys in $DOTFILES_SSH_DIR ==="
+    echo ""
+
+    local found=false
+    for key_file in "$DOTFILES_SSH_DIR"/*; do
+        if [ -f "$key_file" ] && [[ ! "$key_file" =~ \.pub$ ]] && [[ ! "$key_file" =~ README\.md$ ]]; then
+            found=true
+            local key_name=$(basename "$key_file")
+
+            print_color "$BLUE" "▸ $key_name"
+
+            # Check if public key exists
+            if [ -f "$key_file.pub" ]; then
+                local key_info=$(ssh-keygen -l -f "$key_file.pub" 2>/dev/null)
+                if [ -n "$key_info" ]; then
+                    echo "  $key_info"
+                fi
+            else
+                print_color "$YELLOW" "  ⚠ Missing public key"
+            fi
+
+            # Check if symlinked
+            if [ -L "$SYSTEM_SSH_DIR/$key_name" ]; then
+                print_color "$GREEN" "  ✓ Linked to ~/.ssh"
+            else
+                echo "  ✗ Not linked to ~/.ssh"
+            fi
+
+            # Check if in ssh-agent
+            if ssh-add -l 2>/dev/null | grep -q "$key_file"; then
+                print_color "$GREEN" "  ✓ In ssh-agent"
+            fi
+
+            echo ""
+        fi
+    done
+
+    if [ "$found" = false ]; then
+        print_color "$YELLOW" "No SSH keys found"
+        echo "Generate one with: $SCRIPT_NAME generate"
+    fi
+}
+
+# Create symlink for a key
+link_key() {
+    local key_name=$1
+
+    if [ -z "$key_name" ]; then
+        # Link all keys
+        print_color "$CYAN" "Linking all SSH keys to ~/.ssh..."
+        for key_file in "$DOTFILES_SSH_DIR"/*; do
+            if [ -f "$key_file" ] && [[ ! "$key_file" =~ \.pub$ ]] && [[ ! "$key_file" =~ README\.md$ ]]; then
+                local name=$(basename "$key_file")
+                link_single_key "$name"
+            fi
+        done
+    else
+        link_single_key "$key_name"
+    fi
+}
+
+# Link a single key
+link_single_key() {
+    local key_name=$1
+    local key_path="$DOTFILES_SSH_DIR/$key_name"
+    local link_path="$SYSTEM_SSH_DIR/$key_name"
+
+    if [ ! -f "$key_path" ]; then
+        print_color "$RED" "Key not found: $key_name"
+        return 1
+    fi
+
+    # Create symlink for private key
+    if [ -L "$link_path" ]; then
+        print_color "$YELLOW" "Link already exists: $key_name"
+    else
+        ln -sf "$key_path" "$link_path"
+        print_color "$GREEN" "✓ Linked: $key_name"
+    fi
+
+    # Create symlink for public key
+    if [ -f "$key_path.pub" ]; then
+        ln -sf "$key_path.pub" "$link_path.pub"
+        print_color "$GREEN" "✓ Linked: $key_name.pub"
+    fi
+}
+
+# Remove symlink for a key
+unlink_key() {
+    local key_name=$1
+
+    if [ -z "$key_name" ]; then
+        print_color "$RED" "Key name required"
+        echo "Usage: $SCRIPT_NAME unlink KEY_NAME"
+        exit 1
+    fi
+
+    local link_path="$SYSTEM_SSH_DIR/$key_name"
+
+    if [ -L "$link_path" ]; then
+        rm "$link_path"
+        print_color "$GREEN" "✓ Unlinked: $key_name"
+    else
+        print_color "$YELLOW" "No link found: $key_name"
+    fi
+
+    if [ -L "$link_path.pub" ]; then
+        rm "$link_path.pub"
+        print_color "$GREEN" "✓ Unlinked: $key_name.pub"
+    fi
+}
+
+# Test SSH connection
+test_key() {
+    local key_name=$1
+
+    if [ -z "$key_name" ]; then
+        print_color "$RED" "Key name required"
+        echo "Usage: $SCRIPT_NAME test KEY_NAME"
+        exit 1
+    fi
+
+    local key_path="$DOTFILES_SSH_DIR/$key_name"
+
+    if [ ! -f "$key_path" ]; then
+        print_color "$RED" "Key not found: $key_name"
+        exit 1
+    fi
+
+    print_color "$CYAN" "Testing SSH key: $key_name"
+    echo ""
+
+    # Test GitHub
+    print_color "$YELLOW" "Testing GitHub connection..."
+    ssh -T -i "$key_path" git@github.com 2>&1
+
+    echo ""
+    read -p "Test GitLab? (y/N): " test_gitlab
+    if [[ "$test_gitlab" =~ ^[Yy]$ ]]; then
+        print_color "$YELLOW" "Testing GitLab connection..."
+        ssh -T -i "$key_path" git@gitlab.com 2>&1
+    fi
+}
+
+# Copy public key to clipboard
+copy_public_key() {
+    local key_name=$1
+
+    if [ -z "$key_name" ]; then
+        # List keys and let user choose
+        print_color "$CYAN" "Available keys:"
+        for key_file in "$DOTFILES_SSH_DIR"/*.pub; do
+            if [ -f "$key_file" ]; then
+                basename "$key_file" .pub | sed 's/^/  - /'
+            fi
+        done
+        echo ""
+        read -p "Key name to copy: " key_name
+    fi
+
+    local pub_key_path="$DOTFILES_SSH_DIR/$key_name.pub"
+
+    if [ ! -f "$pub_key_path" ]; then
+        print_color "$RED" "Public key not found: $key_name.pub"
+        exit 1
+    fi
+
+    if command -v pbcopy &> /dev/null; then
+        cat "$pub_key_path" | pbcopy
+        print_color "$GREEN" "✓ Public key copied to clipboard"
+        echo ""
+        echo "Key fingerprint:"
+        ssh-keygen -l -f "$pub_key_path"
+    else
+        print_color "$YELLOW" "pbcopy not found. Here's your public key:"
+        cat "$pub_key_path"
+    fi
+}
+
+# Migrate existing SSH keys
+migrate_keys() {
+    ensure_directories
+
+    print_color "$CYAN" "=== Migrate Existing SSH Keys ==="
+    echo ""
+    print_color "$YELLOW" "This will move SSH keys from ~/.ssh to $DOTFILES_SSH_DIR"
+    echo ""
+
+    # List potential keys to migrate
+    local keys_to_migrate=()
+    for key_file in "$SYSTEM_SSH_DIR"/*; do
+        if [ -f "$key_file" ] && [ ! -L "$key_file" ]; then
+            local key_name=$(basename "$key_file")
+            # Skip known non-key files
+            if [[ ! "$key_name" =~ ^(known_hosts|authorized_keys|config|.*\.pub)$ ]]; then
+                # Check if it looks like a private key
+                if head -n 1 "$key_file" | grep -q "PRIVATE KEY"; then
+                    keys_to_migrate+=("$key_name")
+                fi
+            fi
+        fi
+    done
+
+    if [ ${#keys_to_migrate[@]} -eq 0 ]; then
+        print_color "$YELLOW" "No SSH keys found to migrate"
+        exit 0
+    fi
+
+    print_color "$BLUE" "Found keys to migrate:"
+    for key in "${keys_to_migrate[@]}"; do
+        echo "  - $key"
+        if [ -f "$SYSTEM_SSH_DIR/$key.pub" ]; then
+            echo "    (with public key)"
+        fi
+    done
+
+    echo ""
+    read -p "Migrate these keys? (y/N): " confirm
+    if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
+        print_color "$YELLOW" "Migration cancelled"
+        exit 0
+    fi
+
+    # Migrate each key
+    for key in "${keys_to_migrate[@]}"; do
+        local src_path="$SYSTEM_SSH_DIR/$key"
+        local dest_path="$DOTFILES_SSH_DIR/$key"
+
+        print_color "$YELLOW" "Migrating: $key"
+
+        # Move private key
+        mv "$src_path" "$dest_path"
+        chmod 600 "$dest_path"
+
+        # Move public key if exists
+        if [ -f "$src_path.pub" ]; then
+            mv "$src_path.pub" "$dest_path.pub"
+            chmod 644 "$dest_path.pub"
+        fi
+
+        # Create symlink back
+        ln -sf "$dest_path" "$src_path"
+        if [ -f "$dest_path.pub" ]; then
+            ln -sf "$dest_path.pub" "$src_path.pub"
+        fi
+
+        print_color "$GREEN" "✓ Migrated and linked: $key"
+    done
+
+    echo ""
+    print_color "$GREEN" "Migration complete!"
+    print_color "$YELLOW" "Your SSH keys are now in: $DOTFILES_SSH_DIR"
+    print_color "$YELLOW" "Symlinks have been created in ~/.ssh for compatibility"
+}
+
+# Main script logic
+case "$1" in
+    "generate" | "gen" | "new")
+        generate_key
+        ;;
+    "list" | "ls")
+        list_keys
+        ;;
+    "link")
+        link_key "$2"
+        ;;
+    "unlink")
+        unlink_key "$2"
+        ;;
+    "test")
+        test_key "$2"
+        ;;
+    "copy-public" | "copy")
+        copy_public_key "$2"
+        ;;
+    "migrate")
+        migrate_keys
+        ;;
+    "help" | "-h" | "--help" | "")
+        usage
+        ;;
+    *)
+        print_color "$RED" "Unknown command: $1"
+        echo ""
+        usage
+        ;;
+esac

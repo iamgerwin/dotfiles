@@ -170,26 +170,151 @@ learn_vscode_extensions() {
 # Detect and preserve custom scripts
 learn_custom_scripts() {
     print_header "Learning Custom Scripts"
-    
+
     # Check common script locations
     local script_dirs=(
         "$HOME/bin"
         "$HOME/.local/bin"
         "$HOME/scripts"
     )
-    
+
     for dir in "${script_dirs[@]}"; do
         if [[ -d "$dir" ]]; then
             find "$dir" -type f -executable 2>/dev/null > "$ADAPTIVE_DIR/learned/scripts_in_$( basename "$dir").txt" || true
             local count=$(wc -l < "$ADAPTIVE_DIR/learned/scripts_in_$(basename "$dir").txt" | tr -d ' ')
             if [[ $count -gt 0 ]]; then
                 print_success "Found $count script(s) in $dir"
-                
+
                 # Create manifest
                 echo "$dir: $count scripts" >> "$ADAPTIVE_DIR/learned/custom_scripts_manifest.txt"
             fi
         fi
     done
+}
+
+# Learn from existing SSH keys
+learn_ssh_keys() {
+    print_header "Learning SSH Keys"
+
+    local ssh_key_count=0
+    local ssh_keys_found=""
+
+    # Check for SSH keys in ~/.ssh
+    if [[ -d "$HOME/.ssh" ]]; then
+        for key_file in "$HOME/.ssh"/*; do
+            if [[ -f "$key_file" ]] && [[ ! "$key_file" =~ \.pub$ ]]; then
+                # Check if it's a private key
+                if head -n 1 "$key_file" 2>/dev/null | grep -q "PRIVATE KEY"; then
+                    local key_name=$(basename "$key_file")
+                    echo "$key_name" >> "$ADAPTIVE_DIR/learned/ssh_keys.txt"
+                    ssh_key_count=$((ssh_key_count + 1))
+                    ssh_keys_found="${ssh_keys_found}  - $key_name\n"
+                fi
+            fi
+        done
+    fi
+
+    if [[ $ssh_key_count -gt 0 ]]; then
+        print_success "Found $ssh_key_count SSH key(s)"
+
+        # Offer to import immediately if import script is available
+        if [[ -x "$DOTFILES_DIR/scripts/import-git-profiles" ]]; then
+            print_info "Import tool available for easy migration"
+            read -p "Would you like to import SSH keys and Git profiles now? (y/n) " -n 1 -r
+            echo
+            if [[ $REPLY =~ ^[Yy]$ ]]; then
+                "$DOTFILES_DIR/scripts/import-git-profiles"
+                return
+            fi
+        fi
+
+        # Create migration script as fallback
+        cat > "$HOME/.ssh-keys-migrate.sh" << 'EOF'
+#!/usr/bin/env bash
+# SSH Keys Migration Script
+# Migrates existing SSH keys to organized structure
+
+if [[ -x "$HOME/dotfiles/scripts/import-git-profiles" ]]; then
+    echo "Importing Git profiles and SSH keys..."
+    "$HOME/dotfiles/scripts/import-git-profiles" --quick
+elif command -v ~/dotfiles/scripts/ssh-key-manager &> /dev/null; then
+    echo "Migrating SSH keys to organized structure..."
+    ~/dotfiles/scripts/ssh-key-manager migrate
+else
+    echo "Migration tools not found. Manual migration required."
+fi
+EOF
+        chmod +x "$HOME/.ssh-keys-migrate.sh"
+        print_success "Created migration script: ~/.ssh-keys-migrate.sh"
+        print_info "You can run the import wizard later with: ~/dotfiles/scripts/import-git-profiles"
+    else
+        print_info "No SSH keys found to preserve"
+    fi
+}
+
+# Learn from existing Git configuration
+learn_git_profiles() {
+    print_header "Learning Git Configuration"
+
+    # Capture current git configuration
+    local git_user=$(git config --global user.name 2>/dev/null)
+    local git_email=$(git config --global user.email 2>/dev/null)
+
+    if [[ -n "$git_user" ]] && [[ -n "$git_email" ]]; then
+        print_success "Current Git user: $git_user <$git_email>"
+
+        # Create a default profile based on current configuration
+        mkdir -p "$HOME/dotfiles/config/git-profiles" 2>/dev/null || true
+
+        # Try to determine the appropriate SSH key
+        local ssh_key=""
+        if [[ -f "$ADAPTIVE_DIR/learned/ssh_keys.txt" ]]; then
+            # Look for common patterns in key names
+            while IFS= read -r key; do
+                if [[ "$key" =~ github|gitlab|git ]]; then
+                    ssh_key="$key"
+                    break
+                fi
+            done < "$ADAPTIVE_DIR/learned/ssh_keys.txt"
+
+            # If no git-related key found, use the first one
+            if [[ -z "$ssh_key" ]] && [[ -s "$ADAPTIVE_DIR/learned/ssh_keys.txt" ]]; then
+                ssh_key=$(head -n 1 "$ADAPTIVE_DIR/learned/ssh_keys.txt")
+            fi
+        fi
+
+        # Create a default profile
+        cat > "$HOME/dotfiles/config/git-profiles/default.conf" << EOF
+# Default Git Profile (from existing configuration)
+# Created: $(date)
+
+# Git user configuration
+GIT_USER_NAME="$git_user"
+GIT_USER_EMAIL="$git_email"
+
+# SSH key path (relative to ~/.ssh/)
+SSH_KEY_NAME="$ssh_key"
+
+# GitHub CLI account (optional)
+GH_ACCOUNT=""
+
+# GPG signing key (optional)
+GIT_SIGNING_KEY=""
+EOF
+        print_success "Created default Git profile from existing configuration"
+        print_info "You can create additional profiles with: gpm create"
+    else
+        print_info "No existing Git configuration found"
+    fi
+
+    # Check for multiple git configurations (work vs personal)
+    if [[ -f "$HOME/.gitconfig" ]]; then
+        # Look for includeIf directives that might indicate multiple profiles
+        if grep -q "includeIf" "$HOME/.gitconfig" 2>/dev/null; then
+            print_info "Detected conditional Git includes - you may have multiple Git identities"
+            print_info "Consider setting up Git profiles with: gpm create"
+        fi
+    fi
 }
 
 # Intelligent merge of configurations
@@ -376,6 +501,8 @@ main() {
     learn_npm_packages
     learn_vscode_extensions
     learn_custom_scripts
+    learn_ssh_keys
+    learn_git_profiles
     
     # Merge intelligently
     intelligent_merge

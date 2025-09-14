@@ -149,6 +149,23 @@ alias sshc='~/dotfiles/scripts/ssh-connect'
 alias sshl='~/dotfiles/scripts/ssh-connect --list'
 alias sshq='~/dotfiles/scripts/ssh-connect --quick'
 
+# Git Profile Management
+alias gp='~/dotfiles/scripts/git-profile-switch'
+alias gpm='~/dotfiles/scripts/git-profile-manager'
+alias gpm-new='~/dotfiles/scripts/git-profile-manager create'
+alias gpm-list='~/dotfiles/scripts/git-profile-manager list'
+alias gpm-current='~/dotfiles/scripts/git-profile-manager current'
+alias gpm-edit='~/dotfiles/scripts/git-profile-manager update'
+alias gpm-delete='~/dotfiles/scripts/git-profile-manager delete'
+alias gpm-import='~/dotfiles/scripts/import-git-profiles'
+
+# SSH Key Management
+alias sshkm='~/dotfiles/scripts/ssh-key-manager'
+alias sshkm-gen='~/dotfiles/scripts/ssh-key-manager generate'
+alias sshkm-list='~/dotfiles/scripts/ssh-key-manager list'
+alias sshkm-test='~/dotfiles/scripts/ssh-key-manager test'
+alias sshkm-migrate='~/dotfiles/scripts/ssh-key-manager migrate'
+
 # Tmux aliases
 alias ta='tmux attach -t'
 alias tad='tmux attach -d -t'
