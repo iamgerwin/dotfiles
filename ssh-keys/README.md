@@ -17,6 +17,39 @@ ssh-keys/
 └── ...
 ```
 
+## Import Existing SSH Keys
+
+### Automatic Import (Recommended)
+
+Import your existing SSH keys and Git configuration automatically:
+
+```bash
+# Run the import wizard
+~/dotfiles/scripts/import-git-profiles
+
+# Or quick import without prompts
+~/dotfiles/scripts/import-git-profiles --quick
+```
+
+This will:
+- Find all SSH keys in ~/.ssh
+- Move them to this directory
+- Create symlinks for compatibility
+- Generate Git profiles automatically
+- Preserve all your existing settings
+
+### Manual Migration
+
+You can also migrate keys manually using the SSH key manager:
+
+```bash
+# Migrate all existing keys
+~/dotfiles/scripts/ssh-key-manager migrate
+
+# Or use the alias
+sshkm-migrate
+```
+
 ## Setup Instructions
 
 1. Generate new SSH keys here:

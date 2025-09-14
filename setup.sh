@@ -192,22 +192,68 @@ configure_git() {
         echo "You can manage multiple Git identities (personal, work, etc.)"
         echo "with SSH keys and GitHub CLI integration."
         echo
-        read -p "Would you like to set up a Git profile now? (y/n) " -n 1 -r
-        echo
-        if [[ $REPLY =~ ^[Yy]$ ]]; then
-            print_info "Launching Git Profile Manager..."
-            "$DOTFILES_DIR/scripts/git-profile-manager" create
 
-            # Offer to migrate existing SSH keys
-            if [[ -x "$DOTFILES_DIR/scripts/ssh-key-manager" ]]; then
-                echo
-                read -p "Would you like to migrate existing SSH keys to organized structure? (y/n) " -n 1 -r
-                echo
-                if [[ $REPLY =~ ^[Yy]$ ]]; then
-                    "$DOTFILES_DIR/scripts/ssh-key-manager" migrate
+        # Check if there's existing Git config or SSH keys to import
+        local has_existing_config=false
+        if [[ -n "$(git config --global user.name 2>/dev/null)" ]] || [[ -n "$(git config --global user.email 2>/dev/null)" ]]; then
+            has_existing_config=true
+        fi
+
+        local has_ssh_keys=false
+        if [[ -d "$HOME/.ssh" ]]; then
+            for key in "$HOME/.ssh"/*; do
+                if [[ -f "$key" ]] && [[ ! "$key" =~ \.pub$ ]] && [[ ! "$key" =~ known_hosts|authorized_keys|config$ ]]; then
+                    if head -n 1 "$key" 2>/dev/null | grep -q "PRIVATE KEY"; then
+                        has_ssh_keys=true
+                        break
+                    fi
                 fi
-            fi
+            done
+        fi
+
+        if [[ "$has_existing_config" == "true" ]] || [[ "$has_ssh_keys" == "true" ]]; then
+            print_warning "Existing Git configuration and/or SSH keys detected!"
+            echo "What would you like to do?"
+            echo "  1) Import existing configuration and SSH keys"
+            echo "  2) Create a new profile from scratch"
+            echo "  3) Skip for now"
+            echo
+            read -p "Enter choice [1-3]: " git_choice
+
+            case $git_choice in
+                1)
+                    print_info "Importing existing configuration..."
+                    if [[ -x "$DOTFILES_DIR/scripts/import-git-profiles" ]]; then
+                        "$DOTFILES_DIR/scripts/import-git-profiles"
+                    else
+                        print_warning "Import script not found, using manual migration"
+                        "$DOTFILES_DIR/scripts/ssh-key-manager" migrate
+                    fi
+                    ;;
+                2)
+                    print_info "Launching Git Profile Manager..."
+                    "$DOTFILES_DIR/scripts/git-profile-manager" create
+                    ;;
+                3)
+                    print_info "You can import or create profiles later with:"
+                    echo "  Import: ~/dotfiles/scripts/import-git-profiles"
+                    echo "  Create: gpm create"
+                    ;;
+                *)
+                    print_warning "Invalid choice, skipping..."
+                    ;;
+            esac
         else
+            read -p "Would you like to set up a Git profile now? (y/n) " -n 1 -r
+            echo
+            if [[ $REPLY =~ ^[Yy]$ ]]; then
+                print_info "Launching Git Profile Manager..."
+                "$DOTFILES_DIR/scripts/git-profile-manager" create
+            else
+                print_info "You can set up profiles later with: gpm create"
+            fi
+        fi
+    else
             print_info "You can set up profiles later with: gpm create"
             echo
             # Fall back to basic git configuration
@@ -356,6 +402,7 @@ final_setup() {
     chmod +x "$DOTFILES_DIR/scripts/git-profile-switch" 2>/dev/null || true
     chmod +x "$DOTFILES_DIR/scripts/git-profile-manager" 2>/dev/null || true
     chmod +x "$DOTFILES_DIR/scripts/ssh-key-manager" 2>/dev/null || true
+    chmod +x "$DOTFILES_DIR/scripts/import-git-profiles" 2>/dev/null || true
     
     # Create local config files if they don't exist
     touch "$HOME/.zshrc.local"

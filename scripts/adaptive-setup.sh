@@ -217,26 +217,36 @@ learn_ssh_keys() {
     if [[ $ssh_key_count -gt 0 ]]; then
         print_success "Found $ssh_key_count SSH key(s)"
 
-        # Create migration script
+        # Offer to import immediately if import script is available
+        if [[ -x "$DOTFILES_DIR/scripts/import-git-profiles" ]]; then
+            print_info "Import tool available for easy migration"
+            read -p "Would you like to import SSH keys and Git profiles now? (y/n) " -n 1 -r
+            echo
+            if [[ $REPLY =~ ^[Yy]$ ]]; then
+                "$DOTFILES_DIR/scripts/import-git-profiles"
+                return
+            fi
+        fi
+
+        # Create migration script as fallback
         cat > "$HOME/.ssh-keys-migrate.sh" << 'EOF'
 #!/usr/bin/env bash
 # SSH Keys Migration Script
 # Migrates existing SSH keys to organized structure
 
-if command -v ~/dotfiles/scripts/ssh-key-manager &> /dev/null; then
+if [[ -x "$HOME/dotfiles/scripts/import-git-profiles" ]]; then
+    echo "Importing Git profiles and SSH keys..."
+    "$HOME/dotfiles/scripts/import-git-profiles" --quick
+elif command -v ~/dotfiles/scripts/ssh-key-manager &> /dev/null; then
     echo "Migrating SSH keys to organized structure..."
     ~/dotfiles/scripts/ssh-key-manager migrate
 else
-    echo "SSH key manager not found. Manual migration required."
+    echo "Migration tools not found. Manual migration required."
 fi
 EOF
         chmod +x "$HOME/.ssh-keys-migrate.sh"
-        print_success "Created SSH keys migration script: ~/.ssh-keys-migrate.sh"
-
-        # Offer immediate migration if ssh-key-manager is available
-        if [[ -x "$DOTFILES_DIR/scripts/ssh-key-manager" ]]; then
-            print_info "SSH Key Manager available. You can migrate keys with: sshkm-migrate"
-        fi
+        print_success "Created migration script: ~/.ssh-keys-migrate.sh"
+        print_info "You can run the import wizard later with: ~/dotfiles/scripts/import-git-profiles"
     else
         print_info "No SSH keys found to preserve"
     fi

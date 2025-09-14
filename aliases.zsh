@@ -157,6 +157,7 @@ alias gpm-list='~/dotfiles/scripts/git-profile-manager list'
 alias gpm-current='~/dotfiles/scripts/git-profile-manager current'
 alias gpm-edit='~/dotfiles/scripts/git-profile-manager update'
 alias gpm-delete='~/dotfiles/scripts/git-profile-manager delete'
+alias gpm-import='~/dotfiles/scripts/import-git-profiles'
 
 # SSH Key Management
 alias sshkm='~/dotfiles/scripts/ssh-key-manager'

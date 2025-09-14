@@ -80,7 +80,8 @@ dotfiles/
     ├── ssh-connect     # SSH connection helper with saved profiles
     ├── git-profile-switch  # Quick git profile switching
     ├── git-profile-manager # Full git profile CRUD operations
-    └── ssh-key-manager     # SSH key organization and migration
+    ├── ssh-key-manager     # SSH key organization and migration
+    └── import-git-profiles # Import existing Git config and SSH keys
 ```
 
 ## Quick Start
@@ -273,6 +274,27 @@ echo "export SECRET_API_KEY=xxx" >> ~/.zshrc.private
 ### Git Profile Management
 
 Manage multiple Git identities (personal, work, client) with integrated SSH key management:
+
+#### Import Existing Configuration
+
+If you have existing Git configuration and SSH keys, import them automatically:
+
+```bash
+# Interactive import wizard
+~/dotfiles/scripts/import-git-profiles
+
+# Quick import (non-interactive)
+~/dotfiles/scripts/import-git-profiles --quick
+```
+
+The import tool will:
+- Detect your current Git configuration
+- Find all SSH keys in ~/.ssh
+- Create profiles based on key names (personal, work, github, etc.)
+- Migrate SSH keys to organized structure
+- Preserve all existing settings
+
+#### Profile Management Commands
 
 ```bash
 # Create a new profile
