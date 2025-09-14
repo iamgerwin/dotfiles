@@ -367,6 +367,7 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 
 **Backend & APIs**
 - PHP: Laravel, Laravel Nova, Laravel Eloquent ORM, Laravel Filament v4, Symfony with API Platform, CodeIgniter 4
+  - Performance Technologies: Laravel Octane, FrankenPHP, PHP-FPM, Open Swoole, RoadRunner
 - JavaScript/TypeScript: NestJS, Hono.js, Meteor.js, AdonisJS
 - Python: Django, general Python best practices
 - Ruby: Ruby on Rails
