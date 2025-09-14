@@ -184,18 +184,60 @@ create_symlinks() {
 # Configure Git
 configure_git() {
     print_header "Git Configuration"
-    
-    read -p "Enter your Git username: " git_username
-    read -p "Enter your Git email: " git_email
-    
-    if [[ -n "$git_username" ]]; then
-        git config --global user.name "$git_username"
-        print_success "Git username set to: $git_username"
-    fi
-    
-    if [[ -n "$git_email" ]]; then
-        git config --global user.email "$git_email"
-        print_success "Git email set to: $git_email"
+
+    # Check if git profiles are available
+    if [[ -x "$DOTFILES_DIR/scripts/git-profile-manager" ]]; then
+        print_info "Git Profile Management system detected!"
+        echo
+        echo "You can manage multiple Git identities (personal, work, etc.)"
+        echo "with SSH keys and GitHub CLI integration."
+        echo
+        read -p "Would you like to set up a Git profile now? (y/n) " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            print_info "Launching Git Profile Manager..."
+            "$DOTFILES_DIR/scripts/git-profile-manager" create
+
+            # Offer to migrate existing SSH keys
+            if [[ -x "$DOTFILES_DIR/scripts/ssh-key-manager" ]]; then
+                echo
+                read -p "Would you like to migrate existing SSH keys to organized structure? (y/n) " -n 1 -r
+                echo
+                if [[ $REPLY =~ ^[Yy]$ ]]; then
+                    "$DOTFILES_DIR/scripts/ssh-key-manager" migrate
+                fi
+            fi
+        else
+            print_info "You can set up profiles later with: gpm create"
+            echo
+            # Fall back to basic git configuration
+            read -p "Enter your Git username: " git_username
+            read -p "Enter your Git email: " git_email
+
+            if [[ -n "$git_username" ]]; then
+                git config --global user.name "$git_username"
+                print_success "Git username set to: $git_username"
+            fi
+
+            if [[ -n "$git_email" ]]; then
+                git config --global user.email "$git_email"
+                print_success "Git email set to: $git_email"
+            fi
+        fi
+    else
+        # Standard git configuration
+        read -p "Enter your Git username: " git_username
+        read -p "Enter your Git email: " git_email
+
+        if [[ -n "$git_username" ]]; then
+            git config --global user.name "$git_username"
+            print_success "Git username set to: $git_username"
+        fi
+
+        if [[ -n "$git_email" ]]; then
+            git config --global user.email "$git_email"
+            print_success "Git email set to: $git_email"
+        fi
     fi
 }
 
@@ -311,6 +353,9 @@ final_setup() {
     # Make scripts executable
     chmod +x "$DOTFILES_DIR/setup.sh"
     chmod +x "$DOTFILES_DIR/scripts/"*.sh 2>/dev/null || true
+    chmod +x "$DOTFILES_DIR/scripts/git-profile-switch" 2>/dev/null || true
+    chmod +x "$DOTFILES_DIR/scripts/git-profile-manager" 2>/dev/null || true
+    chmod +x "$DOTFILES_DIR/scripts/ssh-key-manager" 2>/dev/null || true
     
     # Create local config files if they don't exist
     touch "$HOME/.zshrc.local"

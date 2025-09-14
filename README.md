@@ -19,6 +19,8 @@ This repository contains my personal dotfiles configuration, designed with modul
 - **Development Tools**: NVM, Pyenv, Herd PHP, and other development environment managers
 - **Laravel/PHP Ready**: Aliases and tools for Laravel development workflow
 - **Custom Preservation**: Automatically detects and preserves your existing aliases, functions, and tools
+- **Git Profile Management**: Manage multiple Git identities (personal, work) with SSH keys and GitHub CLI integration
+- **SSH Key Organization**: Centralized SSH key management with migration and backup capabilities
 - **AI Prompts Management**: Organized system for managing AI prompts and context scripts by company/project
 - **Best Practices Documentation**: Comprehensive guides for modern development technologies and frameworks
 
@@ -40,7 +42,11 @@ dotfiles/
 ├── Brewfile            # Homebrew package definitions
 ├── AI_PROMPTS.md       # AI prompts management documentation
 ├── TEMPLATES.md        # Quick reference for all prompt templates
+├── GIT_PROFILE_MANAGEMENT.md # Git profiles and SSH keys documentation
 ├── setup.sh            # Automated setup script
+├── config/             # Configuration files
+│   └── git-profiles/   # Git profile configurations (gitignored)
+├── ssh-keys/           # Organized SSH keys directory (gitignored)
 ├── docs/               # Documentation directory
 │   └── best-practices/ # Comprehensive technology guides
 │       ├── frontend/   # Frontend frameworks and libraries
@@ -71,7 +77,10 @@ dotfiles/
     ├── ai-prompt       # AI prompts CLI tool
     ├── ai-prompts-init.sh # AI prompts initialization
     ├── prompt-copy     # Quick template copy to clipboard
-    └── ssh-connect     # SSH connection helper with saved profiles
+    ├── ssh-connect     # SSH connection helper with saved profiles
+    ├── git-profile-switch  # Quick git profile switching
+    ├── git-profile-manager # Full git profile CRUD operations
+    └── ssh-key-manager     # SSH key organization and migration
 ```
 
 ## Quick Start
@@ -260,6 +269,58 @@ Store sensitive information in `~/.zshrc.private` (not tracked by Git):
 ```bash
 echo "export SECRET_API_KEY=xxx" >> ~/.zshrc.private
 ```
+
+### Git Profile Management
+
+Manage multiple Git identities (personal, work, client) with integrated SSH key management:
+
+```bash
+# Create a new profile
+gpm create              # Interactive profile creation
+gpm-new                 # Alias for quick access
+
+# List all profiles
+gpm list                # Show all profiles with details
+gpm-list                # Quick alias
+
+# Switch profiles
+gp personal             # Switch to personal profile
+gp work                 # Switch to work profile
+
+# Check current profile
+gpm current             # Show active profile
+gpm-current             # Quick alias
+
+# Manage profiles
+gpm update personal     # Edit existing profile
+gpm delete old-profile  # Remove a profile
+gpm clone work client   # Copy profile as template
+```
+
+### SSH Key Management
+
+Organized SSH key management with migration capabilities:
+
+```bash
+# Generate new SSH key
+sshkm-gen               # Interactive key generation
+
+# Migrate existing keys from ~/.ssh to organized structure
+sshkm-migrate           # Auto-detect and migrate keys
+
+# List all SSH keys
+sshkm-list              # Show keys with status
+
+# Test SSH connection
+sshkm-test github-personal
+
+# Manual migration
+~/dotfiles/scripts/ssh-key-manager generate    # Create new key
+~/dotfiles/scripts/ssh-key-manager link        # Create symlinks
+```
+
+SSH keys are stored in `~/dotfiles/ssh-keys/` (gitignored) with symlinks to `~/.ssh/` for compatibility.
+See [GIT_PROFILE_MANAGEMENT.md](GIT_PROFILE_MANAGEMENT.md) for complete documentation.
 
 ### AI Prompts Management
 

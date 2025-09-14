@@ -1,0 +1,38 @@
+# Git profile configurations (contain sensitive data)
+config/git-profiles/*.conf
+!config/git-profiles/example.conf
+
+# SSH keys directory (contains sensitive keys)
+ssh-keys/*
+!ssh-keys/README.md
+
+# Local environment variables
+.env
+.env.local
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.bak
+*.backup
+
+# SSH keys (if accidentally placed elsewhere)
+*.pem
+*.key
+id_rsa*
+id_dsa*
+id_ecdsa*
+id_ed25519*
+gh-*
+github-*
+gitlab-*
