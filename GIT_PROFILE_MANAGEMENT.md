@@ -104,6 +104,17 @@ gpm-current
 | `gp current` | Show current configuration |
 | `gp help` | Show help information |
 
+### GitHub CLI Authentication (gh)
+
+| Command | Alias | Description |
+|---------|-------|-------------|
+| `gh auth status` | `ghs` | Check authentication status |
+| `gh auth login` | `ghl` | Login to GitHub |
+| `gh auth logout` | `ghlo` | Logout from GitHub |
+| `gh auth switch` | `ghsw` | Switch between GitHub accounts |
+| `gh auth refresh` | `ghr` | Refresh authentication |
+| `gh auth token` | `ght` | Get authentication token |
+
 ## Profile Configuration
 
 Profile files are stored in `~/dotfiles/config/git-profiles/` with `.conf` extension.
@@ -203,11 +214,35 @@ Host github.com-work
 
 ## GitHub CLI Integration
 
+### Quick Command Aliases
+
+Use these convenient aliases for GitHub CLI authentication management:
+
+```bash
+# Check authentication status
+ghs                     # gh auth status
+
+# Login to GitHub
+ghl                     # gh auth login
+
+# Logout from GitHub
+ghlo                    # gh auth logout
+
+# Switch between GitHub accounts
+ghsw                    # gh auth switch
+
+# Refresh authentication
+ghr                     # gh auth refresh
+
+# Get authentication token
+ght                     # gh auth token
+```
+
 ### Setting Up Multiple GitHub CLI Accounts
 
 1. Login to GitHub CLI with your first account:
 ```bash
-gh auth login
+ghl  # or: gh auth login
 ```
 
 2. Add additional accounts:
@@ -217,7 +252,12 @@ gh auth login --hostname github.com
 
 3. Switch between accounts:
 ```bash
-gh auth switch
+ghsw  # or: gh auth switch
+```
+
+4. Check current authentication status:
+```bash
+ghs  # or: gh auth status
 ```
 
 The profile manager will remind you to switch GitHub CLI accounts when needed.
@@ -304,7 +344,7 @@ ssh-add -l
 The scripts remind you to switch GitHub CLI accounts but don't do it automatically:
 ```bash
 # Manually switch GitHub CLI account
-gh auth switch
+ghsw  # or: gh auth switch
 ```
 
 ### Current Profile Not Detected

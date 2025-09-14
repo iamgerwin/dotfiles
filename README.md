@@ -344,6 +344,32 @@ sshkm-test github-personal
 SSH keys are stored in `~/dotfiles/ssh-keys/` (gitignored) with symlinks to `~/.ssh/` for compatibility.
 See [GIT_PROFILE_MANAGEMENT.md](GIT_PROFILE_MANAGEMENT.md) for complete documentation.
 
+### GitHub CLI Authentication
+
+Quick aliases for managing GitHub CLI authentication and account switching:
+
+```bash
+# Check authentication status
+ghs                     # gh auth status
+
+# Login to GitHub
+ghl                     # gh auth login
+
+# Logout from GitHub
+ghlo                    # gh auth logout
+
+# Switch between GitHub accounts
+ghsw                    # gh auth switch
+
+# Refresh authentication
+ghr                     # gh auth refresh
+
+# Get authentication token
+ght                     # gh auth token
+```
+
+These aliases work seamlessly with the Git Profile Management system for managing multiple GitHub accounts.
+
 ### AI Prompts Management
 
 Manage AI prompts and context scripts organized by company/project:

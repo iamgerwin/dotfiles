@@ -166,6 +166,14 @@ alias sshkm-list='~/dotfiles/scripts/ssh-key-manager list'
 alias sshkm-test='~/dotfiles/scripts/ssh-key-manager test'
 alias sshkm-migrate='~/dotfiles/scripts/ssh-key-manager migrate'
 
+# GitHub CLI Authentication
+alias ghs='gh auth status'
+alias ghl='gh auth login'
+alias ghlo='gh auth logout'
+alias ghsw='gh auth switch'
+alias ghr='gh auth refresh'
+alias ght='gh auth token'
+
 # Tmux aliases
 alias ta='tmux attach -t'
 alias tad='tmux attach -d -t'
