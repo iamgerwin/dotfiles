@@ -254,24 +254,8 @@ configure_git() {
             fi
         fi
     else
-            print_info "You can set up profiles later with: gpm create"
-            echo
-            # Fall back to basic git configuration
-            read -p "Enter your Git username: " git_username
-            read -p "Enter your Git email: " git_email
-
-            if [[ -n "$git_username" ]]; then
-                git config --global user.name "$git_username"
-                print_success "Git username set to: $git_username"
-            fi
-
-            if [[ -n "$git_email" ]]; then
-                git config --global user.email "$git_email"
-                print_success "Git email set to: $git_email"
-            fi
-        fi
-    else
-        # Standard git configuration
+        # Standard git configuration when git-profile-manager is not available
+        print_info "Git Profile Manager not found. Using standard configuration."
         read -p "Enter your Git username: " git_username
         read -p "Enter your Git email: " git_email
 
