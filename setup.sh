@@ -167,7 +167,11 @@ create_symlinks() {
     fi
     
     # Create .tmux.conf symlink if it exists
-    if [[ -f "$DOTFILES_DIR/.tmux.conf" ]]; then
+    if [[ -f "$DOTFILES_DIR/tmux.conf" ]]; then
+        remove_existing "$HOME/.tmux.conf"
+        ln -sf "$DOTFILES_DIR/tmux.conf" "$HOME/.tmux.conf"
+        print_success "Linked .tmux.conf"
+    elif [[ -f "$DOTFILES_DIR/.tmux.conf" ]]; then
         remove_existing "$HOME/.tmux.conf"
         ln -sf "$DOTFILES_DIR/.tmux.conf" "$HOME/.tmux.conf"
         print_success "Linked .tmux.conf"
@@ -397,6 +401,17 @@ final_setup() {
     # Setup tmux if installed
     if command -v tmux &> /dev/null; then
         print_info "Setting up tmux configuration..."
+
+        # Install Tmux Plugin Manager (TPM) if not already installed
+        if [[ ! -d "$HOME/.tmux/plugins/tpm" ]]; then
+            print_info "Installing Tmux Plugin Manager..."
+            git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+            print_success "TPM installed"
+            print_info "Note: Press Ctrl-a + I inside tmux to install plugins"
+        else
+            print_success "TPM already installed"
+        fi
+
         if [[ -x "$DOTFILES_DIR/scripts/setup-tmux.sh" ]]; then
             "$DOTFILES_DIR/scripts/setup-tmux.sh"
         fi
