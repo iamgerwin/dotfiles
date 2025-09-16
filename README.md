@@ -86,7 +86,11 @@ dotfiles/
     ├── git-profile-switch  # Quick git profile switching
     ├── git-profile-manager # Full git profile CRUD operations
     ├── ssh-key-manager     # SSH key organization and migration
-    └── import-git-profiles # Import existing Git config and SSH keys
+    ├── import-git-profiles # Import existing Git config and SSH keys
+    └── clickup/        # ClickUp API integration scripts
+        ├── clickup-api.sh      # Main ClickUp API wrapper
+        ├── clickup-download.sh # File download utility
+        └── .env.example        # Configuration template
 ```
 
 ## Quick Start
@@ -421,6 +425,44 @@ sshc -d myserver        # Delete saved connection
 
 The SSH helper stores connections in `~/.ssh_connections` for quick access.
 
+### ClickUp Integration
+
+Comprehensive ClickUp API integration for task management automation:
+
+```bash
+# Configuration
+cp ~/dotfiles/scripts/clickup/.env.example ~/dotfiles/scripts/clickup/.env
+# Edit .env with your CLICKUP_API_KEY
+
+# Task Management
+clickup-api get-task TASK_ID                    # Get task details
+clickup-api create-task LIST_ID "Name" "Desc"   # Create new task
+clickup-api update-status TASK_ID "in progress" # Update task status
+clickup-api batch-update-status "done" ID1 ID2  # Bulk status update
+
+# Comments & Attachments
+clickup-api get-comments TASK_ID                # Get all comments
+clickup-api add-comment TASK_ID "comment"       # Add comment
+clickup-api auto-download-images TASK_ID        # Download all images
+
+# Advanced Features
+clickup-api search-tasks TEAM_ID "query"        # Search tasks
+clickup-api fetch-tasks LIST_ID                 # List all tasks
+
+# File Downloads
+clickup-download URL FILENAME                   # Download with retry logic
+clickup-download -c URL FILENAME                # Resume partial download
+```
+
+Features:
+- Secure API key management via environment variables
+- Batch operations for efficient task management
+- Automatic retry logic with configurable timeouts
+- Progress indicators for file downloads
+- Color-coded output for better readability
+
+See `scripts/clickup/README.md` for complete documentation.
+
 ### Tmux Configuration
 
 The dotfiles include a comprehensive tmux setup with productivity-focused features:
@@ -613,6 +655,7 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 - Project Management Tools: JIRA, ClickUp, Azure DevOps
 - Team Communication: Slack integrations and webhooks
 - Documentation: Confluence, Notion
+- ClickUp API Integration: Task automation and management scripts
 
 **SEO & Web Optimization**
 - Technical SEO: Site architecture, Core Web Vitals, structured data
