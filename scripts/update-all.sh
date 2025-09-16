@@ -168,22 +168,23 @@ update_homebrew() {
             log_success "All Homebrew packages are up to date"
         fi
         
-        # Update Brewfile if it exists
+        # Generate reference Brewfile if main Brewfile exists
         if [[ -f "$HOME/dotfiles/Brewfile" ]]; then
-            log_info "Updating Brewfile..."
+            log_info "Generating reference Brewfile..."
             # Use the preserve comments script if it exists
             if [[ -x "$HOME/dotfiles/scripts/preserve-brewfile-comments.sh" ]]; then
                 if "$HOME/dotfiles/scripts/preserve-brewfile-comments.sh" >/dev/null 2>&1; then
-                    log_success "Brewfile updated with preserved comments"
+                    log_success "Reference Brewfile created (Brewfile.reference)"
+                    log_info "Main Brewfile preserved with your working changes"
                 else
-                    log_warning "Failed to update Brewfile (check for uncommitted changes or errors)"
+                    log_warning "Failed to create reference Brewfile"
                 fi
             else
-                # Fallback to regular brew bundle dump with timeout
-                if timeout 10 brew bundle dump --force --file="$HOME/dotfiles/Brewfile" --no-upgrade 2>/dev/null; then
-                    log_success "Brewfile updated (comments not preserved)"
+                # Fallback to create reference file directly
+                if timeout 10 brew bundle dump --force --file="$HOME/dotfiles/Brewfile.reference" --no-upgrade 2>/dev/null; then
+                    log_success "Reference Brewfile created (without comments)"
                 else
-                    log_warning "Failed to update Brewfile (check for uncommitted changes or errors)"
+                    log_warning "Failed to create reference Brewfile"
                 fi
             fi
         fi

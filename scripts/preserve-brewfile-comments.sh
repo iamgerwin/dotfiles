@@ -7,6 +7,7 @@
 set -euo pipefail
 
 BREWFILE="$HOME/dotfiles/Brewfile"
+BREWFILE_REFERENCE="$HOME/dotfiles/Brewfile.reference"  # Reference copy for comparison
 BREWFILE_COMMENTED="$HOME/dotfiles/Brewfile.lock.commented"
 BREWFILE_TEMP="$HOME/dotfiles/Brewfile.tmp"
 
@@ -98,7 +99,7 @@ main() {
     fi
 
     # Generate fresh brew bundle dump
-    echo "Generating fresh Brewfile from installed packages..."
+    echo "Generating reference Brewfile from installed packages..."
     # Use timeout to prevent hanging and redirect stderr to prevent interactive prompts
     timeout 10 brew bundle dump --force --file="$BREWFILE_TEMP" --no-upgrade 2>/dev/null || {
         echo "Error: Failed to generate Brewfile (timed out or error occurred)"
@@ -106,14 +107,15 @@ main() {
         exit 1
     }
 
-    # Merge with comments
-    echo "Merging with existing comments..."
-    merge_with_comments < "$BREWFILE_TEMP" > "$BREWFILE"
+    # Create reference file instead of modifying the main Brewfile
+    echo "Creating reference Brewfile..."
+    merge_with_comments < "$BREWFILE_TEMP" > "$BREWFILE_REFERENCE"
 
     # Clean up
     rm -f "$BREWFILE_TEMP"
 
-    echo "✓ Brewfile updated with preserved comments"
+    echo "✓ Reference Brewfile created at $BREWFILE_REFERENCE"
+    echo "  Main Brewfile remains unchanged to preserve working changes"
 }
 
 # Run if executed directly
