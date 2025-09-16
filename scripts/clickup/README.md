@@ -264,24 +264,59 @@ Priority levels:
 
 ### clickup-api.sh Commands
 
+#### Organization & Workspace
+| Command | Description | Example |
+|---------|-------------|---------|
+| `get-teams` | List all teams | `./clickup-api.sh get-teams` |
+| `get-spaces` | List spaces in team | `./clickup-api.sh get-spaces TEAM_ID` |
+| `get-lists-in-space` | List all lists in space | `./clickup-api.sh get-lists-in-space SPACE_ID` |
+| `get-folders` | List folders in space | `./clickup-api.sh get-folders SPACE_ID` |
+| `get-lists-in-folder` | List lists in folder | `./clickup-api.sh get-lists-in-folder FOLDER_ID` |
+| `get-list` | Get list details | `./clickup-api.sh get-list LIST_ID` |
+
+#### Task Management
 | Command | Description | Example |
 |---------|-------------|---------|
 | `get-task` | Get task details with subtasks and comments | `./clickup-api.sh get-task abc123` |
 | `create-task` | Create new task | `./clickup-api.sh create-task LIST_ID "Name" "Desc" [priority] [tags] [status]` |
 | `update-task` | Update task name and description | `./clickup-api.sh update-task TASK_ID "New Name" ["New Desc"]` |
-| `update-task-fields` | Update multiple fields | `./clickup-api.sh update-task-fields TASK_ID field=value ...` |
 | `update-status` | Update task status | `./clickup-api.sh update-status TASK_ID "in progress"` |
 | `batch-update-status` | Update multiple tasks' status | `./clickup-api.sh batch-update-status "done" ID1 ID2 ...` |
+| `fetch-tasks` | Get all tasks from list (with pagination) | `./clickup-api.sh fetch-tasks LIST_ID [archived] [subtasks]` |
+| `search-tasks` | Search tasks by name | `./clickup-api.sh search-tasks TEAM_ID "query"` |
+| `get-subtasks` | Get task's subtasks | `./clickup-api.sh get-subtasks TASK_ID` |
+
+#### Team & Assignment
+| Command | Description | Example |
+|---------|-------------|---------|
+| `get-team-members` | List team members | `./clickup-api.sh get-team-members TEAM_ID` |
+| `assign-user` | Assign user to task | `./clickup-api.sh assign-user TASK_ID USER_ID` |
+| `unassign-user` | Unassign user from task | `./clickup-api.sh unassign-user TASK_ID USER_ID` |
+
+#### Tags
+| Command | Description | Example |
+|---------|-------------|---------|
+| `list-space-tags` | List tags in space | `./clickup-api.sh list-space-tags SPACE_ID` |
+| `create-space-tag` | Create space tag | `./clickup-api.sh create-space-tag SPACE_ID "backend" "#0A84FF" "#FFFFFF"` |
+| `delete-space-tag` | Delete space tag | `./clickup-api.sh delete-space-tag SPACE_ID "backend"` |
+| `add-task-tag` | Add tag to task | `./clickup-api.sh add-task-tag TASK_ID "ux"` |
+| `remove-task-tag` | Remove tag from task | `./clickup-api.sh remove-task-tag TASK_ID "ux"` |
+
+#### Custom Fields
+| Command | Description | Example |
+|---------|-------------|---------|
+| `list-custom-fields` | List custom fields in list | `./clickup-api.sh list-custom-fields LIST_ID` |
+| `set-custom-field` | Set custom field value | `./clickup-api.sh set-custom-field TASK_ID FIELD_ID "Sprint 42"` |
+| `get-task-custom-fields` | Get task's custom field values | `./clickup-api.sh get-task-custom-fields TASK_ID` |
+
+#### Comments & Attachments
+| Command | Description | Example |
+|---------|-------------|---------|
 | `get-comments` | Get all comments with replies | `./clickup-api.sh get-comments TASK_ID` |
 | `add-comment` | Add comment to task | `./clickup-api.sh add-comment TASK_ID "text"` |
 | `get-attachments` | List task attachments | `./clickup-api.sh get-attachments TASK_ID` |
 | `download-attachment` | Download specific attachment | `./clickup-api.sh download-attachment TASK_ID ATTACH_ID` |
 | `auto-download-images` | Download all image attachments | `./clickup-api.sh auto-download-images TASK_ID` |
-| `get-subtasks` | Get task's subtasks | `./clickup-api.sh get-subtasks TASK_ID` |
-| `get-list` | Get list details | `./clickup-api.sh get-list LIST_ID` |
-| `fetch-tasks` | Get all tasks from list | `./clickup-api.sh fetch-tasks LIST_ID [archived] [subtasks]` |
-| `search-tasks` | Search tasks by name | `./clickup-api.sh search-tasks TEAM_ID "query"` |
-| `create-task-with-fields` | Create task with custom fields | `./clickup-api.sh create-task-with-fields LIST_ID "Name" "Desc" FIELD_ID VALUE` |
 
 ### clickup-download.sh Options
 
@@ -295,6 +330,31 @@ Priority levels:
 | `-h` | `--help` | Show help message |
 
 ## Examples
+
+### Example 0: Discovering Your Workspace Structure
+
+```bash
+# Find your team IDs
+./clickup-api.sh get-teams | jq '.teams[] | {id, name}'
+
+# List spaces in your team
+TEAM_ID=123456
+./clickup-api.sh get-spaces $TEAM_ID | jq '.spaces[] | {id, name}'
+
+# Find lists in a space
+SPACE_ID=789012
+./clickup-api.sh get-lists-in-space $SPACE_ID | jq '.lists[] | {id, name}'
+
+# Get folders in space
+./clickup-api.sh get-folders $SPACE_ID | jq '.folders[] | {id, name}'
+
+# Get lists in a specific folder
+FOLDER_ID=345678
+./clickup-api.sh get-lists-in-folder $FOLDER_ID | jq '.lists[] | {id, name}'
+
+# Find team members (for assignments)
+./clickup-api.sh get-team-members $TEAM_ID | jq '.members[].user | {id, username, email}'
+```
 
 ### Example 1: Complete Task Workflow
 
@@ -388,6 +448,76 @@ done
 - Waiting for design approval
 EOF
 )"
+```
+
+### Example 5: Managing Tags
+
+```bash
+# List existing tags in space
+./clickup-api.sh list-space-tags SPACE_ID | jq '.tags[] | {name, tag_fg, tag_bg}'
+
+# Create new tags with custom colors
+./clickup-api.sh create-space-tag SPACE_ID "backend" "#0A84FF" "#E6F3FF"
+./clickup-api.sh create-space-tag SPACE_ID "frontend" "#34C759" "#E8F8EC"
+./clickup-api.sh create-space-tag SPACE_ID "urgent" "#FF3B30" "#FFE5E3"
+
+# Add tags to tasks
+./clickup-api.sh add-task-tag TASK_ID "backend"
+./clickup-api.sh add-task-tag TASK_ID "urgent"
+
+# Remove tag from task
+./clickup-api.sh remove-task-tag TASK_ID "urgent"
+
+# Delete space tag (removes from all tasks)
+./clickup-api.sh delete-space-tag SPACE_ID "deprecated"
+```
+
+### Example 6: Working with Custom Fields
+
+```bash
+# List custom fields in a list
+./clickup-api.sh list-custom-fields LIST_ID | \
+  jq '.fields[] | {id, name, type}'
+
+# Set custom field values
+FIELD_ID="abc123"
+./clickup-api.sh set-custom-field TASK_ID "$FIELD_ID" "Sprint 42"
+
+# Get all custom field values for a task
+./clickup-api.sh get-task-custom-fields TASK_ID | \
+  jq '.[] | {name, type, value}'
+
+# Update multiple custom fields
+for field in "sprint:Sprint 42" "points:8" "component:API"; do
+  IFS=':' read -r field_id value <<< "$field"
+  ./clickup-api.sh set-custom-field TASK_ID "$field_id" "$value"
+done
+```
+
+### Example 7: Team Assignment Management
+
+```bash
+# Get list of team members with their IDs
+TEAM_ID=123456
+./clickup-api.sh get-team-members $TEAM_ID | \
+  jq '.members[].user | {id, username, email}'
+
+# Assign multiple users to a task
+USER_IDS=("1234567" "2345678" "3456789")
+for user_id in "${USER_IDS[@]}"; do
+  ./clickup-api.sh assign-user TASK_ID $user_id
+done
+
+# Reassign task to different user
+./clickup-api.sh unassign-user TASK_ID 1234567
+./clickup-api.sh assign-user TASK_ID 9876543
+
+# Bulk assign tasks to a user
+TASKS=$(./clickup-api.sh fetch-tasks LIST_ID | jq -r '.tasks[].id')
+USER_ID=1234567
+echo "$TASKS" | while read -r task_id; do
+  ./clickup-api.sh assign-user "$task_id" "$USER_ID"
+done
 ```
 
 ## Best Practices
