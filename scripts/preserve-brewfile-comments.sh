@@ -7,6 +7,7 @@
 set -euo pipefail
 
 BREWFILE="$HOME/dotfiles/Brewfile"
+BREWFILE_REFERENCE="$HOME/dotfiles/Brewfile.reference"  # Reference copy for comparison
 BREWFILE_COMMENTED="$HOME/dotfiles/Brewfile.lock.commented"
 BREWFILE_TEMP="$HOME/dotfiles/Brewfile.tmp"
 
@@ -98,17 +99,34 @@ main() {
     fi
 
     # Generate fresh brew bundle dump
-    echo "Generating fresh Brewfile from installed packages..."
-    brew bundle dump --force --file="$BREWFILE_TEMP"
+    echo "Generating reference Brewfile from installed packages..."
+    # First check if brew is available
+    if ! command -v brew >/dev/null 2>&1; then
+        echo "Error: Homebrew not found"
+        exit 1
+    fi
 
-    # Merge with comments
-    echo "Merging with existing comments..."
-    merge_with_comments < "$BREWFILE_TEMP" > "$BREWFILE"
+    # Use timeout to prevent hanging, but capture stderr for debugging
+    if ! timeout 10 brew bundle dump --force --file="$BREWFILE_TEMP" --no-upgrade 2>/tmp/brew-bundle-error.log; then
+        echo "Warning: brew bundle dump failed or timed out"
+        if [[ -f /tmp/brew-bundle-error.log ]]; then
+            error_msg=$(cat /tmp/brew-bundle-error.log 2>/dev/null)
+            [[ -n "$error_msg" ]] && echo "  Error details: $error_msg"
+        fi
+        rm -f "$BREWFILE_TEMP" /tmp/brew-bundle-error.log
+        exit 1
+    fi
+    rm -f /tmp/brew-bundle-error.log
+
+    # Create reference file instead of modifying the main Brewfile
+    echo "Creating reference Brewfile..."
+    merge_with_comments < "$BREWFILE_TEMP" > "$BREWFILE_REFERENCE"
 
     # Clean up
     rm -f "$BREWFILE_TEMP"
 
-    echo "✓ Brewfile updated with preserved comments"
+    echo "✓ Reference Brewfile created at $BREWFILE_REFERENCE"
+    echo "  Main Brewfile remains unchanged to preserve working changes"
 }
 
 # Run if executed directly

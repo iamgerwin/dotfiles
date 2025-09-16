@@ -158,27 +158,15 @@ update_homebrew() {
             log_success "Homebrew cleaned up"
         fi
         
-        # Check for outdated packages
-        log_info "Checking for outdated packages..."
-        outdated=$(brew outdated)
-        if [[ -n "$outdated" ]]; then
-            log_warning "Some packages are still outdated:"
-            echo "$outdated"
-        else
-            log_success "All Homebrew packages are up to date"
-        fi
-        
-        # Update Brewfile if it exists
-        if [[ -f "$HOME/dotfiles/Brewfile" ]]; then
-            log_info "Updating Brewfile..."
-            # Use the preserve comments script if it exists
-            if [[ -x "$HOME/dotfiles/scripts/preserve-brewfile-comments.sh" ]]; then
-                "$HOME/dotfiles/scripts/preserve-brewfile-comments.sh" >/dev/null 2>&1
-                log_success "Brewfile updated with preserved comments"
+        # Check for outdated packages (only if verbose mode)
+        if $VERBOSE; then
+            log_info "Checking for outdated packages..."
+            outdated=$(brew outdated 2>/dev/null || true)
+            if [[ -n "$outdated" ]]; then
+                log_warning "Some packages are still outdated:"
+                echo "$outdated"
             else
-                # Fallback to regular brew bundle dump
-                brew bundle dump --force --file="$HOME/dotfiles/Brewfile"
-                log_success "Brewfile updated (comments not preserved)"
+                log_success "All Homebrew packages are up to date"
             fi
         fi
     fi
@@ -297,11 +285,19 @@ update_gems() {
     if [[ "$UPDATE_GEM" == true ]] && command_exists gem; then
         log_section "Updating Ruby gems"
 
-        # Check if using system Ruby or Homebrew Ruby
+        # Check Ruby installation source
         ruby_path=$(which ruby)
-        if [[ "$ruby_path" == "/usr/bin/ruby" ]] || [[ "$ruby_path" == "/System/"* ]]; then
+        gem_path=$(which gem)
+
+        # Check if using Homebrew Ruby (in /opt/homebrew or /usr/local)
+        if [[ "$ruby_path" == "/opt/homebrew/"* ]] || [[ "$ruby_path" == "/usr/local/"* ]]; then
+            log_info "Using Homebrew Ruby at: $ruby_path"
+        elif [[ "$ruby_path" == "$HOME/.rbenv/"* ]] || [[ "$ruby_path" == "$HOME/.rvm/"* ]]; then
+            log_info "Using managed Ruby (rbenv/rvm) at: $ruby_path"
+        elif [[ "$ruby_path" == "/usr/bin/ruby" ]] || [[ "$ruby_path" == "/System/"* ]]; then
             log_warning "Using system Ruby - skipping gem updates (requires sudo)"
             log_info "Consider installing Ruby via Homebrew: brew install ruby"
+            log_info "Or use a Ruby version manager like rbenv or rvm"
             return
         fi
 
