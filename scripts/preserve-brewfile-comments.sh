@@ -99,7 +99,12 @@ main() {
 
     # Generate fresh brew bundle dump
     echo "Generating fresh Brewfile from installed packages..."
-    brew bundle dump --force --file="$BREWFILE_TEMP"
+    # Use timeout to prevent hanging and redirect stderr to prevent interactive prompts
+    timeout 10 brew bundle dump --force --file="$BREWFILE_TEMP" --no-upgrade 2>/dev/null || {
+        echo "Error: Failed to generate Brewfile (timed out or error occurred)"
+        rm -f "$BREWFILE_TEMP"
+        exit 1
+    }
 
     # Merge with comments
     echo "Merging with existing comments..."
