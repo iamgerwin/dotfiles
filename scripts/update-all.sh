@@ -124,36 +124,36 @@ update_homebrew() {
         
         log_info "Updating Homebrew itself..."
         if $VERBOSE; then
-            brew update
+            timeout 30 brew update || log_warning "Homebrew update timed out or failed"
         else
-            brew update >/dev/null 2>&1
+            timeout 30 brew update >/dev/null 2>&1 || log_warning "Homebrew update timed out or failed"
         fi
-        log_success "Homebrew updated"
+        [[ $? -eq 0 ]] && log_success "Homebrew updated"
         
         log_info "Upgrading Homebrew packages..."
         if $VERBOSE; then
-            brew upgrade
+            timeout 300 brew upgrade || log_warning "Some packages failed to upgrade"
         else
-            brew upgrade >/dev/null 2>&1
+            timeout 300 brew upgrade >/dev/null 2>&1 || log_warning "Some packages failed to upgrade"
         fi
-        log_success "Homebrew packages upgraded"
+        [[ $? -eq 0 ]] && log_success "Homebrew packages upgraded"
         
         log_info "Upgrading Homebrew casks..."
         if $VERBOSE; then
-            brew upgrade --cask
+            timeout 300 brew upgrade --cask || log_warning "Some casks failed to upgrade"
         else
-            brew upgrade --cask >/dev/null 2>&1
+            timeout 300 brew upgrade --cask >/dev/null 2>&1 || log_warning "Some casks failed to upgrade"
         fi
-        log_success "Homebrew casks upgraded"
+        [[ $? -eq 0 ]] && log_success "Homebrew casks upgraded"
         
         if [[ "$CLEANUP" == true ]]; then
             log_info "Cleaning up Homebrew..."
             if $VERBOSE; then
-                brew cleanup -s
-                brew autoremove
+                timeout 60 brew cleanup -s || log_warning "Cleanup incomplete"
+                timeout 60 brew autoremove || log_warning "Autoremove incomplete"
             else
-                brew cleanup -s >/dev/null 2>&1
-                brew autoremove >/dev/null 2>&1
+                timeout 60 brew cleanup -s >/dev/null 2>&1 || true
+                timeout 60 brew autoremove >/dev/null 2>&1 || true
             fi
             log_success "Homebrew cleaned up"
         fi
@@ -161,7 +161,7 @@ update_homebrew() {
         # Check for outdated packages (only if verbose mode)
         if $VERBOSE; then
             log_info "Checking for outdated packages..."
-            outdated=$(brew outdated 2>/dev/null || true)
+            outdated=$(timeout 10 brew outdated 2>/dev/null || true)
             if [[ -n "$outdated" ]]; then
                 log_warning "Some packages are still outdated:"
                 echo "$outdated"
