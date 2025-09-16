@@ -224,39 +224,63 @@ update_npm() {
 update_pip() {
     if [[ "$UPDATE_PIP" == true ]] && command_exists pip3; then
         log_section "Updating Python packages"
-        
+
+        # Check if we're in an externally managed environment (PEP 668)
+        if pip3 --version 2>&1 | grep -q "python3.1[0-9]" && [[ "$OSTYPE" == "darwin"* ]]; then
+            log_warning "Python environment is externally managed by Homebrew"
+            log_info "Using --user flag for pip operations to avoid system package conflicts"
+            PIP_USER_FLAG="--user"
+        else
+            PIP_USER_FLAG=""
+        fi
+
         log_info "Updating pip itself..."
         if $VERBOSE; then
-            pip3 install --upgrade pip
+            pip3 install --upgrade $PIP_USER_FLAG pip || {
+                log_warning "Could not update pip (may be externally managed)"
+            }
         else
-            pip3 install --upgrade pip >/dev/null 2>&1
+            pip3 install --upgrade $PIP_USER_FLAG pip >/dev/null 2>&1 || {
+                log_warning "Could not update pip (may be externally managed)"
+            }
         fi
-        log_success "pip updated"
-        
-        log_info "Updating Python packages..."
+
+        log_info "Checking for outdated Python packages..."
         # Get list of outdated packages
         outdated=$(pip3 list --outdated --format=json 2>/dev/null | python3 -c "import sys, json; print(' '.join([p['name'] for p in json.load(sys.stdin)]))" 2>/dev/null || echo "")
-        
+
         if [[ -n "$outdated" ]]; then
-            log_info "Upgrading: $outdated"
-            if $VERBOSE; then
-                pip3 install --upgrade $outdated
+            log_info "Found outdated packages: $outdated"
+            if [[ -n "$PIP_USER_FLAG" ]]; then
+                log_info "Upgrading user packages..."
+                if $VERBOSE; then
+                    pip3 install --upgrade $PIP_USER_FLAG $outdated || {
+                        log_warning "Some packages could not be upgraded"
+                    }
+                else
+                    pip3 install --upgrade $PIP_USER_FLAG $outdated >/dev/null 2>&1 || {
+                        log_warning "Some packages could not be upgraded"
+                    }
+                fi
             else
-                pip3 install --upgrade $outdated >/dev/null 2>&1
+                if $VERBOSE; then
+                    pip3 install --upgrade $outdated
+                else
+                    pip3 install --upgrade $outdated >/dev/null 2>&1
+                fi
             fi
-            log_success "Python packages updated"
+            log_success "Python packages update completed"
         else
             log_success "All Python packages are up to date"
         fi
-        
+
         if [[ "$CLEANUP" == true ]]; then
             log_info "Cleaning pip cache..."
             if $VERBOSE; then
-                pip3 cache purge
+                pip3 cache purge 2>/dev/null && log_success "pip cache cleaned" || log_warning "Could not clean pip cache"
             else
-                pip3 cache purge >/dev/null 2>&1
+                pip3 cache purge >/dev/null 2>&1 && log_success "pip cache cleaned" || true
             fi
-            log_success "pip cache cleaned"
         fi
     fi
 }
@@ -265,32 +289,55 @@ update_pip() {
 update_gems() {
     if [[ "$UPDATE_GEM" == true ]] && command_exists gem; then
         log_section "Updating Ruby gems"
-        
+
+        # Check if using system Ruby or Homebrew Ruby
+        ruby_path=$(which ruby)
+        if [[ "$ruby_path" == "/usr/bin/ruby" ]] || [[ "$ruby_path" == "/System/"* ]]; then
+            log_warning "Using system Ruby - skipping gem updates (requires sudo)"
+            log_info "Consider installing Ruby via Homebrew: brew install ruby"
+            return
+        fi
+
         log_info "Updating RubyGems system..."
         if $VERBOSE; then
-            gem update --system
+            gem update --system || {
+                error_msg=$?
+                if [[ $error_msg -eq 1 ]]; then
+                    log_warning "Permission denied updating RubyGems (may need sudo or different Ruby)"
+                else
+                    log_warning "Could not update RubyGems system"
+                fi
+            }
         else
-            gem update --system >/dev/null 2>&1
+            gem update --system >/dev/null 2>&1 || {
+                log_warning "Could not update RubyGems system (check permissions)"
+            }
         fi
-        log_success "RubyGems system updated"
-        
+
         log_info "Updating installed gems..."
         if $VERBOSE; then
-            gem update
+            gem update --user-install 2>/dev/null || gem update 2>/dev/null || {
+                log_warning "Could not update gems (check permissions)"
+            }
         else
-            gem update >/dev/null 2>&1
+            gem update --user-install >/dev/null 2>&1 || gem update >/dev/null 2>&1 || {
+                log_warning "Could not update gems"
+            }
         fi
-        log_success "Ruby gems updated"
-        
+
         if [[ "$CLEANUP" == true ]]; then
             log_info "Cleaning up old gem versions..."
             if $VERBOSE; then
-                gem cleanup
+                gem cleanup --user-install 2>/dev/null || gem cleanup 2>/dev/null || {
+                    log_warning "Could not clean up old gems"
+                }
             else
-                gem cleanup >/dev/null 2>&1
+                gem cleanup --user-install >/dev/null 2>&1 || gem cleanup >/dev/null 2>&1 || true
             fi
-            log_success "Old gem versions cleaned"
+            [[ $? -eq 0 ]] && log_success "Old gem versions cleaned"
         fi
+
+        log_success "Ruby gems update completed"
     fi
 }
 
@@ -298,32 +345,31 @@ update_gems() {
 update_composer() {
     if [[ "$UPDATE_COMPOSER" == true ]] && command_exists composer; then
         log_section "Updating Composer packages"
-        
+
         log_info "Updating Composer itself..."
         if $VERBOSE; then
-            composer self-update
+            composer self-update || log_warning "Could not update Composer"
         else
-            composer self-update >/dev/null 2>&1
+            composer self-update >/dev/null 2>&1 || log_warning "Could not update Composer"
         fi
-        log_success "Composer updated"
-        
+
         log_info "Updating global Composer packages..."
         if $VERBOSE; then
-            composer global update
+            composer global update || log_warning "Could not update global Composer packages"
         else
-            composer global update >/dev/null 2>&1
+            composer global update >/dev/null 2>&1 || log_warning "Could not update global Composer packages"
         fi
-        log_success "Global Composer packages updated"
-        
+
         if [[ "$CLEANUP" == true ]]; then
             log_info "Clearing Composer cache..."
             if $VERBOSE; then
-                composer clear-cache
+                composer clear-cache && log_success "Composer cache cleared" || log_warning "Could not clear Composer cache"
             else
-                composer clear-cache >/dev/null 2>&1
+                composer clear-cache >/dev/null 2>&1 && log_success "Composer cache cleared" || true
             fi
-            log_success "Composer cache cleared"
         fi
+
+        log_success "Composer update completed"
     fi
 }
 
@@ -331,23 +377,21 @@ update_composer() {
 update_rust() {
     if [[ "$UPDATE_RUST" == true ]] && command_exists rustup; then
         log_section "Updating Rust"
-        
+
         log_info "Updating Rust toolchain..."
         if $VERBOSE; then
-            rustup update
+            rustup update && log_success "Rust toolchain updated" || log_warning "Could not update Rust toolchain"
         else
-            rustup update >/dev/null 2>&1
+            rustup update >/dev/null 2>&1 && log_success "Rust toolchain updated" || log_warning "Could not update Rust toolchain"
         fi
-        log_success "Rust toolchain updated"
-        
+
         if command_exists cargo-install-update; then
             log_info "Updating cargo packages..."
             if $VERBOSE; then
-                cargo install-update -a
+                cargo install-update -a && log_success "Cargo packages updated" || log_warning "Could not update cargo packages"
             else
-                cargo install-update -a >/dev/null 2>&1
+                cargo install-update -a >/dev/null 2>&1 && log_success "Cargo packages updated" || log_warning "Could not update cargo packages"
             fi
-            log_success "Cargo packages updated"
         else
             log_warning "cargo-update not installed. Install with: cargo install cargo-update"
         fi
@@ -383,8 +427,9 @@ update_macos() {
         
         log_info "Checking for macOS software updates..."
         updates=$(softwareupdate -l 2>/dev/null | grep -c "^   \*" || echo "0")
-        
-        if [[ "$updates" -gt 0 ]]; then
+        updates="${updates//[^0-9]/}"  # Remove any non-numeric characters
+
+        if [[ -n "$updates" && "$updates" -gt 0 ]]; then
             log_warning "macOS updates available. Run 'softwareupdate -ia' to install"
         else
             log_success "macOS is up to date"
