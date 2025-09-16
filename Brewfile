@@ -1,142 +1,124 @@
 # Taps
-tap "aws/tap"                              # AWS tools
-tap "oven-sh/bun"                          # Bun JavaScript runtime
+tap "aws/tap" # AWS tools
+tap "oven-sh/bun" # Bun JavaScript runtime
 
-# Command Line Tools
-brew "bat"                                 # Cat clone with syntax highlighting
-brew "bottom"                              # Yet another cross-platform graphical process/system monitor
-brew "btop"                                # Resource monitor that shows usage and stats
-brew "chezmoi"                             # Manage your dotfiles across multiple machines
-
-# Development Tools
-brew "ruby"                                # Ruby programming language
-brew "cocoapods"                           # Dependency manager for Swift and Objective-C
-brew "composer"                            # Dependency manager for PHP
-brew "coreutils"                           # GNU core utilities (adds gdate, gls, etc.)
-brew "couchdb", restart_service: :changed  # Document-oriented NoSQL database
-brew "docker-completion"                   # Docker bash completion
-brew "docker"                              # Container platform
-brew "docker-compose"                      # Define and run multi-container applications
-brew "dust"                                # More intuitive version of du written in Rust
-brew "duti"                                # Set default applications for document types on macOS
-brew "elixir"                              # Dynamic, functional language for building scalable applications
-brew "eza"                                 # Modern replacement for ls
-brew "fd"                                  # Simple, fast alternative to find
-brew "fish"                                # User-friendly command line shell
-brew "flyctl"                              # Command line tools for Fly.io
-brew "fzf"                                 # Command-line fuzzy finder
-brew "gh"                                  # GitHub CLI
-brew "git"                                 # Distributed version control system
-brew "git-delta"                           # Syntax-highlighting pager for git and diff output
-brew "python@3.13"                         # Python programming language v3.13
-brew "git-filter-repo"                     # Quickly rewrite git repository history
-brew "glances"                             # Cross-platform system monitoring tool
-brew "grpc"                                # Next generation RPC framework
-brew "htop"                                # Improved top (interactive process viewer)
-brew "httpie"                              # User-friendly cURL replacement
-brew "jq"                                  # Lightweight and flexible command-line JSON processor
-brew "lazygit"                             # Simple terminal UI for git commands
-brew "mysql"                               # Open source relational database
-brew "neovim"                              # Hyperextensible Vim-based text editor
-brew "nvm"                                 # Node Version Manager
-brew "nvtop"                               # GPU process monitoring for NVIDIA GPUs
-brew "pocketbase"                          # Open source backend in a single file
-brew "procs"                               # Modern replacement for ps written in Rust
-brew "pyenv"                               # Python version management
-brew "python@3.12"                         # Python programming language v3.12
-brew "python@3.9"                          # Python programming language v3.9
-brew "ripgrep"                             # Recursively search directories for a regex pattern
-brew "ruby-install"                        # Install Ruby, JRuby, Rubinius, TruffleRuby, or mruby
-brew "sd"                                  # Intuitive find & replace CLI (sed alternative)
-brew "stow"                                # Symlink farm manager
-brew "tealdeer"                            # Fast tldr client written in Rust
-brew "tmux"                                # Terminal multiplexer
-brew "tokei"                               # Count code, quickly
-brew "turso"                               # Edge SQLite database CLI
-brew "watchman"                            # Watch files and record when they change
-brew "zenith"                              # Sort of like top or htop but with zoom-able charts
-brew "zoxide"                              # Smarter cd command, inspired by z and autojump
-brew "zsh"                                 # UNIX shell (command interpreter)
-brew "oven-sh/bun/bun"                     # Fast all-in-one JavaScript runtime
+# Command Line Tools & Development
+brew "bat" # Cat clone with syntax highlighting
+brew "bottom" # Yet another cross-platform graphical process/system monitor
+brew "btop" # Resource monitor that shows usage and stats
+brew "chezmoi" # Manage your dotfiles across multiple machines
+brew "ruby" # Ruby programming language
+brew "cocoapods" # Dependency manager for Swift and Objective-C
+brew "composer" # Dependency manager for PHP
+brew "coreutils" # GNU core utilities (adds gdate, gls, etc.)
+brew "couchdb", restart_service: :changed # Document-oriented NoSQL database
+brew "docker-completion" # Docker bash completion
+brew "docker" # Docker bash completion
+brew "docker-compose" # Define and run multi-container applications
+brew "dust" # More intuitive version of du written in Rust
+brew "duti" # Set default applications for document types on macOS
+brew "elixir" # Dynamic, functional language for building scalable applications
+brew "eza" # Modern replacement for ls
+brew "fd" # Simple, fast alternative to find
+brew "fish" # User-friendly command line shell
+brew "flyctl" # Command line tools for Fly.io
+brew "fzf" # Command-line fuzzy finder
+brew "gh" # Cat clone with syntax highlighting
+brew "git" # Distributed version control system
+brew "git-delta" # Syntax-highlighting pager for git and diff output
+brew "python@3.13" # Python programming language v3.13
+brew "git-filter-repo" # Quickly rewrite git repository history
+brew "glances" # Cross-platform system monitoring tool
+brew "grpc" # Next generation RPC framework
+brew "htop" # Improved top (interactive process viewer)
+brew "httpie" # User-friendly cURL replacement
+brew "jq" # Lightweight and flexible command-line JSON processor
+brew "lazygit" # Simple terminal UI for git commands
+brew "mysql" # Open source relational database
+brew "neovim" # Hyperextensible Vim-based text editor
+brew "nvm" # Node Version Manager
+brew "nvtop" # GPU process monitoring for NVIDIA GPUs
+brew "pocketbase" # Open source backend in a single file
+brew "procs" # Modern replacement for ps written in Rust
+brew "pyenv" # Python version management
+brew "python@3.12" # Python programming language v3.12
+brew "python@3.9" # Python programming language v3.9
+brew "ripgrep" # Recursively search directories for a regex pattern
+brew "ruby-install" # Install Ruby, JRuby, Rubinius, TruffleRuby, or mruby
+brew "sd" # Intuitive find & replace CLI (sed alternative)
+brew "stow" # Symlink farm manager
+brew "tealdeer" # Fast tldr client written in Rust
+brew "tmux" # Terminal multiplexer
+brew "tokei" # Count code, quickly
+brew "turso" # Edge SQLite database CLI
+brew "watchman" # Watch files and record when they change
+brew "zenith" # Sort of like top or htop but with zoom-able charts
+brew "zoxide" # Smarter cd command, inspired by z and autojump
+brew "zsh" # UNIX shell (command interpreter)
+brew "oven-sh/bun/bun" # Fast all-in-one JavaScript runtime
 
 # macOS Applications
-cask "aldente"                             # macOS battery charge limiter
-cask "alt-tab"                             # Windows alt-tab on macOS
-cask "appflowy"                            # Open-source alternative to Notion
-cask "arc"                                 # The internet computer browser
-cask "discord"                             # Voice and text chat for communities
-cask "docker-desktop"                      # Application for building and sharing containerized applications
-cask "dotnet-runtime"                      # Microsoft .NET runtime
-cask "firefox@developer-edition"           # Web browser for developers
-cask "flutter"                             # UI toolkit for building natively compiled applications
+cask "aldente" # macOS battery charge limiter
+cask "alt-tab" # Windows alt-tab on macOS
+cask "appflowy" # Open-source alternative to Notion
+cask "arc" # Recursively search directories for a regex pattern
+cask "discord" # Voice and text chat for communities
+cask "docker-desktop" # Application for building and sharing containerized applications
+cask "dotnet-runtime" # Microsoft .NET runtime
+cask "firefox@developer-edition" # Web browser for developers
+cask "flutter" # UI toolkit for building natively compiled applications
 
 # Fonts
-cask "font-anonymice-powerline"            # Anonymous Pro font patched for Powerline
-cask "font-fira-code"                      # Monospaced font with programming ligatures
-cask "font-fira-code-nerd-font"            # Fira Code font patched with Nerd Font icons
-cask "font-fira-mono-for-powerline"        # Fira Mono font for Powerline
-cask "font-hack-nerd-font"                 # Hack font patched with Nerd Font icons
-cask "font-meslo-for-powerlevel10k"        # Meslo font recommended for Powerlevel10k
-cask "font-meslo-lg-nerd-font"             # Meslo LG font patched with Nerd Font icons
-cask "font-monaspace"                      # GitHub's innovative font family
-cask "font-monaspice-nerd-font"            # Monaspace font patched with Nerd Font icons
+cask "font-anonymice-powerline" # Anonymous Pro font patched for Powerline
+cask "font-fira-code" # Monospaced font with programming ligatures
+cask "font-fira-code-nerd-font" # Fira Code font patched with Nerd Font icons
+cask "font-fira-mono-for-powerline" # Fira Mono font for Powerline
+cask "font-hack-nerd-font" # Hack font patched with Nerd Font icons
+cask "font-meslo-for-powerlevel10k" # Meslo font recommended for Powerlevel10k
+cask "font-meslo-lg-nerd-font" # Meslo LG font patched with Nerd Font icons
+cask "font-monaspace" # GitHub's innovative font family
+cask "font-monaspice-nerd-font" # Monaspace font patched with Nerd Font icons
 
-# Browsers & Internet
-cask "google-chrome"                       # Web browser
-cask "google-chrome@canary"                # Experimental version of Chrome
-
-# Development Tools
-cask "herd"                                # Laravel and PHP development environment
-cask "iina"                                # Modern media player for macOS
-cask "iterm2"                              # Terminal emulator for macOS
-cask "jetbrains-toolbox"                   # JetBrains IDE manager
-
-# Utilities
-cask "jiggler"                             # Prevents sleep by jiggling the mouse
-cask "keyboardcleantool"                   # Temporarily disable keyboard for cleaning
-cask "lastpass"                            # Password manager
-cask "logi-options+"                       # Software for Logitech devices (new version)
-cask "logitech-options"                    # Software for Logitech devices
-cask "macs-fan-control"                    # Control fans on Apple computers
-cask "mamp"                                # Web development solution with Apache, Nginx, PHP & MySQL
-cask "notion"                              # All-in-one workspace for notes and collaboration
-cask "opera"                               # Web browser with built-in VPN
-cask "opera-air"                           # Simplified browser for everyday browsing
-cask "postman"                             # API development and testing platform
-cask "rustdesk"                            # Remote desktop software
-cask "skype"                               # Video chat and messaging
-cask "sourcetree"                          # Git GUI client
-cask "tableplus"                           # Modern, native database management tool
-cask "teamviewer"                          # Remote control and remote support
-cask "transmission"                        # BitTorrent client
-
-# Code Editors & IDEs
-cask "visual-studio-code"                  # Open-source code editor
-cask "windsurf"                            # AI-powered code editor
-cask "zed"                                 # High-performance, multiplayer code editor
-
-# Communication
-cask "whatsapp"                            # Messaging app
-
-# Browsers
-cask "vivaldi"                             # Feature-rich web browser
-cask "zen"                                 # Privacy-focused browser
-
-# Media & Entertainment
-cask "vlc"                                 # Multimedia player
-
-# Terminal Emulators
-cask "warp"                                # Modern, Rust-based terminal
-cask "wave"                                # AI-powered terminal
-cask "wombat"                              # Cross-platform file manager
-
-# Development Environments
-cask "xampp"                               # Apache, MariaDB, PHP and Perl package
+# macOS Applications
+cask "google-chrome" # Web browser
+cask "google-chrome@canary" # Experimental version of Chrome
+cask "herd" # Laravel and PHP development environment
+cask "iina" # Modern media player for macOS
+cask "iterm2" # Terminal emulator for macOS
+cask "jetbrains-toolbox" # JetBrains IDE manager
+cask "jiggler" # Prevents sleep by jiggling the mouse
+cask "keyboardcleantool" # Temporarily disable keyboard for cleaning
+cask "lastpass" # Password manager
+cask "logi-options+" # Software for Logitech devices (new version)
+cask "logitech-options" # Software for Logitech devices
+cask "macs-fan-control" # Control fans on Apple computers
+cask "mamp" # Web development solution with Apache, Nginx, PHP & MySQL
+cask "notion" # All-in-one workspace for notes and collaboration
+cask "opera" # Web browser with built-in VPN
+cask "opera-air" # Simplified browser for everyday browsing
+cask "postman" # API development and testing platform
+cask "rustdesk" # Remote desktop software
+cask "skype" # Video chat and messaging
+cask "sourcetree" # Git GUI client
+cask "tableplus" # Modern, native database management tool
+cask "teamviewer" # Remote control and remote support
+cask "transmission" # BitTorrent client
+cask "visual-studio-code" # Open-source code editor
+cask "vivaldi" # Feature-rich web browser
+cask "vlc" # Multimedia player
+cask "warp" # Modern, Rust-based terminal
+cask "wave" # AI-powered terminal
+cask "whatsapp" # Messaging app
+cask "windsurf" # AI-powered code editor
+cask "wombat" # Cross-platform file manager
+cask "xampp" # Apache, MariaDB, PHP and Perl package
+cask "zed" # Application for building and sharing containerized applications
+cask "zen" # Sort of like top or htop but with zoom-able charts
 
 # VS Code Extensions
-vscode "anthropic.claude-code"             # Claude AI assistant for VS Code
-vscode "eamodio.gitlens"                   # Supercharge Git within VS Code
-vscode "laravel.vscode-laravel"            # Laravel support for VS Code
-vscode "ms-azuretools.vscode-containers"   # Work with Docker containers
+vscode "anthropic.claude-code" # Claude AI assistant for VS Code
+vscode "eamodio.gitlens" # Supercharge Git within VS Code
+vscode "laravel.vscode-laravel" # Laravel support for VS Code
+vscode "ms-azuretools.vscode-containers" # Work with Docker containers
 vscode "ms-vscode-remote.remote-containers" # Open folders in containers
-vscode "openai.chatgpt"                    # ChatGPT integration for VS Code
+vscode "openai.chatgpt" # ChatGPT integration for VS Code

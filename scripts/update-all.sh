@@ -171,8 +171,15 @@ update_homebrew() {
         # Update Brewfile if it exists
         if [[ -f "$HOME/dotfiles/Brewfile" ]]; then
             log_info "Updating Brewfile..."
-            brew bundle dump --force --file="$HOME/dotfiles/Brewfile"
-            log_success "Brewfile updated"
+            # Use the preserve comments script if it exists
+            if [[ -x "$HOME/dotfiles/scripts/preserve-brewfile-comments.sh" ]]; then
+                "$HOME/dotfiles/scripts/preserve-brewfile-comments.sh" >/dev/null 2>&1
+                log_success "Brewfile updated with preserved comments"
+            else
+                # Fallback to regular brew bundle dump
+                brew bundle dump --force --file="$HOME/dotfiles/Brewfile"
+                log_success "Brewfile updated (comments not preserved)"
+            fi
         fi
     fi
 }
