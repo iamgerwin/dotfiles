@@ -49,6 +49,11 @@ dotfiles/
 ├── ssh-keys/           # Organized SSH keys directory (gitignored)
 ├── docs/               # Documentation directory
 │   └── best-practices/ # Comprehensive technology guides
+│       ├── ai-tools/   # AI-powered development tools
+│       ├── databases/  # Database technologies
+│       ├── mobile-frameworks/ # Mobile development platforms
+│       ├── progressive-web-apps/ # PWA and service workers
+│       ├── pwa-tooling/ # PWA development tools
 │       ├── frontend/   # Frontend frameworks and libraries
 │       ├── backend/    # Backend frameworks and APIs
 │       ├── mobile/     # Mobile development platforms
@@ -463,6 +468,19 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 ```
 
 #### Available Technologies
+
+**AI-Powered Development**
+- Codex CLI (OpenAI): AI-powered code generation with secure API integration
+
+**Progressive Web Applications**
+- Service Workers & Caching: Offline functionality and performance optimization
+- React with Workbox: Building PWAs with intelligent caching strategies
+
+**Databases**
+- DuckDB 1.4.0: Embedded analytical SQL database for OLAP workloads
+
+**Mobile Frameworks**
+- Ionic with Capacitor: Cross-platform mobile development using web technologies
 
 **Frontend & UI**
 - React ecosystem (Next.js, Jotai), Vue.js (Nuxt.js v4), Vaadin
