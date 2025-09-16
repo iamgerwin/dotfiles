@@ -158,41 +158,15 @@ update_homebrew() {
             log_success "Homebrew cleaned up"
         fi
         
-        # Check for outdated packages
-        log_info "Checking for outdated packages..."
-        outdated=$(brew outdated)
-        if [[ -n "$outdated" ]]; then
-            log_warning "Some packages are still outdated:"
-            echo "$outdated"
-        else
-            log_success "All Homebrew packages are up to date"
-        fi
-        
-        # Generate reference Brewfile if main Brewfile exists
-        if [[ -f "$HOME/dotfiles/Brewfile" ]]; then
-            log_info "Generating reference Brewfile..."
-            # Use the preserve comments script if it exists
-            if [[ -x "$HOME/dotfiles/scripts/preserve-brewfile-comments.sh" ]]; then
-                # Capture output for better error reporting
-                output=$("$HOME/dotfiles/scripts/preserve-brewfile-comments.sh" 2>&1)
-                if [[ $? -eq 0 ]]; then
-                    log_success "Reference Brewfile created (Brewfile.reference)"
-                    log_info "Main Brewfile preserved with your working changes"
-                else
-                    log_warning "Could not create reference Brewfile"
-                    if $VERBOSE && [[ -n "$output" ]]; then
-                        echo "$output" | while IFS= read -r line; do
-                            log_info "  $line"
-                        done
-                    fi
-                fi
+        # Check for outdated packages (only if verbose mode)
+        if $VERBOSE; then
+            log_info "Checking for outdated packages..."
+            outdated=$(brew outdated 2>/dev/null || true)
+            if [[ -n "$outdated" ]]; then
+                log_warning "Some packages are still outdated:"
+                echo "$outdated"
             else
-                # Fallback to create reference file directly
-                if timeout 10 brew bundle dump --force --file="$HOME/dotfiles/Brewfile.reference" --no-upgrade 2>/dev/null; then
-                    log_success "Reference Brewfile created (without comments)"
-                else
-                    log_warning "Could not create reference Brewfile (brew bundle dump failed)"
-                fi
+                log_success "All Homebrew packages are up to date"
             fi
         fi
     fi
