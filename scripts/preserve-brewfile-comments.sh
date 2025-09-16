@@ -100,12 +100,23 @@ main() {
 
     # Generate fresh brew bundle dump
     echo "Generating reference Brewfile from installed packages..."
-    # Use timeout to prevent hanging and redirect stderr to prevent interactive prompts
-    timeout 10 brew bundle dump --force --file="$BREWFILE_TEMP" --no-upgrade 2>/dev/null || {
-        echo "Error: Failed to generate Brewfile (timed out or error occurred)"
-        rm -f "$BREWFILE_TEMP"
+    # First check if brew is available
+    if ! command -v brew >/dev/null 2>&1; then
+        echo "Error: Homebrew not found"
         exit 1
-    }
+    fi
+
+    # Use timeout to prevent hanging, but capture stderr for debugging
+    if ! timeout 10 brew bundle dump --force --file="$BREWFILE_TEMP" --no-upgrade 2>/tmp/brew-bundle-error.log; then
+        echo "Warning: brew bundle dump failed or timed out"
+        if [[ -f /tmp/brew-bundle-error.log ]]; then
+            error_msg=$(cat /tmp/brew-bundle-error.log 2>/dev/null)
+            [[ -n "$error_msg" ]] && echo "  Error details: $error_msg"
+        fi
+        rm -f "$BREWFILE_TEMP" /tmp/brew-bundle-error.log
+        exit 1
+    fi
+    rm -f /tmp/brew-bundle-error.log
 
     # Create reference file instead of modifying the main Brewfile
     echo "Creating reference Brewfile..."
