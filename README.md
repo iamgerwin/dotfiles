@@ -575,6 +575,7 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 - Infrastructure as Code: Terraform, AWS CloudFormation, Ansible
 - Cloud platforms: AWS, Azure, Google Cloud Platform, DigitalOcean
 - Edge computing: Cloudflare (Workers, Pages, D1, R2)
+- Static Hosting: GitHub Pages, Netlify, Vercel
 
 **Content Management**
 - Headless CMS: Strapi (customizable API-first CMS)
