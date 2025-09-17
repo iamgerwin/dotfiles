@@ -528,16 +528,21 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 - React ecosystem (Next.js, Jotai), Vue.js (Nuxt.js v4), Vaadin
 - State Management: Redux Toolkit, Zustand, MobX, Context API
 - Svelte & SvelteKit with Runes reactivity system
+- Modern Reactive Frameworks: Solid.js (fine-grained reactivity), Alpine.js (lightweight interactivity)
 - Authentication: Clerk, Better Auth
 - UI libraries: shadcn/ui, Bootstrap, Tailwind CSS
 - Animation: GSAP
 - Data management: TanStack (Query, Router, Start, DB)
 - Legacy: jQuery
 
+**Full-Stack Frameworks**
+- Laravel Livewire: Full-stack framework for building dynamic UIs with PHP
+- Inertia.js: Build server-driven SPAs without APIs
+
 **Backend & APIs**
 - PHP: Laravel, Laravel Nova, Laravel Eloquent ORM, Laravel Filament v4, Symfony with API Platform, CodeIgniter 4
   - Performance Technologies: Laravel Octane, FrankenPHP, PHP-FPM, Open Swoole, RoadRunner
-- JavaScript/TypeScript: NestJS, Hono.js, Meteor.js, AdonisJS
+- JavaScript/TypeScript: NestJS, Hono.js, Meteor.js, AdonisJS (Laravel-inspired MVC), SailsJS (Rails-like MVC), FeathersJS (real-time micro-services)
 - Python: Django, general Python best practices
 - Ruby: Ruby on Rails
 - Elixir: Ash framework
@@ -604,7 +609,7 @@ ls ~/dotfiles/docs/best-practices/devops/      # AWS, Docker, Cloudflare, etc.
 
 **Languages**
 - Systems programming: Rust, Go, Zig
-- Web development: TypeScript, PHP (PSR standards, Swoole, Laravel Octane)
+- Web development: TypeScript (comprehensive type system guide), PHP (PSR standards, Swoole, Laravel Octane)
 - Enterprise: Java (Java 8-17+ features, design patterns)
 
 **AI & Machine Learning**
