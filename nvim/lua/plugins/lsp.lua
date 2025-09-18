@@ -8,7 +8,20 @@ return {
       { "folke/neodev.nvim", opts = {} },
     },
     config = function()
+      -- Suppress deprecation warning until vim.lsp.config is actually available
+      local original_notify = vim.notify
+      vim.notify = function(msg, ...)
+        if msg:match("require%('lspconfig'%)") then
+          return
+        end
+        original_notify(msg, ...)
+      end
+
       local lspconfig = require("lspconfig")
+
+      -- Restore original notify
+      vim.notify = original_notify
+
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       -- LSP keymaps
