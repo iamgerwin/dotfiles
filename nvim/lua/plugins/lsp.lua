@@ -9,6 +9,7 @@ return {
     },
     config = function()
       local lspconfig = require("lspconfig")
+
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       -- LSP keymaps
@@ -60,9 +61,12 @@ return {
         vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
       end
 
-      -- Configure language servers
+      -- Configure language servers using the new vim.lsp.config API
       -- Lua
-      lspconfig.lua_ls.setup({
+      vim.lsp.config.lua_ls = {
+        cmd = { "lua-language-server" },
+        filetypes = { "lua" },
+        root_markers = { ".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git" },
         capabilities = capabilities,
         on_attach = on_attach,
         settings = {
@@ -82,24 +86,31 @@ return {
             },
           },
         },
-      })
+      }
 
       -- TypeScript/JavaScript
-      lspconfig.tsserver.setup({
+      vim.lsp.config.ts_ls = {
+        cmd = { "typescript-language-server", "--stdio" },
+        filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript", "javascriptreact" },
+        root_markers = { "tsconfig.json", "package.json", "jsconfig.json", ".git" },
         capabilities = capabilities,
         on_attach = on_attach,
-        filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript", "javascriptreact" },
-        cmd = { "typescript-language-server", "--stdio" },
-      })
+      }
 
       -- Python
-      lspconfig.pyright.setup({
+      vim.lsp.config.pyright = {
+        cmd = { "pyright-langserver", "--stdio" },
+        filetypes = { "python" },
+        root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" },
         capabilities = capabilities,
         on_attach = on_attach,
-      })
+      }
 
       -- Rust
-      lspconfig.rust_analyzer.setup({
+      vim.lsp.config.rust_analyzer = {
+        cmd = { "rust-analyzer" },
+        filetypes = { "rust" },
+        root_markers = { "Cargo.toml", "Cargo.lock", ".git" },
         capabilities = capabilities,
         on_attach = on_attach,
         settings = {
@@ -109,54 +120,85 @@ return {
             },
           },
         },
-      })
+      }
 
       -- Go
-      lspconfig.gopls.setup({
+      vim.lsp.config.gopls = {
+        cmd = { "gopls" },
+        filetypes = { "go", "gomod", "gowork", "gotmpl" },
+        root_markers = { "go.work", "go.mod", ".git" },
         capabilities = capabilities,
         on_attach = on_attach,
-      })
+      }
 
       -- JSON
-      lspconfig.jsonls.setup({
+      vim.lsp.config.jsonls = {
+        cmd = { "vscode-json-language-server", "--stdio" },
+        filetypes = { "json", "jsonc" },
+        root_markers = { "package.json", ".git" },
         capabilities = capabilities,
         on_attach = on_attach,
-      })
+      }
 
-      -- HTML/CSS
-      lspconfig.html.setup({
+      -- HTML
+      vim.lsp.config.html = {
+        cmd = { "vscode-html-language-server", "--stdio" },
+        filetypes = { "html" },
+        root_markers = { "package.json", ".git" },
         capabilities = capabilities,
         on_attach = on_attach,
-      })
+      }
 
-      lspconfig.cssls.setup({
+      -- CSS
+      vim.lsp.config.cssls = {
+        cmd = { "vscode-css-language-server", "--stdio" },
+        filetypes = { "css", "scss", "less" },
+        root_markers = { "package.json", ".git" },
         capabilities = capabilities,
         on_attach = on_attach,
-      })
+      }
 
       -- Tailwind CSS
-      lspconfig.tailwindcss.setup({
+      vim.lsp.config.tailwindcss = {
+        cmd = { "tailwindcss-language-server", "--stdio" },
+        filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte" },
+        root_markers = { "tailwind.config.js", "tailwind.config.cjs", "tailwind.config.mjs", "tailwind.config.ts", "postcss.config.js", "postcss.config.cjs", "postcss.config.mjs", "postcss.config.ts", "package.json", ".git" },
         capabilities = capabilities,
         on_attach = on_attach,
-      })
+      }
 
       -- Docker
-      lspconfig.dockerls.setup({
+      vim.lsp.config.dockerls = {
+        cmd = { "docker-langserver", "--stdio" },
+        filetypes = { "dockerfile" },
+        root_markers = { "Dockerfile", ".git" },
         capabilities = capabilities,
         on_attach = on_attach,
-      })
+      }
 
       -- YAML
-      lspconfig.yamlls.setup({
+      vim.lsp.config.yamlls = {
+        cmd = { "yaml-language-server", "--stdio" },
+        filetypes = { "yaml", "yaml.docker-compose", "yaml.gitlab" },
+        root_markers = { ".yamllint", ".yamllint.yml", ".yamllint.yaml", ".git" },
         capabilities = capabilities,
         on_attach = on_attach,
-      })
+      }
 
       -- Bash
-      lspconfig.bashls.setup({
+      vim.lsp.config.bashls = {
+        cmd = { "bash-language-server", "start" },
+        filetypes = { "sh", "bash" },
+        root_markers = { ".git" },
         capabilities = capabilities,
         on_attach = on_attach,
-      })
+      }
+
+      -- Enable the language servers
+      local servers = { "lua_ls", "ts_ls", "pyright", "rust_analyzer", "gopls", "jsonls", "html", "cssls", "tailwindcss", "dockerls", "yamlls", "bashls" }
+      for _, server in ipairs(servers) do
+        vim.lsp.enable(server)
+      end
     end,
   },
 
@@ -180,7 +222,7 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "lua_ls",
-          "tsserver",
+          "ts_ls",
           "pyright",
           "rust_analyzer",
           "gopls",
