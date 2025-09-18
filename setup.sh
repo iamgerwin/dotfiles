@@ -416,6 +416,28 @@ final_setup() {
             "$DOTFILES_DIR/scripts/setup-tmux.sh"
         fi
     fi
+
+    # Setup Neovim if installed
+    if command -v nvim &> /dev/null; then
+        print_info "Setting up Neovim configuration..."
+        if [[ -x "$DOTFILES_DIR/scripts/setup-neovim.sh" ]]; then
+            "$DOTFILES_DIR/scripts/setup-neovim.sh"
+        else
+            # Fallback to basic symlink if script not available
+            if [[ -d "$DOTFILES_DIR/nvim" ]]; then
+                mkdir -p "$HOME/.config"
+                if [[ ! -e "$HOME/.config/nvim" ]]; then
+                    ln -sf "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
+                    print_success "Linked Neovim configuration"
+                elif [[ -L "$HOME/.config/nvim" ]] && [[ "$(readlink "$HOME/.config/nvim")" == "$DOTFILES_DIR/nvim" ]]; then
+                    print_success "Neovim configuration already linked"
+                else
+                    print_warning "Existing Neovim configuration found at ~/.config/nvim"
+                    print_info "Run ~/dotfiles/scripts/setup-neovim.sh for safe migration"
+                fi
+            fi
+        fi
+    fi
 }
 
 # Check for existing configuration
