@@ -8,19 +8,20 @@ return {
       { "folke/neodev.nvim", opts = {} },
     },
     config = function()
-      -- Suppress deprecation warning until vim.lsp.config is actually available
-      local original_notify = vim.notify
-      vim.notify = function(msg, ...)
-        if msg:match("require%('lspconfig'%)") then
+      -- Temporarily suppress lspconfig deprecation warning
+      local original_deprecate = vim.deprecate
+      vim.deprecate = function(what, version, ...)
+        if what and what:match("require%('lspconfig'%)") then
+          -- Suppress only the lspconfig deprecation warning
           return
         end
-        original_notify(msg, ...)
+        return original_deprecate(what, version, ...)
       end
 
       local lspconfig = require("lspconfig")
 
-      -- Restore original notify
-      vim.notify = original_notify
+      -- Restore original deprecate function
+      vim.deprecate = original_deprecate
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
