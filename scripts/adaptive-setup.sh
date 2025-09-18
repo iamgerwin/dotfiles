@@ -317,6 +317,84 @@ EOF
     fi
 }
 
+# Learn from existing Neovim configuration
+learn_neovim_config() {
+    print_header "Learning Neovim Configuration"
+
+    if [[ -d "$HOME/.config/nvim" ]]; then
+        print_info "Found existing Neovim configuration"
+
+        # Check if it's already linked to our dotfiles
+        if [[ -L "$HOME/.config/nvim" ]]; then
+            local link_target=$(readlink "$HOME/.config/nvim")
+            if [[ "$link_target" == "$DOTFILES_DIR/nvim" ]]; then
+                print_success "Already using dotfiles Neovim configuration"
+                return
+            fi
+        fi
+
+        # Analyze configuration
+        local has_init_vim=false
+        local has_init_lua=false
+        local has_plugins=false
+        local plugin_manager=""
+
+        [[ -f "$HOME/.config/nvim/init.vim" ]] && has_init_vim=true
+        [[ -f "$HOME/.config/nvim/init.lua" ]] && has_init_lua=true
+
+        # Detect plugin manager
+        if [[ -d "$HOME/.config/nvim/plugged" ]]; then
+            plugin_manager="vim-plug"
+        elif [[ -d "$HOME/.local/share/nvim/site/pack/packer" ]]; then
+            plugin_manager="packer"
+        elif [[ -d "$HOME/.local/share/nvim/lazy" ]]; then
+            plugin_manager="lazy.nvim"
+        elif [[ -d "$HOME/.config/nvim/bundle" ]]; then
+            plugin_manager="vundle"
+        fi
+
+        # Create backup and preservation plan
+        echo "Neovim Configuration Analysis:" >> "$ADAPTIVE_DIR/learned/neovim_analysis.txt"
+        echo "- Config type: $(if $has_init_lua; then echo "Lua"; else echo "VimScript"; fi)" >> "$ADAPTIVE_DIR/learned/neovim_analysis.txt"
+        echo "- Plugin manager: ${plugin_manager:-none detected}" >> "$ADAPTIVE_DIR/learned/neovim_analysis.txt"
+        echo "- Files: $(find "$HOME/.config/nvim" -type f 2>/dev/null | wc -l | tr -d ' ')" >> "$ADAPTIVE_DIR/learned/neovim_analysis.txt"
+
+        print_success "Neovim configuration analyzed"
+        print_info "Your existing configuration will be preserved during setup"
+
+        # Offer to setup Neovim with preservation
+        read -p "Would you like to integrate the new Neovim setup? (y/n) " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            if [[ -x "$DOTFILES_DIR/scripts/setup-neovim.sh" ]]; then
+                "$DOTFILES_DIR/scripts/setup-neovim.sh"
+            else
+                print_warning "Neovim setup script not found"
+            fi
+        else
+            print_info "You can set up Neovim later with: ~/dotfiles/scripts/setup-neovim.sh"
+        fi
+    else
+        print_info "No existing Neovim configuration found"
+
+        # Offer to install fresh configuration
+        if command -v nvim &> /dev/null; then
+            read -p "Neovim is installed. Set up configuration now? (y/n) " -n 1 -r
+            echo
+            if [[ $REPLY =~ ^[Yy]$ ]]; then
+                if [[ -x "$DOTFILES_DIR/scripts/setup-neovim.sh" ]]; then
+                    "$DOTFILES_DIR/scripts/setup-neovim.sh"
+                else
+                    # Simple symlink as fallback
+                    mkdir -p "$HOME/.config"
+                    ln -sf "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
+                    print_success "Linked Neovim configuration"
+                fi
+            fi
+        fi
+    fi
+}
+
 # Intelligent merge of configurations
 intelligent_merge() {
     print_header "Intelligent Configuration Merge"
@@ -503,6 +581,7 @@ main() {
     learn_custom_scripts
     learn_ssh_keys
     learn_git_profiles
+    learn_neovim_config
     
     # Merge intelligently
     intelligent_merge

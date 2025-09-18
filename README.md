@@ -16,6 +16,7 @@ This repository contains my personal dotfiles configuration, designed with modul
 - **Package Management**: Centralized Homebrew package management via Brewfile
 - **Version Control**: All configurations tracked in Git for easy rollback and history
 - **Oh My Zsh Integration**: Pre-configured with useful plugins and Powerlevel10k theme
+- **Neovim Configuration**: Modern IDE-like setup with LSP, Treesitter, and productivity plugins
 - **Development Tools**: NVM, Pyenv, Herd PHP, and other development environment managers
 - **Laravel/PHP Ready**: Aliases and tools for Laravel development workflow
 - **Custom Preservation**: Automatically detects and preserves your existing aliases, functions, and tools
@@ -39,6 +40,7 @@ dotfiles/
 ├── custom.zsh          # Machine-specific configurations
 ├── p10k.zsh            # Powerlevel10k prompt configuration
 ├── tmux.conf           # Tmux configuration with best practices
+├── nvim/               # Neovim configuration with LSP and plugins
 ├── Brewfile            # Homebrew package definitions
 ├── AI_PROMPTS.md       # AI prompts management documentation
 ├── TEMPLATES.md        # Quick reference for all prompt templates
@@ -77,6 +79,7 @@ dotfiles/
 └── scripts/
     ├── install-brew.sh # Homebrew installation script
     ├── setup-tmux.sh   # Tmux setup and configuration script
+    ├── setup-neovim.sh # Neovim setup with backup and migration
     ├── backup.sh       # Backup management script
     ├── uninstall.sh    # Uninstall and rollback script
     ├── ai-prompt       # AI prompts CLI tool
