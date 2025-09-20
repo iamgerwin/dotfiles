@@ -495,6 +495,28 @@ The configuration includes:
 - **tmux-resurrect** for session persistence across restarts
 - **tmux-continuum** for automatic session saves
 - **vim-tmux-navigator** for seamless vim/tmux navigation
+- **tmux-sensible** for sensible default settings
+- **tmux-yank** for enhanced copy functionality
+- **tmux-copycat** for regex search in scrollback
+- **tmux-open** for opening highlighted files/URLs
+- **tmux-pain-control** for better pane control
+- **aw-watcher-tmux** for activity tracking integration
+- **muxile** for mobile-friendly tmux control
+- **tmux-autoreload** for automatic config reloading
+- **tmux-browser** for browser integration
+- **tmux-cargo** for Rust cargo integration
+- **tmux-cowboy** for killing unresponsive processes
+- **tmux-fpp** for file path picker integration
+- **tmux-fzf-url** for fuzzy URL selection
+- **tmux-fzf** for fuzzy finding in tmux
+- **tmux-git-autofetch** for automatic git fetching
+- **tmux-logging** for logging and screen capture
+- **tmux-menus** for popup menus
+- **tmux-mighty-scroll** for improved scrolling
+- **tmux-neolazygit** for lazygit integration
+- **tmux-nerd-font-window-name** for icon window names
+- **tmux-notify** for desktop notifications
+- **tmux-powerline** for powerline status bar
 - **Custom scripts** for development workflows
 
 ### Best Practices Documentation
