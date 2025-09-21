@@ -62,6 +62,9 @@ show_templates() {
     echo -e "${YELLOW}Refactoring:${NC}"
     echo "  refactor-plan      - Refactoring strategy template"
     echo
+    echo -e "${YELLOW}Persona & Communication:${NC}"
+    echo "  humanize           - Humanized communication guidelines"
+    echo
     echo -e "${YELLOW}Project-Specific:${NC}"
     echo "  usisa-laravel      - USISA Laravel developer workflow"
     echo
@@ -134,7 +137,12 @@ copy_template() {
         "refactor"|"refactor-plan")
             file_path="$AI_PROMPTS_DIR/templates/refactoring/refactor-plan.md"
             ;;
-            
+
+        # Persona templates
+        "humanize"|"humanized")
+            file_path="$TEMPLATES_DIR/persona/HUMANIZE.md"
+            ;;
+
         # Project-specific
         "usisa"|"usisa-laravel")
             file_path="$TEMPLATES_DIR/projects/usisa/laravel-developer.md"
