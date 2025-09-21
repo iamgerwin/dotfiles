@@ -63,6 +63,12 @@ pc deployment           # Deployment checklist
 | `pc code-review` | Code Review Checklist | Comprehensive review template |
 | `pc refactor-plan` | Refactoring Plan | Code refactoring strategy |
 
+### Persona & Communication
+| Command | Template | Description |
+|---------|----------|-------------|
+| `pc humanize` | Humanized Communication | Guidelines for empathetic, clear communication |
+| `pch` | Humanize Quick | Alias for humanize |
+
 ## 💡 Usage Examples
 
 ### Creating a ClickUp Ticket
@@ -112,6 +118,18 @@ pcf
 # The LLM will create a complete implementation plan
 ```
 
+### Humanized Communication
+```bash
+# Copy humanization guidelines
+pch
+
+# Use these guidelines for:
+# - Writing empathetic comment replies
+# - Creating clear, granular git commits
+# - Providing constructive PR feedback
+# The LLM will follow human-centric communication patterns
+```
+
 ## 🔧 Template Locations
 
 Templates are stored in two locations:
@@ -120,6 +138,7 @@ Templates are stored in two locations:
    - Version controlled templates
    - Comprehensive examples with code
    - Full workflows and processes
+   - Persona and communication guidelines
 
 2. **AI Prompts Templates** (`~/ai-prompts/templates/`)
    - Quick reference templates
@@ -198,6 +217,7 @@ source ~/ai-prompts/.secrets/api-keys.env
 - **Debugging**: Bug investigation, performance optimization
 - **Operations**: Deployment, monitoring, infrastructure
 - **Review**: Code reviews, architecture reviews
+- **Communication**: Humanized responses, empathetic feedback, clear documentation
 
 ### By Project Phase
 - **Discovery**: Requirements gathering, technical research

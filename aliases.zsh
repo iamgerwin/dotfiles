@@ -143,6 +143,7 @@ alias pcb='prompt-copy bug'
 alias pcf='prompt-copy feature'
 alias pca='prompt-copy api'
 alias pcd='prompt-copy deployment'
+alias pch='prompt-copy humanize'
 
 # SSH Management
 alias sshc='~/dotfiles/scripts/ssh-connect'
