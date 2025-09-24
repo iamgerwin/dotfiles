@@ -18,9 +18,11 @@ brew "docker-compose" # Define and run multi-container applications
 brew "dust" # More intuitive version of du written in Rust
 brew "duti" # Set default applications for document types on macOS
 brew "elixir" # Dynamic, functional language for building scalable applications
+brew "exa" # Modern replacement for ls (deprecated, replaced by eza)
 brew "eza" # Modern replacement for ls
 brew "fd" # Simple, fast alternative to find
 brew "fish" # User-friendly command line shell
+brew "nushell" # Modern shell written in Rust with structured data pipelines
 brew "flyctl" # Command line tools for Fly.io
 brew "fzf" # Command-line fuzzy finder
 brew "gh" # Cat clone with syntax highlighting
@@ -49,11 +51,15 @@ brew "sd" # Intuitive find & replace CLI (sed alternative)
 brew "stow" # Symlink farm manager
 brew "tealdeer" # Fast tldr client written in Rust
 brew "tmux" # Terminal multiplexer
+brew "zellij" # Modern terminal workspace with layouts and plugins
 brew "tokei" # Count code, quickly
 brew "turso" # Edge SQLite database CLI
 brew "watchman" # Watch files and record when they change
 brew "zenith" # Sort of like top or htop but with zoom-able charts
 brew "zoxide" # Smarter cd command, inspired by z and autojump
+brew "starship" # Cross-shell prompt customization
+brew "carapace" # Multi-shell completion framework
+brew "atuin" # Magical shell history
 brew "zsh" # UNIX shell (command interpreter)
 brew "oven-sh/bun/bun" # Fast all-in-one JavaScript runtime
 
@@ -78,6 +84,8 @@ cask "font-meslo-for-powerlevel10k" # Meslo font recommended for Powerlevel10k
 cask "font-meslo-lg-nerd-font" # Meslo LG font patched with Nerd Font icons
 cask "font-monaspace" # GitHub's innovative font family
 cask "font-monaspice-nerd-font" # Monaspace font patched with Nerd Font icons
+cask "font-jetbrains-mono" # JetBrains Mono - Developer font with ligatures
+cask "font-jetbrains-mono-nerd-font" # JetBrains Mono patched with Nerd Font icons
 
 # macOS Applications
 cask "google-chrome" # Web browser
@@ -106,7 +114,9 @@ cask "transmission" # BitTorrent client
 cask "visual-studio-code" # Open-source code editor
 cask "vivaldi" # Feature-rich web browser
 cask "vlc" # Multimedia player
+cask "ghostty" # Fast, feature-rich terminal emulator
 cask "warp" # Modern, Rust-based terminal
+cask "wezterm" # GPU-accelerated cross-platform terminal emulator
 cask "wave" # AI-powered terminal
 cask "whatsapp" # Messaging app
 cask "windsurf" # AI-powered code editor

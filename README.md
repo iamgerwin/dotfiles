@@ -217,6 +217,42 @@ For step-by-step instructions and troubleshooting, see [INSTALLATION.md](INSTALL
   - Optimized performance settings
   - Custom development layouts and scripts
 
+### Terminal Setup Tools
+
+The dotfiles now include comprehensive terminal setup tools for an enhanced development environment:
+
+#### Terminal Emulators
+- **Ghostty**: Fast, feature-rich terminal emulator with GPU acceleration
+- **Warp**: Modern, Rust-based terminal with AI features (already included)
+- **WezTerm**: GPU-accelerated cross-platform terminal emulator
+- **iTerm2**: Traditional favorite terminal for macOS (already included)
+
+#### Modern Shells
+- **Fish**: User-friendly command line shell with auto-suggestions
+- **Nushell**: Modern shell written in Rust with structured data pipelines
+- **Zsh**: UNIX shell with Oh My Zsh framework (already included)
+
+#### Terminal Multiplexers
+- **Tmux**: Terminal multiplexer for managing multiple sessions
+- **Zellij**: Modern terminal workspace with built-in layouts and plugins
+
+#### Shell Enhancements
+- **Starship**: Cross-shell prompt customization with minimal, blazing-fast design
+- **Carapace**: Multi-shell completion framework for consistent auto-completions
+- **Atuin**: Magical shell history that syncs across machines
+- **Zoxide**: Smarter cd command that learns your habits
+- **FZF**: Command-line fuzzy finder for quick navigation
+
+#### Modern CLI Tools
+- **Exa/Eza**: Modern replacement for `ls` with colors and icons
+- **Bat**: Cat clone with syntax highlighting
+- **Ripgrep**: Ultra-fast recursive search
+- **Fd**: Simple, fast alternative to `find`
+- **Dust**: More intuitive version of `du` written in Rust
+
+#### Fonts
+The setup includes JetBrains Mono and other Nerd Fonts for proper icon display in terminals.
+
 ### Package Management
 
 The `Brewfile` contains all Homebrew packages, casks, and fonts. To manage packages:
