@@ -6,7 +6,7 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 
 ### Frontend
 - **Frameworks**: Next.js, Vue.js, Nuxt.js, Angular, AngularJS, Svelte, SvelteKit, SolidJS, Astro, Vaadin
-- **Libraries**: React, jQuery, Alpine.js, shadcn/ui, GSAP
+- **Libraries**: React, jQuery, Alpine.js (lightweight JavaScript framework), shadcn/ui, GSAP
 - **CSS Frameworks**: Tailwind CSS, Bootstrap
 - **State Management**: Redux Toolkit, Zustand, MobX, Context API, Svelte Runes
 - **Data Management**: TanStack Query, TanStack Router, TanStack Start, TanStack DB
@@ -23,7 +23,7 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **Systems Languages**: Rust, Go, Zig
 - **Web Languages**: TypeScript, JavaScript
 - **Enterprise Languages**: Java (Modern features, Spring Boot)
-- **PHP**: PSR Standards, Best Practices, Swoole, Laravel Octane
+- **PHP**: PSR Standards, Best Practices, Swoole, Laravel Octane, PHPStan (static analysis)
 
 ### Mobile
 - **Cross-Platform**: Flutter, React Native, .NET MAUI
@@ -54,10 +54,12 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **Infrastructure as Code**: Terraform, AWS CloudFormation, Ansible
 - **Cloud Platforms**: AWS, Azure, Google Cloud Platform, DigitalOcean
 - **Edge Computing**: Cloudflare Workers, Cloudflare Pages, Cloudflare D1, Cloudflare R2
+- **Self-Hosted PaaS**: Coolify (Heroku alternative), Dokploy (open-source PaaS)
 
 ### Testing
 - **E2E Testing**: Playwright, Cypress
-- **Performance Testing**: JMeter
+- **Performance Testing**: JMeter, k6 (modern load testing)
+- **API Testing**: RestAssured (Java REST API testing)
 - **Code Quality**: SonarQube
 
 ### System Architecture
@@ -69,7 +71,8 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 ### Enterprise Systems
 - **SAP**: ABAP, SAPUI5/OpenUI5
 - **Integration**: MuleSoft
-- **CRM/Platform**: Salesforce Lightning, Zoho
+- **CRM/Platform**: Salesforce Lightning, Zoho, GoHighLevel (marketing automation and CRM)
+- **Workflow Automation**: Zapier (no-code integration platform)
 - **Machine Learning**: RAG, AI/ML Best Practices
 
 ### CMS

@@ -18,7 +18,6 @@ brew "docker-compose" # Define and run multi-container applications
 brew "dust" # More intuitive version of du written in Rust
 brew "duti" # Set default applications for document types on macOS
 brew "elixir" # Dynamic, functional language for building scalable applications
-brew "exa" # Modern replacement for ls (deprecated, replaced by eza)
 brew "eza" # Modern replacement for ls
 brew "fd" # Simple, fast alternative to find
 brew "fish" # User-friendly command line shell
