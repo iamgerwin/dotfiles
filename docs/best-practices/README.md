@@ -10,6 +10,7 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **CSS Frameworks**: Tailwind CSS, Bootstrap
 - **State Management**: Redux Toolkit, Zustand, MobX, Context API, Svelte Runes
 - **Data Management**: TanStack Query, TanStack Router, TanStack Start, TanStack DB
+- **Rust GUI**: Dioxus (cross-platform GUI for web, desktop, mobile)
 
 ### Backend
 - **PHP**: Laravel, Laravel Nova, Laravel Eloquent ORM, Symfony with API Platform, CodeIgniter 4
@@ -18,6 +19,7 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **Ruby**: Ruby on Rails
 - **Elixir**: Ash/Phoenix
 - **.NET**: ASP.NET Core, C#, Entity Framework Core
+- **Rust**: Axum (ergonomic web framework)
 
 ### Languages
 - **Systems Languages**: Rust, Go, Zig
@@ -41,8 +43,10 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **Real-time Platforms**: Convex (real-time backend with reactive queries)
 - **Backend as a Service**: Appwrite, Supabase, PocketBase
 
-### Automation
+### Automation & Workflow
 - **Workflow Automation**: N8N (fair-code workflow automation platform with visual programming)
+- **Process Orchestration**: Camunda (workflow and decision automation platform)
+- **Process Modeling**: BPMN 2.0 (Business Process Model and Notation standard)
 
 ### Build Tools
 - **Monorepo Management**: Turborepo (high-performance build system), Nx (extensible build system with first-class monorepo support)
@@ -76,7 +80,7 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **Machine Learning**: RAG, AI/ML Best Practices
 
 ### CMS
-- **Headless CMS**: Strapi (customizable API-first CMS)
+- **Headless CMS**: Strapi (customizable API-first CMS), PayloadCMS (TypeScript-first headless CMS)
 - **WordPress**: Core development, Plugin development, Theme development
 - **Drupal**: Module and theme development
 - **SharePoint**: SPFx development, REST API, PnP JS library
