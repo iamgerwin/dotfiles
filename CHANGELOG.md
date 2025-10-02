@@ -8,7 +8,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Comprehensive best practices documentation for 8 new technologies:
+- New workflow-automation category for business process management
+- New rust-frameworks category for Rust web and GUI frameworks
+- Comprehensive best practices documentation for 5 new technologies:
+  - **Camunda** - Workflow and decision automation platform (workflow-automation/camunda.md)
+  - **BPMN 2.0** - Business Process Model and Notation standard (workflow-automation/bpmn-2.0.md)
+  - **PayloadCMS** - TypeScript-first headless CMS (cms/payloadcms.md)
+  - **Axum** - Ergonomic Rust web framework (rust-frameworks/axum.md)
+  - **Dioxus** - Cross-platform Rust GUI library (rust-frameworks/dioxus.md)
+- Category README files for workflow-automation and rust-frameworks
+
+### Changed
+- Updated main README.md to include new technologies and categories
+- Enhanced CMS section with PayloadCMS
+- Expanded Backend section with Axum Rust framework
+- Extended Frontend section with Dioxus Rust GUI framework
+- Improved Automation section with workflow orchestration and process modeling tools
+
+## [2025-10-03]
+
+### Added
+- Comprehensive best practices documentation for 8 technologies:
   - **RestAssured** - Java REST API testing library (testing/restassured.md)
   - **k6** - Modern load testing tool (testing/k6.md)
   - **Alpine.js** - Lightweight JavaScript framework (frontend/alpinejs.md)
