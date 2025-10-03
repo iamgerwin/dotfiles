@@ -8,6 +8,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Ruby and Rails development environment setup
+  - `ruby/` directory with complete Ruby/Rails configuration
+  - `ruby/setup.sh` - Automated Ruby and Rails installation script
+  - `ruby/.ruby-version` - Default Ruby version (3.3.6)
+  - `ruby/.gemrc` - Optimized gem configuration
+  - `ruby/README.md` - Comprehensive Ruby setup documentation
+- Ruby development dependencies to Brewfile:
+  - rbenv for Ruby version management
+  - ruby-build for installing Ruby versions
+  - OpenSSL, readline, libyaml for Ruby compilation
+  - Node.js and Yarn for Rails asset pipeline
+- Optional Ruby/Rails setup prompt in `setup.sh` and `scripts/adaptive-setup.sh`
+
+### Changed
+- Updated main README.md with Ruby & Rails Development section
+- Enhanced Brewfile with Ruby development tools and dependencies
+- Reorganized Ruby-related packages in Brewfile for better clarity
+- Removed redundant ruby-install package (replaced by ruby-build)
+
+## [2025-10-04]
+
+### Added
 - New workflow-automation category for business process management
 - New rust-frameworks category for Rust web and GUI frameworks
 - Comprehensive best practices documentation for 5 new technologies:

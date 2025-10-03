@@ -7,7 +7,16 @@ brew "bat" # Cat clone with syntax highlighting
 brew "bottom" # Yet another cross-platform graphical process/system monitor
 brew "btop" # Resource monitor that shows usage and stats
 brew "chezmoi" # Manage your dotfiles across multiple machines
-brew "ruby" # Ruby programming language
+
+# Ruby Development
+brew "rbenv" # Ruby version management
+brew "ruby-build" # Install various Ruby versions and implementations
+brew "openssl@3" # Cryptography and SSL/TLS toolkit
+brew "readline" # Library for command-line editing
+brew "libyaml" # YAML 1.1 parser and emitter
+brew "gmp" # GNU multiple precision arithmetic library (Ruby dependency)
+
+brew "ruby" # Ruby programming language (fallback system Ruby)
 brew "cocoapods" # Dependency manager for Swift and Objective-C
 brew "composer" # Dependency manager for PHP
 brew "coreutils" # GNU core utilities (adds gdate, gls, etc.)
@@ -37,6 +46,8 @@ brew "jq" # Lightweight and flexible command-line JSON processor
 brew "lazygit" # Simple terminal UI for git commands
 brew "mysql" # Open source relational database
 brew "neovim" # Hyperextensible Vim-based text editor
+brew "node" # Node.js JavaScript runtime
+brew "yarn" # JavaScript package manager
 brew "nvm" # Node Version Manager
 brew "nvtop" # GPU process monitoring for NVIDIA GPUs
 brew "pocketbase" # Open source backend in a single file
@@ -45,7 +56,6 @@ brew "pyenv" # Python version management
 brew "python@3.12" # Python programming language v3.12
 brew "python@3.9" # Python programming language v3.9
 brew "ripgrep" # Recursively search directories for a regex pattern
-brew "ruby-install" # Install Ruby, JRuby, Rubinius, TruffleRuby, or mruby
 brew "sd" # Intuitive find & replace CLI (sed alternative)
 brew "stow" # Symlink farm manager
 brew "tealdeer" # Fast tldr client written in Rust

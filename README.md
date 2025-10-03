@@ -17,7 +17,8 @@ This repository contains my personal dotfiles configuration, designed with modul
 - **Version Control**: All configurations tracked in Git for easy rollback and history
 - **Oh My Zsh Integration**: Pre-configured with useful plugins and Powerlevel10k theme
 - **Neovim Configuration**: Modern IDE-like setup with LSP, Treesitter, and productivity plugins
-- **Development Tools**: NVM, Pyenv, Herd PHP, and other development environment managers
+- **Development Tools**: NVM, Pyenv, rbenv, Herd PHP, and other development environment managers
+- **Ruby & Rails Setup**: Automated Ruby version management with rbenv and Rails installation
 - **Laravel/PHP Ready**: Aliases and tools for Laravel development workflow
 - **Custom Preservation**: Automatically detects and preserves your existing aliases, functions, and tools
 - **Git Profile Management**: Manage multiple Git identities (personal, work) with SSH keys and GitHub CLI integration
@@ -41,6 +42,11 @@ dotfiles/
 ├── p10k.zsh            # Powerlevel10k prompt configuration
 ├── tmux.conf           # Tmux configuration with best practices
 ├── nvim/               # Neovim configuration with LSP and plugins
+├── ruby/               # Ruby and Rails setup configuration
+│   ├── .ruby-version   # Default Ruby version (3.3.6)
+│   ├── .gemrc          # Gem configuration (skip docs, concurrent downloads)
+│   ├── setup.sh        # Automated Ruby/Rails installation script
+│   └── README.md       # Ruby setup documentation
 ├── Brewfile            # Homebrew package definitions
 ├── AI_PROMPTS.md       # AI prompts management documentation
 ├── TEMPLATES.md        # Quick reference for all prompt templates
@@ -417,6 +423,46 @@ ght                     # gh auth token
 ```
 
 These aliases work seamlessly with the Git Profile Management system for managing multiple GitHub accounts.
+
+### Ruby & Rails Development
+
+Automated Ruby and Rails setup with rbenv for version management:
+
+```bash
+# Run automated setup (installs Ruby 3.3.6 and latest Rails)
+~/dotfiles/ruby/setup.sh
+
+# Verify installation
+ruby -v                 # Check Ruby version
+rails -v                # Check Rails version
+which ruby              # Should show: ~/.rbenv/shims/ruby
+
+# Manage Ruby versions
+rbenv install --list    # List available versions
+rbenv install 3.2.0     # Install specific version
+rbenv versions          # List installed versions
+rbenv global 3.3.6      # Set global version
+rbenv local 3.2.0       # Set project-specific version
+
+# Create new Rails app
+rails new myapp
+cd myapp
+bundle install
+rails server
+
+# Project-specific Ruby version
+echo "3.3.6" > .ruby-version
+cd .  # Activate version
+```
+
+**Features:**
+- rbenv for lightweight Ruby version management
+- Automatic dependency installation (OpenSSL, readline, libyaml)
+- Optimized gem configuration (skip docs, concurrent downloads)
+- Latest Ruby LTS (3.3.6) and Rails (7.2.x)
+- Node.js and Yarn for Rails asset pipeline
+
+See [ruby/README.md](ruby/README.md) for complete documentation and troubleshooting.
 
 ### AI Prompts Management
 
