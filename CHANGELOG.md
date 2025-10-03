@@ -32,6 +32,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - System Python 3.12 remains available as fallback
 
 ### Added
+- Python, FastAPI, and Django development environment setup
+  - `python/` directory with complete Python development configuration
+  - `python/setup.sh` - Automated Python/FastAPI/Django installation script
+  - `python/.python-version` - Default Python version (3.12.8)
+  - `python/README.md` - Comprehensive Python setup documentation
+- Python setup installs:
+  - Python 3.12.8 via pyenv
+  - FastAPI with uvicorn ASGI server
+  - Django with REST framework and common extensions
+  - Development tools: black, flake8, mypy, pylint, poetry
+  - Testing frameworks: pytest, pytest-asyncio, httpx
+- Optional Python/FastAPI/Django setup prompt in `setup.sh` and `scripts/adaptive-setup.sh`
 - Ruby and Rails development environment setup
   - `ruby/` directory with complete Ruby/Rails configuration
   - `ruby/setup.sh` - Automated Ruby and Rails installation script
@@ -44,7 +56,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - OpenSSL, readline, libyaml for Ruby compilation
   - Node.js and Yarn for Rails asset pipeline
 - Optional Ruby/Rails setup prompt in `setup.sh` and `scripts/adaptive-setup.sh`
-- Python Development section in README.md with pyenv usage examples
 
 ### Changed (Previous)
 - Updated main README.md with Ruby & Rails Development section

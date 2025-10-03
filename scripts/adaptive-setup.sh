@@ -623,6 +623,34 @@ main() {
     fi
     echo
 
+    # Optional Python, FastAPI, and Django setup
+    print_header "Optional: Python, FastAPI & Django Setup"
+    print_info "Would you like to set up Python development environment?"
+    echo "  This will install:"
+    echo "  • Python via pyenv (version manager)"
+    echo "  • Latest stable Python version (3.12.8)"
+    echo "  • FastAPI with uvicorn server"
+    echo "  • Django with REST framework"
+    echo "  • Development tools (black, flake8, mypy, poetry)"
+    echo
+    read -p "Install Python, FastAPI, and Django? (y/n) " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        if [[ -x "$DOTFILES_DIR/python/setup.sh" ]]; then
+            print_info "Running Python, FastAPI, and Django setup..."
+            "$DOTFILES_DIR/python/setup.sh"
+            print_success "Python, FastAPI, and Django setup complete!"
+        else
+            print_warning "Python setup script not found at $DOTFILES_DIR/python/setup.sh"
+            print_info "You can run it manually later:"
+            echo "  cd ~/dotfiles && ./python/setup.sh"
+        fi
+    else
+        print_info "Skipping Python, FastAPI, and Django setup"
+        print_info "You can run it later with: ~/dotfiles/python/setup.sh"
+    fi
+    echo
+
     print_header "Adaptive Setup Complete!"
     
     print_success "Your environment has been preserved and enhanced!"
