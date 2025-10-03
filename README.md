@@ -47,6 +47,10 @@ dotfiles/
 │   ├── .gemrc          # Gem configuration (skip docs, concurrent downloads)
 │   ├── setup.sh        # Automated Ruby/Rails installation script
 │   └── README.md       # Ruby setup documentation
+├── python/             # Python, FastAPI, and Django setup configuration
+│   ├── .python-version # Default Python version (3.12.8)
+│   ├── setup.sh        # Automated Python/FastAPI/Django installation script
+│   └── README.md       # Python setup documentation
 ├── Brewfile            # Homebrew package definitions
 ├── AI_PROMPTS.md       # AI prompts management documentation
 ├── TEMPLATES.md        # Quick reference for all prompt templates
@@ -463,6 +467,70 @@ cd .  # Activate version
 - Node.js and Yarn for Rails asset pipeline
 
 See [ruby/README.md](ruby/README.md) for complete documentation and troubleshooting.
+
+### Python, FastAPI, and Django Development
+
+Automated Python development setup with pyenv for version management, including FastAPI and Django frameworks:
+
+```bash
+# Run automated setup (installs Python 3.12.8, FastAPI, and Django)
+~/dotfiles/python/setup.sh
+
+# Verify installation
+python --version            # Check Python version
+pip --version               # Check pip version
+which python                # Should show: ~/.pyenv/shims/python
+
+# Verify frameworks
+python -c "import fastapi; print(fastapi.__version__)"
+python -c "import django; print(django.get_version())"
+
+# Manage Python versions
+pyenv install --list        # List available versions
+pyenv install 3.11.0        # Install specific version
+pyenv versions              # List installed versions
+pyenv global 3.12.8         # Set global version
+pyenv local 3.11.0          # Set project-specific version
+
+# Create FastAPI project
+mkdir myapi && cd myapi
+python -m venv venv
+source venv/bin/activate
+pip install fastapi uvicorn[standard]
+uvicorn main:app --reload
+
+# Create Django project
+django-admin startproject myproject
+cd myproject
+python manage.py migrate
+python manage.py runserver
+
+# Project-specific Python version
+echo "3.12.8" > .python-version
+cd .  # Activate version
+```
+
+**Features:**
+- pyenv for lightweight Python version management
+- Python 3.12.8 (latest stable LTS)
+- FastAPI with uvicorn for modern async APIs
+- Django with REST framework and common dependencies
+- Development tools: black, flake8, mypy, poetry
+- System Python 3.12 as fallback (installed via Homebrew)
+- Virtual environment support (venv and Poetry)
+
+**Installed Packages:**
+- **FastAPI**: Modern async web framework
+- **Django**: Full-featured web framework
+- **uvicorn**: ASGI server for FastAPI
+- **djangorestframework**: API toolkit for Django
+- **Poetry**: Modern dependency management
+- **Testing**: pytest, pytest-asyncio, httpx
+- **Code Quality**: black, flake8, mypy, pylint
+
+See [python/README.md](python/README.md) for complete documentation and troubleshooting.
+
+**Note:** For local development environments previously using MAMP or XAMPP, consider using Laravel Herd for PHP development or Docker containers for full-stack applications.
 
 ### AI Prompts Management
 
