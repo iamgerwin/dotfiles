@@ -36,7 +36,6 @@ brew "fzf" # Command-line fuzzy finder
 brew "gh" # Cat clone with syntax highlighting
 brew "git" # Distributed version control system
 brew "git-delta" # Syntax-highlighting pager for git and diff output
-brew "python@3.13" # Python programming language v3.13
 brew "git-filter-repo" # Quickly rewrite git repository history
 brew "glances" # Cross-platform system monitoring tool
 brew "grpc" # Next generation RPC framework
@@ -54,7 +53,6 @@ brew "pocketbase" # Open source backend in a single file
 brew "procs" # Modern replacement for ps written in Rust
 brew "pyenv" # Python version management
 brew "python@3.12" # Python programming language v3.12
-brew "python@3.9" # Python programming language v3.9
 brew "ripgrep" # Recursively search directories for a regex pattern
 brew "sd" # Intuitive find & replace CLI (sed alternative)
 brew "stow" # Symlink farm manager
@@ -109,10 +107,8 @@ cask "lastpass" # Password manager
 cask "logi-options+" # Software for Logitech devices (new version)
 cask "logitech-options" # Software for Logitech devices
 cask "macs-fan-control" # Control fans on Apple computers
-cask "mamp" # Web development solution with Apache, Nginx, PHP & MySQL
 cask "notion" # All-in-one workspace for notes and collaboration
 cask "opera" # Web browser with built-in VPN
-cask "opera-air" # Simplified browser for everyday browsing
 cask "postman" # API development and testing platform
 cask "rustdesk" # Remote desktop software
 cask "skype" # Video chat and messaging
@@ -130,7 +126,6 @@ cask "wave" # AI-powered terminal
 cask "whatsapp" # Messaging app
 cask "windsurf" # AI-powered code editor
 cask "wombat" # Cross-platform file manager
-cask "xampp" # Apache, MariaDB, PHP and Perl package
 cask "zed" # Application for building and sharing containerized applications
 cask "zen" # Sort of like top or htop but with zoom-able charts
 

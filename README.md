@@ -464,6 +464,50 @@ cd .  # Activate version
 
 See [ruby/README.md](ruby/README.md) for complete documentation and troubleshooting.
 
+### Python Development
+
+Python version management with pyenv for flexible development environments:
+
+```bash
+# List available Python versions
+pyenv install --list
+
+# Install specific Python version
+pyenv install 3.12.0
+
+# List installed versions
+pyenv versions
+
+# Set global Python version
+pyenv global 3.12.0
+
+# Set local (project-specific) Python version
+pyenv local 3.11.0
+
+# Display current Python version
+pyenv version
+
+# Verify installation
+python --version
+which python              # Should show: ~/.pyenv/shims/python
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate
+
+# Project-specific Python version
+echo "3.12.0" > .python-version
+cd .  # Activate version
+```
+
+**Features:**
+- pyenv for lightweight Python version management
+- System Python 3.12 as fallback (installed via Homebrew)
+- Project-specific version control via `.python-version` files
+- Compatible with virtual environments and pip
+
+**Note:** For local development environments previously using MAMP or XAMPP, consider using Laravel Herd for PHP development or Docker containers for full-stack applications.
+
 ### AI Prompts Management
 
 Manage AI prompts and context scripts organized by company/project:
