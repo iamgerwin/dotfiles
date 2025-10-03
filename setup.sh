@@ -534,7 +534,34 @@ main() {
     configure_git
     setup_oh_my_zsh
     final_setup
-    
+
+    # Optional Ruby and Rails setup
+    print_header "Optional: Ruby & Rails Setup"
+    print_info "Would you like to set up Ruby and Rails development environment?"
+    echo "  This will install:"
+    echo "  • Ruby via rbenv (version manager)"
+    echo "  • Latest stable Ruby version (3.3.6)"
+    echo "  • Latest stable Rails version"
+    echo "  • Required build dependencies"
+    echo
+    read -p "Install Ruby and Rails? (y/n) " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        if [[ -x "$DOTFILES_DIR/ruby/setup.sh" ]]; then
+            print_info "Running Ruby and Rails setup..."
+            "$DOTFILES_DIR/ruby/setup.sh"
+            print_success "Ruby and Rails setup complete!"
+        else
+            print_warning "Ruby setup script not found at $DOTFILES_DIR/ruby/setup.sh"
+            print_info "You can run it manually later:"
+            echo "  cd ~/dotfiles && ./ruby/setup.sh"
+        fi
+    else
+        print_info "Skipping Ruby and Rails setup"
+        print_info "You can run it later with: ~/dotfiles/ruby/setup.sh"
+    fi
+    echo
+
     print_header "Installation Complete!"
     
     echo "Your development environment has been set up successfully!"

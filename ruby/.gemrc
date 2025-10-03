@@ -1,0 +1,17 @@
+---
+# Optimize gem installation
+gem: --no-document
+install: --no-document
+update: --no-document
+
+# Use system OpenSSL
+:ssl_verify_mode: 1
+
+# Concurrent downloads
+:concurrent_downloads: 8
+
+# Backtrace on errors
+:backtrace: false
+
+# Verbose output
+:verbose: false
