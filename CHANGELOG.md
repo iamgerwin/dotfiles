@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Elixir, Phoenix, and Ash development environment setup
+  - `elixir/` directory with complete Elixir development configuration
+  - `elixir/setup.sh` - Automated Elixir/Phoenix/Ash installation script
+  - `elixir/.tool-versions` - Default Erlang/Elixir versions (27.2/1.18.1-otp-27)
+  - `elixir/README.md` - Comprehensive Elixir setup documentation
+- Elixir setup installs:
+  - Erlang 27.2 via asdf with optimized compilation
+  - Elixir 1.18.1-otp-27 via asdf
+  - Phoenix framework with mix archive
+  - Hex package manager and Rebar3 build tool
+  - Support for Phoenix and Ash framework development
+- asdf version manager to Brewfile for multi-language version management
+- Erlang build dependencies to Brewfile:
+  - autoconf for configure script building
+  - wxwidgets for GUI toolkit (Erlang observer)
+  - libxslt for XML transformation
+  - fop for documentation formatting
+  - unixodbc for database connectivity
+
+### Changed
+- Removed standalone `elixir` package from Brewfile (replaced with asdf-managed installation)
+- Updated main README.md with Elixir, Phoenix, and Ash Development section
+- Enhanced Features list with asdf version manager support
+- Updated directory structure documentation to include elixir/ setup
+
 ### Removed (Breaking Changes)
 - **XAMPP** cask - Legacy Apache/MySQL/PHP package
 - **MAMP** cask - Legacy web development solution
