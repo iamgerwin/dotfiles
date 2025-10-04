@@ -17,7 +17,8 @@ This repository contains my personal dotfiles configuration, designed with modul
 - **Version Control**: All configurations tracked in Git for easy rollback and history
 - **Oh My Zsh Integration**: Pre-configured with useful plugins and Powerlevel10k theme
 - **Neovim Configuration**: Modern IDE-like setup with LSP, Treesitter, and productivity plugins
-- **Development Tools**: NVM, Pyenv, rbenv, Herd PHP, and other development environment managers
+- **Development Tools**: NVM, Pyenv, rbenv, asdf, Herd PHP, and other development environment managers
+- **Elixir & Phoenix Setup**: Automated Elixir/Erlang version management with asdf for Phoenix and Ash development
 - **Ruby & Rails Setup**: Automated Ruby version management with rbenv and Rails installation
 - **Laravel/PHP Ready**: Aliases and tools for Laravel development workflow
 - **Custom Preservation**: Automatically detects and preserves your existing aliases, functions, and tools
@@ -42,6 +43,10 @@ dotfiles/
 ├── p10k.zsh            # Powerlevel10k prompt configuration
 ├── tmux.conf           # Tmux configuration with best practices
 ├── nvim/               # Neovim configuration with LSP and plugins
+├── elixir/             # Elixir, Phoenix, and Ash setup configuration
+│   ├── .tool-versions  # Default Erlang/Elixir versions (27.2/1.18.1)
+│   ├── setup.sh        # Automated Elixir/Phoenix/Ash installation script
+│   └── README.md       # Elixir setup documentation
 ├── ruby/               # Ruby and Rails setup configuration
 │   ├── .ruby-version   # Default Ruby version (3.3.6)
 │   ├── .gemrc          # Gem configuration (skip docs, concurrent downloads)
@@ -427,6 +432,63 @@ ght                     # gh auth token
 ```
 
 These aliases work seamlessly with the Git Profile Management system for managing multiple GitHub accounts.
+
+### Elixir, Phoenix, and Ash Development
+
+Automated Elixir and Phoenix setup with asdf for version management, targeting Phoenix and Ash framework development:
+
+```bash
+# Run automated setup (installs Erlang 27.2 and Elixir 1.18.1)
+~/dotfiles/elixir/setup.sh
+
+# Verify installation
+elixir --version            # Check Elixir and Erlang versions
+mix --version               # Check Mix build tool
+which elixir                # Should show: ~/.asdf/shims/elixir
+
+# Verify Phoenix installation
+mix phx.new --version       # Check Phoenix version
+
+# Manage Elixir/Erlang versions
+asdf list all erlang        # List available Erlang versions
+asdf list all elixir        # List available Elixir versions
+asdf install erlang 27.2    # Install specific Erlang version
+asdf install elixir 1.18.1-otp-27  # Install specific Elixir version
+asdf global erlang 27.2     # Set global Erlang version
+asdf global elixir 1.18.1-otp-27   # Set global Elixir version
+
+# Create new Phoenix app
+mix phx.new myapp
+cd myapp
+mix deps.get
+mix ecto.create
+mix phx.server
+
+# Create Phoenix API
+mix phx.new myapi --no-html --no-assets
+
+# Project-specific versions
+echo "erlang 27.2" > .tool-versions
+echo "elixir 1.18.1-otp-27" >> .tool-versions
+cd .  # Activate versions
+```
+
+**Features:**
+- asdf for multi-language version management
+- Erlang/OTP 27.2 with optimized compilation
+- Elixir 1.18.1 with OTP 27 compatibility
+- Phoenix framework for web applications
+- Hex package manager and Rebar3 build tool
+- Ready for Phoenix and Ash framework development
+- Automatic dependency installation (wxwidgets, openssl, etc.)
+
+**Frameworks Supported:**
+- **Phoenix**: Web framework for building APIs and full-stack applications
+- **Ash**: Declarative, resource-based framework for robust APIs
+- **LiveView**: Real-time server-rendered apps (included in Phoenix)
+- **Ecto**: Database wrapper and query DSL
+
+See [elixir/README.md](elixir/README.md) for complete documentation, Phoenix setup, Ash framework guide, and troubleshooting.
 
 ### Ruby & Rails Development
 

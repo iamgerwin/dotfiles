@@ -8,6 +8,14 @@ brew "bottom" # Yet another cross-platform graphical process/system monitor
 brew "btop" # Resource monitor that shows usage and stats
 brew "chezmoi" # Manage your dotfiles across multiple machines
 
+# Elixir Development
+brew "asdf" # Extendable version manager for multiple languages
+brew "autoconf" # Automatic configure script builder (Erlang dependency)
+brew "wxwidgets" # Cross-platform GUI toolkit (Erlang dependency)
+brew "libxslt" # XSLT library (Erlang dependency)
+brew "fop" # XSL-FO print formatter (Erlang dependency)
+brew "unixodbc" # ODBC 3 connectivity for UNIX (Erlang dependency)
+
 # Ruby Development
 brew "rbenv" # Ruby version management
 brew "ruby-build" # Install various Ruby versions and implementations
@@ -26,7 +34,6 @@ brew "docker" # Docker bash completion
 brew "docker-compose" # Define and run multi-container applications
 brew "dust" # More intuitive version of du written in Rust
 brew "duti" # Set default applications for document types on macOS
-brew "elixir" # Dynamic, functional language for building scalable applications
 brew "eza" # Modern replacement for ls
 brew "fd" # Simple, fast alternative to find
 brew "fish" # User-friendly command line shell
