@@ -28,7 +28,7 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **PHP**: PSR Standards, Best Practices, Swoole, Laravel Octane, PHPStan (static analysis)
 
 ### Mobile
-- **Cross-Platform**: Flutter, React Native, .NET MAUI
+- **Cross-Platform**: Flutter, React Native, .NET MAUI, Ionic (hybrid framework with web technologies)
 - **Native**: Swift (iOS), Kotlin (Android)
 
 ### Database
@@ -44,11 +44,13 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **Backend as a Service**: Appwrite, Supabase, PocketBase
 
 ### Automation & Workflow
+- **RPA**: UiPath (enterprise robotic process automation platform)
 - **Workflow Automation**: N8N (fair-code workflow automation platform with visual programming)
 - **Process Orchestration**: Camunda (workflow and decision automation platform)
 - **Process Modeling**: BPMN 2.0 (Business Process Model and Notation standard)
 
 ### Build Tools
+- **Package Managers**: PNPM (fast, disk space-efficient package manager)
 - **Monorepo Management**: Turborepo (high-performance build system), Nx (extensible build system with first-class monorepo support)
 
 ### DevOps
