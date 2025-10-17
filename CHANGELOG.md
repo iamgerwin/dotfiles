@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Fixed update-all.sh script hanging on password prompts and unresponsive operations
+  - Added comprehensive timeout handling for all package manager operations
+  - Implemented non-interactive flags for Homebrew casks, Composer, RubyGems, and Oh My Zsh
+  - Added `run_with_timeout()` function for safe command execution with fallback support
+  - Changed script to continue on errors instead of stopping (removed `-e` flag)
+  - Added error tracking with `HAS_ERRORS` flag for better completion reporting
+  - Configurable timeout values for each package manager (60s-600s based on operation)
+  - Enhanced logging to track and report script completion status
+
 ### Added
 - Elixir, Phoenix, and Ash development environment setup
   - `elixir/` directory with complete Elixir development configuration
