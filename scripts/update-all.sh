@@ -132,11 +132,13 @@ run_with_timeout() {
     shift
     local cmd="$@"
     
+    # Use --kill-after to force kill if timeout is reached
+    # Use --foreground to ensure proper signal handling
     if command -v timeout >/dev/null 2>&1; then
-        timeout $timeout bash -c "$cmd"
+        timeout --foreground --kill-after=10 $timeout bash -c "$cmd"
         return $?
     elif command -v gtimeout >/dev/null 2>&1; then
-        gtimeout $timeout bash -c "$cmd"
+        gtimeout --foreground --kill-after=10 $timeout bash -c "$cmd"
         return $?
     else
         # Fallback without timeout
@@ -155,11 +157,18 @@ update_homebrew() {
     if [[ "$UPDATE_BREW" == true ]] && command_exists brew; then
         log_section "Updating Homebrew"
         
+        # Clean up any stale lock files before updating
+        local brew_prefix=$(brew --prefix 2>/dev/null)
+        if [[ -n "$brew_prefix" && -f "$brew_prefix/var/homebrew/locks/update" ]]; then
+            log_warning "Found stale Homebrew lock file, removing..."
+            rm -f "$brew_prefix/var/homebrew/locks/update" 2>/dev/null || true
+        fi
+        
         log_info "Updating Homebrew itself..."
         if $VERBOSE; then
             run_with_timeout $BREW_UPDATE_TIMEOUT "brew update" || log_warning "Homebrew update timed out or failed"
         else
-            run_with_timeout $BREW_UPDATE_TIMEOUT "brew update >/dev/null 2>&1" || log_warning "Homebrew update timed out or failed"
+            run_with_timeout $BREW_UPDATE_TIMEOUT "brew update 2>&1" || log_warning "Homebrew update timed out or failed"
         fi
         [[ $? -eq 0 ]] && log_success "Homebrew updated"
         
@@ -167,7 +176,7 @@ update_homebrew() {
         if $VERBOSE; then
             run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade" || log_warning "Some packages failed to upgrade"
         else
-            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade >/dev/null 2>&1" || log_warning "Some packages failed to upgrade"
+            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade 2>&1" || log_warning "Some packages failed to upgrade"
         fi
         [[ $? -eq 0 ]] && log_success "Homebrew packages upgraded"
         
@@ -175,7 +184,7 @@ update_homebrew() {
         if $VERBOSE; then
             run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy" || log_warning "Some casks failed to upgrade"
         else
-            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy >/dev/null 2>&1" || log_warning "Some casks failed to upgrade"
+            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy 2>&1" || log_warning "Some casks failed to upgrade"
         fi
         [[ $? -eq 0 ]] && log_success "Homebrew casks upgraded"
         
