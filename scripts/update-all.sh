@@ -11,7 +11,8 @@
 #     --no-cleanup    Skip cleanup operations
 #     --verbose       Show detailed output
 
-set -euo pipefail
+# Allow script to continue on errors but track them
+set -uo pipefail
 
 # Colors for output
 RED='\033[0;31m'
@@ -32,6 +33,18 @@ UPDATE_GEM=true
 UPDATE_COMPOSER=true
 UPDATE_RUST=true
 UPDATE_GO=true
+
+# Timeout configuration (in seconds)
+DEFAULT_TIMEOUT=300
+BREW_UPDATE_TIMEOUT=60
+BREW_UPGRADE_TIMEOUT=600
+NPM_TIMEOUT=300
+PIP_TIMEOUT=300
+GEM_TIMEOUT=300
+COMPOSER_TIMEOUT=300
+
+# Track script errors
+HAS_ERRORS=false
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
@@ -99,6 +112,7 @@ log_success() {
 
 log_error() {
     echo -e "${RED}✗${NC} $1"
+    HAS_ERRORS=true
 }
 
 log_warning() {
@@ -112,6 +126,27 @@ log_section() {
     echo -e "${PURPLE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 }
 
+# Safe command execution with timeout
+run_with_timeout() {
+    local timeout=$1
+    shift
+    local cmd="$@"
+    
+    # Use --kill-after to force kill if timeout is reached
+    # Use --foreground to ensure proper signal handling
+    if command -v timeout >/dev/null 2>&1; then
+        timeout --foreground --kill-after=10 $timeout bash -c "$cmd"
+        return $?
+    elif command -v gtimeout >/dev/null 2>&1; then
+        gtimeout --foreground --kill-after=10 $timeout bash -c "$cmd"
+        return $?
+    else
+        # Fallback without timeout
+        bash -c "$cmd"
+        return $?
+    fi
+}
+
 # Check if command exists
 command_exists() {
     command -v "$1" >/dev/null 2>&1
@@ -122,38 +157,45 @@ update_homebrew() {
     if [[ "$UPDATE_BREW" == true ]] && command_exists brew; then
         log_section "Updating Homebrew"
         
+        # Clean up any stale lock files before updating
+        local brew_prefix=$(brew --prefix 2>/dev/null)
+        if [[ -n "$brew_prefix" && -f "$brew_prefix/var/homebrew/locks/update" ]]; then
+            log_warning "Found stale Homebrew lock file, removing..."
+            rm -f "$brew_prefix/var/homebrew/locks/update" 2>/dev/null || true
+        fi
+        
         log_info "Updating Homebrew itself..."
         if $VERBOSE; then
-            timeout 30 brew update || log_warning "Homebrew update timed out or failed"
+            run_with_timeout $BREW_UPDATE_TIMEOUT "brew update" || log_warning "Homebrew update timed out or failed"
         else
-            timeout 30 brew update >/dev/null 2>&1 || log_warning "Homebrew update timed out or failed"
+            run_with_timeout $BREW_UPDATE_TIMEOUT "brew update 2>&1" || log_warning "Homebrew update timed out or failed"
         fi
         [[ $? -eq 0 ]] && log_success "Homebrew updated"
         
         log_info "Upgrading Homebrew packages..."
         if $VERBOSE; then
-            timeout 300 brew upgrade || log_warning "Some packages failed to upgrade"
+            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade" || log_warning "Some packages failed to upgrade"
         else
-            timeout 300 brew upgrade >/dev/null 2>&1 || log_warning "Some packages failed to upgrade"
+            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade 2>&1" || log_warning "Some packages failed to upgrade"
         fi
         [[ $? -eq 0 ]] && log_success "Homebrew packages upgraded"
         
-        log_info "Upgrading Homebrew casks..."
+        log_info "Upgrading Homebrew casks (non-interactive)..."
         if $VERBOSE; then
-            timeout 300 brew upgrade --cask || log_warning "Some casks failed to upgrade"
+            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy" || log_warning "Some casks failed to upgrade"
         else
-            timeout 300 brew upgrade --cask >/dev/null 2>&1 || log_warning "Some casks failed to upgrade"
+            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy 2>&1" || log_warning "Some casks failed to upgrade"
         fi
         [[ $? -eq 0 ]] && log_success "Homebrew casks upgraded"
         
         if [[ "$CLEANUP" == true ]]; then
             log_info "Cleaning up Homebrew..."
             if $VERBOSE; then
-                timeout 60 brew cleanup -s || log_warning "Cleanup incomplete"
-                timeout 60 brew autoremove || log_warning "Autoremove incomplete"
+                run_with_timeout 60 "brew cleanup -s" || log_warning "Cleanup incomplete"
+                run_with_timeout 60 "brew autoremove" || log_warning "Autoremove incomplete"
             else
-                timeout 60 brew cleanup -s >/dev/null 2>&1 || true
-                timeout 60 brew autoremove >/dev/null 2>&1 || true
+                run_with_timeout 60 "brew cleanup -s >/dev/null 2>&1" || true
+                run_with_timeout 60 "brew autoremove >/dev/null 2>&1" || true
             fi
             log_success "Homebrew cleaned up"
         fi
@@ -161,7 +203,7 @@ update_homebrew() {
         # Check for outdated packages (only if verbose mode)
         if $VERBOSE; then
             log_info "Checking for outdated packages..."
-            outdated=$(timeout 10 brew outdated 2>/dev/null || true)
+            outdated=$(run_with_timeout 10 "brew outdated 2>/dev/null" || true)
             if [[ -n "$outdated" ]]; then
                 log_warning "Some packages are still outdated:"
                 echo "$outdated"
@@ -179,19 +221,19 @@ update_npm() {
         
         log_info "Updating npm itself..."
         if $VERBOSE; then
-            npm install -g npm@latest
+            run_with_timeout $NPM_TIMEOUT "npm install -g npm@latest" || log_error "npm update failed or timed out"
         else
-            npm install -g npm@latest >/dev/null 2>&1
+            run_with_timeout $NPM_TIMEOUT "npm install -g npm@latest >/dev/null 2>&1" || log_error "npm update failed or timed out"
         fi
-        log_success "npm updated"
+        [[ $? -eq 0 ]] && log_success "npm updated"
         
         log_info "Updating global npm packages..."
         if $VERBOSE; then
-            npm update -g
+            run_with_timeout $NPM_TIMEOUT "npm update -g" || log_warning "Some npm packages failed to update"
         else
-            npm update -g >/dev/null 2>&1
+            run_with_timeout $NPM_TIMEOUT "npm update -g >/dev/null 2>&1" || log_warning "Some npm packages failed to update"
         fi
-        log_success "Global npm packages updated"
+        [[ $? -eq 0 ]] && log_success "Global npm packages updated"
         
         # List outdated global packages
         log_info "Checking for outdated npm packages..."
@@ -231,11 +273,11 @@ update_pip() {
 
         log_info "Updating pip itself..."
         if $VERBOSE; then
-            pip3 install --upgrade $PIP_USER_FLAG pip || {
+            run_with_timeout $PIP_TIMEOUT "pip3 install --upgrade $PIP_USER_FLAG pip" || {
                 log_warning "Could not update pip (may be externally managed)"
             }
         else
-            pip3 install --upgrade $PIP_USER_FLAG pip >/dev/null 2>&1 || {
+            run_with_timeout $PIP_TIMEOUT "pip3 install --upgrade $PIP_USER_FLAG pip >/dev/null 2>&1" || {
                 log_warning "Could not update pip (may be externally managed)"
             }
         fi
@@ -249,19 +291,19 @@ update_pip() {
             if [[ -n "$PIP_USER_FLAG" ]]; then
                 log_info "Upgrading user packages..."
                 if $VERBOSE; then
-                    pip3 install --upgrade $PIP_USER_FLAG $outdated || {
+                    run_with_timeout $PIP_TIMEOUT "pip3 install --upgrade $PIP_USER_FLAG $outdated" || {
                         log_warning "Some packages could not be upgraded"
                     }
                 else
-                    pip3 install --upgrade $PIP_USER_FLAG $outdated >/dev/null 2>&1 || {
+                    run_with_timeout $PIP_TIMEOUT "pip3 install --upgrade $PIP_USER_FLAG $outdated >/dev/null 2>&1" || {
                         log_warning "Some packages could not be upgraded"
                     }
                 fi
             else
                 if $VERBOSE; then
-                    pip3 install --upgrade $outdated
+                    run_with_timeout $PIP_TIMEOUT "pip3 install --upgrade $outdated" || log_warning "Some packages could not be upgraded"
                 else
-                    pip3 install --upgrade $outdated >/dev/null 2>&1
+                    run_with_timeout $PIP_TIMEOUT "pip3 install --upgrade $outdated >/dev/null 2>&1" || log_warning "Some packages could not be upgraded"
                 fi
             fi
             log_success "Python packages update completed"
@@ -301,29 +343,24 @@ update_gems() {
             return
         fi
 
-        log_info "Updating RubyGems system..."
+        log_info "Updating RubyGems system (non-interactive)..."
         if $VERBOSE; then
-            gem update --system || {
-                error_msg=$?
-                if [[ $error_msg -eq 1 ]]; then
-                    log_warning "Permission denied updating RubyGems (may need sudo or different Ruby)"
-                else
-                    log_warning "Could not update RubyGems system"
-                fi
+            run_with_timeout $GEM_TIMEOUT "gem update --system --no-document" || {
+                log_warning "Could not update RubyGems system (check permissions or use rbenv/rvm)"
             }
         else
-            gem update --system >/dev/null 2>&1 || {
+            run_with_timeout $GEM_TIMEOUT "gem update --system --no-document >/dev/null 2>&1" || {
                 log_warning "Could not update RubyGems system (check permissions)"
             }
         fi
 
-        log_info "Updating installed gems..."
+        log_info "Updating installed gems (non-interactive)..."
         if $VERBOSE; then
-            gem update --user-install 2>/dev/null || gem update 2>/dev/null || {
+            run_with_timeout $GEM_TIMEOUT "gem update --user-install --no-document 2>/dev/null || gem update --no-document 2>/dev/null" || {
                 log_warning "Could not update gems (check permissions)"
             }
         else
-            gem update --user-install >/dev/null 2>&1 || gem update >/dev/null 2>&1 || {
+            run_with_timeout $GEM_TIMEOUT "gem update --user-install --no-document >/dev/null 2>&1 || gem update --no-document >/dev/null 2>&1" || {
                 log_warning "Could not update gems"
             }
         fi
@@ -349,18 +386,18 @@ update_composer() {
     if [[ "$UPDATE_COMPOSER" == true ]] && command_exists composer; then
         log_section "Updating Composer packages"
 
-        log_info "Updating Composer itself..."
+        log_info "Updating Composer itself (non-interactive)..."
         if $VERBOSE; then
-            composer self-update || log_warning "Could not update Composer"
+            run_with_timeout $COMPOSER_TIMEOUT "composer self-update --no-interaction" || log_warning "Could not update Composer"
         else
-            composer self-update >/dev/null 2>&1 || log_warning "Could not update Composer"
+            run_with_timeout $COMPOSER_TIMEOUT "composer self-update --no-interaction >/dev/null 2>&1" || log_warning "Could not update Composer"
         fi
 
-        log_info "Updating global Composer packages..."
+        log_info "Updating global Composer packages (non-interactive)..."
         if $VERBOSE; then
-            composer global update || log_warning "Could not update global Composer packages"
+            run_with_timeout $COMPOSER_TIMEOUT "composer global update --no-interaction" || log_warning "Could not update global Composer packages"
         else
-            composer global update >/dev/null 2>&1 || log_warning "Could not update global Composer packages"
+            run_with_timeout $COMPOSER_TIMEOUT "composer global update --no-interaction >/dev/null 2>&1" || log_warning "Could not update global Composer packages"
         fi
 
         if [[ "$CLEANUP" == true ]]; then
@@ -445,13 +482,14 @@ update_oh_my_zsh() {
     if [[ -d "$HOME/.oh-my-zsh" ]]; then
         log_section "Updating Oh My Zsh"
         
-        log_info "Updating Oh My Zsh..."
+        log_info "Updating Oh My Zsh (non-interactive)..."
+        # Set RUNZSH=no to prevent interactive shell launch
         if $VERBOSE; then
-            env ZSH="$HOME/.oh-my-zsh" sh "$HOME/.oh-my-zsh/tools/upgrade.sh"
+            run_with_timeout 60 "RUNZSH=no ZSH=\"$HOME/.oh-my-zsh\" sh \"$HOME/.oh-my-zsh/tools/upgrade.sh\"" || log_warning "Oh My Zsh update failed or timed out"
         else
-            env ZSH="$HOME/.oh-my-zsh" sh "$HOME/.oh-my-zsh/tools/upgrade.sh" >/dev/null 2>&1
+            run_with_timeout 60 "RUNZSH=no ZSH=\"$HOME/.oh-my-zsh\" sh \"$HOME/.oh-my-zsh/tools/upgrade.sh\" >/dev/null 2>&1" || log_warning "Oh My Zsh update failed or timed out"
         fi
-        log_success "Oh My Zsh updated"
+        [[ $? -eq 0 ]] && log_success "Oh My Zsh updated"
     fi
 }
 
@@ -516,10 +554,17 @@ main() {
     seconds=$((duration % 60))
     
     echo ""
-    echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-    echo -e "${GREEN}✓ All updates completed successfully!${NC}"
-    echo -e "${GREEN}  Time taken: ${minutes}m ${seconds}s${NC}"
-    echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    if [[ "$HAS_ERRORS" == true ]]; then
+        echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+        echo -e "${YELLOW}⚠ Updates completed with some errors or warnings${NC}"
+        echo -e "${YELLOW}  Time taken: ${minutes}m ${seconds}s${NC}"
+        echo -e "${YELLOW}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    else
+        echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+        echo -e "${GREEN}✓ All updates completed successfully!${NC}"
+        echo -e "${GREEN}  Time taken: ${minutes}m ${seconds}s${NC}"
+        echo -e "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
+    fi
     
     # Reminder
     echo ""
@@ -527,6 +572,12 @@ main() {
     echo "  • Restart your terminal for some changes to take effect"
     echo "  • Check for any manual updates mentioned above"
     echo "  • Review any warnings or errors"
+    
+    if [[ "$HAS_ERRORS" == true ]]; then
+        echo ""
+        log_warning "Script completed with errors. Review the output above for details."
+        return 1
+    fi
 }
 
 # Run main function
