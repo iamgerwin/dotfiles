@@ -33,6 +33,14 @@ UPDATE_GEM=true
 UPDATE_COMPOSER=true
 UPDATE_RUST=true
 UPDATE_GO=true
+REMEDIATE_CASKS=true
+
+# Cask remediation configuration
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+DEFAULT_CASK_IGNORE_FILE="$REPO_ROOT/.dotfiles-cask-ignore"
+CASK_IGNORE_FILE="${CASK_IGNORE_FILE:-$DEFAULT_CASK_IGNORE_FILE}"
+declare -a CASK_IGNORE_LIST=()
 
 # Timeout configuration (in seconds)
 DEFAULT_TIMEOUT=300
@@ -80,6 +88,10 @@ while [[ $# -gt 0 ]]; do
             CLEANUP=false
             shift
             ;;
+        --cask-no-remediation)
+            REMEDIATE_CASKS=false
+            shift
+            ;;
         --verbose)
             VERBOSE=true
             shift
@@ -91,6 +103,7 @@ while [[ $# -gt 0 ]]; do
             echo "  --npm-only      Only update npm packages"
             echo "  --pip-only      Only update pip packages"
             echo "  --no-cleanup    Skip cleanup operations"
+            echo "  --cask-no-remediation  Skip cask remediation logic"
             echo "  --verbose       Show detailed output"
             exit 0
             ;;
@@ -152,6 +165,124 @@ command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
 
+# Load ignore list for problematic casks
+load_cask_ignore_list() {
+    if [[ -f "$CASK_IGNORE_FILE" ]]; then
+        while IFS= read -r line; do
+            # ignore comments and blanks
+            [[ -z "$line" || "$line" =~ ^# ]] && continue
+            CASK_IGNORE_LIST+=("$line")
+        done < "$CASK_IGNORE_FILE"
+        if (( ${#CASK_IGNORE_LIST[@]} > 0 )); then
+            log_info "Loaded cask ignore list from $CASK_IGNORE_FILE: ${CASK_IGNORE_LIST[*]}"
+        fi
+    fi
+}
+
+is_cask_ignored() {
+    local target="$1"
+    for c in "${CASK_IGNORE_LIST[@]}"; do
+        if [[ "$c" == "$target" ]]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+brew_cask_installed() {
+    brew list --cask --versions "$1" >/dev/null 2>&1
+}
+
+brewfile_has_cask() {
+    # basic grep on Brewfile in repo root
+    grep -E "^cask \"$1\"" "$REPO_ROOT/Brewfile" >/dev/null 2>&1
+}
+
+retry_brew_cask() {
+    local cask="$1"
+    local attempted_uninstall="${2:-false}"
+
+    if is_cask_ignored "$cask"; then
+        log_warning "Skipping $cask (in ignore list)"
+        return 0
+    fi
+
+    log_info "Reinstalling cask: $cask"
+    if $VERBOSE; then
+        run_with_timeout $BREW_UPGRADE_TIMEOUT "brew reinstall --cask --force $cask"
+    else
+        run_with_timeout $BREW_UPGRADE_TIMEOUT "brew reinstall --cask --force $cask >/dev/null 2>&1"
+    fi
+    local rc=$?
+    if [[ $rc -eq 0 ]]; then
+        log_success "$cask reinstalled"
+        return 0
+    fi
+
+    if [[ "$attempted_uninstall" == false ]]; then
+        log_warning "$cask reinstall failed; trying uninstall + install"
+        if $VERBOSE; then
+            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew uninstall --cask --force $cask" || true
+            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew install --cask $cask"
+        else
+            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew uninstall --cask --force $cask >/dev/null 2>&1" || true
+            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew install --cask $cask >/dev/null 2>&1"
+        fi
+        if [[ $? -eq 0 ]]; then
+            log_success "$cask reinstalled via uninstall+install"
+            return 0
+        fi
+    fi
+
+    log_warning "Failed to remediate $cask; skipping"
+    HAS_ERRORS=true
+    return 1
+}
+
+remediate_problem_casks() {
+    [[ "$REMEDIATE_CASKS" != true ]] && return 0
+
+    # Load ignore list once
+    load_cask_ignore_list
+
+    log_section "Remediating problematic Homebrew casks"
+
+    # Known problematic casks observed in CI/local runs
+    local candidates=(
+        alt-tab
+        arc
+        firefox@developer-edition
+        vivaldi
+        opera
+        skype
+    )
+
+    for c in "${candidates[@]}"; do
+        # Only touch if installed or present in Brewfile
+        if brew_cask_installed "$c" || brewfile_has_cask "$c"; then
+            if [[ "$c" == "opera" ]]; then
+                log_info "Handling special case for opera (Caskroom conflicts)"
+                if $VERBOSE; then
+                    run_with_timeout $BREW_UPGRADE_TIMEOUT "brew uninstall --cask --force opera" || true
+                    run_with_timeout $BREW_UPGRADE_TIMEOUT "brew install --cask opera" || log_warning "opera install failed"
+                else
+                    run_with_timeout $BREW_UPGRADE_TIMEOUT "brew uninstall --cask --force opera >/dev/null 2>&1" || true
+                    run_with_timeout $BREW_UPGRADE_TIMEOUT "brew install --cask opera >/dev/null 2>&1" || log_warning "opera install failed"
+                fi
+                continue
+            fi
+
+            # skype often has transient download failures: try once
+            if [[ "$c" == "skype" ]]; then
+                retry_brew_cask "$c" true || log_warning "skype remediation failed; leaving as-is"
+                continue
+            fi
+
+            retry_brew_cask "$c" || true
+        fi
+    done
+}
+
 # Update Homebrew and packages
 update_homebrew() {
     if [[ "$UPDATE_BREW" == true ]] && command_exists brew; then
@@ -187,6 +318,9 @@ update_homebrew() {
             run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy 2>&1" || log_warning "Some casks failed to upgrade"
         fi
         [[ $? -eq 0 ]] && log_success "Homebrew casks upgraded"
+
+        # Attempt remediation for common cask failures
+        remediate_problem_casks
         
         if [[ "$CLEANUP" == true ]]; then
             log_info "Cleaning up Homebrew..."
