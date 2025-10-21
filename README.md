@@ -199,6 +199,16 @@ Every installation automatically:
 
 For step-by-step instructions and troubleshooting, see [INSTALLATION.md](INSTALLATION.md)
 
+## Homebrew Cask Remediation
+
+The update script includes optional remediation for flaky/broken casks seen during `brew upgrade --cask --greedy`.
+
+- Default behavior: attempts a `reinstall --cask --force` and, if needed, `uninstall --cask --force` + `install` for a small set of known-problem casks.
+- Skip remediation: run `scripts/update-all.sh --cask-no-remediation`.
+- Ignore specific casks: create `.dotfiles-cask-ignore` at repo root and list tokens to skip (see `.dotfiles-cask-ignore.sample`).
+
+This reduces noise from transient vendor issues (e.g., Skype) and stale Caskroom conflicts (e.g., Opera).
+
 ## Configuration Files
 
 ### Core Modules

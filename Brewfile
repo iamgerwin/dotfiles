@@ -103,7 +103,7 @@ cask "font-jetbrains-mono-nerd-font" # JetBrains Mono patched with Nerd Font ico
 
 # macOS Applications
 cask "google-chrome" # Web browser
-cask "google-chrome@canary" # Experimental version of Chrome
+cask "google-chrome-canary" # Experimental version of Chrome
 cask "herd" # Laravel and PHP development environment
 cask "iina" # Modern media player for macOS
 cask "iterm2" # Terminal emulator for macOS
@@ -112,7 +112,6 @@ cask "jiggler" # Prevents sleep by jiggling the mouse
 cask "keyboardcleantool" # Temporarily disable keyboard for cleaning
 cask "lastpass" # Password manager
 cask "logi-options+" # Software for Logitech devices (new version)
-cask "logitech-options" # Software for Logitech devices
 cask "macs-fan-control" # Control fans on Apple computers
 cask "notion" # All-in-one workspace for notes and collaboration
 cask "opera" # Web browser with built-in VPN
