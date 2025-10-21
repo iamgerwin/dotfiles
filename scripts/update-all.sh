@@ -181,6 +181,10 @@ load_cask_ignore_list() {
 
 is_cask_ignored() {
     local target="$1"
+    # Check if array has elements to avoid unbound variable error
+    if (( ${#CASK_IGNORE_LIST[@]} == 0 )); then
+        return 1
+    fi
     for c in "${CASK_IGNORE_LIST[@]}"; do
         if [[ "$c" == "$target" ]]; then
             return 0
@@ -198,20 +202,115 @@ brewfile_has_cask() {
     grep -E "^cask \"$1\"" "$REPO_ROOT/Brewfile" >/dev/null 2>&1
 }
 
+get_brewfile_casks() {
+    # Extract all cask names from Brewfile
+    grep -E "^cask " "$REPO_ROOT/Brewfile" 2>/dev/null | sed -E 's/^cask "([^"]+)".*/\1/' || true
+}
+
+get_outdated_casks() {
+    # Get list of outdated casks (casks that would be upgraded)
+    brew outdated --cask --greedy 2>/dev/null | awk '{print $1}' || true
+}
+
+preemptively_exclude_ignored_casks() {
+    local -a outdated_casks=()
+    local -a excluded_casks=()
+    local cask_list
+    
+    # Get outdated casks
+    cask_list=$(get_outdated_casks)
+    if [[ -z "$cask_list" ]]; then
+        log_info "No outdated casks found"
+        return 0
+    fi
+    
+    # Use while read loop instead of readarray for bash 3.x compatibility
+    while IFS= read -r line; do
+        [[ -n "$line" ]] && outdated_casks+=("$line")
+    done <<< "$cask_list"
+    
+    log_info "Found ${#outdated_casks[@]} outdated casks"
+    
+    # Check each outdated cask against ignore list
+    for cask in "${outdated_casks[@]}"; do
+        [[ -z "$cask" ]] && continue
+        
+        if is_cask_ignored "$cask"; then
+            excluded_casks+=("$cask")
+            log_warning "Pre-emptively excluding '$cask' from upgrade (in ignore list)"
+        fi
+    done
+    
+    # Return list of non-ignored casks for upgrade
+    if (( ${#excluded_casks[@]} > 0 )); then
+        log_info "Excluded ${#excluded_casks[@]} cask(s): ${excluded_casks[*]}"
+    fi
+}
+
+get_cask_upgrade_list() {
+    # Returns space-separated list of casks to upgrade, excluding ignored ones
+    local -a outdated_casks=()
+    local -a upgrade_casks=()
+    local cask_list
+    
+    cask_list=$(get_outdated_casks)
+    [[ -z "$cask_list" ]] && return 0
+    
+    # Use while read loop instead of readarray for bash 3.x compatibility
+    while IFS= read -r line; do
+        [[ -n "$line" ]] && outdated_casks+=("$line")
+    done <<< "$cask_list"
+    
+    for cask in "${outdated_casks[@]}"; do
+        [[ -z "$cask" ]] && continue
+        
+        if ! is_cask_ignored "$cask"; then
+            upgrade_casks+=("$cask")
+        fi
+    done
+    
+    # Safe array expansion
+    if (( ${#upgrade_casks[@]} > 0 )); then
+        echo "${upgrade_casks[@]}"
+    fi
+}
+
+check_cask_health() {
+    local cask="$1"
+    local app_path
+    local issues_found=false
+    
+    # Only check for the main .app bundle (ignore binaries, completions, manpages)
+    # These are secondary artifacts that might not exist yet
+    app_path=$(brew info --cask "$cask" 2>/dev/null | grep -E "^/Applications/.*\.app$" | head -1 || echo "")
+    
+    # Only flag as issue if main .app bundle is missing
+    if [[ -n "$app_path" && ! -e "$app_path" ]]; then
+        log_warning "$cask: Main app bundle '$app_path' is missing"
+        issues_found=true
+    fi
+    
+    # REMOVED: Multiple versions check - this is normal Homebrew behavior
+    # Homebrew keeps old versions for rollback, this is NOT a conflict
+    
+    $issues_found && return 1 || return 0
+}
+
 retry_brew_cask() {
     local cask="$1"
     local attempted_uninstall="${2:-false}"
+    local retry_count="${3:-1}"
 
     if is_cask_ignored "$cask"; then
         log_warning "Skipping $cask (in ignore list)"
         return 0
     fi
 
-    log_info "Reinstalling cask: $cask"
+    log_info "Reinstalling cask: $cask (attempt $retry_count)"
     if $VERBOSE; then
         run_with_timeout $BREW_UPGRADE_TIMEOUT "brew reinstall --cask --force $cask"
     else
-        run_with_timeout $BREW_UPGRADE_TIMEOUT "brew reinstall --cask --force $cask >/dev/null 2>&1"
+        run_with_timeout $BREW_UPGRADE_TIMEOUT "brew reinstall --cask --force $cask 2>&1 | grep -v '^Warning:' || true"
     fi
     local rc=$?
     if [[ $rc -eq 0 ]]; then
@@ -219,33 +318,86 @@ retry_brew_cask() {
         return 0
     fi
 
+    # First retry: try uninstall + install approach
     if [[ "$attempted_uninstall" == false ]]; then
         log_warning "$cask reinstall failed; trying uninstall + install"
         if $VERBOSE; then
-            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew uninstall --cask --force $cask" || true
+            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew uninstall --cask --force --zap $cask" || true
+            sleep 2  # Brief pause to let system settle
             run_with_timeout $BREW_UPGRADE_TIMEOUT "brew install --cask $cask"
         else
-            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew uninstall --cask --force $cask >/dev/null 2>&1" || true
-            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew install --cask $cask >/dev/null 2>&1"
+            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew uninstall --cask --force --zap $cask 2>&1 | grep -v '^Warning:' || true"
+            sleep 2
+            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew install --cask $cask 2>&1 | grep -v '^Warning:' || true"
         fi
         if [[ $? -eq 0 ]]; then
             log_success "$cask reinstalled via uninstall+install"
             return 0
         fi
+        
+        # Second retry: one more attempt with fresh state
+        if [[ $retry_count -lt 2 ]]; then
+            log_info "Retrying $cask one more time..."
+            sleep 3
+            retry_brew_cask "$cask" true 2
+            return $?
+        fi
     fi
 
-    log_warning "Failed to remediate $cask; skipping"
+    log_warning "Failed to remediate $cask after $retry_count attempts; adding to ignore list for this session"
+    CASK_IGNORE_LIST+=("$cask")
     HAS_ERRORS=true
     return 1
+}
+
+preemptive_cask_health_check() {
+    [[ "$REMEDIATE_CASKS" != true ]] && return 0
+    
+    load_cask_ignore_list
+    
+    log_section "Pre-emptive Cask Health Check"
+    
+    # Only check KNOWN problematic casks (not all casks)
+    # Checking all casks is too aggressive and causes unnecessary reinstalls
+    local -a known_problematic=(
+        opera       # Known Caskroom conflicts
+    )
+    
+    local -a problematic_casks=()
+    
+    for cask in "${known_problematic[@]}"; do
+        # Only check if installed
+        if ! brew_cask_installed "$cask"; then
+            continue
+        fi
+        
+        # Skip if ignored
+        if is_cask_ignored "$cask"; then
+            continue
+        fi
+        
+        # Check for actual health issues
+        if ! check_cask_health "$cask"; then
+            problematic_casks+=("$cask")
+        fi
+    done
+    
+    # Fix problematic casks before attempting upgrade
+    if (( ${#problematic_casks[@]} > 0 )); then
+        log_info "Found ${#problematic_casks[@]} known problematic cask(s) with issues"
+        for cask in "${problematic_casks[@]}"; do
+            log_info "Pre-emptively fixing: $cask"
+            retry_brew_cask "$cask" false 1 || log_warning "Could not fix $cask; may fail during upgrade"
+        done
+    else
+        log_success "No known problematic casks need fixing"
+    fi
 }
 
 remediate_problem_casks() {
     [[ "$REMEDIATE_CASKS" != true ]] && return 0
 
-    # Load ignore list once
-    load_cask_ignore_list
-
-    log_section "Remediating problematic Homebrew casks"
+    log_section "Post-Upgrade Cask Remediation"
 
     # Known problematic casks observed in CI/local runs
     local candidates=(
@@ -256,31 +408,50 @@ remediate_problem_casks() {
         opera
         skype
     )
+    
+    local needs_remediation=false
 
     for c in "${candidates[@]}"; do
         # Only touch if installed or present in Brewfile
         if brew_cask_installed "$c" || brewfile_has_cask "$c"; then
-            if [[ "$c" == "opera" ]]; then
-                log_info "Handling special case for opera (Caskroom conflicts)"
-                if $VERBOSE; then
-                    run_with_timeout $BREW_UPGRADE_TIMEOUT "brew uninstall --cask --force opera" || true
-                    run_with_timeout $BREW_UPGRADE_TIMEOUT "brew install --cask opera" || log_warning "opera install failed"
-                else
-                    run_with_timeout $BREW_UPGRADE_TIMEOUT "brew uninstall --cask --force opera >/dev/null 2>&1" || true
-                    run_with_timeout $BREW_UPGRADE_TIMEOUT "brew install --cask opera >/dev/null 2>&1" || log_warning "opera install failed"
+            # Skip if ignored
+            if is_cask_ignored "$c"; then
+                log_info "Skipping $c (in ignore list)"
+                continue
+            fi
+            
+            # Check if this cask has issues
+            if ! check_cask_health "$c"; then
+                needs_remediation=true
+                
+                if [[ "$c" == "opera" ]]; then
+                    log_info "Handling special case for opera (Caskroom conflicts)"
+                    if $VERBOSE; then
+                        run_with_timeout $BREW_UPGRADE_TIMEOUT "brew uninstall --cask --force --zap opera" || true
+                        sleep 2
+                        run_with_timeout $BREW_UPGRADE_TIMEOUT "brew install --cask opera" || log_warning "opera install failed"
+                    else
+                        run_with_timeout $BREW_UPGRADE_TIMEOUT "brew uninstall --cask --force --zap opera 2>&1 | grep -v '^Warning:' || true"
+                        sleep 2
+                        run_with_timeout $BREW_UPGRADE_TIMEOUT "brew install --cask opera 2>&1 | grep -v '^Warning:' || true" || log_warning "opera install failed"
+                    fi
+                    continue
                 fi
-                continue
-            fi
 
-            # skype often has transient download failures: try once
-            if [[ "$c" == "skype" ]]; then
-                retry_brew_cask "$c" true || log_warning "skype remediation failed; leaving as-is"
-                continue
-            fi
+                # skype often has transient download failures: retry with backoff
+                if [[ "$c" == "skype" ]]; then
+                    retry_brew_cask "$c" false 1 || log_warning "skype remediation failed; leaving as-is"
+                    continue
+                fi
 
-            retry_brew_cask "$c" || true
+                retry_brew_cask "$c" false 1 || true
+            fi
         fi
     done
+    
+    if ! $needs_remediation; then
+        log_success "No post-upgrade remediation needed"
+    fi
 }
 
 # Update Homebrew and packages
@@ -311,15 +482,48 @@ update_homebrew() {
         fi
         [[ $? -eq 0 ]] && log_success "Homebrew packages upgraded"
         
+        # Pre-emptive health check and remediation
+        preemptive_cask_health_check
+        
+        # Pre-emptively exclude ignored casks from upgrade
+        preemptively_exclude_ignored_casks
+        
         log_info "Upgrading Homebrew casks (non-interactive)..."
-        if $VERBOSE; then
-            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy" || log_warning "Some casks failed to upgrade"
+        
+        # Get filtered list of casks to upgrade
+        local casks_to_upgrade
+        casks_to_upgrade=$(get_cask_upgrade_list)
+        
+        if [[ -n "$casks_to_upgrade" ]]; then
+            log_info "Upgrading casks: $casks_to_upgrade"
+            
+            # Upgrade each cask individually for better error handling
+            local upgrade_failed=false
+            for cask in $casks_to_upgrade; do
+                log_info "Upgrading: $cask"
+                if $VERBOSE; then
+                    if ! run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy $cask"; then
+                        log_warning "Failed to upgrade $cask"
+                        upgrade_failed=true
+                    fi
+                else
+                    if ! run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy $cask 2>&1 | grep -v '^Warning:' || true"; then
+                        log_warning "Failed to upgrade $cask"
+                        upgrade_failed=true
+                    fi
+                fi
+            done
+            
+            if ! $upgrade_failed; then
+                log_success "Homebrew casks upgraded"
+            else
+                log_warning "Some casks failed to upgrade"
+            fi
         else
-            run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy 2>&1" || log_warning "Some casks failed to upgrade"
+            log_success "No casks need upgrading (or all are in ignore list)"
         fi
-        [[ $? -eq 0 ]] && log_success "Homebrew casks upgraded"
 
-        # Attempt remediation for common cask failures
+        # Attempt remediation for any failures
         remediate_problem_casks
         
         if [[ "$CLEANUP" == true ]]; then
