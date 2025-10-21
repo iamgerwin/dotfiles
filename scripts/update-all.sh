@@ -274,26 +274,18 @@ check_cask_health() {
     local app_path
     local issues_found=false
     
-    # Try to get expected app path
-    app_path=$(brew info --cask "$cask" 2>/dev/null | grep -E "^/Applications/" | head -1 || echo "")
+    # Only check for the main .app bundle (ignore binaries, completions, manpages)
+    # These are secondary artifacts that might not exist yet
+    app_path=$(brew info --cask "$cask" 2>/dev/null | grep -E "^/Applications/.*\.app$" | head -1 || echo "")
     
+    # Only flag as issue if main .app bundle is missing
     if [[ -n "$app_path" && ! -e "$app_path" ]]; then
-        log_warning "$cask: App source '$app_path' is missing"
+        log_warning "$cask: Main app bundle '$app_path' is missing"
         issues_found=true
     fi
     
-    # Check for Caskroom conflicts
-    if brew list --cask "$cask" >/dev/null 2>&1; then
-        local cask_dir="$(brew --caskroom)/$cask"
-        if [[ -d "$cask_dir" ]]; then
-            # Check for multiple versions (conflict indicator)
-            local version_count=$(find "$cask_dir" -maxdepth 1 -type d ! -name "$(basename "$cask_dir")" | wc -l | tr -d ' ')
-            if [[ "$version_count" -gt 1 ]]; then
-                log_warning "$cask: Multiple versions detected (potential conflict)"
-                issues_found=true
-            fi
-        fi
-    fi
+    # REMOVED: Multiple versions check - this is normal Homebrew behavior
+    # Homebrew keeps old versions for rollback, this is NOT a conflict
     
     $issues_found && return 1 || return 0
 }
@@ -359,36 +351,40 @@ preemptive_cask_health_check() {
     
     log_section "Pre-emptive Cask Health Check"
     
-    # Check all installed casks for known issues BEFORE upgrade
+    # Only check KNOWN problematic casks (not all casks)
+    # Checking all casks is too aggressive and causes unnecessary reinstalls
+    local -a known_problematic=(
+        opera       # Known Caskroom conflicts
+    )
+    
     local -a problematic_casks=()
-    local all_casks
     
-    all_casks=$(brew list --cask 2>/dev/null || true)
-    [[ -z "$all_casks" ]] && return 0
-    
-    while IFS= read -r cask; do
-        [[ -z "$cask" ]] && continue
+    for cask in "${known_problematic[@]}"; do
+        # Only check if installed
+        if ! brew_cask_installed "$cask"; then
+            continue
+        fi
         
         # Skip if ignored
         if is_cask_ignored "$cask"; then
             continue
         fi
         
-        # Check for known problematic patterns
+        # Check for actual health issues
         if ! check_cask_health "$cask"; then
             problematic_casks+=("$cask")
         fi
-    done <<< "$all_casks"
+    done
     
     # Fix problematic casks before attempting upgrade
     if (( ${#problematic_casks[@]} > 0 )); then
-        log_info "Found ${#problematic_casks[@]} cask(s) with potential issues"
+        log_info "Found ${#problematic_casks[@]} known problematic cask(s) with issues"
         for cask in "${problematic_casks[@]}"; do
             log_info "Pre-emptively fixing: $cask"
             retry_brew_cask "$cask" false 1 || log_warning "Could not fix $cask; may fail during upgrade"
         done
     else
-        log_success "All casks appear healthy"
+        log_success "No known problematic casks need fixing"
     fi
 }
 
