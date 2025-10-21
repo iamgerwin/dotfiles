@@ -1,0 +1,36 @@
+# Homebrew Cask Ignore List
+# ==========================
+# One cask token per line to skip from upgrade/remediation cycles.
+# Lines starting with # are comments and blank lines are ignored.
+#
+# Purpose:
+# - Prevents time-consuming downloads for problematic casks
+# - Excludes casks with known transient failures (download issues, vendor problems)
+# - Skips casks you want to manage manually
+#
+# How it works:
+# 1. Pre-emptive exclusion: Casks listed here are excluded BEFORE brew upgrade runs
+# 2. This saves time by not attempting downloads that are known to fail
+# 3. The script will log which casks are being excluded
+#
+# When to add a cask here:
+# - Vendor download failures (e.g., Skype's CDN issues)
+# - App source conflicts (missing /Applications/*.app)
+# - Caskroom version conflicts
+# - Manual version management preference
+#
+# How to add:
+# 1. Add the cask token (not the app name) one per line
+# 2. You can find the token with: brew list --cask
+# 3. Or check your Brewfile for the exact token
+#
+# Example problematic casks (uncomment to use):
+# skype                      # Frequent vendor download timeouts
+# arc                        # App source occasionally missing
+# opera                      # Caskroom conflicts
+# firefox@developer-edition  # Version management issues
+# vivaldi                    # App source path issues
+# alt-tab                    # Occasional conflicts
+
+# Add your ignored casks below:
+# -----------------------------
