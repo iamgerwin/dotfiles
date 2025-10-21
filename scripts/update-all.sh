@@ -181,6 +181,10 @@ load_cask_ignore_list() {
 
 is_cask_ignored() {
     local target="$1"
+    # Check if array has elements to avoid unbound variable error
+    if (( ${#CASK_IGNORE_LIST[@]} == 0 )); then
+        return 1
+    fi
     for c in "${CASK_IGNORE_LIST[@]}"; do
         if [[ "$c" == "$target" ]]; then
             return 0
@@ -259,7 +263,10 @@ get_cask_upgrade_list() {
         fi
     done
     
-    echo "${upgrade_casks[@]}"
+    # Safe array expansion
+    if (( ${#upgrade_casks[@]} > 0 )); then
+        echo "${upgrade_casks[@]}"
+    fi
 }
 
 check_cask_health() {
