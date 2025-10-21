@@ -224,7 +224,10 @@ preemptively_exclude_ignored_casks() {
         return 0
     fi
     
-    readarray -t outdated_casks <<< "$cask_list"
+    # Use while read loop instead of readarray for bash 3.x compatibility
+    while IFS= read -r line; do
+        [[ -n "$line" ]] && outdated_casks+=("$line")
+    done <<< "$cask_list"
     
     log_info "Found ${#outdated_casks[@]} outdated casks"
     
@@ -253,7 +256,10 @@ get_cask_upgrade_list() {
     cask_list=$(get_outdated_casks)
     [[ -z "$cask_list" ]] && return 0
     
-    readarray -t outdated_casks <<< "$cask_list"
+    # Use while read loop instead of readarray for bash 3.x compatibility
+    while IFS= read -r line; do
+        [[ -n "$line" ]] && outdated_casks+=("$line")
+    done <<< "$cask_list"
     
     for cask in "${outdated_casks[@]}"; do
         [[ -z "$cask" ]] && continue
