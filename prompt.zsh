@@ -1,6 +1,11 @@
 #!/usr/bin/env zsh
 # Prompt - Terminal prompt configuration
 
+# Skip if using Powerlevel10k (avoid conflicts)
+if [[ "$ZSH_THEME" == "powerlevel10k/powerlevel10k" ]]; then
+    return 0
+fi
+
 # Enable prompt substitution
 setopt PROMPT_SUBST
 
@@ -13,7 +18,7 @@ precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' check-for-changes false
 zstyle ':vcs_info:*' unstagedstr ' *'
 zstyle ':vcs_info:*' stagedstr ' +'
 zstyle ':vcs_info:git:*' formats ' [%b%u%c]'

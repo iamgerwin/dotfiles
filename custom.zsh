@@ -19,24 +19,8 @@ if [[ -f ~/.fzf.zsh ]]; then
     export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 fi
 
-# NVM (Node Version Manager) if installed
-if [[ -d "$HOME/.nvm" ]]; then
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
-fi
-
-# rbenv (Ruby Version Manager) if installed
-if command -v rbenv &> /dev/null; then
-    eval "$(rbenv init - zsh)"
-fi
-
-# pyenv (Python Version Manager) if installed
-if command -v pyenv &> /dev/null; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="$PYENV_ROOT/bin:$PATH"
-    eval "$(pyenv init -)"
-fi
+# NOTE: NVM, rbenv, and pyenv are already loaded in plugins.zsh
+# Do not load them again here to avoid hangs and slow startup
 
 # Google Cloud SDK
 if [[ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]]; then
