@@ -32,9 +32,32 @@ if [[ -d "$HOME/.oh-my-zsh" ]]; then
     source $ZSH/oh-my-zsh.sh
 fi
 
-# NVM (Node Version Manager)
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# NVM (Node Version Manager) - Lazy load for faster startup
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+    # Skip NVM loading in VSCode/Windsurf to avoid hangs
+    if [[ -z "$VSCODE_PID" && -z "$TERM_PROGRAM" ]]; then
+        \. "$NVM_DIR/nvm.sh"
+        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+    else
+        # Lazy load NVM when needed
+        nvm() {
+            unset -f nvm
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+            nvm "$@"
+        }
+        node() {
+            unset -f node
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            node "$@"
+        }
+        npm() {
+            unset -f npm
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            npm "$@"
+        }
+    fi
+fi
 
 # Pyenv initialization
 if command -v pyenv >/dev/null; then

@@ -86,8 +86,10 @@ export LESSHISTFILE='-'
 export CLICOLOR=1
 export LSCOLORS='GxFxCxDxBxegedabagaced'
 
-# GPG
-export GPG_TTY=$(tty)
+# GPG (with guard for VSCode/Windsurf terminals)
+if [[ -t 0 && ! -n "$VSCODE_PID" ]]; then
+    export GPG_TTY=$(tty)
+fi
 
 # FZF defaults
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
