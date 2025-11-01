@@ -103,3 +103,10 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 # Compilation flags
 export ARCHFLAGS="-arch $(uname -m)"
+
+# AI Agent CLI Tools
+# Add your API keys to ~/.zshrc.local for security
+# export GEMINI_API_KEY="your-gemini-api-key-here"
+# export OPENAI_API_KEY="your-openai-api-key-here"
+# export ANTHROPIC_API_KEY="your-anthropic-api-key-here"
+# export CLAUDE_API_KEY="your-claude-api-key-here"  # Alternative naming
