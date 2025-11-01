@@ -47,6 +47,10 @@ vivaldi: It seems the App source '/Applications/Vivaldi.app' is not there.
 - `google-chrome@canary` → `google-chrome-canary` (rename).
 - `logitech-options` — likely removable in favor of `logi-options+`.
 
+## New Additions
+
+- `gemini-cli` — Google Gemini CLI for AI-powered development workflows (install via `brew install gemini-cli`).
+
 ## Acceptance Criteria
 
 - `scripts/update-all.sh` completes without exiting non-zero due to cask issues.

@@ -118,8 +118,9 @@ if command -v brew &> /dev/null; then
     echo
     print_info "Next steps:"
     echo "  1. Run 'brew bundle install' to install packages from Brewfile"
-    echo "  2. Run 'brew help' to see available commands"
-    echo "  3. Run 'brew doctor' if you encounter any issues"
+    echo "  2. Run 'brew install gemini-cli' to install Google Gemini CLI"
+    echo "  3. Run 'brew help' to see available commands"
+    echo "  4. Run 'brew doctor' if you encounter any issues"
 else
     print_error "Homebrew installation failed"
     exit 1
