@@ -25,6 +25,7 @@ This repository contains my personal dotfiles configuration, designed with modul
 - **Git Profile Management**: Manage multiple Git identities (personal, work) with SSH keys and GitHub CLI integration
 - **SSH Key Organization**: Centralized SSH key management with migration and backup capabilities
 - **AI Prompts Management**: Organized system for managing AI prompts and context scripts by company/project
+- **AI Agent CLI Tools**: Support for Gemini, Claude, and Codex CLI tools with co-existence strategy
 - **Best Practices Documentation**: Comprehensive guides for modern development technologies and frameworks
 
 ## Structure
@@ -57,6 +58,10 @@ dotfiles/
 │   ├── setup.sh        # Automated Python/FastAPI/Django installation script
 │   └── README.md       # Python setup documentation
 ├── Brewfile            # Homebrew package definitions
+├── AGENTS.md           # AI Agent CLI tools best practices
+├── CLAUDE.md -> AGENTS.md    # Symlink to AGENTS.md
+├── CODEX.md -> AGENTS.md     # Symlink to AGENTS.md
+├── GEMINI.md -> AGENTS.md    # Symlink to AGENTS.md
 ├── AI_PROMPTS.md       # AI prompts management documentation
 ├── TEMPLATES.md        # Quick reference for all prompt templates
 ├── GIT_PROFILE_MANAGEMENT.md # Git profiles and SSH keys documentation
