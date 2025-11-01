@@ -154,9 +154,23 @@ run_with_timeout() {
         gtimeout --foreground --kill-after=10 $timeout bash -c "$cmd"
         return $?
     else
-        # Fallback without timeout
-        bash -c "$cmd"
-        return $?
+        # Portable fallback: implement our own timeout
+        bash -c "$cmd" &
+        local cmd_pid=$!
+        (
+            sleep "$timeout"
+            if kill -0 "$cmd_pid" 2>/dev/null; then
+                kill -TERM "$cmd_pid" 2>/dev/null || true
+                sleep 10
+                kill -KILL "$cmd_pid" 2>/dev/null || true
+            fi
+        ) &
+        local watcher_pid=$!
+        wait "$cmd_pid"
+        local rc=$?
+        kill -TERM "$watcher_pid" 2>/dev/null || true
+        wait "$watcher_pid" 2>/dev/null || true
+        return $rc
     fi
 }
 
@@ -692,15 +706,46 @@ update_gems() {
             }
         fi
 
-        log_info "Updating installed gems (non-interactive)..."
-        if $VERBOSE; then
-            run_with_timeout $GEM_TIMEOUT "gem update --user-install --no-document 2>/dev/null || gem update --no-document 2>/dev/null" || {
-                log_warning "Could not update gems (check permissions)"
-            }
+        # Ensure HTTPS rubygems source and remove legacy HTTP if present
+        log_info "Ensuring RubyGems sources use HTTPS..."
+        gem sources --add https://rubygems.org/ >/dev/null 2>&1 || true
+        gem sources --remove http://rubygems.org/ >/dev/null 2>&1 || true
+
+        log_info "Checking for outdated gems..."
+        local outdated
+        outdated=$(gem outdated --no-verbose 2>/dev/null | awk '{print $1}' | tr '\n' ' ' | sed 's/ *$//')
+
+        if [[ -z "$outdated" ]]; then
+            log_success "All Ruby gems are up to date"
         else
-            run_with_timeout $GEM_TIMEOUT "gem update --user-install --no-document >/dev/null 2>&1 || gem update --no-document >/dev/null 2>&1" || {
-                log_warning "Could not update gems"
-            }
+            log_info "Found outdated gems: $outdated"
+            local update_failed=false
+            for g in $outdated; do
+                log_info "Updating gem: $g"
+                if $VERBOSE; then
+                    if ! run_with_timeout $GEM_TIMEOUT "gem update --user-install --no-document $g 2>&1 || gem update --no-document $g 2>&1"; then
+                        log_warning "Failed to update gem: $g (timed out or error)"
+                        update_failed=true
+                        HAS_ERRORS=true
+                    else
+                        log_success "$g updated"
+                    fi
+                else
+                    if ! run_with_timeout $GEM_TIMEOUT "gem update --user-install --no-document $g >/dev/null 2>&1 || gem update --no-document $g >/dev/null 2>&1"; then
+                        log_warning "Failed to update gem: $g (timed out or error)"
+                        update_failed=true
+                        HAS_ERRORS=true
+                    else
+                        log_success "$g updated"
+                    fi
+                fi
+            done
+
+            if ! $update_failed; then
+                log_success "Ruby gems updated"
+            else
+                log_warning "Some Ruby gems failed to update; see warnings above"
+            fi
         fi
 
         if [[ "$CLEANUP" == true ]]; then
