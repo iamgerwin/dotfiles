@@ -607,6 +607,26 @@ cd .  # Activate version
 
 See [python/README.md](python/README.md) for complete documentation and troubleshooting.
 
+### .NET Development
+
+Automated .NET development setup, including the .NET SDK and development certificates.
+
+```bash
+# Run automated setup (installs .NET SDK)
+~/dotfiles/scripts/dotnet/install.sh
+
+# Verify installation
+dotnet --version            # Check .NET version
+
+# Install development certificates (optional)
+~/dotfiles/scripts/dotnet/dev-certs.sh
+```
+
+**Features:**
+- Installs the latest .NET SDK (currently 8.0).
+- Configures the shell environment for .NET development.
+- Optional script to install and trust development certificates for HTTPS.
+
 **Note:** For local development environments previously using MAMP or XAMPP, consider using Laravel Herd for PHP development or Docker containers for full-stack applications.
 
 ### AI Prompts Management
