@@ -57,11 +57,11 @@ CLAUDE_INSTALLED=false
 GEMINI_INSTALLED=false
 CODEX_INSTALLED=false
 
-if command -v claude &> /dev/null; then
+if command -v claude &> /dev/null || command -v claude-cmd &> /dev/null; then
     CLAUDE_INSTALLED=true
     print_success "Claude CLI is installed"
 else
-    print_info "Claude CLI is not installed (run: brew install claude)"
+    print_info "Claude CLI is not installed (run: brew install claude-cmd)"
 fi
 
 if command -v gemini &> /dev/null || command -v gemini-cli &> /dev/null; then
@@ -75,7 +75,7 @@ if command -v codex &> /dev/null; then
     CODEX_INSTALLED=true
     print_success "Codex CLI is installed"
 else
-    print_info "Codex CLI is not installed (run: brew install codex)"
+    print_info "Codex CLI is not installed (run: brew install --cask codex)"
 fi
 
 echo

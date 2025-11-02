@@ -121,6 +121,35 @@ if command -v brew &> /dev/null; then
     echo "  2. Run '~/dotfiles/scripts/setup-ai-tools.sh' to configure AI CLI tools"
     echo "  3. Run 'brew help' to see available commands"
     echo "  4. Run 'brew doctor' if you encounter any issues"
+    echo
+    
+    # Ask if user wants to install AI tools now
+    read -p "Do you want to install AI CLI tools (Claude, Gemini, Codex) now? (y/n) " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        print_info "Installing AI CLI tools..."
+        
+        # Install AI tools
+        brew install claude-cmd
+        brew install gemini-cli
+        brew install --cask codex
+        
+        print_success "AI CLI tools installed"
+        
+        # Run setup script
+        read -p "Do you want to configure API keys now? (y/n) " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            if [[ -f "$HOME/dotfiles/scripts/setup-ai-tools.sh" ]]; then
+                bash "$HOME/dotfiles/scripts/setup-ai-tools.sh"
+            else
+                print_error "Setup script not found: $HOME/dotfiles/scripts/setup-ai-tools.sh"
+            fi
+        else
+            print_info "You can configure API keys later by running:"
+            echo "  ~/dotfiles/scripts/setup-ai-tools.sh"
+        fi
+    fi
 else
     print_error "Homebrew installation failed"
     exit 1
