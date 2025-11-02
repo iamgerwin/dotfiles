@@ -80,7 +80,7 @@ brew "oven-sh/bun/bun" # Fast all-in-one JavaScript runtime
 # AI Development Tools
 # Note: These require API keys to be set in your environment
 # See docs/ai-tools/AI.md for setup instructions
-brew "claude-cmd" # Claude AI CLI by Anthropic
+cask "claude-code" # Claude Code - AI pair programming by Anthropic
 brew "gemini-cli" # Google Gemini CLI
 cask "codex" # OpenAI Codex application
 

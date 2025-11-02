@@ -57,11 +57,11 @@ CLAUDE_INSTALLED=false
 GEMINI_INSTALLED=false
 CODEX_INSTALLED=false
 
-if command -v claude &> /dev/null || command -v claude-cmd &> /dev/null; then
+if command -v claude &> /dev/null; then
     CLAUDE_INSTALLED=true
-    print_success "Claude CLI is installed"
+    print_success "Claude Code is installed"
 else
-    print_info "Claude CLI is not installed (run: brew install claude-cmd)"
+    print_info "Claude Code is not installed (run: brew install --cask claude-code)"
 fi
 
 if command -v gemini &> /dev/null || command -v gemini-cli &> /dev/null; then
@@ -107,7 +107,7 @@ add_api_key() {
 # Configure Claude
 if [[ "$CLAUDE_INSTALLED" = true ]]; then
     echo
-    print_header "Claude CLI Configuration"
+    print_header "Claude Code Configuration"
 
     if check_api_key "CLAUDE_API_KEY" || check_api_key "ANTHROPIC_API_KEY"; then
         print_info "Claude API key is already configured"
@@ -125,8 +125,9 @@ if [[ "$CLAUDE_INSTALLED" = true ]]; then
             fi
         fi
     else
-        print_info "Claude CLI requires an API key from Anthropic"
-        print_info "Get your key at: https://console.anthropic.com/"
+        print_info "Claude Code requires authentication via Claude Console"
+        print_info "Visit: https://console.anthropic.com/ for billing setup"
+        print_info "Or get API key at: https://console.anthropic.com/"
         echo
         read -p "Do you want to configure it now? (y/n) " -n 1 -r
         echo
@@ -256,7 +257,7 @@ echo "  2. Read the documentation: cat ~/dotfiles/docs/ai-tools/AI.md"
 echo "  3. Test your setup:"
 
 if [[ "$CLAUDE_INSTALLED" = true ]]; then
-    echo "     • claude --version"
+    echo "     • claude --version (or just run 'claude' for interactive mode)"
 fi
 if [[ "$GEMINI_INSTALLED" = true ]]; then
     echo "     • gemini --version"

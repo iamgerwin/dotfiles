@@ -22,8 +22,8 @@ The script will:
 Install AI tools via Homebrew:
 
 ```bash
-# Install Claude CLI
-brew install claude-cmd
+# Install Claude Code (AI pair programming)
+brew install --cask claude-code
 
 # Install Gemini CLI
 brew install gemini-cli
@@ -117,12 +117,12 @@ Test your installation:
 
 ```bash
 # Check if tools are installed
-command -v claude-cmd && echo "Claude: ✓" || echo "Claude: ✗"
+command -v claude && echo "Claude: ✓" || echo "Claude: ✗"
 command -v gemini && echo "Gemini: ✓" || echo "Gemini: ✗"
 command -v codex && echo "Codex: ✓" || echo "Codex: ✗"
 
 # Check versions
-claude-cmd --version
+claude --version
 gemini --version
 codex --version
 ```
@@ -169,7 +169,7 @@ Update AI tools via Homebrew:
 brew update && brew upgrade
 
 # Or update specific tools
-brew upgrade claude-cmd
+brew upgrade --cask claude-code
 brew upgrade gemini-cli
 brew upgrade --cask codex
 ```
@@ -179,7 +179,7 @@ brew upgrade --cask codex
 Remove AI tools:
 
 ```bash
-brew uninstall claude-cmd
+brew uninstall --cask claude-code
 brew uninstall gemini-cli
 brew uninstall --cask codex
 ```
