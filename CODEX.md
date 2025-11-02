@@ -1,1 +1,1 @@
-AGENTS.md
+docs/ai-tools/AI.md
