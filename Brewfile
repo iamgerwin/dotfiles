@@ -77,6 +77,13 @@ brew "atuin" # Magical shell history
 brew "zsh" # UNIX shell (command interpreter)
 brew "oven-sh/bun/bun" # Fast all-in-one JavaScript runtime
 
+# AI Development Tools
+# Note: These require API keys to be set in your environment
+# See docs/ai-tools/AI.md for setup instructions
+brew "claude" # Claude AI CLI by Anthropic
+brew "gemini-cli" # Google Gemini CLI
+brew "codex" # OpenAI Codex CLI
+
 # macOS Applications
 cask "aldente" # macOS battery charge limiter
 cask "alt-tab" # Windows alt-tab on macOS
