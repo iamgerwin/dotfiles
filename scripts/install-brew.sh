@@ -118,7 +118,7 @@ if command -v brew &> /dev/null; then
     echo
     print_info "Next steps:"
     echo "  1. Run 'brew bundle install' to install packages from Brewfile"
-    echo "  2. Run 'brew install gemini-cli' to install Google Gemini CLI"
+    echo "  2. Run '~/dotfiles/scripts/setup-ai-tools.sh' to configure AI CLI tools"
     echo "  3. Run 'brew help' to see available commands"
     echo "  4. Run 'brew doctor' if you encounter any issues"
 else
