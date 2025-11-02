@@ -105,12 +105,14 @@ Each backup includes:
 - Zsh plugins (autosuggestions, syntax highlighting)
 - Tmux with Tmux Plugin Manager (TPM)
 - Tmux plugins (resurrect, continuum, vim-navigator)
+- AI CLI tools (Claude, Gemini, Codex) - optional, requires API keys
 
 ### Final Configuration Steps
 After installation completes, you'll need to:
 1. Install the MesloLGS NF font and configure your terminal
 2. Run `p10k configure` to customize your prompt theme
-3. Restart your terminal to activate all changes
+3. (Optional) Run `~/dotfiles/scripts/setup-ai-tools.sh` to configure AI CLI tools
+4. Restart your terminal to activate all changes
 
 ## Verification Steps
 
@@ -315,6 +317,45 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # Or run the setup script again
 ~/dotfiles/scripts/setup-tmux.sh
 ```
+
+## AI CLI Tools Setup (Optional)
+
+The dotfiles include support for AI CLI tools (Claude, Gemini, Codex). These are installed via Homebrew but require API keys to function.
+
+### Quick Setup
+
+```bash
+# Run the AI tools setup script
+~/dotfiles/scripts/setup-ai-tools.sh
+```
+
+This interactive script will:
+- Check if AI CLI tools are installed
+- Prompt for API keys (stored securely in ~/.zshrc.private)
+- Create symlinks for unified documentation
+- Set up shell aliases for easy access
+
+### Manual Setup
+
+If you prefer manual configuration:
+
+```bash
+# Add API keys to your private config
+echo "export CLAUDE_API_KEY='your-claude-key'" >> ~/.zshrc.private
+echo "export GEMINI_API_KEY='your-gemini-key'" >> ~/.zshrc.private
+echo "export OPENAI_API_KEY='your-openai-key'" >> ~/.zshrc.private
+
+# Reload your shell
+source ~/.zshrc
+```
+
+### Documentation
+
+All AI tools share the same documentation to avoid maintenance overhead:
+- Main docs: `~/dotfiles/docs/ai-tools/AI.md`
+- Symlinks: `CLAUDE.md`, `GEMINI.md`, `CODEX.md`, `AGENTS.md` all point to `AI.md`
+
+See `docs/ai-tools/AI.md` for usage, best practices, and security considerations.
 
 ## Customization After Installation
 
