@@ -110,7 +110,7 @@ cask "font-jetbrains-mono-nerd-font" # JetBrains Mono patched with Nerd Font ico
 
 # macOS Applications
 cask "google-chrome" # Web browser
-cask "google-chrome-canary" # Experimental version of Chrome
+cask "google-chrome@canary" # Experimental version of Chrome
 cask "herd" # Laravel and PHP development environment
 cask "iina" # Modern media player for macOS
 cask "iterm2" # Terminal emulator for macOS
