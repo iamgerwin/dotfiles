@@ -82,3 +82,7 @@ export HERD_PHP_82_INI_SCAN_DIR="/Users/gerwin/Library/Application Support/Herd/
 
 # Herd injected PHP 8.1 configuration.
 export HERD_PHP_81_INI_SCAN_DIR="/Users/gerwin/Library/Application Support/Herd/config/php/81/"
+
+
+# Herd injected PHP 8.5 configuration.
+export HERD_PHP_85_INI_SCAN_DIR="/Users/gerwin/Library/Application Support/Herd/config/php/85/"
