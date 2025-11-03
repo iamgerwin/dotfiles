@@ -212,7 +212,7 @@ The update script includes optional remediation for flaky/broken casks seen duri
 - Skip remediation: run `scripts/update-all.sh --cask-no-remediation`.
 - Ignore specific casks: create `.dotfiles-cask-ignore` at repo root and list tokens to skip (see `.dotfiles-cask-ignore.sample`).
 
-This reduces noise from transient vendor issues (e.g., Skype) and stale Caskroom conflicts (e.g., Opera).
+This reduces noise from transient vendor issues and stale Caskroom conflicts (e.g., Opera).
 
 ## Configuration Files
 

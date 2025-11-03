@@ -14,7 +14,7 @@
 # 3. The script will log which casks are being excluded
 #
 # When to add a cask here:
-# - Vendor download failures (e.g., Skype's CDN issues)
+# - Vendor download failures (CDN issues, deprecated apps)
 # - App source conflicts (missing /Applications/*.app)
 # - Caskroom version conflicts
 # - Manual version management preference
@@ -25,7 +25,6 @@
 # 3. Or check your Brewfile for the exact token
 #
 # Example problematic casks (uncomment to use):
-# skype                      # Frequent vendor download timeouts
 # arc                        # App source occasionally missing
 # opera                      # Caskroom conflicts
 # firefox@developer-edition  # Version management issues

@@ -14,7 +14,6 @@ alt-tab: It seems the App source '/Applications/AltTab.app' is not there.
 arc: It seems the App source '/Applications/Arc.app' is not there.
 firefox@developer-edition: It seems the App source '/Applications/Firefox Developer Edition.app' is not there.
 opera: It seems there is already an App at '/opt/homebrew/Caskroom/opera/118.0.5461.60/Opera.app'.
-skype: Download failed on Cask 'skype' with message: Download failed: https://download.skype.com/s4l/download/mac/Skype-8.150.0.125.dmg
 vivaldi: It seems the App source '/Applications/Vivaldi.app' is not there.
 ```
 
@@ -22,7 +21,7 @@ vivaldi: It seems the App source '/Applications/Vivaldi.app' is not there.
 
 - App bundles were moved/removed from `/Applications` after install (common for AltTab, Arc, Vivaldi, Firefox Dev Edition).
 - Stale/partial installs in `Caskroom` (e.g., Opera) causing conflicts.
-- Upstream vendor download changed or rate-limited (Skype), or token changed.
+- Upstream vendor download changed or rate-limited, or token changed.
 - Outdated/renamed tokens in `Brewfile` (e.g., Canary channel uses `google-chrome-canary`, not `google-chrome@canary`).
 
 ## Proposed Enhancements
@@ -43,7 +42,6 @@ vivaldi: It seems the App source '/Applications/Vivaldi.app' is not there.
 
 - `alt-tab`, `arc`, `vivaldi`, `firefox@developer-edition` — re-check tokens and reinstall behavior.
 - `opera` — clean uninstall/reinstall to fix Caskroom conflict.
-- `skype` — transient vendor download failures; consider skipping by default.
 - `google-chrome@canary` → `google-chrome-canary` (rename).
 - `logitech-options` — likely removable in favor of `logi-options+`.
 

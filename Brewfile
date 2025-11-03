@@ -124,7 +124,6 @@ cask "notion" # All-in-one workspace for notes and collaboration
 cask "opera" # Web browser with built-in VPN
 cask "postman" # API development and testing platform
 cask "rustdesk" # Remote desktop software
-cask "skype" # Video chat and messaging
 cask "sourcetree" # Git GUI client
 cask "tableplus" # Modern, native database management tool
 cask "teamviewer" # Remote control and remote support

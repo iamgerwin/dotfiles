@@ -61,7 +61,6 @@ export CASK_IGNORE_FILE=/path/to/custom-ignore
 ```
 # One cask token per line
 # Comments start with #
-skype
 arc
 opera
 ```
@@ -80,7 +79,6 @@ grep '^cask' ~/dotfiles/Brewfile
 
 ### Common Problematic Casks
 ```
-skype                      # Vendor download timeouts
 arc                        # App source missing
 opera                      # Caskroom conflicts
 firefox@developer-edition  # Version management issues
@@ -104,9 +102,9 @@ alt-tab                    # Occasional conflicts
 ### Pre-emptive Exclusion
 ```
 ℹ Found 5 outdated casks
-⚠ Pre-emptively excluding 'skype' from upgrade (in ignore list)
 ⚠ Pre-emptively excluding 'arc' from upgrade (in ignore list)
-ℹ Excluded 2 cask(s): skype arc
+⚠ Pre-emptively excluding 'opera' from upgrade (in ignore list)
+ℹ Excluded 2 cask(s): arc opera
 ```
 
 ### Individual Upgrades
@@ -208,8 +206,8 @@ alt-tab                    # Occasional conflicts
 ```bash
 # Create custom ignore file
 cat > ~/my-cask-ignore <<EOF
-skype
 arc
+opera
 vivaldi
 EOF
 

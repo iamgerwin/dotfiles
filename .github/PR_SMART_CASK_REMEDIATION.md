@@ -154,7 +154,7 @@ New `check_cask_health()` function detects:
 4. **Retry exhaustion**
    ```bash
    # Auto-adds to session ignore after 2 attempts
-   Failed to remediate skype after 2 attempts; adding to ignore list
+   Failed to remediate vivaldi after 2 attempts; adding to ignore list
    ```
 
 5. **Missing Brewfile**
@@ -191,7 +191,7 @@ The ignore file now includes:
 
 ### Download Failure Path ⚠️
 ```bash
-# Scenario: skype download times out
+# Scenario: problematic cask download times out
 1. Cask is in ignore list
 2. Pre-emptively excluded
 3. No download attempted (time saved!)
@@ -241,9 +241,9 @@ export CASK_IGNORE_FILE=/path/to/custom-ignore
 ### Pre-emptive Exclusion
 ```
 ℹ Found 5 outdated casks
-⚠ Pre-emptively excluding 'skype' from upgrade (in ignore list)
 ⚠ Pre-emptively excluding 'arc' from upgrade (in ignore list)
-ℹ Excluded 2 cask(s): skype arc
+⚠ Pre-emptively excluding 'opera' from upgrade (in ignore list)
+ℹ Excluded 2 cask(s): arc opera
 ```
 
 ### Health Check

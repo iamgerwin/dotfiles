@@ -1,6 +1,6 @@
 # One cask token per line to skip remediation/forced reinstall
 # Lines starting with # are comments
 # Example:
-# skype
 # arc
+# opera
 

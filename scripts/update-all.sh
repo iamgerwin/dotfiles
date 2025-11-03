@@ -420,7 +420,6 @@ remediate_problem_casks() {
         firefox@developer-edition
         vivaldi
         opera
-        skype
     )
     
     local needs_remediation=false
@@ -449,12 +448,6 @@ remediate_problem_casks() {
                         sleep 2
                         run_with_timeout $BREW_UPGRADE_TIMEOUT "brew install --cask opera 2>&1 | grep -v '^Warning:' || true" || log_warning "opera install failed"
                     fi
-                    continue
-                fi
-
-                # skype often has transient download failures: retry with backoff
-                if [[ "$c" == "skype" ]]; then
-                    retry_brew_cask "$c" false 1 || log_warning "skype remediation failed; leaving as-is"
                     continue
                 fi
 
