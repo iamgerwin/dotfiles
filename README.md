@@ -340,6 +340,7 @@ brew bundle dump --force --file=~/dotfiles/Brewfile
 ~/dotfiles/scripts/update-all.sh --brew-only
 ~/dotfiles/scripts/update-all.sh --npm-only
 ~/dotfiles/scripts/update-all.sh --pip-only
+~/dotfiles/scripts/update-all.sh --ai-tools-only
 ```
 
 ### Updating AI/LLM CLI Tools
@@ -350,7 +351,10 @@ The dotfiles include automated updates for AI CLI tools like `gemini-cli`, `code
 # Update AI tools as part of full system update
 ~/dotfiles/scripts/update-all.sh
 
-# Update only AI tools
+# Update only LLM CLI tools (recommended)
+~/dotfiles/scripts/update-all.sh --ai-tools-only
+
+# Update only AI tools (alternative method)
 source ~/dotfiles/scripts/update-all.sh && update_ai_tools
 
 # Skip AI tools during system update

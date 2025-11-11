@@ -88,6 +88,16 @@ while [[ $# -gt 0 ]]; do
             UPDATE_AI_TOOLS=false
             shift
             ;;
+        --ai-tools-only)
+            UPDATE_BREW=false
+            UPDATE_NPM=false
+            UPDATE_PIP=false
+            UPDATE_GEM=false
+            UPDATE_COMPOSER=false
+            UPDATE_RUST=false
+            UPDATE_GO=false
+            shift
+            ;;
         --no-cleanup)
             CLEANUP=false
             shift
@@ -106,6 +116,7 @@ while [[ $# -gt 0 ]]; do
             echo "  --brew-only     Only update Homebrew packages"
             echo "  --npm-only      Only update npm packages"
             echo "  --pip-only      Only update pip packages"
+            echo "  --ai-tools-only Only update LLM CLI tools"
             echo "  --no-cleanup    Skip cleanup operations"
             echo "  --cask-no-remediation  Skip cask remediation logic"
             echo "  --verbose       Show detailed output"
