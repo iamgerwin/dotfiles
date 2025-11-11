@@ -538,21 +538,36 @@ update_homebrew() {
         
         if [[ -n "$casks_to_upgrade" ]]; then
             log_info "Upgrading casks: $casks_to_upgrade"
-            
+
             # Upgrade each cask individually for better error handling
             local upgrade_failed=false
+            local -a failed_casks=()
+
             for cask in $casks_to_upgrade; do
                 log_info "Upgrading: $cask"
+                local output
+                local has_error=false
+
+                # Capture output and check for errors
                 if $VERBOSE; then
-                    if ! run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy $cask"; then
-                        log_warning "Failed to upgrade $cask"
-                        upgrade_failed=true
-                    fi
+                    output=$(run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy $cask 2>&1" || true)
+                    echo "$output"
                 else
-                    if ! run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy $cask 2>&1 | grep -v '^Warning:' || true"; then
-                        log_warning "Failed to upgrade $cask"
-                        upgrade_failed=true
-                    fi
+                    output=$(run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy $cask 2>&1" || true)
+                fi
+
+                # Check if output contains error messages
+                if echo "$output" | grep -q "^Error:"; then
+                    has_error=true
+                    log_warning "Failed to upgrade $cask (detected error in output)"
+                    failed_casks+=("$cask")
+                    upgrade_failed=true
+                fi
+
+                # Check for common failure patterns
+                if echo "$output" | grep -q "It seems the App source.*is not there"; then
+                    log_warning "$cask: App source missing - adding to ignore list"
+                    CASK_IGNORE_LIST+=("$cask")
                 fi
             done
             
@@ -560,6 +575,10 @@ update_homebrew() {
                 log_success "Homebrew casks upgraded"
             else
                 log_warning "Some casks failed to upgrade"
+                if (( ${#failed_casks[@]} > 0 )); then
+                    log_info "Failed casks: ${failed_casks[*]}"
+                    log_info "To prevent repeated failures, add them to: $CASK_IGNORE_FILE"
+                fi
             fi
         else
             log_success "No casks need upgrading (or all are in ignore list)"
