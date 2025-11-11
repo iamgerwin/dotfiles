@@ -34,6 +34,10 @@ UPDATE_COMPOSER=true
 UPDATE_RUST=true
 UPDATE_GO=true
 UPDATE_AI_TOOLS=true
+UPDATE_OH_MY_ZSH=true
+UPDATE_TMUX=true
+UPDATE_NEOVIM=true
+UPDATE_MACOS=true
 REMEDIATE_CASKS=true
 
 # Cask remediation configuration
@@ -66,6 +70,10 @@ while [[ $# -gt 0 ]]; do
             UPDATE_RUST=false
             UPDATE_GO=false
             UPDATE_AI_TOOLS=false
+            UPDATE_OH_MY_ZSH=false
+            UPDATE_TMUX=false
+            UPDATE_NEOVIM=false
+            UPDATE_MACOS=false
             shift
             ;;
         --npm-only)
@@ -76,6 +84,10 @@ while [[ $# -gt 0 ]]; do
             UPDATE_RUST=false
             UPDATE_GO=false
             UPDATE_AI_TOOLS=false
+            UPDATE_OH_MY_ZSH=false
+            UPDATE_TMUX=false
+            UPDATE_NEOVIM=false
+            UPDATE_MACOS=false
             shift
             ;;
         --pip-only)
@@ -86,6 +98,10 @@ while [[ $# -gt 0 ]]; do
             UPDATE_RUST=false
             UPDATE_GO=false
             UPDATE_AI_TOOLS=false
+            UPDATE_OH_MY_ZSH=false
+            UPDATE_TMUX=false
+            UPDATE_NEOVIM=false
+            UPDATE_MACOS=false
             shift
             ;;
         --ai-tools-only)
@@ -96,6 +112,10 @@ while [[ $# -gt 0 ]]; do
             UPDATE_COMPOSER=false
             UPDATE_RUST=false
             UPDATE_GO=false
+            UPDATE_OH_MY_ZSH=false
+            UPDATE_TMUX=false
+            UPDATE_NEOVIM=false
+            UPDATE_MACOS=false
             shift
             ;;
         --no-cleanup)
@@ -957,7 +977,7 @@ update_go() {
 
 # Update macOS system
 update_macos() {
-    if [[ "$OSTYPE" == "darwin"* ]]; then
+    if [[ "$UPDATE_MACOS" == true ]] && [[ "$OSTYPE" == "darwin"* ]]; then
         log_section "Checking macOS Updates"
         
         log_info "Checking for macOS software updates..."
@@ -974,7 +994,7 @@ update_macos() {
 
 # Update Oh My Zsh
 update_oh_my_zsh() {
-    if [[ -d "$HOME/.oh-my-zsh" ]]; then
+    if [[ "$UPDATE_OH_MY_ZSH" == true ]] && [[ -d "$HOME/.oh-my-zsh" ]]; then
         log_section "Updating Oh My Zsh"
         
         log_info "Updating Oh My Zsh (non-interactive)..."
@@ -990,7 +1010,7 @@ update_oh_my_zsh() {
 
 # Update tmux plugins
 update_tmux_plugins() {
-    if [[ -d "$HOME/.tmux/plugins/tpm" ]]; then
+    if [[ "$UPDATE_TMUX" == true ]] && [[ -d "$HOME/.tmux/plugins/tpm" ]]; then
         log_section "Updating tmux plugins"
         
         log_info "Updating tmux plugins..."
@@ -1005,7 +1025,7 @@ update_tmux_plugins() {
 
 # Update Neovim plugins
 update_neovim_plugins() {
-    if command_exists nvim && [[ -d "$HOME/.config/nvim" ]]; then
+    if [[ "$UPDATE_NEOVIM" == true ]] && command_exists nvim && [[ -d "$HOME/.config/nvim" ]]; then
         log_section "Updating Neovim plugins"
         
         log_info "Updating Neovim plugins..."
