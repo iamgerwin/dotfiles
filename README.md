@@ -329,7 +329,44 @@ brew update && brew upgrade && brew cleanup
 
 # Update package list in Brewfile
 brew bundle dump --force --file=~/dotfiles/Brewfile
+
+# Update all system packages including AI tools (recommended)
+~/dotfiles/scripts/update-all.sh
+
+# Update with verbose output
+~/dotfiles/scripts/update-all.sh --verbose
+
+# Update only specific package managers
+~/dotfiles/scripts/update-all.sh --brew-only
+~/dotfiles/scripts/update-all.sh --npm-only
+~/dotfiles/scripts/update-all.sh --pip-only
 ```
+
+### Updating AI/LLM CLI Tools
+
+The dotfiles include automated updates for AI CLI tools like `gemini-cli`, `codex`, and `claude-code`:
+
+```bash
+# Update AI tools as part of full system update
+~/dotfiles/scripts/update-all.sh
+
+# Update only AI tools
+source ~/dotfiles/scripts/update-all.sh && update_ai_tools
+
+# Skip AI tools during system update
+UPDATE_AI_TOOLS=false ~/dotfiles/scripts/update-all.sh
+
+# Manual update of individual tools
+brew upgrade gemini-cli codex          # Formula-based tools
+brew upgrade --cask claude-code        # Cask-based tools
+```
+
+**Features:**
+- Automatic detection of installed AI tools
+- Smart update handling with timeout protection
+- Helpful installation messages for missing tools
+- Integrated with package manager isolation flags
+- Non-blocking: failures on one tool don't prevent updates to others
 
 ## Customization
 
