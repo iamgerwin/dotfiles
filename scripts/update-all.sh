@@ -65,6 +65,7 @@ while [[ $# -gt 0 ]]; do
             UPDATE_COMPOSER=false
             UPDATE_RUST=false
             UPDATE_GO=false
+            UPDATE_AI_TOOLS=false
             shift
             ;;
         --npm-only)
@@ -74,6 +75,7 @@ while [[ $# -gt 0 ]]; do
             UPDATE_COMPOSER=false
             UPDATE_RUST=false
             UPDATE_GO=false
+            UPDATE_AI_TOOLS=false
             shift
             ;;
         --pip-only)
@@ -83,6 +85,7 @@ while [[ $# -gt 0 ]]; do
             UPDATE_COMPOSER=false
             UPDATE_RUST=false
             UPDATE_GO=false
+            UPDATE_AI_TOOLS=false
             shift
             ;;
         --no-cleanup)
