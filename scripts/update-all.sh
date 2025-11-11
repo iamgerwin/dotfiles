@@ -824,50 +824,100 @@ update_ai_tools() {
         log_section "Updating AI CLI Tools"
 
         local tools_updated=false
+        local ai_tools=("gemini-cli" "codex" "claude-code")
+        local installed_tools=()
 
-        # Update gemini-cli
-        if command_exists gemini; then
-            log_info "Updating gemini-cli..."
-            if $VERBOSE; then
-                run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade gemini-cli" || log_warning "gemini-cli update failed"
+        # Check which AI CLI tools are installed
+        for tool in "${ai_tools[@]}"; do
+            if [[ "$tool" == "claude-code" ]]; then
+                # claude-code is a cask
+                if brew list --cask --versions claude-code >/dev/null 2>&1; then
+                    installed_tools+=("$tool")
+                fi
             else
-                run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade gemini-cli >/dev/null 2>&1" || log_warning "gemini-cli update failed"
+                # Check formula tools
+                if brew list --versions "$tool" >/dev/null 2>&1; then
+                    installed_tools+=("$tool")
+                fi
             fi
-            [[ $? -eq 0 ]] && log_success "gemini-cli updated" && tools_updated=true
-        else
-            log_info "gemini-cli not installed (install with: brew install gemini-cli)"
+        done
+
+        if [[ ${#installed_tools[@]} -eq 0 ]]; then
+            log_info "No AI CLI tools installed"
+            log_info "Available tools:"
+            log_info "  • brew install gemini-cli"
+            log_info "  • brew install codex"
+            log_info "  • brew install --cask claude-code"
+            return 0
         fi
 
-        # Update codex
-        if command_exists codex; then
-            log_info "Updating codex..."
-            if $VERBOSE; then
-                run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade codex" || log_warning "codex update failed"
-            else
-                run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade codex >/dev/null 2>&1" || log_warning "codex update failed"
-            fi
-            [[ $? -eq 0 ]] && log_success "codex updated" && tools_updated=true
-        else
-            log_info "codex not installed (install with: brew install codex)"
-        fi
+        log_info "Found installed AI tools: ${installed_tools[*]}"
 
-        # Update claude-code (cask)
-        if brew list --cask --versions claude-code >/dev/null 2>&1; then
-            log_info "Updating claude-code..."
-            if $VERBOSE; then
-                run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask claude-code" || log_warning "claude-code update failed"
+        # Update each installed tool
+        for tool in "${installed_tools[@]}"; do
+            if [[ "$tool" == "claude-code" ]]; then
+                # Update cask
+                log_info "Checking for $tool updates..."
+                if $VERBOSE; then
+                    if run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask $tool 2>&1"; then
+                        log_success "$tool updated"
+                        tools_updated=true
+                    else
+                        local rc=$?
+                        if [[ $rc -eq 0 ]]; then
+                            log_success "$tool is already up to date"
+                        else
+                            log_warning "$tool update failed or timed out"
+                        fi
+                    fi
+                else
+                    if run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask $tool >/dev/null 2>&1"; then
+                        log_success "$tool updated"
+                        tools_updated=true
+                    else
+                        local rc=$?
+                        if [[ $rc -eq 0 ]]; then
+                            log_success "$tool is already up to date"
+                        else
+                            log_warning "$tool update failed or timed out"
+                        fi
+                    fi
+                fi
             else
-                run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask claude-code >/dev/null 2>&1" || log_warning "claude-code update failed"
+                # Update formula
+                log_info "Checking for $tool updates..."
+                if $VERBOSE; then
+                    if run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade $tool 2>&1"; then
+                        log_success "$tool updated"
+                        tools_updated=true
+                    else
+                        local rc=$?
+                        if [[ $rc -eq 0 ]]; then
+                            log_success "$tool is already up to date"
+                        else
+                            log_warning "$tool update failed or timed out"
+                        fi
+                    fi
+                else
+                    if run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade $tool >/dev/null 2>&1"; then
+                        log_success "$tool updated"
+                        tools_updated=true
+                    else
+                        local rc=$?
+                        if [[ $rc -eq 0 ]]; then
+                            log_success "$tool is already up to date"
+                        else
+                            log_warning "$tool update failed or timed out"
+                        fi
+                    fi
+                fi
             fi
-            [[ $? -eq 0 ]] && log_success "claude-code updated" && tools_updated=true
-        else
-            log_info "claude-code not installed (install with: brew install --cask claude-code)"
-        fi
+        done
 
         if $tools_updated; then
             log_success "AI CLI tools update completed"
         else
-            log_info "No AI CLI tools found to update"
+            log_success "All AI CLI tools are up to date"
         fi
     fi
 }
