@@ -818,11 +818,65 @@ update_rust() {
     fi
 }
 
+# Update AI CLI Tools
+update_ai_tools() {
+    if [[ "$UPDATE_AI_TOOLS" == true ]]; then
+        log_section "Updating AI CLI Tools"
+
+        local tools_updated=false
+
+        # Update gemini-cli
+        if command_exists gemini; then
+            log_info "Updating gemini-cli..."
+            if $VERBOSE; then
+                run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade gemini-cli" || log_warning "gemini-cli update failed"
+            else
+                run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade gemini-cli >/dev/null 2>&1" || log_warning "gemini-cli update failed"
+            fi
+            [[ $? -eq 0 ]] && log_success "gemini-cli updated" && tools_updated=true
+        else
+            log_info "gemini-cli not installed (install with: brew install gemini-cli)"
+        fi
+
+        # Update codex
+        if command_exists codex; then
+            log_info "Updating codex..."
+            if $VERBOSE; then
+                run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade codex" || log_warning "codex update failed"
+            else
+                run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade codex >/dev/null 2>&1" || log_warning "codex update failed"
+            fi
+            [[ $? -eq 0 ]] && log_success "codex updated" && tools_updated=true
+        else
+            log_info "codex not installed (install with: brew install codex)"
+        fi
+
+        # Update claude-code (cask)
+        if brew list --cask --versions claude-code >/dev/null 2>&1; then
+            log_info "Updating claude-code..."
+            if $VERBOSE; then
+                run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask claude-code" || log_warning "claude-code update failed"
+            else
+                run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask claude-code >/dev/null 2>&1" || log_warning "claude-code update failed"
+            fi
+            [[ $? -eq 0 ]] && log_success "claude-code updated" && tools_updated=true
+        else
+            log_info "claude-code not installed (install with: brew install --cask claude-code)"
+        fi
+
+        if $tools_updated; then
+            log_success "AI CLI tools update completed"
+        else
+            log_info "No AI CLI tools found to update"
+        fi
+    fi
+}
+
 # Update Go packages
 update_go() {
     if [[ "$UPDATE_GO" == true ]] && command_exists go; then
         log_section "Updating Go packages"
-        
+
         log_info "Updating Go modules..."
         if [[ -d "$HOME/go/bin" ]]; then
             for binary in "$HOME/go/bin"/*; do
