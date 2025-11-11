@@ -220,7 +220,12 @@ load_cask_ignore_list() {
         while IFS= read -r line; do
             # ignore comments and blanks
             [[ -z "$line" || "$line" =~ ^# ]] && continue
-            CASK_IGNORE_LIST+=("$line")
+            # Strip inline comments (anything after #)
+            local cask_name="${line%%#*}"
+            # Trim all leading and trailing whitespace using parameter expansion
+            cask_name="${cask_name#"${cask_name%%[![:space:]]*}"}"
+            cask_name="${cask_name%"${cask_name##*[![:space:]]}"}"
+            [[ -n "$cask_name" ]] && CASK_IGNORE_LIST+=("$cask_name")
         done < "$CASK_IGNORE_FILE"
         if (( ${#CASK_IGNORE_LIST[@]} > 0 )); then
             log_info "Loaded cask ignore list from $CASK_IGNORE_FILE: ${CASK_IGNORE_LIST[*]}"
