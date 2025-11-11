@@ -206,13 +206,52 @@ For step-by-step instructions and troubleshooting, see [INSTALLATION.md](INSTALL
 
 ## Homebrew Cask Remediation
 
-The update script includes optional remediation for flaky/broken casks seen during `brew upgrade --cask --greedy`.
+The update script includes comprehensive handling for problematic Homebrew casks:
 
-- Default behavior: attempts a `reinstall --cask --force` and, if needed, `uninstall --cask --force` + `install` for a small set of known-problem casks.
-- Skip remediation: run `scripts/update-all.sh --cask-no-remediation`.
-- Ignore specific casks: create `.dotfiles-cask-ignore` at repo root and list tokens to skip (see `.dotfiles-cask-ignore.sample`).
+### Automatic Error Detection
 
-This reduces noise from transient vendor issues and stale Caskroom conflicts (e.g., Opera).
+- Detects cask upgrade failures that Homebrew doesn't report (exit code 0 despite errors)
+- Identifies common failure patterns:
+  - Missing app sources (`It seems the App source is not there`)
+  - Uninstaller script issues
+  - Installation conflicts
+- Reports failed casks with helpful guidance
+
+### Cask Ignore List
+
+Skip problematic casks to prevent wasted time on repeated failures:
+
+```bash
+# Casks in .dotfiles-cask-ignore are automatically excluded from upgrades
+cat .dotfiles-cask-ignore
+```
+
+**Format** (inline comments supported):
+```
+skype
+alt-tab          # App source missing error
+arc              # App source missing error
+logitech-options # Requires password prompt then fails
+```
+
+**When to add casks:**
+- Persistent upgrade failures (missing app sources, uninstaller issues)
+- Interactive prompts that block automation (password requests)
+- Apps you prefer to manage manually
+
+**Add failed casks to ignore list:**
+```bash
+# The script will suggest casks to add after detecting failures
+echo "cask-name  # reason" >> .dotfiles-cask-ignore
+```
+
+### Remediation Options
+
+- **Default**: Automatic remediation for known problematic casks
+- **Skip remediation**: `scripts/update-all.sh --cask-no-remediation`
+- **Pre-emptive exclusion**: Casks in `.dotfiles-cask-ignore` are filtered before upgrade attempts
+
+This reduces noise from vendor issues and prevents blocking operations.
 
 ## Configuration Files
 
@@ -329,7 +368,48 @@ brew update && brew upgrade && brew cleanup
 
 # Update package list in Brewfile
 brew bundle dump --force --file=~/dotfiles/Brewfile
+
+# Update all system packages including AI tools (recommended)
+~/dotfiles/scripts/update-all.sh
+
+# Update with verbose output
+~/dotfiles/scripts/update-all.sh --verbose
+
+# Update only specific package managers
+~/dotfiles/scripts/update-all.sh --brew-only
+~/dotfiles/scripts/update-all.sh --npm-only
+~/dotfiles/scripts/update-all.sh --pip-only
+~/dotfiles/scripts/update-all.sh --ai-tools-only
 ```
+
+### Updating AI/LLM CLI Tools
+
+The dotfiles include automated updates for AI CLI tools like `gemini-cli`, `codex`, and `claude-code`:
+
+```bash
+# Update AI tools as part of full system update
+~/dotfiles/scripts/update-all.sh
+
+# Update only LLM CLI tools (recommended)
+~/dotfiles/scripts/update-all.sh --ai-tools-only
+
+# Update only AI tools (alternative method)
+source ~/dotfiles/scripts/update-all.sh && update_ai_tools
+
+# Skip AI tools during system update
+UPDATE_AI_TOOLS=false ~/dotfiles/scripts/update-all.sh
+
+# Manual update of individual tools
+brew upgrade gemini-cli codex          # Formula-based tools
+brew upgrade --cask claude-code        # Cask-based tools
+```
+
+**Features:**
+- Automatic detection of installed AI tools
+- Smart update handling with timeout protection
+- Helpful installation messages for missing tools
+- Integrated with package manager isolation flags
+- Non-blocking: failures on one tool don't prevent updates to others
 
 ## Customization
 

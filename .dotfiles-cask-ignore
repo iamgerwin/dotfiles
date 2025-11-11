@@ -34,3 +34,8 @@
 # Add your ignored casks below:
 # -----------------------------
 skype
+alt-tab          # App source missing error
+arc              # App source missing error
+opera-air        # App source missing error
+whatsapp         # Already an App conflict
+logitech-options # Requires password prompt then fails - not suitable for automation

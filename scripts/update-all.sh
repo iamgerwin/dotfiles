@@ -33,6 +33,11 @@ UPDATE_GEM=true
 UPDATE_COMPOSER=true
 UPDATE_RUST=true
 UPDATE_GO=true
+UPDATE_AI_TOOLS=true
+UPDATE_OH_MY_ZSH=true
+UPDATE_TMUX=true
+UPDATE_NEOVIM=true
+UPDATE_MACOS=true
 REMEDIATE_CASKS=true
 
 # Cask remediation configuration
@@ -64,6 +69,11 @@ while [[ $# -gt 0 ]]; do
             UPDATE_COMPOSER=false
             UPDATE_RUST=false
             UPDATE_GO=false
+            UPDATE_AI_TOOLS=false
+            UPDATE_OH_MY_ZSH=false
+            UPDATE_TMUX=false
+            UPDATE_NEOVIM=false
+            UPDATE_MACOS=false
             shift
             ;;
         --npm-only)
@@ -73,6 +83,11 @@ while [[ $# -gt 0 ]]; do
             UPDATE_COMPOSER=false
             UPDATE_RUST=false
             UPDATE_GO=false
+            UPDATE_AI_TOOLS=false
+            UPDATE_OH_MY_ZSH=false
+            UPDATE_TMUX=false
+            UPDATE_NEOVIM=false
+            UPDATE_MACOS=false
             shift
             ;;
         --pip-only)
@@ -82,6 +97,25 @@ while [[ $# -gt 0 ]]; do
             UPDATE_COMPOSER=false
             UPDATE_RUST=false
             UPDATE_GO=false
+            UPDATE_AI_TOOLS=false
+            UPDATE_OH_MY_ZSH=false
+            UPDATE_TMUX=false
+            UPDATE_NEOVIM=false
+            UPDATE_MACOS=false
+            shift
+            ;;
+        --ai-tools-only)
+            UPDATE_BREW=false
+            UPDATE_NPM=false
+            UPDATE_PIP=false
+            UPDATE_GEM=false
+            UPDATE_COMPOSER=false
+            UPDATE_RUST=false
+            UPDATE_GO=false
+            UPDATE_OH_MY_ZSH=false
+            UPDATE_TMUX=false
+            UPDATE_NEOVIM=false
+            UPDATE_MACOS=false
             shift
             ;;
         --no-cleanup)
@@ -102,6 +136,7 @@ while [[ $# -gt 0 ]]; do
             echo "  --brew-only     Only update Homebrew packages"
             echo "  --npm-only      Only update npm packages"
             echo "  --pip-only      Only update pip packages"
+            echo "  --ai-tools-only Only update LLM CLI tools"
             echo "  --no-cleanup    Skip cleanup operations"
             echo "  --cask-no-remediation  Skip cask remediation logic"
             echo "  --verbose       Show detailed output"
@@ -185,7 +220,12 @@ load_cask_ignore_list() {
         while IFS= read -r line; do
             # ignore comments and blanks
             [[ -z "$line" || "$line" =~ ^# ]] && continue
-            CASK_IGNORE_LIST+=("$line")
+            # Strip inline comments (anything after #)
+            local cask_name="${line%%#*}"
+            # Trim all leading and trailing whitespace using parameter expansion
+            cask_name="${cask_name#"${cask_name%%[![:space:]]*}"}"
+            cask_name="${cask_name%"${cask_name##*[![:space:]]}"}"
+            [[ -n "$cask_name" ]] && CASK_IGNORE_LIST+=("$cask_name")
         done < "$CASK_IGNORE_FILE"
         if (( ${#CASK_IGNORE_LIST[@]} > 0 )); then
             log_info "Loaded cask ignore list from $CASK_IGNORE_FILE: ${CASK_IGNORE_LIST[*]}"
@@ -503,21 +543,36 @@ update_homebrew() {
         
         if [[ -n "$casks_to_upgrade" ]]; then
             log_info "Upgrading casks: $casks_to_upgrade"
-            
+
             # Upgrade each cask individually for better error handling
             local upgrade_failed=false
+            local -a failed_casks=()
+
             for cask in $casks_to_upgrade; do
                 log_info "Upgrading: $cask"
+                local output
+                local has_error=false
+
+                # Capture output and check for errors
                 if $VERBOSE; then
-                    if ! run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy $cask"; then
-                        log_warning "Failed to upgrade $cask"
-                        upgrade_failed=true
-                    fi
+                    output=$(run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy $cask 2>&1" || true)
+                    echo "$output"
                 else
-                    if ! run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy $cask 2>&1 | grep -v '^Warning:' || true"; then
-                        log_warning "Failed to upgrade $cask"
-                        upgrade_failed=true
-                    fi
+                    output=$(run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy $cask 2>&1" || true)
+                fi
+
+                # Check if output contains error messages
+                if echo "$output" | grep -q "^Error:"; then
+                    has_error=true
+                    log_warning "Failed to upgrade $cask (detected error in output)"
+                    failed_casks+=("$cask")
+                    upgrade_failed=true
+                fi
+
+                # Check for common failure patterns
+                if echo "$output" | grep -q "It seems the App source.*is not there"; then
+                    log_warning "$cask: App source missing - adding to ignore list"
+                    CASK_IGNORE_LIST+=("$cask")
                 fi
             done
             
@@ -525,6 +580,10 @@ update_homebrew() {
                 log_success "Homebrew casks upgraded"
             else
                 log_warning "Some casks failed to upgrade"
+                if (( ${#failed_casks[@]} > 0 )); then
+                    log_info "Failed casks: ${failed_casks[*]}"
+                    log_info "To prevent repeated failures, add them to: $CASK_IGNORE_FILE"
+                fi
             fi
         else
             log_success "No casks need upgrading (or all are in ignore list)"
@@ -814,11 +873,115 @@ update_rust() {
     fi
 }
 
+# Update AI CLI Tools
+update_ai_tools() {
+    if [[ "$UPDATE_AI_TOOLS" == true ]]; then
+        log_section "Updating AI CLI Tools"
+
+        local tools_updated=false
+        local ai_tools=("gemini-cli" "codex" "claude-code")
+        local installed_tools=()
+
+        # Check which AI CLI tools are installed
+        for tool in "${ai_tools[@]}"; do
+            if [[ "$tool" == "claude-code" ]]; then
+                # claude-code is a cask
+                if brew list --cask --versions claude-code >/dev/null 2>&1; then
+                    installed_tools+=("$tool")
+                fi
+            else
+                # Check formula tools
+                if brew list --versions "$tool" >/dev/null 2>&1; then
+                    installed_tools+=("$tool")
+                fi
+            fi
+        done
+
+        if [[ ${#installed_tools[@]} -eq 0 ]]; then
+            log_info "No AI CLI tools installed"
+            log_info "Available tools:"
+            log_info "  • brew install gemini-cli"
+            log_info "  • brew install codex"
+            log_info "  • brew install --cask claude-code"
+            return 0
+        fi
+
+        log_info "Found installed AI tools: ${installed_tools[*]}"
+
+        # Update each installed tool
+        for tool in "${installed_tools[@]}"; do
+            if [[ "$tool" == "claude-code" ]]; then
+                # Update cask
+                log_info "Checking for $tool updates..."
+                if $VERBOSE; then
+                    if run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask $tool 2>&1"; then
+                        log_success "$tool updated"
+                        tools_updated=true
+                    else
+                        local rc=$?
+                        if [[ $rc -eq 0 ]]; then
+                            log_success "$tool is already up to date"
+                        else
+                            log_warning "$tool update failed or timed out"
+                        fi
+                    fi
+                else
+                    if run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask $tool >/dev/null 2>&1"; then
+                        log_success "$tool updated"
+                        tools_updated=true
+                    else
+                        local rc=$?
+                        if [[ $rc -eq 0 ]]; then
+                            log_success "$tool is already up to date"
+                        else
+                            log_warning "$tool update failed or timed out"
+                        fi
+                    fi
+                fi
+            else
+                # Update formula
+                log_info "Checking for $tool updates..."
+                if $VERBOSE; then
+                    if run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade $tool 2>&1"; then
+                        log_success "$tool updated"
+                        tools_updated=true
+                    else
+                        local rc=$?
+                        if [[ $rc -eq 0 ]]; then
+                            log_success "$tool is already up to date"
+                        else
+                            log_warning "$tool update failed or timed out"
+                        fi
+                    fi
+                else
+                    if run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade $tool >/dev/null 2>&1"; then
+                        log_success "$tool updated"
+                        tools_updated=true
+                    else
+                        local rc=$?
+                        if [[ $rc -eq 0 ]]; then
+                            log_success "$tool is already up to date"
+                        else
+                            log_warning "$tool update failed or timed out"
+                        fi
+                    fi
+                fi
+            fi
+        done
+
+        if $tools_updated; then
+            log_success "AI CLI tools update completed"
+        else
+            log_success "All AI CLI tools are up to date"
+        fi
+    fi
+}
+
 # Update Go packages
 update_go() {
     if [[ "$UPDATE_GO" == true ]] && command_exists go; then
         log_section "Updating Go packages"
-        
+
         log_info "Updating Go modules..."
         if [[ -d "$HOME/go/bin" ]]; then
             for binary in "$HOME/go/bin"/*; do
@@ -838,7 +1001,7 @@ update_go() {
 
 # Update macOS system
 update_macos() {
-    if [[ "$OSTYPE" == "darwin"* ]]; then
+    if [[ "$UPDATE_MACOS" == true ]] && [[ "$OSTYPE" == "darwin"* ]]; then
         log_section "Checking macOS Updates"
         
         log_info "Checking for macOS software updates..."
@@ -855,7 +1018,7 @@ update_macos() {
 
 # Update Oh My Zsh
 update_oh_my_zsh() {
-    if [[ -d "$HOME/.oh-my-zsh" ]]; then
+    if [[ "$UPDATE_OH_MY_ZSH" == true ]] && [[ -d "$HOME/.oh-my-zsh" ]]; then
         log_section "Updating Oh My Zsh"
         
         log_info "Updating Oh My Zsh (non-interactive)..."
@@ -871,7 +1034,7 @@ update_oh_my_zsh() {
 
 # Update tmux plugins
 update_tmux_plugins() {
-    if [[ -d "$HOME/.tmux/plugins/tpm" ]]; then
+    if [[ "$UPDATE_TMUX" == true ]] && [[ -d "$HOME/.tmux/plugins/tpm" ]]; then
         log_section "Updating tmux plugins"
         
         log_info "Updating tmux plugins..."
@@ -886,7 +1049,7 @@ update_tmux_plugins() {
 
 # Update Neovim plugins
 update_neovim_plugins() {
-    if command_exists nvim && [[ -d "$HOME/.config/nvim" ]]; then
+    if [[ "$UPDATE_NEOVIM" == true ]] && command_exists nvim && [[ -d "$HOME/.config/nvim" ]]; then
         log_section "Updating Neovim plugins"
         
         log_info "Updating Neovim plugins..."
@@ -918,6 +1081,7 @@ main() {
     update_composer
     update_rust
     update_go
+    update_ai_tools
     update_oh_my_zsh
     update_tmux_plugins
     update_neovim_plugins
