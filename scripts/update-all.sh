@@ -33,6 +33,7 @@ UPDATE_GEM=true
 UPDATE_COMPOSER=true
 UPDATE_RUST=true
 UPDATE_GO=true
+UPDATE_AI_TOOLS=true
 REMEDIATE_CASKS=true
 
 # Cask remediation configuration
