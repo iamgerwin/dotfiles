@@ -976,6 +976,7 @@ main() {
     update_composer
     update_rust
     update_go
+    update_ai_tools
     update_oh_my_zsh
     update_tmux_plugins
     update_neovim_plugins
