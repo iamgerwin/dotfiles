@@ -206,13 +206,52 @@ For step-by-step instructions and troubleshooting, see [INSTALLATION.md](INSTALL
 
 ## Homebrew Cask Remediation
 
-The update script includes optional remediation for flaky/broken casks seen during `brew upgrade --cask --greedy`.
+The update script includes comprehensive handling for problematic Homebrew casks:
 
-- Default behavior: attempts a `reinstall --cask --force` and, if needed, `uninstall --cask --force` + `install` for a small set of known-problem casks.
-- Skip remediation: run `scripts/update-all.sh --cask-no-remediation`.
-- Ignore specific casks: create `.dotfiles-cask-ignore` at repo root and list tokens to skip (see `.dotfiles-cask-ignore.sample`).
+### Automatic Error Detection
 
-This reduces noise from transient vendor issues and stale Caskroom conflicts (e.g., Opera).
+- Detects cask upgrade failures that Homebrew doesn't report (exit code 0 despite errors)
+- Identifies common failure patterns:
+  - Missing app sources (`It seems the App source is not there`)
+  - Uninstaller script issues
+  - Installation conflicts
+- Reports failed casks with helpful guidance
+
+### Cask Ignore List
+
+Skip problematic casks to prevent wasted time on repeated failures:
+
+```bash
+# Casks in .dotfiles-cask-ignore are automatically excluded from upgrades
+cat .dotfiles-cask-ignore
+```
+
+**Format** (inline comments supported):
+```
+skype
+alt-tab          # App source missing error
+arc              # App source missing error
+logitech-options # Requires password prompt then fails
+```
+
+**When to add casks:**
+- Persistent upgrade failures (missing app sources, uninstaller issues)
+- Interactive prompts that block automation (password requests)
+- Apps you prefer to manage manually
+
+**Add failed casks to ignore list:**
+```bash
+# The script will suggest casks to add after detecting failures
+echo "cask-name  # reason" >> .dotfiles-cask-ignore
+```
+
+### Remediation Options
+
+- **Default**: Automatic remediation for known problematic casks
+- **Skip remediation**: `scripts/update-all.sh --cask-no-remediation`
+- **Pre-emptive exclusion**: Casks in `.dotfiles-cask-ignore` are filtered before upgrade attempts
+
+This reduces noise from vendor issues and prevents blocking operations.
 
 ## Configuration Files
 
