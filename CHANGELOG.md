@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- IT Terms & Jargons Dictionary (`docs/dictionary.md`)
+  - Comprehensive glossary with 50+ IT terminology entries
+  - Covers foundational concepts, system design, design patterns, and best practices
+  - Categories: Frontend, Backend, DevOps, Software Engineering, System Design
+  - Alphabetically organized with table of contents for quick navigation
+  - Includes related terms cross-references for deeper understanding
+  - Ready for continuous expansion by contributors
+
 ### Fixed
 - Fixed update-all.sh script hanging on password prompts and unresponsive operations
   - Added comprehensive timeout handling for all package manager operations
