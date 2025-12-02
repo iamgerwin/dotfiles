@@ -78,11 +78,23 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** Common solutions to recurring problems that are counterproductive, ineffective, or lead to poor code quality. Examples include God Objects, Spaghetti Code, and Copy-Paste Programming. Recognizing anti-patterns helps developers avoid technical debt.
 **Related Terms:** Technical Debt, SOLID Principles
 
+### Airtable
+
+**Category:** Database / Low-Code
+**Description:** A cloud-based platform combining spreadsheet simplicity with database power for organizing work. Airtable provides relational database features, customizable views (grid, calendar, kanban), automations, and integrations, making it popular for project management and content planning.
+**Related Terms:** NocoDB, Database, Low-Code, Project Management
+
 ### API Gateway
 
 **Category:** System Design
 **Description:** A server that acts as a single entry point for a set of microservices. It handles request routing, composition, and protocol translation, often providing cross-cutting concerns like authentication, rate limiting, and monitoring.
-**Related Terms:** Load Balancer, Reverse Proxy, Rate Limiting
+**Related Terms:** Load Balancer, Reverse Proxy, Rate Limiting, API Manager
+
+### API Manager
+
+**Category:** System Design / DevOps
+**Description:** A comprehensive platform for creating, publishing, securing, and managing APIs throughout their lifecycle. API Managers provide developer portals, analytics, monetization, versioning, and governance capabilities beyond basic API Gateway functionality.
+**Related Terms:** API Gateway, MuleSoft, OpenAPI, Rate Limiting
 
 ### Autoscaling
 
@@ -135,6 +147,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Foundational Concept
 **Description:** The maximum rate of data transfer across a network connection, typically measured in bits per second (bps). Higher bandwidth allows more data to be transmitted in a given time period.
 **Related Terms:** Throughput, Latency
+
+### BABOK (Business Analysis Body of Knowledge)
+
+**Category:** Project Management / Standards
+**Description:** A globally recognized standard providing guidelines and best practices for business analysis. BABOK defines knowledge areas including requirements elicitation, analysis, solution evaluation, and stakeholder collaboration, serving as a foundation for business analyst certifications.
+**Related Terms:** PMBOK, Project Management, Requirements Engineering, Business Analysis
 
 ### BDD (Behavior-Driven Development)
 
@@ -200,6 +218,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A principle stating that a distributed system can only guarantee two of three properties: Consistency (all nodes see the same data), Availability (every request receives a response), and Partition tolerance (the system continues operating despite network failures).
 **Related Terms:** Stateless vs Stateful, Event-Driven Architecture
 
+### CCNA (Cisco Certified Network Associate)
+
+**Category:** Certification / Networking
+**Description:** An industry-recognized IT certification validating foundational networking knowledge including IP addressing, network security, routing and switching, and network fundamentals. CCNA certification demonstrates competency in configuring and troubleshooting network infrastructure.
+**Related Terms:** Networking, Cybersecurity, Infrastructure, VPS
+
 ### CDN (Content Delivery Network)
 
 **Category:** System Design
@@ -222,7 +246,13 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 
 **Category:** DevOps
 **Description:** A set of practices that automate the building, testing, and deployment of applications. CI ensures code changes are regularly merged and tested. CD automates the release process, enabling frequent and reliable deployments.
-**Related Terms:** Containerization, Infrastructure as Code
+**Related Terms:** Containerization, Infrastructure as Code, CircleCI, GitHub Actions
+
+### CircleCI
+
+**Category:** DevOps / CI/CD Platform
+**Description:** A cloud-based continuous integration and delivery platform that automates software builds, tests, and deployments. CircleCI provides configuration-as-code via YAML, parallelism, caching, orbs (reusable packages), and integrations with major version control systems.
+**Related Terms:** CI/CD, GitHub Actions, Jenkins, Pipeline
 
 ### Circuit Breaker Pattern
 
@@ -260,6 +290,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A technique that breaks JavaScript bundles into smaller chunks loaded on demand. Code splitting reduces initial load time by only loading necessary code for the current page, with additional code loaded as needed.
 **Related Terms:** Lazy Loading, Webpack, Performance Optimization
 
+### Compliance
+
+**Category:** Security / Governance
+**Description:** The adherence to laws, regulations, guidelines, and specifications relevant to business operations and IT systems. In software development, compliance includes meeting standards like GDPR, HIPAA, SOC 2, PCI-DSS, and industry-specific regulations that govern data handling and security practices.
+**Related Terms:** GDPR, OWASP, Security, Cybersecurity, Audit
+
 ### Component-Based Architecture
 
 **Category:** Software Architecture / Frontend
@@ -271,6 +307,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Backend / Platform
 **Description:** A backend platform that combines a database, server functions, file storage, scheduling, and real-time updates in a single system. Convex provides a reactive database with TypeScript support, automatic caching, and built-in security.
 **Related Terms:** Firebase, Supabase, Backend-as-a-Service, Real-time Database
+
+### Contabo
+
+**Category:** Cloud / Hosting Provider
+**Description:** A German web hosting and cloud services provider offering VPS, dedicated servers, and cloud solutions at competitive prices. Contabo is known for high-resource allocations at budget-friendly rates, serving customers who prioritize value over premium support features.
+**Related Terms:** VPS, Hetzner, DigitalOcean, Hostinger, Cloud Computing
 
 ### Cryptocurrency
 
@@ -338,6 +380,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A modern end-to-end testing framework for web applications that runs tests directly in the browser. Cypress provides fast, reliable testing with automatic waiting, time-travel debugging, and real-time reloading.
 **Related Terms:** Playwright, Testing, CI/CD
 
+### Cybersecurity
+
+**Category:** Security / IT
+**Description:** The practice of protecting systems, networks, programs, and data from digital attacks, unauthorized access, and damage. Cybersecurity encompasses network security, application security, information security, operational security, disaster recovery, and end-user education.
+**Related Terms:** OWASP, Ethical Hacking, White Hat, Compliance, Cryptography
+
 ---
 
 ## D
@@ -365,6 +413,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Design Pattern
 **Description:** A structural design pattern that allows behavior to be added to individual objects dynamically without affecting other objects of the same class. It wraps the original object and extends its functionality.
 **Related Terms:** Adapter Pattern, Observer Pattern
+
+### Datadog
+
+**Category:** DevOps / Monitoring
+**Description:** A cloud-based monitoring and analytics platform for infrastructure, applications, and logs. Datadog provides real-time observability through metrics, traces, and logs with powerful dashboards, alerting, and APM capabilities for modern cloud environments.
+**Related Terms:** Observability, Monitoring, PostHog, New Relic, Logs / Metrics / Traces
 
 ### DeepSeek
 
@@ -424,6 +478,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 
 ## E
 
+### ECC RAM (Error-Correcting Code Memory)
+
+**Category:** Hardware / Infrastructure
+**Description:** A type of computer memory that detects and corrects common internal data corruption, improving system reliability for servers and workstations. ECC RAM prevents single-bit memory errors from causing crashes or data corruption, making it essential for mission-critical systems and databases.
+**Related Terms:** Memory, Infrastructure, Server, Database
+
 ### Edge Computing
 
 **Category:** System Design / Cloud
@@ -441,6 +501,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Software Engineering
 **Description:** A data type consisting of a set of named constants that represent distinct values. Enums improve code readability, type safety, and maintainability by replacing magic strings and numbers with meaningful identifiers. They're essential for defining fixed sets of options.
 **Related Terms:** Single Source of Truth, Code Smells, Type Safety
+
+### Ethical Hacking
+
+**Category:** Security / Cybersecurity
+**Description:** The authorized practice of bypassing system security to identify potential vulnerabilities that malicious hackers could exploit. Ethical hackers use the same tools and techniques as attackers but with permission, helping organizations strengthen their security posture through penetration testing and vulnerability assessments.
+**Related Terms:** White Hat, Cybersecurity, OWASP, Penetration Testing
 
 ### Event Sourcing
 
@@ -470,6 +536,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** Conditional toggles that enable or disable features in production without code deployment. Feature flags facilitate A/B testing, gradual rollouts, canary releases, and quick rollback of problematic features, reducing deployment risk.
 **Related Terms:** CI/CD, Deployment Strategies, Testing
 
+### Fedora
+
+**Category:** Operating System / Linux
+**Description:** A Linux distribution sponsored by Red Hat, serving as a cutting-edge platform featuring the latest open-source technologies. Fedora is known for rapid adoption of new features, strong security defaults, and serving as an upstream source for Red Hat Enterprise Linux.
+**Related Terms:** Linux, Red Hat, Ubuntu, Operating System
+
 ### Firebase
 
 **Category:** Backend / Platform
@@ -488,6 +560,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** Google's UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase. Flutter uses the Dart language and provides fast development with hot reload, expressive UIs, and native performance.
 **Related Terms:** React Native, Kotlin, Mobile Development
 
+### FrankenPHP
+
+**Category:** Backend / PHP Runtime
+**Description:** A modern PHP application server written in Go, providing built-in support for HTTP/2, HTTP/3, automatic HTTPS, and early hints. FrankenPHP can run as a standalone server or embed PHP into any Go application, offering significant performance improvements over traditional PHP-FPM setups.
+**Related Terms:** Laravel Octane, PHP, Web Server, Performance
+
 ---
 
 ## G
@@ -503,6 +581,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Cloud / Platform
 **Description:** Google's cloud computing platform offering services for compute (Compute Engine), storage (Cloud Storage), databases (Cloud SQL, Firestore), machine learning (Vertex AI), Kubernetes (GKE), and data analytics (BigQuery).
 **Related Terms:** AWS, Azure, Cloud Computing, Firebase
+
+### GDPR (General Data Protection Regulation)
+
+**Category:** Security / Compliance
+**Description:** A comprehensive data protection regulation enacted by the European Union governing how organizations collect, store, process, and transfer personal data. GDPR grants individuals rights over their data and imposes strict requirements on data controllers and processors, with significant penalties for non-compliance.
+**Related Terms:** Compliance, Privacy, Security, Data Protection
 
 ### Gemini
 
@@ -528,6 +612,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A statically typed, compiled programming language designed by Google emphasizing simplicity, concurrency, and performance. Go features garbage collection, built-in concurrency primitives (goroutines and channels), and fast compilation times.
 **Related Terms:** Rust, Concurrency, Microservices
 
+### GoHighLevel
+
+**Category:** Platform / Marketing Automation
+**Description:** An all-in-one sales and marketing platform designed for agencies, providing CRM, funnel builders, email marketing, SMS campaigns, appointment scheduling, and white-label solutions. GoHighLevel consolidates multiple marketing tools into a single platform for managing client relationships and campaigns.
+**Related Terms:** CRM, Marketing Automation, SaaS, Zapier
+
 ### GraphQL
 
 **Category:** API / Query Language
@@ -549,6 +639,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Cloud / Platform
 **Description:** A German cloud hosting provider offering dedicated servers, virtual private servers (VPS), cloud servers, and storage solutions. Hetzner is known for competitive pricing, high-performance hardware, and European data centers.
 **Related Terms:** DigitalOcean, AWS, Cloud Computing, VPS
+
+### Hostinger
+
+**Category:** Cloud / Hosting Provider
+**Description:** A web hosting company offering shared hosting, VPS, cloud hosting, and domain registration services at budget-friendly prices. Hostinger is popular among beginners and small businesses for its user-friendly interface, hPanel control panel, and competitive pricing.
+**Related Terms:** VPS, Namecheap, Contabo, Web Hosting
 
 ### Hook (React Hooks)
 
@@ -577,6 +673,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 ---
 
 ## I
+
+### I18n (Internationalization)
+
+**Category:** Software Engineering / Localization
+**Description:** The process of designing software to support multiple languages and regions without requiring code changes. I18n (18 letters between 'i' and 'n') involves separating text from code, handling different date/number formats, and supporting right-to-left languages. Often paired with L10n (Localization) for actual translation.
+**Related Terms:** L10n, Accessibility, Frontend, UX
 
 ### IaaS (Infrastructure as a Service)
 
@@ -636,6 +738,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** Atlassian's project management and issue tracking software widely used for agile development. JIRA supports scrum and kanban workflows, sprint planning, backlog management, custom workflows, and integration with development tools for tracking software projects.
 **Related Terms:** ClickUp, Notion, Agile, Sprint
 
+### JMeter
+
+**Category:** Testing / Performance
+**Description:** An open-source Java application designed for load testing and measuring performance of web applications, APIs, databases, and other services. JMeter simulates heavy loads to analyze overall performance under various conditions, supporting HTTP, JDBC, FTP, and other protocols.
+**Related Terms:** Load Testing, K6, Performance Testing, CI/CD
+
 ### Jotai
 
 **Category:** State Management / Frontend
@@ -652,11 +760,23 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 
 ## K
 
+### K6
+
+**Category:** Testing / Performance
+**Description:** A modern open-source load testing tool built for developer happiness, using JavaScript for writing test scripts. K6 provides excellent CLI experience, scriptable scenarios, built-in protocols (HTTP, WebSocket, gRPC), and integrates with CI/CD pipelines for performance regression testing.
+**Related Terms:** JMeter, Load Testing, Performance Testing, CI/CD
+
 ### Kafka
 
 **Category:** System Design / Messaging
 **Description:** A distributed event streaming platform designed for high-throughput, fault-tolerant message processing. Kafka provides publish-subscribe messaging, stream processing, and durable storage, commonly used for building real-time data pipelines and event-driven architectures.
 **Related Terms:** RabbitMQ, Message Queue, Event-Driven Architecture, Pub/Sub
+
+### Kali Linux
+
+**Category:** Operating System / Security
+**Description:** A Debian-based Linux distribution designed for digital forensics and penetration testing. Kali Linux comes pre-installed with hundreds of security tools for ethical hacking, vulnerability assessment, and security auditing, making it the go-to platform for security professionals.
+**Related Terms:** Linux, Ethical Hacking, Cybersecurity, Penetration Testing
 
 ### Kanban
 
@@ -676,6 +796,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A modern, statically typed programming language developed by JetBrains that runs on the JVM and is fully interoperable with Java. Kotlin is the preferred language for Android development, offering concise syntax, null safety, coroutines, and functional programming features.
 **Related Terms:** Java, Android, Flutter
 
+### Kubernetes
+
+**Category:** DevOps / Container Orchestration
+**Description:** An open-source container orchestration platform for automating deployment, scaling, and management of containerized applications. Kubernetes provides service discovery, load balancing, storage orchestration, automated rollouts, self-healing, and secret management across clusters.
+**Related Terms:** Docker Image, Containerization, Kubernetes Pod, Helm, GitOps
+
 ### Kubernetes Pod
 
 **Category:** DevOps / Cloud
@@ -691,6 +817,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Framework / Backend
 **Description:** A popular PHP web application framework known for elegant syntax and developer-friendly features. Laravel provides MVC architecture, Eloquent ORM, routing, authentication, migrations, and a rich ecosystem for building modern web applications.
 **Related Terms:** PHP, MVC, Eloquent, Backend Development
+
+### Laravel Octane
+
+**Category:** Framework / Backend Performance
+**Description:** A Laravel package that supercharges application performance by serving requests using high-powered application servers like Swoole, RoadRunner, or FrankenPHP. Octane boots the application once and keeps it in memory, dramatically reducing response times and increasing throughput.
+**Related Terms:** Laravel, FrankenPHP, Swoole, Performance, PHP
 
 ### Largest Contentful Paint (LCP)
 
@@ -710,11 +842,23 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A design pattern that defers the initialization or loading of resources until they are actually needed. This improves initial load time and reduces memory usage by not loading unnecessary data upfront.
 **Related Terms:** Pagination, Caching Strategies
 
+### Lean
+
+**Category:** Project Management / Methodology
+**Description:** A systematic approach to eliminating waste and maximizing value in processes, originating from Toyota's manufacturing practices. In software development, Lean principles focus on delivering value, eliminating waste, building quality in, deferring decisions, and optimizing the whole system.
+**Related Terms:** Agile Methodology, Six Sigma, Kanban, Project Management
+
 ### Linked List
 
 **Category:** Foundational Concept
 **Description:** A linear data structure where elements (nodes) are not stored contiguously in memory. Each node contains data and a reference to the next node. Linked lists allow efficient insertions and deletions but have O(n) access time.
 **Related Terms:** Data Structure, Stack, Queue
+
+### Linux
+
+**Category:** Operating System / Infrastructure
+**Description:** An open-source Unix-like operating system kernel that powers servers, desktops, mobile devices (Android), and embedded systems. Linux distributions (Ubuntu, Fedora, Red Hat, Debian) provide the foundation for most web servers, cloud infrastructure, and containerized applications.
+**Related Terms:** Ubuntu, Fedora, Red Hat, Kali Linux, Operating System
 
 ### LLM (Large Language Model)
 
@@ -810,6 +954,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A software development strategy where code for multiple projects is stored in a single repository. Monorepos simplify dependency management, code sharing, and atomic changes across projects but require specialized tooling for large codebases.
 **Related Terms:** Version Control, CI/CD, Code Organization
 
+### MuleSoft
+
+**Category:** Integration / Platform
+**Description:** A Salesforce company providing an integration platform (Anypoint Platform) for connecting applications, data, and devices. MuleSoft enables API-led connectivity through API design, development, management, and analytics, commonly used for enterprise integration and digital transformation.
+**Related Terms:** API Gateway, API Manager, Integration, Salesforce, Enterprise
+
 ### Multi-tenancy
 
 **Category:** Software Architecture / SaaS
@@ -843,6 +993,24 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Database / Performance
 **Description:** A common database performance anti-pattern where an application executes one query to fetch a list of records, then N additional queries to fetch related data for each record. This causes excessive database round trips and can be solved with eager loading or joins.
 **Related Terms:** ORM, Database Optimization, Laravel
+
+### N8N
+
+**Category:** Automation / Workflow
+**Description:** An open-source workflow automation platform enabling technical users to connect applications and automate processes through a visual node-based interface. N8N supports self-hosting, hundreds of integrations, custom code nodes, and complex workflow logic for data processing and API orchestration.
+**Related Terms:** Zapier, Automation, Integration, Low-Code
+
+### Namecheap
+
+**Category:** Services / Domain Registrar
+**Description:** A domain registrar and web hosting company offering domain registration, SSL certificates, hosting, and privacy protection services. Namecheap is known for competitive pricing, user-friendly interface, and strong domain privacy features.
+**Related Terms:** Hostinger, Web Hosting, DNS, Domain
+
+### NeonDB
+
+**Category:** Database / Serverless
+**Description:** A fully managed serverless PostgreSQL platform offering automatic scaling, branching for development workflows, and pay-per-use pricing. Neon separates storage and compute, enabling instant database provisioning, point-in-time recovery, and cost-effective scaling for modern applications.
+**Related Terms:** PostgreSQL, Serverless, Supabase, Turso, Database
 
 ### Nest.js
 
@@ -902,6 +1070,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An authorization framework that enables applications to obtain limited access to user accounts on HTTP services. OAuth2 provides secure delegated access through access tokens, supporting various grant types for different application architectures.
 **Related Terms:** JWT, Authentication, API Security
 
+### Odoo
+
+**Category:** Platform / ERP
+**Description:** An open-source suite of business applications including CRM, e-commerce, accounting, inventory, project management, and manufacturing modules. Odoo provides a modular architecture allowing organizations to start with specific apps and expand, with both community and enterprise editions.
+**Related Terms:** ERP, CRM, SaaS, Business Applications
+
 ### Observer Pattern
 
 **Category:** Design Pattern
@@ -925,6 +1099,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Security / Authentication
 **Description:** An authentication protocol that allows users to be authenticated by cooperating sites (identity providers) using a third-party service. OpenID Connect (OIDC) builds on OAuth 2.0 to provide identity layer functionality.
 **Related Terms:** OAuth2, JWT, Authentication, SSO
+
+### Optimistic Update
+
+**Category:** Frontend / UX Pattern
+**Description:** A UI pattern that immediately reflects changes in the interface before server confirmation, assuming the operation will succeed. Optimistic updates provide instant feedback and better perceived performance, with rollback mechanisms if the server request fails.
+**Related Terms:** Pessimistic Update, State Management, UX, API
+
+### OWASP (Open Web Application Security Project)
+
+**Category:** Security / Standards
+**Description:** A nonprofit foundation providing free security resources, tools, and best practices for web application security. OWASP maintains the widely-referenced Top 10 list of critical web application security risks and provides guidelines, testing tools, and educational materials.
+**Related Terms:** Cybersecurity, Compliance, Security, Ethical Hacking
 
 ---
 
@@ -954,6 +1140,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** The simultaneous execution of multiple tasks or processes at the same time, typically on multiple CPU cores. Unlike concurrency, parallelism requires multiple processing units to achieve true simultaneous execution.
 **Related Terms:** Concurrency, CPU-bound vs I/O-bound
 
+### Pessimistic Update
+
+**Category:** Frontend / UX Pattern
+**Description:** A UI pattern that waits for server confirmation before reflecting changes in the interface, ensuring data consistency at the cost of perceived responsiveness. Pessimistic updates are safer for critical operations where failures must be immediately visible to users.
+**Related Terms:** Optimistic Update, State Management, UX, API
+
+### Pest
+
+**Category:** Testing / PHP
+**Description:** A modern PHP testing framework with an elegant, expressive syntax inspired by Jest and Ruby's RSpec. Pest provides a minimal, focused API for writing tests, built on top of PHPUnit, with features like parallel testing, coverage reports, and architectural testing.
+**Related Terms:** PHPUnit, Testing, Laravel, TDD
+
 ### Phoenix
 
 **Category:** Framework / Backend
@@ -972,11 +1170,29 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A modern end-to-end testing framework developed by Microsoft that supports multiple browsers (Chromium, Firefox, WebKit). Playwright offers reliable testing with auto-wait, powerful selectors, network interception, and parallel execution capabilities.
 **Related Terms:** Cypress, Testing, Automation
 
+### PMBOK (Project Management Body of Knowledge)
+
+**Category:** Project Management / Standards
+**Description:** A comprehensive guide published by PMI containing standardized terminology, processes, and best practices for project management. PMBOK defines knowledge areas including scope, schedule, cost, quality, and risk management, serving as the foundation for PMP certification.
+**Related Terms:** PMP, Project Management, BABOK, Agile Methodology
+
+### PMP (Project Management Professional)
+
+**Category:** Certification / Project Management
+**Description:** A globally recognized professional certification offered by the Project Management Institute (PMI) for project managers. PMP certification validates competency in leading and directing projects, requiring education, experience, and passing a rigorous examination based on PMBOK standards.
+**Related Terms:** PMBOK, Project Management, Scrum, Agile Methodology
+
 ### PNPM
 
 **Category:** Package Manager / Tools
 **Description:** A fast, disk-efficient package manager for JavaScript that uses a content-addressable storage system. PNPM creates a single store for all packages and uses hard links to save disk space while maintaining strict dependency isolation.
 **Related Terms:** NPM, Yarn, Bun, Node.js
+
+### PostHog
+
+**Category:** Analytics / Platform
+**Description:** An open-source product analytics platform providing event tracking, user analytics, feature flags, A/B testing, session recordings, and heatmaps. PostHog can be self-hosted or cloud-hosted, offering full data ownership and integration with development workflows.
+**Related Terms:** Analytics, Datadog, Feature Flags, Observability
 
 ### Polyglot Persistence
 
@@ -989,6 +1205,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Frontend / Mobile
 **Description:** Web applications that use modern web capabilities to deliver app-like experiences. PWAs work offline, can be installed on devices, send push notifications, and provide fast, reliable performance through service workers.
 **Related Terms:** Service Worker, Mobile-First Design, Responsive Design
+
+### Project Management
+
+**Category:** Methodology / Business
+**Description:** The discipline of planning, organizing, and managing resources to successfully complete specific project goals within constraints of scope, time, and budget. Project management encompasses methodologies (Agile, Waterfall), frameworks (Scrum, Kanban), and certifications (PMP, PRINCE2).
+**Related Terms:** Agile Methodology, Scrum, Kanban, PMP, PMBOK, JIRA
 
 ### Prototyping
 
@@ -1027,6 +1249,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** System Design / Messaging
 **Description:** An open-source message broker that implements AMQP and other messaging protocols. RabbitMQ facilitates reliable message delivery between distributed systems through queues, exchanges, and routing, supporting various messaging patterns.
 **Related Terms:** Kafka, Message Queue, Event-Driven Architecture
+
+### Red Hat
+
+**Category:** Company / Linux
+**Description:** An enterprise software company known for Red Hat Enterprise Linux (RHEL), a commercial Linux distribution providing long-term support, certifications, and enterprise features. Red Hat also offers OpenShift (Kubernetes platform), Ansible automation, and is now owned by IBM.
+**Related Terms:** Linux, Fedora, Ubuntu, Enterprise, Open Source
 
 ### Rails (Ruby on Rails)
 
@@ -1088,6 +1316,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An architectural style for designing networked applications using HTTP methods (GET, POST, PUT, DELETE) to manipulate resources. RESTful APIs are stateless, cacheable, and use standard HTTP conventions for communication.
 **Related Terms:** GraphQL, API Gateway, HTTP
 
+### REST Assured
+
+**Category:** Testing / Java
+**Description:** A Java library for testing and validating REST APIs with a fluent, domain-specific language. REST Assured simplifies HTTP requests and response validation, supporting JSON/XML parsing, authentication, and integration with testing frameworks like JUnit and TestNG.
+**Related Terms:** API Testing, JMeter, Java, Testing
+
 ### Reverse Proxy
 
 **Category:** System Design
@@ -1121,6 +1355,24 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Cloud / Service Model
 **Description:** A software distribution model where applications are hosted by a service provider and made available to customers over the internet. SaaS eliminates the need for local installation, with providers handling maintenance, updates, and infrastructure.
 **Related Terms:** PaaS, IaaS, Multi-tenancy, Cloud Computing
+
+### S3 (Simple Storage Service)
+
+**Category:** Cloud / Storage
+**Description:** Amazon's object storage service providing scalable, durable, and highly available storage for any amount of data. S3 supports various storage classes (Standard, Glacier, Intelligent-Tiering), versioning, lifecycle policies, and serves as foundational storage for many cloud architectures.
+**Related Terms:** AWS, Cloud Computing, Object Storage, CDN
+
+### Salesforce
+
+**Category:** Platform / CRM
+**Description:** A cloud-based customer relationship management (CRM) platform offering sales, service, marketing, and commerce applications. Salesforce provides the Lightning platform for custom app development, AppExchange marketplace, and extensive API capabilities for enterprise integrations.
+**Related Terms:** CRM, MuleSoft, SaaS, Enterprise, ServiceNow
+
+### SAP
+
+**Category:** Platform / ERP
+**Description:** A multinational software corporation specializing in enterprise resource planning (ERP) software. SAP provides comprehensive business solutions for finance, supply chain, human resources, and operations, with SAP S/4HANA as its next-generation intelligent ERP suite.
+**Related Terms:** ERP, Enterprise, Odoo, Business Applications
 
 ### Saga Pattern
 
@@ -1158,6 +1410,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An infrastructure layer that handles service-to-service communication in microservices architectures. Service meshes provide observability, security, traffic management, and resilience features like circuit breakers and retries without changing application code.
 **Related Terms:** Microservices, API Gateway, Kubernetes, Istio
 
+### ServiceNow
+
+**Category:** Platform / ITSM
+**Description:** A cloud-based platform for IT service management (ITSM), IT operations management, and business process automation. ServiceNow provides workflow automation, incident management, change management, and a low-code platform for building enterprise applications.
+**Related Terms:** ITSM, Salesforce, Enterprise, Automation, Ticketing
+
 ### Sharding
 
 **Category:** Database / Scalability
@@ -1175,6 +1433,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Software Engineering / Best Practice
 **Description:** A principle where each piece of data is stored in exactly one place and other references point to that canonical source. SSOT reduces inconsistencies, simplifies maintenance, and ensures data integrity across systems.
 **Related Terms:** DRY, Database Normalization, State Management
+
+### Six Sigma
+
+**Category:** Project Management / Methodology
+**Description:** A data-driven methodology for eliminating defects and improving processes, using statistical analysis to achieve near-perfect quality (3.4 defects per million opportunities). Six Sigma employs DMAIC (Define, Measure, Analyze, Improve, Control) framework and certifies practitioners as Green Belts, Black Belts, and Master Black Belts.
+**Related Terms:** Lean, Project Management, Quality Assurance, Process Improvement
 
 ### Singleton
 
@@ -1206,6 +1470,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** Five design principles for writing maintainable code: **S**ingle Responsibility, **O**pen/Closed, **L**iskov Substitution, **I**nterface Segregation, and **D**ependency Inversion. Following SOLID leads to flexible, extensible, and testable code.
 **Related Terms:** DRY, Dependency Injection, Anti-Patterns
 
+### SQLite
+
+**Category:** Database / Embedded
+**Description:** A self-contained, serverless, zero-configuration SQL database engine. SQLite is the most widely deployed database in the world, embedded in mobile apps, browsers, and applications where a lightweight, file-based relational database is needed without client-server overhead.
+**Related Terms:** Database, Turso, DuckDB, Mobile Development
+
 ### Space Complexity
 
 **Category:** Foundational Concept
@@ -1235,6 +1505,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Foundational Concept
 **Description:** A linear data structure that follows the Last-In-First-Out (LIFO) principle. Elements are added and removed from the same end (top). Stacks are used for function call management, undo operations, and expression evaluation.
 **Related Terms:** Queue, Data Structure, Linked List
+
+### Stack Overflow
+
+**Category:** Community / Platform
+**Description:** The largest online community for developers to learn, share knowledge, and build careers through Q&A format. Stack Overflow hosts millions of questions and answers on programming topics, serving as a primary resource for troubleshooting and learning. Also refers to a programming error when call stack exceeds its limit.
+**Related Terms:** Reddit, Community, Knowledge Sharing, Debugging
+
+### Sticky Session
+
+**Category:** System Design / Load Balancing
+**Description:** A load balancing technique that routes all requests from a specific client to the same backend server for the duration of a session. Sticky sessions (session affinity) maintain state consistency but can reduce load distribution effectiveness and complicate scaling.
+**Related Terms:** Load Balancer, Session Management, Stateful, Horizontal Scaling
 
 ### State Machine
 
@@ -1336,6 +1618,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** In different contexts: a unit of text processed by parsers or language models; an authentication credential (like JWT); or a representation of a security key. Tokens are fundamental to parsing, security, and modern authentication systems.
 **Related Terms:** Serialization, String
 
+### Turso
+
+**Category:** Database / Edge
+**Description:** A SQLite-based edge database platform providing globally distributed, low-latency data access. Turso uses libSQL (SQLite fork) and enables embedding databases at the edge while syncing with a primary database, ideal for applications requiring local-first data access.
+**Related Terms:** SQLite, NeonDB, Edge Computing, Database
+
 ---
 
 ## U
@@ -1351,6 +1639,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** UX / Design
 **Description:** General principles or guidelines for evaluating user interface design quality. Jakob Nielsen's 10 usability heuristics include visibility of system status, user control, consistency, error prevention, and aesthetic minimalist design.
 **Related Terms:** UX Design, Accessibility, User Experience
+
+### Ubuntu
+
+**Category:** Operating System / Linux
+**Description:** A popular open-source Linux distribution based on Debian, known for its user-friendliness, regular release schedule, and strong community support. Ubuntu is widely used for servers, desktops, cloud deployments, and as a development environment, with LTS (Long Term Support) versions providing 5-year support cycles.
+**Related Terms:** Linux, Fedora, Red Hat, Debian, VPS, Operating System
+
+### UUID (Universally Unique Identifier)
+
+**Category:** Data / Identifiers
+**Description:** A 128-bit identifier designed to be unique across all systems without central coordination. UUIDs are used for database primary keys, distributed systems, and anywhere globally unique identifiers are needed. Common versions include: **v4** (random-based, most widely used), **v1** (timestamp + MAC address), and **v7** (timestamp-sortable, newest standard offering time-ordered uniqueness for database efficiency).
+**Related Terms:** Database, Primary Key, Distributed Systems, ULID
 
 ---
 
@@ -1368,9 +1668,21 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A lightweight, in-memory representation of the actual DOM. Frameworks like React use the Virtual DOM to batch and optimize updates, comparing new and old trees to compute the minimal changes needed (reconciliation).
 **Related Terms:** DOM, Reconciliation, Hydration
 
+### VPS (Virtual Private Server)
+
+**Category:** Infrastructure / Hosting
+**Description:** A virtualized server environment that mimics dedicated server functionality within a shared hosting infrastructure. VPS provides isolated resources, root access, and greater control than shared hosting at a lower cost than dedicated servers. Popular for development environments, small applications, and cost-effective hosting.
+**Related Terms:** Cloud Computing, Containerization, Linux, Ubuntu, Contabo, Hostinger, DigitalOcean
+
 ---
 
 ## W
+
+### White Hat
+
+**Category:** Security / Hacking
+**Description:** Ethical security professionals who use their skills to identify and fix vulnerabilities with authorization from system owners. White hat hackers perform penetration testing, security audits, and vulnerability assessments to improve security posture, contrasting with black hat (malicious) and gray hat hackers.
+**Related Terms:** Cybersecurity, Ethical Hacking, Penetration Testing, OWASP, Security
 
 ### Wireframing
 
@@ -1391,6 +1703,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 ---
 
 ## Z
+
+### Zapier
+
+**Category:** Automation / Integration
+**Description:** A no-code automation platform that connects thousands of web applications to create automated workflows (Zaps). Zapier enables users to automate repetitive tasks between apps without coding, supporting triggers, actions, filters, and multi-step workflows for business process automation.
+**Related Terms:** N8N, Automation, Integration, GoHighLevel, API, Workflow
 
 ### Zig
 
