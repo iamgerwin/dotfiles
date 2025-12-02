@@ -54,6 +54,24 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An iterative approach to software development emphasizing flexibility, collaboration, and customer feedback. Agile breaks projects into short iterations (sprints), enabling teams to adapt to changing requirements and deliver value incrementally.
 **Related Terms:** Scrum, Kanban, Sprint, DevOps
 
+### AI (Artificial Intelligence)
+
+**Category:** Technology / Machine Learning
+**Description:** The simulation of human intelligence in machines programmed to think, learn, and solve problems. AI encompasses machine learning, deep learning, natural language processing, computer vision, and other technologies that enable computers to perform tasks requiring human-like intelligence.
+**Related Terms:** LLM, Machine Learning, ChatGPT, Claude
+
+### Angular
+
+**Category:** Framework / Frontend
+**Description:** A TypeScript-based web application framework developed by Google for building single-page applications. Angular provides a complete solution with dependency injection, routing, forms, HTTP client, and a powerful CLI for scaffolding and building projects.
+**Related Terms:** React, Vue, TypeScript, SPA
+
+### Anthropic
+
+**Category:** AI / Company
+**Description:** An AI safety company that developed Claude, focusing on building reliable, interpretable, and steerable AI systems. Anthropic emphasizes Constitutional AI and responsible AI development practices.
+**Related Terms:** Claude, OpenAI, AI, LLM
+
 ### Anti-Patterns
 
 **Category:** Software Engineering
@@ -78,11 +96,29 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** Short for asynchronous, a programming paradigm that allows operations to run without blocking the execution thread. Async operations enable programs to continue executing other code while waiting for long-running tasks (I/O, network requests) to complete.
 **Related Terms:** Await, Concurrency, CPU-bound vs I/O-bound
 
+### Ash
+
+**Category:** Framework / Backend
+**Description:** A declarative resource-based framework for Elixir that provides a unified API for building robust, maintainable applications. Ash offers features like authorization, calculations, aggregations, and automatic API generation with strong type safety.
+**Related Terms:** Elixir, Phoenix, Backend Framework
+
 ### Await
 
 **Category:** Foundational Concept
 **Description:** A keyword used with async operations to pause execution until a promise or asynchronous operation completes. Await makes asynchronous code appear synchronous while maintaining non-blocking behavior, improving code readability.
 **Related Terms:** Async, Concurrency
+
+### AWS (Amazon Web Services)
+
+**Category:** Cloud / Platform
+**Description:** Amazon's comprehensive cloud computing platform offering over 200 services including compute (EC2), storage (S3), databases (RDS, DynamoDB), machine learning, analytics, and more. AWS is the market leader in cloud infrastructure.
+**Related Terms:** Azure, GCP, Cloud Computing, IaaS, PaaS
+
+### Azure
+
+**Category:** Cloud / Platform
+**Description:** Microsoft's cloud computing platform providing IaaS, PaaS, and SaaS solutions. Azure offers services for compute, storage, databases, AI, IoT, and enterprise integration, with strong integration with Microsoft ecosystem.
+**Related Terms:** AWS, GCP, Cloud Computing, Microsoft
 
 ---
 
@@ -176,6 +212,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** The practice of intentionally injecting failures into systems to test their resilience and identify weaknesses before they cause real outages. Chaos engineering helps teams build confidence in system reliability through controlled experiments.
 **Related Terms:** Load Testing, SRE, Observability
 
+### ChatGPT
+
+**Category:** AI / Tools
+**Description:** A conversational AI model developed by OpenAI based on the GPT architecture. ChatGPT can engage in dialogue, answer questions, write code, create content, and assist with various tasks using natural language understanding and generation.
+**Related Terms:** OpenAI, LLM, AI, Claude
+
 ### CI/CD (Continuous Integration/Continuous Delivery)
 
 **Category:** DevOps
@@ -193,6 +235,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** AI / Tools
 **Description:** An AI assistant developed by Anthropic, designed to be helpful, harmless, and honest. Claude can assist with coding, writing, analysis, and problem-solving tasks while maintaining safety and reliability standards.
 **Related Terms:** OpenAI, GitHub Copilot
+
+### Claude Code
+
+**Category:** AI / Development Tools
+**Description:** An official CLI tool from Anthropic that brings Claude's capabilities directly into the terminal and development workflow. Claude Code assists with code generation, debugging, refactoring, and project understanding through conversational AI.
+**Related Terms:** Claude, AI, Developer Tools, CLI
 
 ### ClickUp
 
@@ -217,6 +265,24 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Software Architecture / Frontend
 **Description:** An architectural approach that structures applications as collections of reusable, self-contained components. Each component encapsulates its own logic, state, and presentation, promoting modularity and reusability.
 **Related Terms:** React, Vue, Microservices, Modular Design
+
+### Convex
+
+**Category:** Backend / Platform
+**Description:** A backend platform that combines a database, server functions, file storage, scheduling, and real-time updates in a single system. Convex provides a reactive database with TypeScript support, automatic caching, and built-in security.
+**Related Terms:** Firebase, Supabase, Backend-as-a-Service, Real-time Database
+
+### Cryptocurrency
+
+**Category:** Technology / Finance
+**Description:** Digital or virtual currency secured by cryptography, operating on decentralized blockchain networks. Cryptocurrencies enable peer-to-peer transactions without central authority, using consensus mechanisms like proof-of-work or proof-of-stake.
+**Related Terms:** Blockchain, Cryptography, Bitcoin, Ethereum
+
+### Cryptography
+
+**Category:** Security / Foundational Concept
+**Description:** The practice of securing information through mathematical techniques that transform readable data into encoded formats. Cryptography encompasses encryption, hashing, digital signatures, and key exchange protocols essential for secure communication.
+**Related Terms:** Encryption, Security, Hashing, PKI
 
 ### Concurrency
 
@@ -300,6 +366,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A structural design pattern that allows behavior to be added to individual objects dynamically without affecting other objects of the same class. It wraps the original object and extends its functionality.
 **Related Terms:** Adapter Pattern, Observer Pattern
 
+### DeepSeek
+
+**Category:** AI / Tools
+**Description:** An AI company and language model provider focusing on advanced reasoning and coding capabilities. DeepSeek offers competitive AI models with strong performance in technical tasks and mathematical reasoning.
+**Related Terms:** OpenAI, Anthropic, LLM, AI
+
 ### Deno
 
 **Category:** Runtime / Tools
@@ -311,6 +383,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Software Engineering
 **Description:** A design pattern where dependencies are provided to a class rather than created inside it. This promotes loose coupling, makes code more testable, and follows the Inversion of Control principle.
 **Related Terms:** SOLID Principles, Factory Pattern, Repository Pattern
+
+### DigitalOcean
+
+**Category:** Cloud / Platform
+**Description:** A cloud infrastructure provider focused on simplicity and developer experience, offering droplets (virtual machines), managed databases, Kubernetes, app platform, and storage solutions. DigitalOcean targets developers and small to medium businesses.
+**Related Terms:** AWS, Azure, Hetzner, Cloud Computing
 
 ### Docker Image
 
@@ -330,6 +408,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A software development principle that aims to reduce repetition of code. Every piece of knowledge should have a single, unambiguous representation in the system. DRY improves maintainability and reduces bugs.
 **Related Terms:** KISS, YAGNI, SOLID Principles
 
+### DuckDB
+
+**Category:** Database / Analytics
+**Description:** An in-process analytical database management system designed for fast analytical queries. DuckDB is embeddable, runs queries in parallel, and excels at OLAP workloads without requiring a separate server process.
+**Related Terms:** SQLite, Database, Analytics, OLAP
+
+### DynamoDB
+
+**Category:** Database / Cloud
+**Description:** Amazon's fully managed NoSQL database service offering single-digit millisecond performance at any scale. DynamoDB provides automatic scaling, built-in security, backup and restore, and in-memory caching with DynamoDB Accelerator (DAX).
+**Related Terms:** AWS, NoSQL, Database, MemoryDB
+
 ---
 
 ## E
@@ -339,6 +429,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** System Design / Cloud
 **Description:** A distributed computing paradigm that brings computation and data storage closer to end users or data sources. Edge computing reduces latency, bandwidth usage, and dependency on centralized cloud servers by processing data at the network edge.
 **Related Terms:** CDN, Latency, Cloud Computing
+
+### Elixir
+
+**Category:** Programming Language
+**Description:** A dynamic, functional programming language built on the Erlang VM (BEAM) designed for building scalable, maintainable applications. Elixir features immutability, pattern matching, powerful metaprogramming, and excellent concurrency support through lightweight processes.
+**Related Terms:** Phoenix, Ash, Erlang, Functional Programming
 
 ### Enum (Enumeration)
 
@@ -374,6 +470,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** Conditional toggles that enable or disable features in production without code deployment. Feature flags facilitate A/B testing, gradual rollouts, canary releases, and quick rollback of problematic features, reducing deployment risk.
 **Related Terms:** CI/CD, Deployment Strategies, Testing
 
+### Firebase
+
+**Category:** Backend / Platform
+**Description:** Google's mobile and web application development platform providing backend services including real-time database, authentication, cloud storage, hosting, cloud functions, and analytics. Firebase enables rapid development with minimal backend code.
+**Related Terms:** Supabase, Convex, Backend-as-a-Service, Google Cloud
+
 ### First Contentful Paint (FCP)
 
 **Category:** Frontend / Performance
@@ -395,6 +497,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Foundational Concept / Memory Management
 **Description:** An automatic memory management process that reclaims memory occupied by objects no longer in use. Garbage collection prevents memory leaks but can introduce pause times, requiring tuning for performance-critical applications.
 **Related Terms:** Memory, Memory Leak, Performance
+
+### GCP (Google Cloud Platform)
+
+**Category:** Cloud / Platform
+**Description:** Google's cloud computing platform offering services for compute (Compute Engine), storage (Cloud Storage), databases (Cloud SQL, Firestore), machine learning (Vertex AI), Kubernetes (GKE), and data analytics (BigQuery).
+**Related Terms:** AWS, Azure, Cloud Computing, Firebase
+
+### Gemini
+
+**Category:** AI / Tools
+**Description:** Google's family of large language models designed for multimodal understanding (text, images, audio, video). Gemini powers various Google services and provides API access for developers to build AI-powered applications.
+**Related Terms:** ChatGPT, Claude, LLM, AI, Google
 
 ### GitHub
 
@@ -430,6 +544,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A **hash** is a fixed-size value computed from data using a hash function. A **hash table** is a data structure that maps keys to values using hashing, providing average O(1) time complexity for insertions, deletions, and lookups.
 **Related Terms:** Data Structure, Time Complexity
 
+### Hetzner
+
+**Category:** Cloud / Platform
+**Description:** A German cloud hosting provider offering dedicated servers, virtual private servers (VPS), cloud servers, and storage solutions. Hetzner is known for competitive pricing, high-performance hardware, and European data centers.
+**Related Terms:** DigitalOcean, AWS, Cloud Computing, VPS
+
 ### Hook (React Hooks)
 
 **Category:** Frontend / React
@@ -457,6 +577,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 ---
 
 ## I
+
+### IaaS (Infrastructure as a Service)
+
+**Category:** Cloud / Service Model
+**Description:** A cloud computing model providing virtualized computing resources over the internet. IaaS offers servers, storage, networking, and operating systems on-demand, allowing users to avoid physical infrastructure management.
+**Related Terms:** PaaS, SaaS, AWS, Azure, Cloud Computing
 
 ### Idempotency
 
@@ -509,6 +635,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Project Management / Tools
 **Description:** Atlassian's project management and issue tracking software widely used for agile development. JIRA supports scrum and kanban workflows, sprint planning, backlog management, custom workflows, and integration with development tools for tracking software projects.
 **Related Terms:** ClickUp, Notion, Agile, Sprint
+
+### Jotai
+
+**Category:** State Management / Frontend
+**Description:** A primitive and flexible state management library for React using atomic state patterns. Jotai provides a bottom-up approach with minimal boilerplate, automatic optimization, and TypeScript support for managing application state.
+**Related Terms:** State Management, React, Zustand, Recoil
 
 ### JWT (JSON Web Token)
 
@@ -584,6 +716,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A linear data structure where elements (nodes) are not stored contiguously in memory. Each node contains data and a reference to the next node. Linked lists allow efficient insertions and deletions but have O(n) access time.
 **Related Terms:** Data Structure, Stack, Queue
 
+### LLM (Large Language Model)
+
+**Category:** AI / Machine Learning
+**Description:** Neural networks trained on massive text datasets to understand and generate human-like text. LLMs power conversational AI, code generation, translation, summarization, and other natural language tasks through transformer architectures.
+**Related Terms:** AI, ChatGPT, Claude, GPT, Transformer
+
 ### Load Balancer
 
 **Category:** System Design
@@ -618,11 +756,23 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A condition where a program fails to release memory no longer needed, gradually consuming available memory until the system degrades or crashes. Memory leaks are particularly problematic in long-running applications.
 **Related Terms:** Garbage Collection, Memory, Performance
 
+### MemoryDB
+
+**Category:** Database / Cloud
+**Description:** Amazon's Redis-compatible, durable, in-memory database service offering microsecond read and single-digit millisecond write latency. MemoryDB provides Multi-AZ durability, automatic failover, and seamless scaling for ultra-fast applications.
+**Related Terms:** Redis, AWS, DynamoDB, In-Memory Database
+
 ### Message Queue
 
 **Category:** System Design
 **Description:** A form of asynchronous communication between services where messages are stored in a queue until processed. Message queues decouple producers from consumers and enable reliable message delivery even when services are temporarily unavailable.
 **Related Terms:** Pub/Sub, Event-Driven Architecture
+
+### Meteor.js
+
+**Category:** Framework / Full-Stack
+**Description:** A full-stack JavaScript platform for building real-time web and mobile applications. Meteor provides an integrated ecosystem with database integration, real-time data synchronization, hot code push, and built-in user accounts.
+**Related Terms:** Node.js, Real-time, Full-Stack, WebSockets
 
 ### Microservices
 
@@ -660,6 +810,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A software development strategy where code for multiple projects is stored in a single repository. Monorepos simplify dependency management, code sharing, and atomic changes across projects but require specialized tooling for large codebases.
 **Related Terms:** Version Control, CI/CD, Code Organization
 
+### Multi-tenancy
+
+**Category:** Software Architecture / SaaS
+**Description:** An architecture where a single instance of software serves multiple tenants (customers) while keeping their data isolated. Multi-tenancy maximizes resource efficiency and reduces costs compared to single-tenant deployments.
+**Related Terms:** SaaS, Database Design, Isolation, Security
+
 ### Monitoring
 
 **Category:** DevOps
@@ -688,6 +844,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A common database performance anti-pattern where an application executes one query to fetch a list of records, then N additional queries to fetch related data for each record. This causes excessive database round trips and can be solved with eager loading or joins.
 **Related Terms:** ORM, Database Optimization, Laravel
 
+### Nest.js
+
+**Category:** Framework / Backend
+**Description:** A progressive Node.js framework for building efficient, scalable server-side applications using TypeScript. Nest.js provides an opinionated architecture inspired by Angular, with decorators, dependency injection, and modular organization.
+**Related Terms:** Node.js, TypeScript, Express, Backend Framework
+
 ### Next.js
 
 **Category:** Framework / Frontend
@@ -699,6 +861,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Foundational Concept
 **Description:** A property where the same input can produce different outputs across executions due to factors like timing, randomness, or external state. Non-deterministic behavior makes testing and debugging challenging, requiring careful handling in distributed systems.
 **Related Terms:** State Management, Testing, Idempotency
+
+### NocoDB
+
+**Category:** Database / Tools
+**Description:** An open-source Airtable alternative that turns any MySQL, PostgreSQL, SQL Server, SQLite, or MariaDB database into a smart spreadsheet interface. NocoDB provides REST APIs, webhooks, and automation without coding.
+**Related Terms:** Airtable, Database, Low-Code, API
 
 ### Notion
 
@@ -752,6 +920,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A specification for describing RESTful APIs in a machine-readable format (formerly Swagger Specification). OpenAPI definitions enable automatic documentation generation, client SDK generation, API testing, and contract validation.
 **Related Terms:** Swagger, REST API, API Documentation
 
+### OpenID
+
+**Category:** Security / Authentication
+**Description:** An authentication protocol that allows users to be authenticated by cooperating sites (identity providers) using a third-party service. OpenID Connect (OIDC) builds on OAuth 2.0 to provide identity layer functionality.
+**Related Terms:** OAuth2, JWT, Authentication, SSO
+
 ---
 
 ## P
@@ -761,6 +935,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Package Manager / Tools
 **Description:** The main package repository for PHP and Composer, hosting thousands of reusable PHP libraries and frameworks. Packagist enables dependency management for PHP projects, similar to NPM for JavaScript or PyPI for Python.
 **Related Terms:** Composer, PHP, Laravel, Package Management
+
+### PaaS (Platform as a Service)
+
+**Category:** Cloud / Service Model
+**Description:** A cloud computing model providing a platform for customers to develop, run, and manage applications without managing underlying infrastructure. PaaS includes development tools, databases, middleware, and runtime environments.
+**Related Terms:** IaaS, SaaS, Heroku, Cloud Computing
 
 ### Pagination
 
@@ -773,6 +953,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Foundational Concept
 **Description:** The simultaneous execution of multiple tasks or processes at the same time, typically on multiple CPU cores. Unlike concurrency, parallelism requires multiple processing units to achieve true simultaneous execution.
 **Related Terms:** Concurrency, CPU-bound vs I/O-bound
+
+### Phoenix
+
+**Category:** Framework / Backend
+**Description:** A web framework for Elixir inspired by Ruby on Rails, built on the Erlang VM for high performance and fault tolerance. Phoenix provides channels for real-time communication, LiveView for interactive UIs without JavaScript, and excellent developer productivity.
+**Related Terms:** Elixir, Ash, Rails, Web Framework
 
 ### Pipeline
 
@@ -842,6 +1028,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An open-source message broker that implements AMQP and other messaging protocols. RabbitMQ facilitates reliable message delivery between distributed systems through queues, exchanges, and routing, supporting various messaging patterns.
 **Related Terms:** Kafka, Message Queue, Event-Driven Architecture
 
+### Rails (Ruby on Rails)
+
+**Category:** Framework / Backend
+**Description:** A server-side web application framework written in Ruby following the MVC pattern. Rails emphasizes convention over configuration, DRY principles, and rapid development with built-in features for routing, database migrations, and asset management.
+**Related Terms:** Ruby, Phoenix, Laravel, MVC
+
 ### Rate Limiting
 
 **Category:** System Design
@@ -859,6 +1051,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Mobile / Framework
 **Description:** A framework for building native mobile applications using React and JavaScript. React Native allows code sharing between iOS and Android while rendering to native platform components, enabling faster development than traditional native approaches.
 **Related Terms:** React, Flutter, Mobile Development
+
+### Reddit
+
+**Category:** Social Platform / Community
+**Description:** A social news aggregation, content rating, and discussion website where users submit content organized into communities (subreddits). Reddit serves as a valuable resource for developer communities, technical discussions, and knowledge sharing.
+**Related Terms:** Social Media, Community, Knowledge Sharing
 
 ### Reconciliation
 
@@ -902,6 +1100,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** The process of reverting a system to a previous stable state after a failed deployment or problematic change. Rollbacks minimize downtime and customer impact by quickly restoring known-good versions.
 **Related Terms:** Hotfix, Blue-Green Deployment, CI/CD
 
+### Ruby
+
+**Category:** Programming Language
+**Description:** A dynamic, interpreted, object-oriented programming language designed for simplicity and productivity. Ruby emphasizes elegant syntax, powerful metaprogramming, and follows the principle of least surprise, making it popular for web development with Rails.
+**Related Terms:** Rails, Elixir, Dynamic Language
+
 ### Rust
 
 **Category:** Programming Language
@@ -911,6 +1115,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 ---
 
 ## S
+
+### SaaS (Software as a Service)
+
+**Category:** Cloud / Service Model
+**Description:** A software distribution model where applications are hosted by a service provider and made available to customers over the internet. SaaS eliminates the need for local installation, with providers handling maintenance, updates, and infrastructure.
+**Related Terms:** PaaS, IaaS, Multi-tenancy, Cloud Computing
 
 ### Saga Pattern
 
@@ -984,6 +1194,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An architectural pattern that structures applications as a collection of loosely coupled services communicating over a network. SOA predates microservices and typically uses enterprise service buses (ESBs) and standardized protocols like SOAP.
 **Related Terms:** Microservices, Web Services, Enterprise Architecture
 
+### Solid.js
+
+**Category:** Framework / Frontend
+**Description:** A declarative JavaScript framework for building user interfaces with fine-grained reactivity. Solid.js compiles away its reactive system at build time for exceptional runtime performance while maintaining a React-like developer experience.
+**Related Terms:** React, Svelte, Vue, Performance
+
 ### SOLID Principles
 
 **Category:** Software Engineering
@@ -1056,6 +1272,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A sequence of characters used to represent text. Strings are immutable in many languages and support operations like concatenation, slicing, searching, and pattern matching. String handling is fundamental to most applications.
 **Related Terms:** Token, Data Structure
 
+### Supabase
+
+**Category:** Backend / Platform
+**Description:** An open-source Firebase alternative providing PostgreSQL database, authentication, instant APIs, real-time subscriptions, storage, and edge functions. Supabase offers a complete backend solution with SQL power and developer-friendly tools.
+**Related Terms:** Firebase, Convex, PostgreSQL, Backend-as-a-Service
+
+### Svelte
+
+**Category:** Framework / Frontend
+**Description:** A component framework that compiles components into highly efficient vanilla JavaScript at build time rather than using a virtual DOM at runtime. Svelte offers excellent performance, small bundle sizes, and elegant syntax with built-in reactivity.
+**Related Terms:** React, Vue, Solid.js, SvelteKit
+
 ### Swagger
 
 **Category:** API / Tools
@@ -1065,6 +1293,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 ---
 
 ## T
+
+### TanStack
+
+**Category:** Library / Frontend
+**Description:** A collection of headless, framework-agnostic libraries for building powerful web applications. TanStack includes Query (data fetching/caching), Table (tables/data grids), Router (routing), Virtual (virtualization), and Form (form management).
+**Related Terms:** React Query, State Management, Data Fetching
 
 ### TDD (Test-Driven Development)
 
@@ -1121,6 +1355,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 ---
 
 ## V
+
+### Vibe Coding
+
+**Category:** Development Philosophy / AI
+**Description:** A development approach that emphasizes rapid iteration, experimentation, and creative flow aided by AI tools. Vibe coding prioritizes developer intuition and momentum over rigid planning, leveraging AI assistants for quick prototyping and problem-solving.
+**Related Terms:** AI, LLM, Rapid Prototyping, Developer Experience
 
 ### Virtual DOM
 
