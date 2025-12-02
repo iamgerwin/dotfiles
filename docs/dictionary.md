@@ -12,11 +12,14 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 - [D](#d)
 - [E](#e)
 - [F](#f)
+- [G](#g)
 - [H](#h)
 - [I](#i)
+- [J](#j)
 - [K](#k)
 - [L](#l)
 - [M](#m)
+- [N](#n)
 - [O](#o)
 - [P](#p)
 - [Q](#q)
@@ -25,6 +28,7 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 - [T](#t)
 - [V](#v)
 - [Y](#y)
+- [Z](#z)
 
 ---
 
@@ -60,6 +64,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** The automatic adjustment of computational resources based on demand. When traffic increases, autoscaling adds more instances; when traffic decreases, it removes instances. This ensures optimal performance while controlling costs.
 **Related Terms:** Horizontal Scaling, Kubernetes Pod
 
+### Async
+
+**Category:** Foundational Concept
+**Description:** Short for asynchronous, a programming paradigm that allows operations to run without blocking the execution thread. Async operations enable programs to continue executing other code while waiting for long-running tasks (I/O, network requests) to complete.
+**Related Terms:** Await, Concurrency, CPU-bound vs I/O-bound
+
+### Await
+
+**Category:** Foundational Concept
+**Description:** A keyword used with async operations to pause execution until a promise or asynchronous operation completes. Await makes asynchronous code appear synchronous while maintaining non-blocking behavior, improving code readability.
+**Related Terms:** Async, Concurrency
+
 ---
 
 ## B
@@ -69,6 +85,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Foundational Concept
 **Description:** The maximum rate of data transfer across a network connection, typically measured in bits per second (bps). Higher bandwidth allows more data to be transmitted in a given time period.
 **Related Terms:** Throughput, Latency
+
+### Bun
+
+**Category:** DevOps / Tools
+**Description:** A modern JavaScript runtime, package manager, and bundler designed for speed. Bun aims to be a drop-in replacement for Node.js with significantly faster startup times, built-in TypeScript support, and native bundling capabilities.
+**Related Terms:** Node.js, NPM, Deno
 
 ---
 
@@ -98,11 +120,35 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A geographically distributed network of servers that deliver web content to users based on their location. CDNs cache static assets closer to end users, reducing latency and improving load times.
 **Related Terms:** Cache, Latency, Load Balancer
 
+### Chaos Engineering
+
+**Category:** DevOps
+**Description:** The practice of intentionally injecting failures into systems to test their resilience and identify weaknesses before they cause real outages. Chaos engineering helps teams build confidence in system reliability through controlled experiments.
+**Related Terms:** Load Testing, SRE, Observability
+
 ### CI/CD (Continuous Integration/Continuous Delivery)
 
 **Category:** DevOps
 **Description:** A set of practices that automate the building, testing, and deployment of applications. CI ensures code changes are regularly merged and tested. CD automates the release process, enabling frequent and reliable deployments.
 **Related Terms:** Containerization, Infrastructure as Code
+
+### Claude
+
+**Category:** AI / Tools
+**Description:** An AI assistant developed by Anthropic, designed to be helpful, harmless, and honest. Claude can assist with coding, writing, analysis, and problem-solving tasks while maintaining safety and reliability standards.
+**Related Terms:** OpenAI, GitHub Copilot
+
+### ClickUp
+
+**Category:** Project Management / Tools
+**Description:** A comprehensive project management platform that organizes work into Spaces, Folders, Lists, and Tasks. ClickUp supports agile workflows, time tracking, document collaboration, and customizable views for managing software development projects.
+**Related Terms:** JIRA, Notion, Slack
+
+### Code Smells
+
+**Category:** Software Engineering
+**Description:** Surface-level indicators of deeper problems in code that suggest potential issues with design, maintainability, or implementation. Common code smells include long methods, duplicate code, large classes, and excessive parameters. They're not bugs but signs that refactoring may be needed.
+**Related Terms:** Anti-Patterns, Technical Debt, SOLID Principles
 
 ### Concurrency
 
@@ -122,6 +168,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** **CPU-bound** tasks are limited by processor speed and benefit from faster CPUs or parallel processing. **I/O-bound** tasks are limited by input/output operations (disk, network) and benefit from asynchronous processing or better I/O hardware.
 **Related Terms:** Concurrency, Parallelism
 
+### Core Web Vitals
+
+**Category:** Frontend / Performance
+**Description:** A set of metrics defined by Google to measure user experience quality: Largest Contentful Paint (LCP), First Input Delay/Interaction to Next Paint (FID/INP), and Cumulative Layout Shift (CLS). These metrics impact search rankings and user satisfaction.
+**Related Terms:** Largest Contentful Paint, Interaction to Next Paint, Cumulative Layout Shift, First Contentful Paint
+
 ### Critical Rendering Path
 
 **Category:** Frontend
@@ -134,6 +186,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A rendering approach where the browser downloads a minimal HTML page and uses JavaScript to render the content. This enables rich interactivity but may result in slower initial page loads and SEO challenges.
 **Related Terms:** SSR, SSG, ISR, Hydration
 
+### Cumulative Layout Shift (CLS)
+
+**Category:** Frontend / Performance
+**Description:** A Core Web Vitals metric measuring visual stability by quantifying unexpected layout shifts during page load. Lower CLS scores indicate better user experience, as content doesn't unexpectedly move while users interact with the page.
+**Related Terms:** Core Web Vitals, Largest Contentful Paint, First Contentful Paint
+
+### Cypress
+
+**Category:** Testing / Tools
+**Description:** A modern end-to-end testing framework for web applications that runs tests directly in the browser. Cypress provides fast, reliable testing with automatic waiting, time-travel debugging, and real-time reloading.
+**Related Terms:** Playwright, Testing, CI/CD
+
 ---
 
 ## D
@@ -144,11 +208,23 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A way of organizing and storing data that enables efficient access and modification. Common data structures include arrays, linked lists, stacks, queues, trees, and hash tables. Choosing the right data structure is crucial for performance.
 **Related Terms:** Hash Table, Stack, Queue, Linked List
 
+### DDD (Domain-Driven Design)
+
+**Category:** Software Architecture
+**Description:** An approach to software development that emphasizes collaboration between technical and domain experts to create a shared understanding of the business domain. DDD uses ubiquitous language, bounded contexts, entities, value objects, and aggregates to model complex business logic.
+**Related Terms:** Microservices, Repository Pattern, SOLID Principles
+
 ### Decorator Pattern
 
 **Category:** Design Pattern
 **Description:** A structural design pattern that allows behavior to be added to individual objects dynamically without affecting other objects of the same class. It wraps the original object and extends its functionality.
 **Related Terms:** Adapter Pattern, Observer Pattern
+
+### Deno
+
+**Category:** Runtime / Tools
+**Description:** A modern, secure JavaScript/TypeScript runtime built on V8 that addresses Node.js design flaws. Deno features secure-by-default execution, built-in TypeScript support, standard library, and modern ES modules without requiring package.json or node_modules.
+**Related Terms:** Node.js, Bun, NPM
 
 ### Dependency Injection
 
@@ -178,6 +254,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 
 ## E
 
+### Edge Computing
+
+**Category:** System Design / Cloud
+**Description:** A distributed computing paradigm that brings computation and data storage closer to end users or data sources. Edge computing reduces latency, bandwidth usage, and dependency on centralized cloud servers by processing data at the network edge.
+**Related Terms:** CDN, Latency, Cloud Computing
+
+### Enum (Enumeration)
+
+**Category:** Software Engineering
+**Description:** A data type consisting of a set of named constants that represent distinct values. Enums improve code readability, type safety, and maintainability by replacing magic strings and numbers with meaningful identifiers. They're essential for defining fixed sets of options.
+**Related Terms:** Single Source of Truth, Code Smells, Type Safety
+
 ### Event-Driven Architecture
 
 **Category:** System Design
@@ -193,6 +281,40 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Design Pattern
 **Description:** A creational design pattern that provides an interface for creating objects without specifying their exact classes. It delegates the instantiation logic to subclasses or specialized methods.
 **Related Terms:** Singleton, Dependency Injection
+
+### Feature Flags
+
+**Category:** DevOps / Software Engineering
+**Description:** Conditional toggles that enable or disable features in production without code deployment. Feature flags facilitate A/B testing, gradual rollouts, canary releases, and quick rollback of problematic features, reducing deployment risk.
+**Related Terms:** CI/CD, Deployment Strategies, Testing
+
+### First Contentful Paint (FCP)
+
+**Category:** Frontend / Performance
+**Description:** A performance metric measuring the time from navigation start to when the browser renders the first piece of DOM content. FCP indicates when users first see visual feedback that the page is loading.
+**Related Terms:** Core Web Vitals, Largest Contentful Paint, Critical Rendering Path
+
+### Flutter
+
+**Category:** Mobile / Framework
+**Description:** Google's UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase. Flutter uses the Dart language and provides fast development with hot reload, expressive UIs, and native performance.
+**Related Terms:** React Native, Kotlin, Mobile Development
+
+---
+
+## G
+
+### GitHub
+
+**Category:** DevOps / Tools
+**Description:** A web-based platform for version control and collaboration using Git. GitHub provides repository hosting, pull requests, code review, issue tracking, GitHub Actions for CI/CD, and project management features for software development teams.
+**Related Terms:** Git, CI/CD, Pipeline
+
+### Go (Golang)
+
+**Category:** Programming Language
+**Description:** A statically typed, compiled programming language designed by Google emphasizing simplicity, concurrency, and performance. Go features garbage collection, built-in concurrency primitives (goroutines and channels), and fast compilation times.
+**Related Terms:** Rust, Concurrency, Microservices
 
 ---
 
@@ -232,6 +354,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** The practice of managing and provisioning infrastructure through code rather than manual processes. Tools like Terraform, CloudFormation, and Pulumi enable version-controlled, repeatable infrastructure deployments.
 **Related Terms:** CI/CD, Containerization
 
+### Interaction to Next Paint (INP)
+
+**Category:** Frontend / Performance
+**Description:** A Core Web Vitals metric replacing First Input Delay (FID) that measures responsiveness by observing the latency of all user interactions throughout the page lifecycle. Lower INP values indicate a more responsive user experience.
+**Related Terms:** Core Web Vitals, First Contentful Paint, Cumulative Layout Shift
+
+### Island Architecture
+
+**Category:** Frontend / Architecture
+**Description:** A web architecture pattern where interactive components (islands) are hydrated independently on an otherwise static page. This approach minimizes JavaScript overhead by only loading interactivity where needed, improving performance.
+**Related Terms:** SSR, Hydration, Partial Hydration
+
 ### ISR (Incremental Static Regeneration)
 
 **Category:** Frontend
@@ -240,13 +374,35 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 
 ---
 
+## J
+
+### JIRA
+
+**Category:** Project Management / Tools
+**Description:** Atlassian's project management and issue tracking software widely used for agile development. JIRA supports scrum and kanban workflows, sprint planning, backlog management, custom workflows, and integration with development tools for tracking software projects.
+**Related Terms:** ClickUp, Notion, Agile, Sprint
+
+---
+
 ## K
+
+### Kafka
+
+**Category:** System Design / Messaging
+**Description:** A distributed event streaming platform designed for high-throughput, fault-tolerant message processing. Kafka provides publish-subscribe messaging, stream processing, and durable storage, commonly used for building real-time data pipelines and event-driven architectures.
+**Related Terms:** RabbitMQ, Message Queue, Event-Driven Architecture, Pub/Sub
 
 ### KISS (Keep It Simple, Stupid)
 
 **Category:** Best Practice
 **Description:** A design principle stating that simplicity should be a key goal. Most systems work best when kept simple rather than made complex. Avoid unnecessary complexity and over-engineering.
 **Related Terms:** DRY, YAGNI
+
+### Kotlin
+
+**Category:** Programming Language
+**Description:** A modern, statically typed programming language developed by JetBrains that runs on the JVM and is fully interoperable with Java. Kotlin is the preferred language for Android development, offering concise syntax, null safety, coroutines, and functional programming features.
+**Related Terms:** Java, Android, Flutter
 
 ### Kubernetes Pod
 
@@ -257,6 +413,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 ---
 
 ## L
+
+### Laravel
+
+**Category:** Framework / Backend
+**Description:** A popular PHP web application framework known for elegant syntax and developer-friendly features. Laravel provides MVC architecture, Eloquent ORM, routing, authentication, migrations, and a rich ecosystem for building modern web applications.
+**Related Terms:** PHP, MVC, Eloquent, Backend Development
+
+### Largest Contentful Paint (LCP)
+
+**Category:** Frontend / Performance
+**Description:** A Core Web Vitals metric measuring loading performance by capturing when the largest content element becomes visible in the viewport. Good LCP scores (under 2.5s) indicate fast perceived load times.
+**Related Terms:** Core Web Vitals, First Contentful Paint, Interaction to Next Paint
 
 ### Latency
 
@@ -310,11 +478,87 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A form of asynchronous communication between services where messages are stored in a queue until processed. Message queues decouple producers from consumers and enable reliable message delivery even when services are temporarily unavailable.
 **Related Terms:** Pub/Sub, Event-Driven Architecture
 
+### Microservices
+
+**Category:** Software Architecture
+**Description:** An architectural style that structures an application as a collection of small, independently deployable services. Each microservice focuses on a specific business capability, can be developed and scaled independently, and communicates via lightweight protocols.
+**Related Terms:** Monolith, DDD, API Gateway, Event-Driven Architecture
+
+### Modular Monolith
+
+**Category:** Software Architecture
+**Description:** An architectural approach that combines monolithic deployment with modular design principles. Code is organized into distinct, loosely coupled modules with clear boundaries, providing some benefits of microservices while maintaining simpler deployment and operations.
+**Related Terms:** Monolith, Microservices, DDD
+
+### Monolith
+
+**Category:** Software Architecture
+**Description:** A traditional software architecture where all components of an application are tightly coupled and deployed as a single unit. Monoliths are simpler to develop initially but can become difficult to scale and maintain as applications grow.
+**Related Terms:** Microservices, Modular Monolith, Scaling
+
+### Monorepo
+
+**Category:** DevOps / Software Engineering
+**Description:** A software development strategy where code for multiple projects is stored in a single repository. Monorepos simplify dependency management, code sharing, and atomic changes across projects but require specialized tooling for large codebases.
+**Related Terms:** Version Control, CI/CD, Code Organization
+
 ### Monitoring
 
 **Category:** DevOps
 **Description:** The practice of collecting, analyzing, and displaying data about system performance and health. Monitoring helps detect issues, trigger alerts, and maintain service level objectives (SLOs).
 **Related Terms:** Observability, Logs / Metrics / Traces
+
+### MVC (Model-View-Controller)
+
+**Category:** Design Pattern / Architecture
+**Description:** An architectural pattern that separates application logic into three interconnected components: Model (data and business logic), View (presentation layer), and Controller (handles user input and updates model/view). MVC promotes separation of concerns and testability.
+**Related Terms:** MVVM, Laravel, Software Architecture
+
+### MVVM (Model-View-ViewModel)
+
+**Category:** Design Pattern / Architecture
+**Description:** An architectural pattern that extends MVC by introducing a ViewModel layer that mediates between View and Model. MVVM enables data binding, making it popular in frameworks like Angular, Vue, and WPF for building reactive user interfaces.
+**Related Terms:** MVC, State Management, Frontend Architecture
+
+---
+
+## N
+
+### N+1 Query Problem
+
+**Category:** Database / Performance
+**Description:** A common database performance anti-pattern where an application executes one query to fetch a list of records, then N additional queries to fetch related data for each record. This causes excessive database round trips and can be solved with eager loading or joins.
+**Related Terms:** ORM, Database Optimization, Laravel
+
+### Next.js
+
+**Category:** Framework / Frontend
+**Description:** A React-based framework for building production-ready web applications with server-side rendering, static site generation, and API routes. Next.js provides file-based routing, automatic code splitting, and optimized performance out of the box.
+**Related Terms:** React, SSR, SSG, ISR, Nuxt.js
+
+### Non-deterministic
+
+**Category:** Foundational Concept
+**Description:** A property where the same input can produce different outputs across executions due to factors like timing, randomness, or external state. Non-deterministic behavior makes testing and debugging challenging, requiring careful handling in distributed systems.
+**Related Terms:** State Management, Testing, Idempotency
+
+### Notion
+
+**Category:** Productivity / Tools
+**Description:** An all-in-one workspace combining note-taking, knowledge management, project management, and databases. Notion uses blocks to create flexible documents and supports collaboration, making it popular for documentation, wikis, and project planning.
+**Related Terms:** ClickUp, JIRA, Documentation
+
+### NPM (Node Package Manager)
+
+**Category:** Package Manager / Tools
+**Description:** The default package manager for Node.js that manages JavaScript dependencies. NPM provides a registry of reusable packages, dependency resolution, version management, and scripts for building and testing applications.
+**Related Terms:** Node.js, PNPM, Bun, Yarn
+
+### Nuxt.js
+
+**Category:** Framework / Frontend
+**Description:** A Vue.js framework for building server-rendered, static, or single-page applications. Nuxt provides automatic routing, middleware, modules ecosystem, and various rendering modes (SSR, SSG, SPA) for Vue applications.
+**Related Terms:** Vue.js, Next.js, SSR, SSG
 
 ---
 
@@ -332,9 +576,27 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A behavioral design pattern where an object (subject) maintains a list of dependents (observers) and notifies them automatically of state changes. This pattern is fundamental to event handling and reactive programming.
 **Related Terms:** Pub/Sub, Event-Driven Architecture, State Management
 
+### OpenAI
+
+**Category:** AI / Tools
+**Description:** An artificial intelligence research company that developed GPT models, DALL-E, and other AI technologies. OpenAI provides APIs for language models, image generation, and embeddings used in applications for text generation, code assistance, and automation.
+**Related Terms:** Claude, GPT, AI Tools
+
+### OpenAPI
+
+**Category:** API / Standards
+**Description:** A specification for describing RESTful APIs in a machine-readable format (formerly Swagger Specification). OpenAPI definitions enable automatic documentation generation, client SDK generation, API testing, and contract validation.
+**Related Terms:** Swagger, REST API, API Documentation
+
 ---
 
 ## P
+
+### Packagist
+
+**Category:** Package Manager / Tools
+**Description:** The main package repository for PHP and Composer, hosting thousands of reusable PHP libraries and frameworks. Packagist enables dependency management for PHP projects, similar to NPM for JavaScript or PyPI for Python.
+**Related Terms:** Composer, PHP, Laravel, Package Management
 
 ### Pagination
 
@@ -347,6 +609,24 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Foundational Concept
 **Description:** The simultaneous execution of multiple tasks or processes at the same time, typically on multiple CPU cores. Unlike concurrency, parallelism requires multiple processing units to achieve true simultaneous execution.
 **Related Terms:** Concurrency, CPU-bound vs I/O-bound
+
+### Pipeline
+
+**Category:** DevOps / CI/CD
+**Description:** An automated workflow that builds, tests, and deploys code changes through sequential stages. Pipelines enforce quality gates, run tests, perform security scans, and deploy to various environments, enabling continuous integration and delivery.
+**Related Terms:** CI/CD, GitHub Actions, Jenkins, DevOps
+
+### Playwright
+
+**Category:** Testing / Tools
+**Description:** A modern end-to-end testing framework developed by Microsoft that supports multiple browsers (Chromium, Firefox, WebKit). Playwright offers reliable testing with auto-wait, powerful selectors, network interception, and parallel execution capabilities.
+**Related Terms:** Cypress, Testing, Automation
+
+### PNPM
+
+**Category:** Package Manager / Tools
+**Description:** A fast, disk-efficient package manager for JavaScript that uses a content-addressable storage system. PNPM creates a single store for all packages and uses hard links to save disk space while maintaining strict dependency isolation.
+**Related Terms:** NPM, Yarn, Bun, Node.js
 
 ### Pub/Sub (Publish/Subscribe)
 
@@ -368,11 +648,29 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 
 ## R
 
+### RabbitMQ
+
+**Category:** System Design / Messaging
+**Description:** An open-source message broker that implements AMQP and other messaging protocols. RabbitMQ facilitates reliable message delivery between distributed systems through queues, exchanges, and routing, supporting various messaging patterns.
+**Related Terms:** Kafka, Message Queue, Event-Driven Architecture
+
 ### Rate Limiting
 
 **Category:** System Design
 **Description:** A technique to control the rate of requests a client can make to a service within a specified time window. Rate limiting protects services from abuse, prevents resource exhaustion, and ensures fair usage across clients.
 **Related Terms:** Throttling, API Gateway, Idempotency
+
+### React
+
+**Category:** Framework / Frontend
+**Description:** A JavaScript library for building user interfaces developed by Meta. React uses component-based architecture, virtual DOM for efficient updates, and declarative syntax. It's widely used for building single-page applications and mobile apps (React Native).
+**Related Terms:** React Native, Next.js, Virtual DOM, JSX
+
+### React Native
+
+**Category:** Mobile / Framework
+**Description:** A framework for building native mobile applications using React and JavaScript. React Native allows code sharing between iOS and Android while rendering to native platform components, enabling faster development than traditional native approaches.
+**Related Terms:** React, Flutter, Mobile Development
 
 ### Reconciliation
 
@@ -398,6 +696,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A server that sits between clients and backend servers, forwarding client requests to appropriate servers. Reverse proxies provide load balancing, SSL termination, caching, and protection for backend services.
 **Related Terms:** Load Balancer, API Gateway
 
+### Rust
+
+**Category:** Programming Language
+**Description:** A systems programming language focused on safety, concurrency, and performance. Rust's ownership system prevents memory errors at compile time without garbage collection, making it ideal for systems programming, WebAssembly, and performance-critical applications.
+**Related Terms:** Go, C++, Memory Safety, WebAssembly
+
 ---
 
 ## S
@@ -408,11 +712,23 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** **Serialization** converts an object into a format (JSON, XML, binary) that can be stored or transmitted. **Deserialization** is the reverse process of reconstructing the object from its serialized form.
 **Related Terms:** Token, Data Structure
 
+### Single Source of Truth (SSOT)
+
+**Category:** Software Engineering / Best Practice
+**Description:** A principle where each piece of data is stored in exactly one place and other references point to that canonical source. SSOT reduces inconsistencies, simplifies maintenance, and ensures data integrity across systems.
+**Related Terms:** DRY, Database Normalization, State Management
+
 ### Singleton
 
 **Category:** Design Pattern
 **Description:** A creational design pattern that ensures a class has only one instance and provides a global point of access to it. Singletons are useful for shared resources but should be used sparingly as they can introduce global state.
 **Related Terms:** Factory Pattern, Dependency Injection
+
+### Slack
+
+**Category:** Communication / Tools
+**Description:** A team collaboration platform providing channels, direct messaging, file sharing, and integrations with development tools. Slack enables real-time communication, threaded conversations, and searchable message history for distributed teams.
+**Related Terms:** Microsoft Teams, Discord, Collaboration Tools
 
 ### SOLID Principles
 
@@ -480,6 +796,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A sequence of characters used to represent text. Strings are immutable in many languages and support operations like concatenation, slicing, searching, and pattern matching. String handling is fundamental to most applications.
 **Related Terms:** Token, Data Structure
 
+### Swagger
+
+**Category:** API / Tools
+**Description:** A suite of tools for designing, building, documenting, and consuming RESTful APIs. Swagger uses the OpenAPI Specification to generate interactive API documentation, enable API testing, and create client SDKs automatically.
+**Related Terms:** OpenAPI, REST API, API Documentation
+
 ---
 
 ## T
@@ -536,6 +858,16 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 
 ---
 
+## Z
+
+### Zig
+
+**Category:** Programming Language
+**Description:** A general-purpose programming language designed for robustness, optimality, and maintainability. Zig emphasizes compile-time code execution, manual memory management with safety checks, and C interoperability, positioning itself as a modern alternative to C.
+**Related Terms:** Rust, C, Systems Programming
+
+---
+
 ## Contributing
 
 To add new terms to this dictionary:
@@ -548,4 +880,4 @@ To add new terms to this dictionary:
 
 ---
 
-*Last updated: December 2024*
+*Last updated: December 2025*
