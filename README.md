@@ -70,6 +70,7 @@ dotfiles/
 │   └── git-profiles/   # Git profile configurations (gitignored)
 ├── ssh-keys/           # Organized SSH keys directory (gitignored)
 ├── docs/               # Documentation directory
+│   ├── dictionary.md   # IT Terms & Jargons Dictionary
 │   └── best-practices/ # Comprehensive technology guides
 │       ├── ai-tools/   # AI-powered development tools
 │       ├── databases/  # Database technologies
@@ -845,6 +846,28 @@ The configuration includes:
 - **tmux-notify** for desktop notifications
 - **tmux-powerline** for powerline status bar
 - **Custom scripts** for development workflows
+
+### IT Terms & Jargons Dictionary
+
+A comprehensive glossary of IT terminology for developers, designers, PMs, QA engineers, and stakeholders:
+
+```bash
+# View the dictionary
+open ~/dotfiles/docs/dictionary.md
+
+# Or in terminal
+less ~/dotfiles/docs/dictionary.md
+```
+
+**Categories covered:**
+- **Foundational Concepts**: Cache, Throughput, Latency, Data Structures, Big-O, etc.
+- **System Design**: Load Balancer, API Gateway, CAP Theorem, Caching Strategies, etc.
+- **Design Patterns**: SOLID, Factory, Singleton, Observer, Strategy, Repository, etc.
+- **Frontend/UI**: DOM, Virtual DOM, SSR/CSR/SSG, State Management, Hydration, etc.
+- **DevOps/Cloud**: CI/CD, Containerization, Kubernetes, IaC, Observability, etc.
+- **Best Practices**: DRY, KISS, YAGNI, Technical Debt, Anti-Patterns, etc.
+
+See [docs/dictionary.md](docs/dictionary.md) for the complete glossary.
 
 ### Best Practices Documentation
 
