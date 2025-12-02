@@ -39,6 +39,11 @@ Comprehensive documentation for full-stack development, enterprise systems, and 
 - **Low-Code Database**: Airtable
 - **ORM**: Prisma, Entity Framework Core
 
+### Messaging & Event Streaming
+- **Event Streaming**: Apache Kafka (distributed event streaming platform)
+- **Message Queuing**: RabbitMQ (AMQP message broker)
+- **Comparison Guide**: When to use Kafka vs RabbitMQ vs Redis
+
 ### Backend Services
 - **Real-time Platforms**: Convex (real-time backend with reactive queries)
 - **Backend as a Service**: Appwrite, Supabase, PocketBase
