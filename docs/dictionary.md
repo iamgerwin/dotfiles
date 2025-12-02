@@ -26,7 +26,9 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 - [R](#r)
 - [S](#s)
 - [T](#t)
+- [U](#u)
 - [V](#v)
+- [W](#w)
 - [Y](#y)
 - [Z](#z)
 
@@ -45,6 +47,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Design Pattern
 **Description:** A structural design pattern that allows objects with incompatible interfaces to work together. It acts as a wrapper that translates one interface into another that clients expect.
 **Related Terms:** Decorator Pattern, Factory Pattern
+
+### Agile Methodology
+
+**Category:** Software Development / Process
+**Description:** An iterative approach to software development emphasizing flexibility, collaboration, and customer feedback. Agile breaks projects into short iterations (sprints), enabling teams to adapt to changing requirements and deliver value incrementally.
+**Related Terms:** Scrum, Kanban, Sprint, DevOps
 
 ### Anti-Patterns
 
@@ -80,11 +88,35 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 
 ## B
 
+### Backpressure
+
+**Category:** System Design / Performance
+**Description:** A flow control mechanism that prevents overwhelming downstream systems by signaling when they cannot handle more requests. Backpressure helps maintain system stability by allowing producers to slow down when consumers are overloaded.
+**Related Terms:** Rate Limiting, Throttling, Message Queue
+
 ### Bandwidth
 
 **Category:** Foundational Concept
 **Description:** The maximum rate of data transfer across a network connection, typically measured in bits per second (bps). Higher bandwidth allows more data to be transmitted in a given time period.
 **Related Terms:** Throughput, Latency
+
+### BDD (Behavior-Driven Development)
+
+**Category:** Software Development / Testing
+**Description:** A software development approach that extends TDD by writing tests in natural language describing system behavior from the user's perspective. BDD encourages collaboration between developers, QA, and non-technical stakeholders using tools like Cucumber or SpecFlow.
+**Related Terms:** TDD, Testing, Agile Methodology
+
+### Blue-Green Deployment
+
+**Category:** DevOps / Deployment
+**Description:** A deployment strategy that maintains two identical production environments (blue and green). New releases deploy to the inactive environment, and traffic switches over after validation, enabling instant rollback and zero-downtime deployments.
+**Related Terms:** Canary Releases, CI/CD, Rollback
+
+### Bulkhead Isolation
+
+**Category:** System Design / Resilience
+**Description:** A pattern inspired by ship compartments that isolates system components to prevent cascading failures. If one component fails, bulkheads contain the failure, preventing it from affecting other parts of the system.
+**Related Terms:** Circuit Breaker Pattern, Microservices, Resilience
 
 ### Bun
 
@@ -102,11 +134,29 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A high-speed data storage layer that stores a subset of data, typically transient, so future requests for that data can be served faster. Caching reduces database load and improves application response times.
 **Related Terms:** Redis, CDN, Caching Strategies
 
+### Cache Invalidation
+
+**Category:** System Design / Performance
+**Description:** The process of removing or updating stale data from cache to ensure data consistency. Cache invalidation is notoriously difficult, with strategies including time-based expiration, event-based invalidation, and versioning.
+**Related Terms:** Cache, Caching Strategies, Redis
+
 ### Caching Strategies
 
 **Category:** System Design
 **Description:** Patterns for managing cached data. **Cache-aside** (lazy loading): application checks cache first, fetches from database on miss. **Write-through**: writes go to cache and database simultaneously. **Write-back**: writes go to cache first, then asynchronously to database.
 **Related Terms:** Cache, Redis, Lazy Loading
+
+### Cache Stampede
+
+**Category:** System Design / Performance
+**Description:** A situation where multiple requests simultaneously discover a cache miss for the same resource and all attempt to regenerate it, causing a spike in backend load. Solutions include cache locking, probabilistic early expiration, and background refresh mechanisms.
+**Related Terms:** Cache, Cache Invalidation, Performance, Thundering Herd
+
+### Canary Releases
+
+**Category:** DevOps / Deployment
+**Description:** A deployment strategy that gradually rolls out changes to a small subset of users before full deployment. Named after canaries in coal mines, this approach detects problems early with minimal user impact and allows quick rollback if issues arise.
+**Related Terms:** Blue-Green Deployment, Feature Flags, CI/CD
 
 ### CAP Theorem
 
@@ -132,6 +182,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A set of practices that automate the building, testing, and deployment of applications. CI ensures code changes are regularly merged and tested. CD automates the release process, enabling frequent and reliable deployments.
 **Related Terms:** Containerization, Infrastructure as Code
 
+### Circuit Breaker Pattern
+
+**Category:** Design Pattern / Resilience
+**Description:** A design pattern that prevents an application from repeatedly trying to execute operations likely to fail. Like an electrical circuit breaker, it opens after failures reach a threshold, fails fast, and periodically attempts recovery.
+**Related Terms:** Bulkhead Isolation, Microservices, Resilience, Saga Pattern
+
 ### Claude
 
 **Category:** AI / Tools
@@ -150,6 +206,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** Surface-level indicators of deeper problems in code that suggest potential issues with design, maintainability, or implementation. Common code smells include long methods, duplicate code, large classes, and excessive parameters. They're not bugs but signs that refactoring may be needed.
 **Related Terms:** Anti-Patterns, Technical Debt, SOLID Principles
 
+### Code Splitting
+
+**Category:** Frontend / Performance
+**Description:** A technique that breaks JavaScript bundles into smaller chunks loaded on demand. Code splitting reduces initial load time by only loading necessary code for the current page, with additional code loaded as needed.
+**Related Terms:** Lazy Loading, Webpack, Performance Optimization
+
+### Component-Based Architecture
+
+**Category:** Software Architecture / Frontend
+**Description:** An architectural approach that structures applications as collections of reusable, self-contained components. Each component encapsulates its own logic, state, and presentation, promoting modularity and reusability.
+**Related Terms:** React, Vue, Microservices, Modular Design
+
 ### Concurrency
 
 **Category:** Foundational Concept
@@ -167,6 +235,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Foundational Concept
 **Description:** **CPU-bound** tasks are limited by processor speed and benefit from faster CPUs or parallel processing. **I/O-bound** tasks are limited by input/output operations (disk, network) and benefit from asynchronous processing or better I/O hardware.
 **Related Terms:** Concurrency, Parallelism
+
+### CQRS (Command Query Responsibility Segregation)
+
+**Category:** Software Architecture / Design Pattern
+**Description:** An architectural pattern that separates read operations (queries) from write operations (commands) using different models. CQRS enables independent scaling, optimization, and evolution of read and write workloads, often paired with Event Sourcing.
+**Related Terms:** Event Sourcing, DDD, Microservices, Saga Pattern
 
 ### Core Web Vitals
 
@@ -207,6 +281,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Foundational Concept
 **Description:** A way of organizing and storing data that enables efficient access and modification. Common data structures include arrays, linked lists, stacks, queues, trees, and hash tables. Choosing the right data structure is crucial for performance.
 **Related Terms:** Hash Table, Stack, Queue, Linked List
+
+### Deadlock
+
+**Category:** Concurrency / Foundational Concept
+**Description:** A situation where two or more processes are unable to proceed because each is waiting for the other to release a resource. Deadlocks require four conditions: mutual exclusion, hold and wait, no preemption, and circular wait.
+**Related Terms:** Race Condition, Concurrency, Threading
 
 ### DDD (Domain-Driven Design)
 
@@ -266,6 +346,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A data type consisting of a set of named constants that represent distinct values. Enums improve code readability, type safety, and maintainability by replacing magic strings and numbers with meaningful identifiers. They're essential for defining fixed sets of options.
 **Related Terms:** Single Source of Truth, Code Smells, Type Safety
 
+### Event Sourcing
+
+**Category:** Software Architecture / Design Pattern
+**Description:** A pattern where state changes are stored as a sequence of events rather than updating records in place. Event sourcing provides complete audit trails, enables time travel debugging, and supports CQRS architectures.
+**Related Terms:** CQRS, DDD, Event-Driven Architecture, Saga Pattern
+
 ### Event-Driven Architecture
 
 **Category:** System Design
@@ -304,17 +390,35 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 
 ## G
 
+### Garbage Collection
+
+**Category:** Foundational Concept / Memory Management
+**Description:** An automatic memory management process that reclaims memory occupied by objects no longer in use. Garbage collection prevents memory leaks but can introduce pause times, requiring tuning for performance-critical applications.
+**Related Terms:** Memory, Memory Leak, Performance
+
 ### GitHub
 
 **Category:** DevOps / Tools
 **Description:** A web-based platform for version control and collaboration using Git. GitHub provides repository hosting, pull requests, code review, issue tracking, GitHub Actions for CI/CD, and project management features for software development teams.
 **Related Terms:** Git, CI/CD, Pipeline
 
+### GitOps
+
+**Category:** DevOps / Software Engineering
+**Description:** An operational framework that applies Git workflows to infrastructure and application deployment. GitOps uses Git as the single source of truth for declarative infrastructure and applications, enabling version control, audit trails, and automated deployments.
+**Related Terms:** Infrastructure as Code, CI/CD, Kubernetes, Deployment
+
 ### Go (Golang)
 
 **Category:** Programming Language
 **Description:** A statically typed, compiled programming language designed by Google emphasizing simplicity, concurrency, and performance. Go features garbage collection, built-in concurrency primitives (goroutines and channels), and fast compilation times.
 **Related Terms:** Rust, Concurrency, Microservices
+
+### GraphQL
+
+**Category:** API / Query Language
+**Description:** A query language and runtime for APIs that allows clients to request exactly the data they need. GraphQL provides a complete schema, eliminates over-fetching/under-fetching, and enables powerful developer tooling.
+**Related Terms:** REST API, API Gateway, Backend Development
 
 ---
 
@@ -326,11 +430,23 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A **hash** is a fixed-size value computed from data using a hash function. A **hash table** is a data structure that maps keys to values using hashing, providing average O(1) time complexity for insertions, deletions, and lookups.
 **Related Terms:** Data Structure, Time Complexity
 
+### Hook (React Hooks)
+
+**Category:** Frontend / React
+**Description:** Functions that let you use state and other React features in functional components without writing classes. Hooks like useState, useEffect, and useContext enable cleaner, more reusable component logic.
+**Related Terms:** React, State Management, Component-Based Architecture
+
 ### Horizontal Scaling vs Vertical Scaling
 
 **Category:** System Design
 **Description:** **Horizontal scaling** (scale out) adds more machines to distribute load. **Vertical scaling** (scale up) adds more power (CPU, RAM) to existing machines. Horizontal scaling offers better fault tolerance and is generally preferred for web applications.
 **Related Terms:** Autoscaling, Load Balancer
+
+### Hotfix
+
+**Category:** DevOps / Software Engineering
+**Description:** An urgent patch applied to production systems to fix critical bugs or security vulnerabilities. Hotfixes bypass normal development cycles and require careful testing and documentation to prevent introducing new issues.
+**Related Terms:** Rollback, CI/CD, Deployment
 
 ### Hydration
 
@@ -347,6 +463,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** System Design
 **Description:** A property where an operation produces the same result regardless of how many times it is performed. Idempotent operations are crucial for reliable APIs and handling retries without side effects.
 **Related Terms:** API Gateway, Rate Limiting
+
+### Immutable Infrastructure
+
+**Category:** DevOps / Infrastructure
+**Description:** An approach where servers are never modified after deployment. Instead of updating existing servers, new servers are deployed with changes and old ones are destroyed. This eliminates configuration drift and simplifies rollbacks.
+**Related Terms:** Infrastructure as Code, Containerization, GitOps
+
+### Information Architecture
+
+**Category:** UX / Design
+**Description:** The structural design of information in websites and applications to support usability and findability. Information architecture involves organizing, labeling, and structuring content to help users navigate and understand systems effectively.
+**Related Terms:** UX Design, Wireframing, User Journey Mapping
 
 ### Infrastructure as Code (IaC)
 
@@ -382,6 +510,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** Atlassian's project management and issue tracking software widely used for agile development. JIRA supports scrum and kanban workflows, sprint planning, backlog management, custom workflows, and integration with development tools for tracking software projects.
 **Related Terms:** ClickUp, Notion, Agile, Sprint
 
+### JWT (JSON Web Token)
+
+**Category:** Security / Authentication
+**Description:** A compact, URL-safe token format for securely transmitting information between parties as a JSON object. JWTs are commonly used for authentication and authorization, containing encoded claims that can be verified and trusted through digital signatures.
+**Related Terms:** OAuth2, Authentication, API Security
+
 ---
 
 ## K
@@ -391,6 +525,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** System Design / Messaging
 **Description:** A distributed event streaming platform designed for high-throughput, fault-tolerant message processing. Kafka provides publish-subscribe messaging, stream processing, and durable storage, commonly used for building real-time data pipelines and event-driven architectures.
 **Related Terms:** RabbitMQ, Message Queue, Event-Driven Architecture, Pub/Sub
+
+### Kanban
+
+**Category:** Software Development / Process
+**Description:** An agile methodology that visualizes work on a board with columns representing workflow stages. Kanban limits work in progress, emphasizes continuous flow, and helps teams identify bottlenecks and optimize throughput.
+**Related Terms:** Agile Methodology, Scrum, JIRA, Workflow
 
 ### KISS (Keep It Simple, Stupid)
 
@@ -472,6 +612,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** Computer hardware that stores data and instructions for quick access by the CPU. RAM (Random Access Memory) is volatile and fast; storage (HDD/SSD) is persistent but slower. Efficient memory management is crucial for performance.
 **Related Terms:** Space Complexity, Cache
 
+### Memory Leak
+
+**Category:** Performance / Debugging
+**Description:** A condition where a program fails to release memory no longer needed, gradually consuming available memory until the system degrades or crashes. Memory leaks are particularly problematic in long-running applications.
+**Related Terms:** Garbage Collection, Memory, Performance
+
 ### Message Queue
 
 **Category:** System Design
@@ -483,6 +629,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Software Architecture
 **Description:** An architectural style that structures an application as a collection of small, independently deployable services. Each microservice focuses on a specific business capability, can be developed and scaled independently, and communicates via lightweight protocols.
 **Related Terms:** Monolith, DDD, API Gateway, Event-Driven Architecture
+
+### Middleware
+
+**Category:** Software Architecture / Backend
+**Description:** Software components that sit between applications or services to facilitate communication, data transformation, authentication, or logging. Middleware handles cross-cutting concerns and decouples different parts of the system.
+**Related Terms:** API Gateway, Backend Development, Service Architecture
+
+### Mobile-First Design
+
+**Category:** Frontend / UX
+**Description:** A design approach that starts with mobile layouts and progressively enhances for larger screens. Mobile-first design ensures optimal experiences on constrained devices and often results in simpler, more focused user interfaces.
+**Related Terms:** Responsive Design, Progressive Web App, UX Design
 
 ### Modular Monolith
 
@@ -570,6 +728,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** The ability to understand a system's internal state by examining its external outputs. Observability goes beyond monitoring by enabling teams to ask arbitrary questions about system behavior using logs, metrics, and traces.
 **Related Terms:** Monitoring, Logs / Metrics / Traces, SRE
 
+### OAuth2
+
+**Category:** Security / Authentication
+**Description:** An authorization framework that enables applications to obtain limited access to user accounts on HTTP services. OAuth2 provides secure delegated access through access tokens, supporting various grant types for different application architectures.
+**Related Terms:** JWT, Authentication, API Security
+
 ### Observer Pattern
 
 **Category:** Design Pattern
@@ -628,6 +792,24 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A fast, disk-efficient package manager for JavaScript that uses a content-addressable storage system. PNPM creates a single store for all packages and uses hard links to save disk space while maintaining strict dependency isolation.
 **Related Terms:** NPM, Yarn, Bun, Node.js
 
+### Polyglot Persistence
+
+**Category:** Database / Architecture
+**Description:** An approach that uses different database technologies for different data storage needs within the same application. Polyglot persistence matches each data type with the most suitable database (SQL, NoSQL, graph, etc.) rather than using one-size-fits-all.
+**Related Terms:** Microservices, Database Design, System Architecture
+
+### Progressive Web App (PWA)
+
+**Category:** Frontend / Mobile
+**Description:** Web applications that use modern web capabilities to deliver app-like experiences. PWAs work offline, can be installed on devices, send push notifications, and provide fast, reliable performance through service workers.
+**Related Terms:** Service Worker, Mobile-First Design, Responsive Design
+
+### Prototyping
+
+**Category:** UX / Design
+**Description:** The process of creating interactive or static models of a product to test concepts, gather feedback, and validate designs before full development. Prototypes range from low-fidelity wireframes to high-fidelity interactive mockups.
+**Related Terms:** Wireframing, User Journey Mapping, UX Design
+
 ### Pub/Sub (Publish/Subscribe)
 
 **Category:** System Design
@@ -647,6 +829,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 ---
 
 ## R
+
+### Race Condition
+
+**Category:** Concurrency / Foundational Concept
+**Description:** A situation where system behavior depends on the timing or sequence of uncontrollable events. Race conditions occur when multiple threads access shared data concurrently, leading to unpredictable results if not properly synchronized.
+**Related Terms:** Deadlock, Concurrency, Threading
 
 ### RabbitMQ
 
@@ -690,11 +878,29 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A design pattern that abstracts data access logic and provides a collection-like interface for domain objects. It separates business logic from data access, making code more testable and maintainable.
 **Related Terms:** Dependency Injection, SOLID Principles
 
+### Responsive Design
+
+**Category:** Frontend / UX
+**Description:** A design approach that makes web applications adapt to different screen sizes and devices through flexible layouts, images, and CSS media queries. Responsive design ensures optimal viewing experiences across desktops, tablets, and mobile devices.
+**Related Terms:** Mobile-First Design, CSS, Progressive Web App
+
+### REST API (Representational State Transfer)
+
+**Category:** API / Architecture
+**Description:** An architectural style for designing networked applications using HTTP methods (GET, POST, PUT, DELETE) to manipulate resources. RESTful APIs are stateless, cacheable, and use standard HTTP conventions for communication.
+**Related Terms:** GraphQL, API Gateway, HTTP
+
 ### Reverse Proxy
 
 **Category:** System Design
 **Description:** A server that sits between clients and backend servers, forwarding client requests to appropriate servers. Reverse proxies provide load balancing, SSL termination, caching, and protection for backend services.
 **Related Terms:** Load Balancer, API Gateway
+
+### Rollback
+
+**Category:** DevOps / Deployment
+**Description:** The process of reverting a system to a previous stable state after a failed deployment or problematic change. Rollbacks minimize downtime and customer impact by quickly restoring known-good versions.
+**Related Terms:** Hotfix, Blue-Green Deployment, CI/CD
 
 ### Rust
 
@@ -706,11 +912,53 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 
 ## S
 
+### Saga Pattern
+
+**Category:** Design Pattern / Distributed Systems
+**Description:** A design pattern for managing distributed transactions across microservices through a sequence of local transactions. Each transaction updates the database and triggers the next step, with compensating transactions to handle failures.
+**Related Terms:** CQRS, Event Sourcing, Microservices, Circuit Breaker Pattern
+
+### Scrum
+
+**Category:** Software Development / Process
+**Description:** An agile framework that organizes work into time-boxed iterations called sprints (typically 2-4 weeks). Scrum defines roles (Product Owner, Scrum Master, Development Team), ceremonies (daily standups, sprint planning, retrospectives), and artifacts (product backlog, sprint backlog).
+**Related Terms:** Agile Methodology, Kanban, Sprint, JIRA
+
+### Semantic Versioning
+
+**Category:** Software Engineering / Best Practice
+**Description:** A versioning scheme using MAJOR.MINOR.PATCH format. Increment MAJOR for incompatible API changes, MINOR for backward-compatible functionality, and PATCH for backward-compatible bug fixes. Semantic versioning communicates the nature of changes to consumers.
+**Related Terms:** Release Management, Dependency Management
+
 ### Serialization / Deserialization
 
 **Category:** Foundational Concept
 **Description:** **Serialization** converts an object into a format (JSON, XML, binary) that can be stored or transmitted. **Deserialization** is the reverse process of reconstructing the object from its serialized form.
 **Related Terms:** Token, Data Structure
+
+### Serverless Architecture
+
+**Category:** Cloud / Architecture
+**Description:** A cloud computing model where infrastructure management is abstracted away, and applications run on-demand in stateless compute containers. Serverless enables automatic scaling, pay-per-execution billing, and reduced operational overhead.
+**Related Terms:** Cloud Computing, Microservices, Function-as-a-Service (FaaS)
+
+### Service Mesh
+
+**Category:** Infrastructure / Microservices
+**Description:** An infrastructure layer that handles service-to-service communication in microservices architectures. Service meshes provide observability, security, traffic management, and resilience features like circuit breakers and retries without changing application code.
+**Related Terms:** Microservices, API Gateway, Kubernetes, Istio
+
+### Sharding
+
+**Category:** Database / Scalability
+**Description:** A database architecture pattern that splits data across multiple database instances (shards) based on a shard key. Sharding enables horizontal scaling by distributing load and storage requirements across multiple servers.
+**Related Terms:** Horizontal Scaling, Database Partitioning, Scalability
+
+### Single Page Application (SPA)
+
+**Category:** Frontend / Architecture
+**Description:** A web application that loads a single HTML page and dynamically updates content as users interact with the app. SPAs provide fluid user experiences but require careful handling of SEO, initial load time, and state management.
+**Related Terms:** CSR, React, Vue, Angular, Progressive Web App
 
 ### Single Source of Truth (SSOT)
 
@@ -729,6 +977,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Communication / Tools
 **Description:** A team collaboration platform providing channels, direct messaging, file sharing, and integrations with development tools. Slack enables real-time communication, threaded conversations, and searchable message history for distributed teams.
 **Related Terms:** Microsoft Teams, Discord, Collaboration Tools
+
+### SOA (Service-Oriented Architecture)
+
+**Category:** Software Architecture
+**Description:** An architectural pattern that structures applications as a collection of loosely coupled services communicating over a network. SOA predates microservices and typically uses enterprise service buses (ESBs) and standardized protocols like SOAP.
+**Related Terms:** Microservices, Web Services, Enterprise Architecture
 
 ### SOLID Principles
 
@@ -778,6 +1032,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** The practice of managing and synchronizing application state across components. Solutions range from local component state to global state libraries (Redux, MobX, Zustand) and provide predictable data flow patterns.
 **Related Terms:** State Machine, Observer Pattern
 
+### Static Typing vs Dynamic Typing
+
+**Category:** Programming Languages / Foundational Concept
+**Description:** **Static typing** checks types at compile time (Java, TypeScript, Go), catching errors early but requiring explicit type declarations. **Dynamic typing** checks types at runtime (Python, JavaScript, Ruby), offering flexibility but potentially deferring error detection.
+**Related Terms:** Type Safety, TypeScript, Programming Paradigms
+
 ### Stateless vs Stateful
 
 **Category:** System Design
@@ -805,6 +1065,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 ---
 
 ## T
+
+### TDD (Test-Driven Development)
+
+**Category:** Software Development / Testing
+**Description:** A development practice where tests are written before the code they test. TDD follows a red-green-refactor cycle: write a failing test, write minimal code to pass, then refactor. This approach improves code quality and design.
+**Related Terms:** BDD, Testing, Unit Testing, Agile Methodology
 
 ### Technical Debt
 
@@ -838,6 +1104,22 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 
 ---
 
+## U
+
+### User Journey Mapping
+
+**Category:** UX / Design
+**Description:** A visualization technique that maps out the steps users take to accomplish goals within a product. User journey maps capture touchpoints, emotions, pain points, and opportunities, helping teams understand and improve user experiences.
+**Related Terms:** UX Design, Wireframing, Prototyping, Information Architecture
+
+### UX Heuristics
+
+**Category:** UX / Design
+**Description:** General principles or guidelines for evaluating user interface design quality. Jakob Nielsen's 10 usability heuristics include visibility of system status, user control, consistency, error prevention, and aesthetic minimalist design.
+**Related Terms:** UX Design, Accessibility, User Experience
+
+---
+
 ## V
 
 ### Virtual DOM
@@ -845,6 +1127,16 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Frontend
 **Description:** A lightweight, in-memory representation of the actual DOM. Frameworks like React use the Virtual DOM to batch and optimize updates, comparing new and old trees to compute the minimal changes needed (reconciliation).
 **Related Terms:** DOM, Reconciliation, Hydration
+
+---
+
+## W
+
+### Wireframing
+
+**Category:** UX / Design
+**Description:** The process of creating low-fidelity visual representations of user interfaces to plan layout, structure, and functionality. Wireframes focus on content hierarchy and user flow rather than visual design, enabling rapid iteration and stakeholder feedback.
+**Related Terms:** Prototyping, UX Design, Information Architecture, User Journey Mapping
 
 ---
 
