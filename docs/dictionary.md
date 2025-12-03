@@ -103,6 +103,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A cloud-based platform combining spreadsheet simplicity with database power for organizing work. Airtable provides relational database features, customizable views (grid, calendar, kanban), automations, and integrations, making it popular for project management and content planning.
 **Related Terms:** NocoDB, Database, Low-Code, Project Management
 
+### API (Application Programming Interface)
+
+**Category:** Software Engineering / Integration
+**Description:** A set of protocols, routines, and tools that define how software components should interact. APIs enable applications to communicate with each other, allowing developers to access functionality or data from external services without understanding internal implementation details.
+**Related Terms:** REST API, GraphQL, API Gateway, Endpoint, SDK
+
+### Apache HTTP Server
+
+**Category:** Infrastructure / Web Server
+**Description:** An open-source, cross-platform web server software that has been the most popular web server on the internet since 1996. Apache handles HTTP requests, supports virtual hosting, URL rewriting, authentication, and can be extended through modules. It forms the "A" in the LAMP stack.
+**Related Terms:** LAMP Stack, Nginx, Web Server, Reverse Proxy, HTTPS
+
 ### API Gateway
 
 **Category:** System Design
@@ -144,6 +156,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Foundational Concept
 **Description:** Short for asynchronous, a programming paradigm that allows operations to run without blocking the execution thread. Async operations enable programs to continue executing other code while waiting for long-running tasks (I/O, network requests) to complete.
 **Related Terms:** Await, Concurrency, CPU-bound vs I/O-bound
+
+### Array
+
+**Category:** Data Structure / Foundational Concept
+**Description:** A fundamental data structure that stores elements of the same type in contiguous memory locations, accessible by index. Arrays provide O(1) random access but O(n) insertion/deletion. They form the basis for many other data structures and are essential for efficient data manipulation in programming.
+**Related Terms:** Data Structure, Linked List, Hash Table, Index, Time Complexity
 
 ### Ash
 
@@ -202,6 +220,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Project Management / Standards
 **Description:** A globally recognized standard providing guidelines and best practices for business analysis. BABOK defines knowledge areas including requirements elicitation, analysis, solution evaluation, and stakeholder collaboration, serving as a foundation for business analyst certifications.
 **Related Terms:** PMBOK, Project Management, Requirements Engineering, Business Analysis
+
+### BCNF (Boyce-Codd Normal Form)
+
+**Category:** Database / Normalization
+**Description:** A stricter version of Third Normal Form (3NF) in database normalization where every determinant must be a candidate key. BCNF eliminates anomalies that 3NF might miss when a table has multiple overlapping candidate keys. A relation is in BCNF if for every non-trivial functional dependency X → Y, X is a superkey.
+**Related Terms:** Normalization, Normal Forms, 3NF, Database, Schema
 
 ### BDD (Behavior-Driven Development)
 
@@ -405,6 +429,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An AI model developed by OpenAI that powers GitHub Copilot, trained on publicly available code to understand and generate programming code. Codex can translate natural language to code, explain existing code, and assist with debugging across multiple programming languages.
 **Related Terms:** GitHub Copilot, AI, LLM, Code Generation, OpenAI
 
+### Commit (Database)
+
+**Category:** Database / Transaction
+**Description:** A database operation that permanently saves all changes made during the current transaction. Once committed, changes are durable and visible to other transactions. Commit is part of ACID properties (Atomicity, Consistency, Isolation, Durability) and works in conjunction with rollback for transaction control.
+**Related Terms:** Rollback, Transaction, ACID, Database, Data Integrity
+
 ### Compliance
 
 **Category:** Security / Governance
@@ -416,6 +446,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Software Architecture / Frontend
 **Description:** An architectural approach that structures applications as collections of reusable, self-contained components. Each component encapsulates its own logic, state, and presentation, promoting modularity and reusability.
 **Related Terms:** React, Vue, Microservices, Modular Design
+
+### Composite Primary Key
+
+**Category:** Database / Design
+**Description:** A primary key consisting of two or more columns that together uniquely identify each row in a database table. Composite keys are used when no single column can serve as a unique identifier, commonly seen in junction tables for many-to-many relationships or when modeling natural compound identifiers.
+**Related Terms:** Primary Key, Foreign Key, Database, Schema, Normalization
 
 ### Convex
 
@@ -501,6 +537,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** Software systems that manage a company's interactions with current and potential customers. CRM platforms track customer data, sales pipelines, marketing campaigns, and support tickets to improve business relationships and drive sales growth. Popular examples include Salesforce, HubSpot, and Zoho CRM.
 **Related Terms:** ERP, Salesforce, Zoho, SaaS, Business Intelligence
 
+### CRUD (Create, Read, Update, Delete)
+
+**Category:** Software Engineering / Database
+**Description:** An acronym representing the four basic operations for persistent storage: Create (INSERT), Read (SELECT), Update (UPDATE), and Delete (DELETE). CRUD operations form the foundation of most database interactions and RESTful API design, mapping to HTTP methods POST, GET, PUT/PATCH, and DELETE respectively.
+**Related Terms:** REST API, Database, SQL, HTTP Methods, API
+
 ### CSR (Client-Side Rendering)
 
 **Category:** Frontend
@@ -546,6 +588,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Data / Infrastructure
 **Description:** A centralized repository that stores vast amounts of raw data in its native format until needed for analysis. Unlike data warehouses, data lakes can store structured, semi-structured, and unstructured data, making them flexible for big data analytics and machine learning workloads.
 **Related Terms:** Data Warehouse, Big Data, Data Science, Analytics, ETL
+
+### Data Integrity
+
+**Category:** Database / Quality
+**Description:** The accuracy, consistency, and reliability of data throughout its lifecycle. Data integrity ensures that data remains valid, complete, and unchanged unless through authorized modifications. It is maintained through constraints (primary keys, foreign keys, check constraints), validation rules, transactions, and proper access controls.
+**Related Terms:** Database, Normalization, Primary Key, Foreign Key, ACID, Commit
 
 ### Data Science
 
@@ -595,6 +643,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A cloud-based monitoring and analytics platform for infrastructure, applications, and logs. Datadog provides real-time observability through metrics, traces, and logs with powerful dashboards, alerting, and APM capabilities for modern cloud environments.
 **Related Terms:** Observability, Monitoring, PostHog, New Relic, Logs / Metrics / Traces
 
+### DCL (Data Control Language)
+
+**Category:** Database / SQL
+**Description:** A subset of SQL commands used to control access and permissions to database objects. DCL includes GRANT (to give privileges) and REVOKE (to remove privileges), enabling database administrators to manage security by specifying which users can perform specific operations on tables, views, and other database objects.
+**Related Terms:** DDL, DML, DQL, SQL, Database, Authorization
+
+### DDL (Data Definition Language)
+
+**Category:** Database / SQL
+**Description:** A subset of SQL commands used to define, modify, and delete database structures. DDL includes CREATE, ALTER, DROP, and TRUNCATE statements for managing tables, indexes, views, and schemas. DDL changes typically affect the database schema and are often auto-committed.
+**Related Terms:** DML, DQL, DCL, SQL, Schema, Database
+
 ### DeepSeek
 
 **Category:** AI / Tools
@@ -606,6 +666,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Runtime / Tools
 **Description:** A modern, secure JavaScript/TypeScript runtime built on V8 that addresses Node.js design flaws. Deno features secure-by-default execution, built-in TypeScript support, standard library, and modern ES modules without requiring package.json or node_modules.
 **Related Terms:** Node.js, Bun, NPM
+
+### Denormalization
+
+**Category:** Database / Design
+**Description:** The intentional introduction of redundancy into a database schema to improve read performance at the cost of write complexity and storage. Denormalization involves adding duplicate data, pre-computed aggregates, or flattening relationships to reduce expensive JOIN operations. It's a trade-off commonly used in read-heavy applications and data warehouses.
+**Related Terms:** Normalization, Normal Forms, Redundancy, Read/Write Performance, Database, Schema
 
 ### Dependency Injection
 
@@ -649,6 +715,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A data-driven quality strategy used for improving processes, standing for Define, Measure, Analyze, Improve, and Control. DMAIC is the core methodology of Six Sigma, providing a structured approach to problem-solving and process optimization through statistical analysis and root cause identification.
 **Related Terms:** Six Sigma, Lean, Project Management, Process Improvement
 
+### DML (Data Manipulation Language)
+
+**Category:** Database / SQL
+**Description:** A subset of SQL commands used to manipulate data within database tables. DML includes INSERT (add new records), UPDATE (modify existing records), DELETE (remove records), and SELECT (retrieve data). Unlike DDL, DML operations affect the data itself rather than the schema structure.
+**Related Terms:** DDL, DQL, DCL, SQL, CRUD, Database
+
 ### Docker Image
 
 **Category:** DevOps / Cloud
@@ -660,6 +732,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Frontend
 **Description:** A programming interface for web documents that represents the page structure as a tree of objects. JavaScript can manipulate the DOM to dynamically change content, structure, and styles.
 **Related Terms:** Virtual DOM, Reconciliation, Critical Rendering Path
+
+### DQL (Data Query Language)
+
+**Category:** Database / SQL
+**Description:** A subset of SQL focused specifically on querying and retrieving data from databases. While often considered part of DML, DQL is sometimes classified separately and consists primarily of the SELECT statement along with its clauses (WHERE, JOIN, GROUP BY, ORDER BY, HAVING) for filtering, sorting, and aggregating data.
+**Related Terms:** DDL, DML, DCL, SQL, Join, Database
 
 ### DRY (Don't Repeat Yourself)
 
@@ -688,6 +766,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 ---
 
 ## E
+
+### Eager Loading
+
+**Category:** Database / ORM
+**Description:** A data fetching strategy that loads related entities along with the main query upfront, rather than waiting until they are accessed. Eager loading prevents the N+1 query problem by fetching all necessary data in fewer database calls, improving performance when related data will definitely be used. The opposite of lazy loading.
+**Related Terms:** Lazy Loading, ORM, N+1 Query Problem, Eloquent, Database, Performance
 
 ### ECC RAM (Error-Correcting Code Memory)
 
@@ -773,6 +857,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An architectural pattern where the flow of the program is determined by events such as user actions, sensor outputs, or messages from other programs. Components communicate through events rather than direct calls.
 **Related Terms:** Message Queue, Pub/Sub, State Machine
 
+### Express.js
+
+**Category:** Framework / Backend
+**Description:** A minimal and flexible Node.js web application framework providing robust features for building web and mobile applications. Express.js offers routing, middleware support, template engines, and HTTP utilities, serving as the de facto standard for Node.js backend development and the "E" in the MEAN/MERN stack.
+**Related Terms:** Node.js, JavaScript, REST API, Middleware, MEAN Stack, Hono.js
+
 ---
 
 ## F
@@ -801,6 +891,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A Linux distribution sponsored by Red Hat, serving as a cutting-edge platform featuring the latest open-source technologies. Fedora is known for rapid adoption of new features, strong security defaults, and serving as an upstream source for Red Hat Enterprise Linux.
 **Related Terms:** Linux, Red Hat, Ubuntu, Operating System
 
+### FIFO (First In, First Out)
+
+**Category:** Data Structure / Algorithm
+**Description:** A principle where the first element added to a collection is the first one to be removed, like a queue at a store. FIFO is the fundamental behavior of queue data structures and is used in scheduling algorithms, buffer management, cache eviction policies, and message queues. The opposite of LIFO (Last In, First Out).
+**Related Terms:** Queue, Cache Eviction, Data Structure, LIFO, TTL
+
 ### Firebase
 
 **Category:** Backend / Platform
@@ -824,6 +920,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Mobile / Framework
 **Description:** Google's UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase. Flutter uses the Dart language and provides fast development with hot reload, expressive UIs, and native performance.
 **Related Terms:** React Native, Kotlin, Mobile Development
+
+### Foreign Key
+
+**Category:** Database / Design
+**Description:** A column or set of columns in a relational database table that references the primary key of another table, establishing a link between the two tables. Foreign keys enforce referential integrity by ensuring that values in the referencing table correspond to existing values in the referenced table, preventing orphaned records and maintaining data consistency.
+**Related Terms:** Primary Key, Composite Primary Key, Database, Schema, Data Integrity, Normalization
 
 ### FrankenPHP
 
@@ -1053,6 +1155,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A cloud computing model providing virtualized computing resources over the internet. IaaS offers servers, storage, networking, and operating systems on-demand, allowing users to avoid physical infrastructure management.
 **Related Terms:** PaaS, SaaS, AWS, Azure, Cloud Computing
 
+### IAM (Identity and Access Management)
+
+**Category:** Security / Cloud
+**Description:** A framework of policies, processes, and technologies for managing digital identities and controlling access to resources. In AWS, IAM enables creating users, groups, roles, and policies to securely manage access to AWS services. IAM follows the principle of least privilege, granting only the permissions needed for specific tasks.
+**Related Terms:** AWS, Authorization, Authentication, RBAC, Security, Policy
+
 ### Idempotency
 
 **Category:** System Design
@@ -1070,6 +1178,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Framework / Frontend
 **Description:** A library that allows building single-page applications using classic server-side routing and controllers without a full client-side framework API. Inertia.js bridges the gap between server-side frameworks (Laravel, Rails) and modern JavaScript frameworks (Vue, React, Svelte), providing SPA-like experiences without building an API.
 **Related Terms:** Laravel, Vue.js, React, Livewire, SPA
+
+### Index (Database)
+
+**Category:** Database / Performance
+**Description:** A data structure that improves the speed of data retrieval operations on a database table at the cost of additional storage and write overhead. Indexes work like a book's index, allowing the database to find rows without scanning the entire table. Common types include B-tree, hash, and composite indexes. Proper indexing is crucial for query optimization.
+**Related Terms:** Primary Key, Foreign Key, Database, Query Optimization, B-tree, Performance
 
 ### IndexedDB
 
@@ -1152,6 +1266,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Testing / Performance
 **Description:** An open-source Java application designed for load testing and measuring performance of web applications, APIs, databases, and other services. JMeter simulates heavy loads to analyze overall performance under various conditions, supporting HTTP, JDBC, FTP, and other protocols.
 **Related Terms:** Load Testing, K6, Performance Testing, CI/CD
+
+### Join (SQL)
+
+**Category:** Database / SQL
+**Description:** A SQL operation that combines rows from two or more tables based on a related column. Types include INNER JOIN (matching rows only), LEFT/RIGHT JOIN (all rows from one table plus matches), FULL OUTER JOIN (all rows from both tables), and CROSS JOIN (Cartesian product). Joins are fundamental for querying normalized relational databases.
+**Related Terms:** SQL, DQL, Database, Normalization, Foreign Key, Schema
 
 ### Joomla
 
@@ -1244,6 +1364,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 ---
 
 ## L
+
+### LAMP Stack
+
+**Category:** Infrastructure / Web Development
+**Description:** A classic open-source web development stack consisting of Linux (operating system), Apache (web server), MySQL (database), and PHP/Perl/Python (programming language). LAMP provides a complete environment for developing and deploying dynamic web applications, known for its stability, flexibility, and widespread community support.
+**Related Terms:** Apache HTTP Server, MySQL, PHP, Linux, Web Server, MEAN Stack
 
 ### Laravel
 
@@ -1362,6 +1488,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Technology / AI
 **Description:** A subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. Machine learning uses algorithms to identify patterns in data, make predictions, and automate decision-making through techniques like supervised, unsupervised, and reinforcement learning.
 **Related Terms:** AI, Deep Learning, Data Science, Neural Networks, Python
+
+### Master-Slave Replication
+
+**Category:** Database / Architecture
+**Description:** A database replication pattern where one server (master/primary) handles all write operations while one or more servers (slaves/replicas) receive copies of the data for read operations. This architecture improves read scalability and provides data redundancy, though write operations remain a single point of bottleneck. Modern terminology often uses "primary-replica" instead.
+**Related Terms:** Database, Read/Write Performance, Redundancy, Horizontal Scaling, High Availability
 
 ### Memory
 
@@ -1553,6 +1685,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A React-based framework for building production-ready web applications with server-side rendering, static site generation, and API routes. Next.js provides file-based routing, automatic code splitting, and optimized performance out of the box.
 **Related Terms:** React, SSR, SSG, ISR, Nuxt.js
 
+### Nil
+
+**Category:** Programming / Foundational Concept
+**Description:** A special value representing "nothing" or "no value" in programming languages, equivalent to null in many languages. In languages like Go, Ruby, and Objective-C, nil indicates the absence of a value for pointers, objects, or optional types. Understanding nil vs null vs undefined is important for proper null-safety handling.
+**Related Terms:** Nullable, Null Safety, Type Safety, Optional
+
 ### Non-deterministic
 
 **Category:** Foundational Concept
@@ -1564,6 +1702,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Database / Tools
 **Description:** An open-source Airtable alternative that turns any MySQL, PostgreSQL, SQL Server, SQLite, or MariaDB database into a smart spreadsheet interface. NocoDB provides REST APIs, webhooks, and automation without coding.
 **Related Terms:** Airtable, Database, Low-Code, API
+
+### Normal Forms (1NF, 2NF, 3NF)
+
+**Category:** Database / Design
+**Description:** A series of guidelines for organizing relational database tables to reduce redundancy and improve data integrity. First Normal Form (1NF) eliminates repeating groups; Second Normal Form (2NF) removes partial dependencies; Third Normal Form (3NF) removes transitive dependencies. Higher forms like BCNF and 4NF address more complex anomalies.
+**Related Terms:** Normalization, BCNF, Database, Schema, Denormalization, Data Integrity
+
+### Normalization
+
+**Category:** Database / Design
+**Description:** The process of organizing a relational database to reduce data redundancy and improve data integrity by dividing tables into smaller, well-structured tables and defining relationships between them. Normalization follows progressive normal forms (1NF through 5NF) to eliminate insertion, update, and deletion anomalies.
+**Related Terms:** Normal Forms, Denormalization, BCNF, Schema, Database, ERD
 
 ### NoSQL
 
@@ -1582,6 +1732,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Package Manager / Tools
 **Description:** The default package manager for Node.js that manages JavaScript dependencies. NPM provides a registry of reusable packages, dependency resolution, version management, and scripts for building and testing applications.
 **Related Terms:** Node.js, PNPM, Bun, Yarn
+
+### Nullable
+
+**Category:** Programming / Type System
+**Description:** A type annotation or property indicating that a variable, parameter, or column can hold a null/nil value in addition to its normal type. Nullable types are crucial for database schema design (allowing optional fields) and programming (handling absence of values). Modern languages provide nullable type systems and null-safety features to prevent null reference errors.
+**Related Terms:** Nil, Null Safety, Type Safety, Database, Schema, Optional
 
 ### Nuxt.js
 
@@ -1771,11 +1927,23 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An approach that uses different database technologies for different data storage needs within the same application. Polyglot persistence matches each data type with the most suitable database (SQL, NoSQL, graph, etc.) rather than using one-size-fits-all.
 **Related Terms:** Microservices, Database Design, System Architecture
 
+### Polymorphic Relationship
+
+**Category:** Database / ORM
+**Description:** A database design pattern where a single association can belong to more than one type of parent model. In polymorphic relationships, a table stores both a foreign key and a type identifier to reference different tables dynamically. Common in ORMs like Eloquent and ActiveRecord for implementing features like comments that can belong to posts, videos, or images.
+**Related Terms:** ORM, Foreign Key, Database, Eloquent, Schema, Eager Loading
+
 ### Port Forwarding
 
 **Category:** Networking / Infrastructure
 **Description:** A technique that redirects network traffic from one IP address and port combination to another. Port forwarding enables external devices to access services on private networks, commonly used for hosting game servers, remote access, and exposing local development environments to the internet.
 **Related Terms:** Networking, VPN, Firewall, NAT, DNS
+
+### Primary Key
+
+**Category:** Database / Design
+**Description:** A column or combination of columns that uniquely identifies each row in a database table. Primary keys enforce entity integrity by ensuring no duplicate or null values exist in the key columns. They serve as the main reference point for relationships with other tables through foreign keys. Types include natural keys (meaningful data) and surrogate keys (auto-generated IDs).
+**Related Terms:** Foreign Key, Composite Primary Key, Index, Database, Schema, Data Integrity
 
 ### Prim's Algorithm
 
@@ -1917,6 +2085,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A framework for building native mobile applications using React and JavaScript. React Native allows code sharing between iOS and Android while rendering to native platform components, enabling faster development than traditional native approaches.
 **Related Terms:** React, Flutter, Mobile Development
 
+### Read/Write Performance
+
+**Category:** Database / Performance
+**Description:** The balance between how efficiently a database handles read operations (SELECT queries) versus write operations (INSERT, UPDATE, DELETE). Database design decisions like indexing, normalization/denormalization, and replication strategies involve trade-offs between read and write performance. Read-heavy workloads may favor denormalization and caching, while write-heavy workloads may favor minimal indexing.
+**Related Terms:** Index, Denormalization, Master-Slave Replication, Cache, Database, Performance
+
 ### Reddit
 
 **Category:** Social Platform / Community
@@ -1934,6 +2108,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** System Design
 **Description:** An open-source, in-memory data structure store used as a database, cache, message broker, and queue. Redis supports various data structures and provides extremely fast read/write operations.
 **Related Terms:** Cache, Caching Strategies, Message Queue
+
+### Redundancy
+
+**Category:** Database / System Design
+**Description:** The intentional or unintentional duplication of data or system components. In databases, redundancy refers to storing the same data in multiple places, which can improve read performance through denormalization but increases storage costs and risks data inconsistency. In system design, redundancy provides fault tolerance by having backup components ready to take over if primary ones fail.
+**Related Terms:** Denormalization, Data Integrity, High Availability, Master-Slave Replication, Normalization
 
 ### Repository Pattern
 
@@ -2028,6 +2208,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Design Pattern / Distributed Systems
 **Description:** A design pattern for managing distributed transactions across microservices through a sequence of local transactions. Each transaction updates the database and triggers the next step, with compensating transactions to handle failures.
 **Related Terms:** CQRS, Event Sourcing, Microservices, Circuit Breaker Pattern
+
+### Schema
+
+**Category:** Database / Design
+**Description:** The structure or blueprint of a database that defines how data is organized, including tables, columns, data types, constraints, relationships, and indexes. Database schemas can be logical (abstract structure) or physical (storage implementation). Schema design is fundamental to data modeling and directly impacts application performance, data integrity, and maintainability.
+**Related Terms:** Database, DDL, Normalization, ERD, Primary Key, Foreign Key, Index
 
 ### Scrum
 
@@ -2369,6 +2555,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A classic NP-hard optimization problem seeking the shortest route visiting all given cities exactly once and returning to the origin. TSP is fundamental in computer science for studying algorithmic complexity, heuristics, and metaheuristics. Real-world applications include logistics, circuit design, and DNA sequencing.
 **Related Terms:** Greedy Algorithm, Heuristic, Metaheuristics, Nearest Neighbor, Graph Theory
 
+### TTL (Time To Live)
+
+**Category:** System Design / Caching
+**Description:** A mechanism that specifies how long a piece of data, record, or network packet should exist before being discarded or refreshed. TTL is used in DNS records to control caching duration, in cache systems to automatically expire stale data, in databases for automatic record deletion, and in network protocols to prevent infinite packet routing. Lower TTL means fresher data but more overhead; higher TTL improves performance but risks staleness.
+**Related Terms:** Cache, Cache Eviction, FIFO, DNS, Redis, Cache Invalidation
+
 ### Turborepo
 
 **Category:** Build Tool / Monorepo
@@ -2605,4 +2797,4 @@ To add new terms to this dictionary:
 
 ---
 
-*Last updated: December 04, 2025 01:03 PST (Asia/Manila)*
+*Last updated: December 04, 2025 01:20 PST (Asia/Manila)*
