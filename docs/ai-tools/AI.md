@@ -1,421 +1,218 @@
-# AI Agent CLI Tools Best Practices
+# AI Coding Workflow Guidelines
 
-> **Note**: This documentation is shared across all AI CLI tools (Claude, Gemini, Codex) via symlinks to avoid maintenance overhead and ensure consistency. The files `CLAUDE.md`, `GEMINI.md`, `CODEX.md`, and `AGENTS.md` in the root directory all point to this single master document.
+## 🎯 Core Principles
+- **Mental alignment**: Always seek clarification, never assume—ask even at 90% certainty
+- **Incremental commits**: Granular, trackable progress with conventional commits
+- **No AI attribution**: Never mention Claude/AI/co-authored in commits, PRs, or comments
+- **No auto-posting**: Never comment on ClickUp unless explicitly instructed
+- **Stay in Smart Zone**: Keep context <40% capacity (avoid "dumb zone" degradation)
+- **Frequent Intentional Compaction**: Compress context to markdown after every phase
+- **No Vibes Coding**: Research → Plan → Implement (RPI). Never skip planning
+- **Trajectory Awareness**: Reset conversations showing failure patterns (yell-correct loops)
+- **Specify Persona**: Identify what's the basic characteristic of agent, Senior Developer ? Backend? Frontend? UI UX? this will boost quality
 
-## Overview
+## 🏗️ Branching & Commit Strategy
 
-AI Agent CLI tools (Codex, Claude, Gemini, etc.) leverage powerful language models to generate, explain, and debug code directly from natural language descriptions. These tools transform the development workflow by enabling developers to describe what they want in plain English and receive functional code snippets, making programming more accessible and efficient for both experienced developers and newcomers.
+### For ClickUp Feature/Bugfix Tasks
 
-## Supported Tools
+1. Branch from `latest develop`: [commit-type]/[clickup-id]-[short-description]
+   - commit-type: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `cherrypick`
+   - Example: `feat/CU-1234-add-user-profile-api`
 
-### Available CLI Tools
+2. Create **TWO PR sets**:
+   - **PR #1**: Feature branch → `develop`
+   - **PR #2**: Cherry-pick commits → `main` (resolve conflicts, exact commits only)
 
-- **Codex CLI (OpenAI)**: Code generation using GPT models
-- **Claude CLI (Anthropic)**: Code assistance with Claude models
-- **Gemini CLI (Google)**: AI-powered development with Gemini models
+## ✅ Pre-Implementation Checks
 
-### Installation
+- [ ] Document only what's necessary
+- [ ] No destructive changes/migrations
+- [ ] Focus ONLY on required files
+- [ ] Defensive coding - preserve existing behavior
+- [ ] Mimic existing patterns or document best-practice deviations
+- [ ] Always ask when in doubt (90% rule)
+- [ ] Context size: <40% window capacity
+- [ ] Compaction: Current state → tagged markdown
+- [ ] Trajectory: No failure patterns in history
+- [ ] Onboarding: Dynamic research (not static docs)
+- [ ] Sub-agent scope: Discovery only, succinct returns
 
-All three AI CLI tools are included in the dotfiles Brewfile and will be installed automatically:
+## 🔬 RPI Workflow (Research → Plan → Implement)
 
-```bash
-# Install all dotfiles packages (includes AI tools)
-cd ~/dotfiles
-brew bundle install
+Store findings: `docs/plans/[ticket-id]-[short-title].md`
 
-# Or install individually
-brew install claude        # Claude CLI
-brew install gemini-cli    # Gemini CLI
-brew install codex         # OpenAI Codex CLI
+### RESEARCH Phase
+```
+File: docs/plans/[ticket]-research.md
+
+□ Objective codebase scan (files, line numbers, flows)
+□ On-demand vertical slices (no stale docs)
+□ Compress truth from code itself
+□ Sub-agents for scoped discovery only
+□ Search for impacted files proactively
+□ Zero tolerance for assumptions/hallucinations
+□ Clarify requirements for mental alignment
 ```
 
-### Configuration
+### PLAN Phase
+```
+File: docs/plans/[ticket]-plan.md
 
-After installation, run the setup script to configure API keys:
-
-```bash
-~/dotfiles/scripts/setup-ai-tools.sh
+□ Explicit steps + file paths + code snippets
+□ Post-change test instructions
+□ Human review REQUIRED (90% rule)
+□ Sweet spot: Detailed for agents, readable for humans
+□ Code snippets show exact changes
+□ Test validation after each step
 ```
 
-This will:
-- Check which AI CLI tools are installed
-- Prompt for API keys (stored securely in ~/.zshrc.private)
-- Create documentation symlinks
-- Set up shell aliases
-
-## Use Cases
-
-### Optimal Scenarios
-- **Rapid Prototyping**: Generate boilerplate code and initial implementations quickly
-- **Learning New Languages**: Get syntax-correct code in unfamiliar programming languages
-- **Code Translation**: Convert code between different programming languages
-- **Documentation Generation**: Create comprehensive documentation from existing code
-- **Unit Test Creation**: Generate test cases based on function specifications
-- **Regex Pattern Building**: Construct complex regular expressions from descriptions
-- **SQL Query Generation**: Build database queries from natural language requirements
-- **Algorithm Implementation**: Transform algorithmic descriptions into working code
-- **Code Review**: Get suggestions for code improvements and best practices
-- **Debugging Assistance**: Identify and fix bugs with AI-powered analysis
-
-### When to Avoid
-- Mission-critical production code without thorough review
-- Security-sensitive implementations requiring cryptographic expertise
-- Highly optimized performance-critical sections
-- Proprietary business logic that shouldn't be exposed to third-party services
-
-## Pros and Cons
-
-### Pros
-- Accelerates development speed by 30-50% for routine tasks
-- Reduces cognitive load when switching between languages
-- Provides instant code examples and patterns
-- Helps overcome blank page syndrome
-- Supports multiple programming languages seamlessly
-- Facilitates learning through generated examples
-- Reduces boilerplate code writing time
-- Available 24/7 for instant assistance
-
-### Cons
-- Generated code may contain subtle bugs or inefficiencies
-- Dependency on internet connection and API availability
-- Cost considerations for high-volume usage
-- Potential for generating outdated patterns
-- Risk of intellectual property concerns
-- May encourage over-reliance on automation
-- Limited understanding of complex business requirements
-
-## Implementation Patterns
-
-### Standard Integration Workflow
-
-```bash
-# Basic usage pattern (Gemini CLI example)
-gemini generate "Create a Python function that validates email addresses"
-
-# With context specification
-gemini generate --language javascript --context "React component" \
-  "Create a form input component with validation"
-
-# Interactive mode
-gemini chat
+### IMPLEMENT Phase
+```
+□ Execute plan only - no improvisation
+□ Compact prior state before next iteration
+□ Fresh context window with plan only
+□ Focus on files outlined in plan
 ```
 
-### Configuration Structure
+## 💎 Coding Standards
 
-```yaml
-# .ai-cli-config.yaml
-api:
-  key: ${GEMINI_API_KEY}  # or OPENAI_API_KEY, ANTHROPIC_API_KEY
-  model: gemini-pro       # or gpt-4, claude-3-sonnet
-  max_tokens: 2048
-  temperature: 0.2
+- ✅ Use enums (avoid magic strings/numbers)
+- ✅ Eliminate code smells
+- ✅ New enums → respective directories
+- ✅ Match existing codebase style
+- ✅ Document intentional best-practice improvements
 
-defaults:
-  language: python
-  style: pep8
-  documentation: docstring
+## 🚫 Anti-Slop Rules
 
-security:
-  mask_secrets: true
-  validate_output: true
-
-output:
-  format: annotated
-  save_history: true
-  review_required: true
+```
+❌ NEVER: "Vibe coding" without RPI
+❌ NEVER: Skip human plan review
+❌ NEVER: >40% context (dumb zone)
+❌ NEVER: Static docs (they lie most)
+❌ NEVER: Anthropomorphize sub-agents (roles)
+✅ ALWAYS: Compact before reset
+✅ ALWAYS: Code snippets in plans
+✅ ALWAYS: Mental alignment via plan review
 ```
 
-### Environment Setup
+## 📋 Final Deliverables Checklist
 
-Add to your `.zshrc` or `.zshrc.local`:
+### 1. Create Pull Request Summary
 
-```bash
-# AI Agent CLI Configuration
-export GEMINI_API_KEY="your-api-key-here"
-export OPENAI_API_KEY="your-api-key-here"
-export ANTHROPIC_API_KEY="your-api-key-here"
-export CLAUDE_API_KEY="your-api-key-here"  # Alternative naming
+File: `docs/pullrequests/[ticket-id]-[short-title].md`
 
-# Tool-specific aliases for co-existence
-# Gemini (Google)
-alias gm="gemini"
-alias gmgen="gemini generate"
-alias gmchat="gemini chat"
-alias gmexp="gemini explain"
+**Format:**
 
-# Claude (Anthropic)
-alias cl="claude"
-alias clgen="claude generate"
-alias clchat="claude chat"
-alias clrev="claude review"
+# [Ticket Title]
 
-# Codex (OpenAI)
-alias cx="codex"
-alias cxgen="codex generate"
-alias cxchat="codex chat"
-
-# Generic AI aliases (default to your preferred tool)
-alias ai="gemini"          # Change to your preferred default
-alias aigen="gemini generate"
-alias aichat="gemini chat"
-alias aicode="gemini code"
-
-# Task-specific aliases (use each tool's strength)
-alias ai-analyze="claude analyze"    # Claude for analysis
-alias ai-review="claude review"       # Claude for code review
-alias ai-generate="gemini generate"   # Gemini for quick generation
-alias ai-refine="codex refine"        # Codex for production code
+## RPI Summary
+```
+Research: docs/plans/[ticket]-research.md
+Plan: docs/plans/[ticket]-plan.md ← HUMAN APPROVED
+Implementation: Executed per plan
+Context Compactions: [X] iterations
 ```
 
-## Security Considerations
+## PR Links
+- **Develop PR**: [link]
+- **Main Cherry-pick PR**: [link]
 
-### Critical Security Measures
+## Status
+- [ ] Code Review
 
-1. **API Key Management**
-   - Store API keys in environment variables, never in code
-   - Use secret management systems (HashiCorp Vault, AWS Secrets Manager)
-   - Rotate API keys regularly (every 90 days minimum)
-   - Implement key usage monitoring and alerting
+## Description
+[Clear implementation summary]
 
-2. **Input Sanitization**
-   - Never include sensitive data in prompts
-   - Filter out credentials, PII, and proprietary information
-   - Implement prompt injection prevention
-   - Validate prompt length and complexity
+## Files Changed
+[List key files with purpose]
 
-3. **Output Validation**
-   - Always review generated code before execution
-   - Run static analysis tools on generated code
-   - Test in isolated environments first
-   - Implement automated security scanning
+## Technical Details
+[Bullet points on approach, decisions, tests]
 
-4. **Data Privacy**
-   - Understand each provider's data retention policies
-   - Avoid sending proprietary algorithms or trade secrets
-   - Implement local caching to minimize API calls
-   - Use enterprise agreements for sensitive workloads
+## Mental Alignment Notes
+[Key decisions from plan review, human sign-offs]
 
-### Vulnerability Mitigation
+## Reviewers
+@reviewer1 @reviewer2 [ClickUp task assignees]
 
-```bash
-# Security scanning workflow
-gemini generate "function to process user input" | \
-  bandit --stdin | \
-  semgrep --config=auto --lang=python
+### 2. Critical Features
+
+Create: `docs/[feature-name]/[implementation|fix|improvement].md`
+
+### 3. Git Operations
+
+- [ ] Professional PR titles/descriptions
+- [ ] Push both PRs (develop + main cherry-pick)
+- [ ] Verify all commits included correctly
+- [ ] Attach RPI summary/threads to PR for transparency
+
+## 🚀 Enhanced RPI Workflow
+
+```
+1. RESEARCH → docs/plans/[ticket]-research.md (compress truth)
+2. PLAN → docs/plans/[ticket]-plan.md (HUMAN REVIEW)
+3. IMPLEMENT → Fresh context w/ plan only
+4. COMPACT → docs/plans/[ticket]-compaction-[n].md
+5. REPEAT → Stay in smart zone (<40%)
+6. MENTAL ALIGNMENT → Plan review > code review
 ```
 
-## Common Pitfalls
+## 🧠 Mental Alignment Strategy
 
-### Pitfall 1: Blind Trust in Generated Code
-**Problem**: Accepting generated code without review
-**Solution**: Implement mandatory code review process and automated testing
+**Why it matters**: Keep the entire engineering team synchronized on how the codebase is evolving and why—not just catching bugs, but understanding intent.
 
-### Pitfall 2: Exposing Sensitive Information
-**Problem**: Including API keys or passwords in prompts
-**Solution**: Use environment variables and secret management tools
+**How to achieve it**:
+- Human-in-loop: Review research/plans iteratively; peers approve before implementation
+- Leverage compression: Detailed-but-readable plans hit the sweet spot (reliable execution + skimmable)
+- Cultural shift: Share plans in PRs for transparency; prevents seniors cleaning up juniors' slop
+- Catch early: One bad research line cascades to 100 bad code lines—review hierarchy matters
 
-### Pitfall 3: Over-Engineering Simple Solutions
-**Problem**: Using AI for trivial tasks that don't require assistance
-**Solution**: Define clear criteria for when to use AI vs. manual coding
+**Key insight**: Read plans instead of 1000+ lines of code. Leaders stay informed without drowning in diffs.
 
-### Pitfall 4: Ignoring Rate Limits
-**Problem**: Hitting API rate limits during critical development
-**Solution**: Implement caching, queuing, and rate limit monitoring
+## ⚠️ "Don't Outsource the Thinking" & "This Isn't Magic"
 
-### Pitfall 5: Version Compatibility Issues
-**Problem**: Generated code uses deprecated or incompatible libraries
-**Solution**: Specify version requirements in prompts and validate dependencies
+**Core warnings**:
+- AI cannot replace human judgment—it amplifies whatever you provide (garbage in = garbage out)
+- No perfect prompt exists; success demands human review of research and plans
+- Bad inputs cascade catastrophically: Misunderstanding flow → flawed plan → wrong execution
+- Watch for tools spewing unvetted markdown—stay in the loop
 
-### Pitfall 6: License Compliance Violations
-**Problem**: Generated code may inadvertently violate licenses
-**Solution**: Implement license scanning and attribution tracking
+**Practical application**:
+- Humans drive highest-leverage steps (research validation, plan approval)
+- Shift effort from code reading to oversight
+- Build intuition through reps—get it wrong repeatedly
+- Without discipline, teams rift: juniors vibe-code slop, seniors burn out fixing it
 
-## Best Practices Summary
+## 📚 Context Engineering Checklist
 
-- [ ] Store API keys securely using environment variables or secret managers
-- [ ] Implement comprehensive input sanitization before sending prompts
-- [ ] Always review and test generated code before production deployment
-- [ ] Use version control to track all generated code
-- [ ] Implement rate limiting and caching mechanisms
-- [ ] Maintain audit logs of all AI interactions
-- [ ] Establish clear guidelines for appropriate use cases
-- [ ] Run security scans on all generated code
-- [ ] Document the AI-assisted portions of your codebase
-- [ ] Implement fallback mechanisms for API unavailability
-- [ ] Regular training for team members on secure usage
-- [ ] Monitor API usage and costs continuously
-- [ ] Validate generated code against coding standards
-- [ ] Use specific, detailed prompts for better results
-- [ ] Implement automated testing for generated functions
-
-## Workflow Integration
-
-### Daily Development Workflow
-
-1. **Code Generation**: Use AI to generate boilerplate and initial implementations
-2. **Code Review**: Review generated code for correctness and security
-3. **Testing**: Write and run tests for AI-generated code
-4. **Refinement**: Iterate on generated code based on requirements
-5. **Documentation**: Use AI to generate documentation and comments
-
-### Project Setup
-
-```bash
-# Initialize AI configuration
-mkdir -p ~/.config/ai-cli
-touch ~/.config/ai-cli/config.yaml
-
-# Set up API keys
-echo "export GEMINI_API_KEY='your-key-here'" >> ~/.zshrc.local
-source ~/.zshrc
-
-# Test installation
-gemini --version
+```
+□ Context size: <40% window capacity
+□ Compaction: Current state → tagged markdown
+□ Trajectory: No failure patterns in conversation
+□ Onboarding: Dynamic research (not stale static docs)
+□ Sub-agents: Scoped discovery, succinct returns
+□ Research: Grounded in code, not assumptions
+□ Plans: Include code snippets, test steps
+□ Implementation: Execute plan only
+□ Review: Human sign-off before agent work
 ```
 
-## Co-Existence Strategy
+## 🎓 Learning & Iteration
 
-### Running Multiple AI CLIs Together
+- Pick one tool (Claude/Cursor) and get reps
+- You will get RPI scope wrong repeatedly—that's normal
+- Too much compaction = missed context; too little = dumb zone
+- Find your team's sweet spot through practice
+- Avoid minmaxing across multiple tools
 
-All three AI CLI tools can coexist on your system. Each has unique strengths:
+## 🚀 Workflow Summary
 
-**Gemini CLI (Google)**
-- ✨ Strengths: Multi-modal capabilities, fast responses, generous free tier
-- 🎯 Best for: Quick code generation, image analysis, rapid prototyping
-- 💰 Cost: Free tier available
+1. Branch from develop → Implement incrementally (RPI)
+2. Research/Plan → `docs/plans/[ticket].md` (human review)
+3. Code → Match standards, enums, no destruction
+4. `docs/pullrequests/[ticket].md` → Review summary with RPI
+5. PR #1: develop | PR #2: main (cherry-pick)
+6. ASK for clarification → Mental alignment first
+7. Compact context → Prepare for next iteration
 
-**Claude CLI (Anthropic)**
-- ✨ Strengths: Excellent reasoning, safety features, large context windows (200K tokens)
-- 🎯 Best for: Code review, architecture decisions, documentation, complex analysis
-- 💰 Cost: Subscription or API-based
-
-**Codex CLI (OpenAI)**
-- ✨ Strengths: High accuracy, proven track record, production-ready code
-- 🎯 Best for: Production code generation, established patterns, critical systems
-- 💰 Cost: Pay-per-token
-
-### Strategic Tool Selection
-
-Create a wrapper function to intelligently route tasks:
-
-```bash
-# Add to ~/.zshrc.local
-ai_smart() {
-  case $1 in
-    analyze|review|audit|docs)
-      # Claude for analysis and reasoning
-      claude "${@:2}"
-      ;;
-    generate|quick|prototype)
-      # Gemini for quick generation
-      gemini "${@:2}"
-      ;;
-    production|deploy|refine)
-      # Codex for production code
-      codex "${@:2}"
-      ;;
-    vision|image|diagram)
-      # Gemini for multi-modal tasks
-      gemini "${@:2}"
-      ;;
-    *)
-      echo "Usage: ai_smart {analyze|review|generate|quick|production|vision} [args]"
-      ;;
-  esac
-}
-```
-
-### Ensemble Approach
-
-Get multiple perspectives on the same problem:
-
-```bash
-ai_ensemble() {
-  local prompt="$1"
-  echo "\n=== Claude's Analysis ==="
-  claude analyze "$prompt"
-  echo "\n=== Gemini's Suggestion ==="
-  gemini generate "$prompt"
-  echo "\n=== Codex's Implementation ==="
-  codex generate "$prompt"
-}
-```
-
-## Getting Help
-
-For tool-specific help, use the built-in help commands:
-
-```bash
-# Claude CLI
-claude --help
-claude chat --help
-
-# Gemini CLI
-gemini --help
-gemini generate --help
-
-# Codex CLI
-codex --help
-codex generate --help
-```
-
-## Troubleshooting
-
-### Common Issues
-
-**API Key Not Found**
-```bash
-# Verify environment variable is set
-echo $GEMINI_API_KEY
-
-# Add to shell profile if missing
-echo "export GEMINI_API_KEY='your-key'" >> ~/.zshrc.local
-source ~/.zshrc
-```
-
-**Rate Limit Exceeded**
-```bash
-# Check API usage
-gemini usage --show-limits
-
-# Implement caching to reduce calls
-gemini config set cache.enabled true
-```
-
-**Connection Errors**
-```bash
-# Test network connectivity
-curl -I https://api.google.com
-
-# Check proxy settings if behind corporate firewall
-gemini config set proxy.url "http://proxy:8080"
-```
-
-## Conclusion
-
-AI Agent CLI tools represent a paradigm shift in software development, offering unprecedented speed and accessibility for code generation. However, their power demands responsible usage with robust security measures, thorough validation processes, and clear operational guidelines.
-
-**When to use AI Agent CLIs:**
-- Accelerating development of standard patterns and boilerplate
-- Learning new technologies or languages
-- Generating initial implementations for further refinement
-- Creating comprehensive test suites
-- Building proof-of-concepts rapidly
-
-**When to seek alternatives:**
-- High-security applications requiring cryptographic expertise
-- Performance-critical system components
-- Highly specialized domain-specific algorithms
-- Situations requiring deep understanding of complex business logic
-- When API costs exceed development time savings
-
-The key to successful AI CLI adoption lies in treating it as a powerful assistant rather than a replacement for developer expertise. By implementing the security measures, validation processes, and best practices outlined in this guide, teams can harness the efficiency gains while maintaining code quality and security standards.
-
-Remember: Generated code is a starting point, not a destination. Always review, test, and refine before production deployment.
-
-## Related Documentation
-
-- [Main README](../../README.md) - Dotfiles documentation
-- [Installation Guide](../../INSTALLATION.md) - Setup instructions and AI tools configuration
-- [Setup Script](../../scripts/setup-ai-tools.sh) - AI tools installation script
-- [Brewfile](../../Brewfile) - Package definitions including AI CLI tools
+**Remember**: Precision over speed. Clarity over assumptions. Alignment over automation. Think first, ask second, code third.
