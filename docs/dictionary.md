@@ -67,6 +67,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** The simulation of human intelligence in machines programmed to think, learn, and solve problems. AI encompasses machine learning, deep learning, natural language processing, computer vision, and other technologies that enable computers to perform tasks requiring human-like intelligence.
 **Related Terms:** LLM, Machine Learning, ChatGPT, Claude
 
+### A* Search Algorithm
+
+**Category:** Algorithm / Pathfinding
+**Description:** A best-first graph traversal algorithm that finds the shortest path between nodes using heuristics to guide its search. A* combines the actual cost from the start (g) with an estimated cost to the goal (h), making it optimal and complete when using an admissible heuristic. Widely used in game development, robotics, and GPS navigation.
+**Related Terms:** Dijkstra's Algorithm, Graph Theory, Heuristic, Pathfinding, BFS
+
 ### Alpine.js
 
 **Category:** Framework / Frontend
@@ -197,6 +203,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A software development approach that extends TDD by writing tests in natural language describing system behavior from the user's perspective. BDD encourages collaboration between developers, QA, and non-technical stakeholders using tools like Cucumber or SpecFlow.
 **Related Terms:** TDD, Testing, Agile Methodology
 
+### BFS (Breadth-First Search)
+
+**Category:** Algorithm / Graph Theory
+**Description:** A graph traversal algorithm that explores all neighbor nodes at the present depth before moving to nodes at the next depth level. BFS uses a queue data structure and is optimal for finding the shortest path in unweighted graphs. Common applications include social network analysis, GPS navigation, and web crawling.
+**Related Terms:** DFS, Graph Theory, Queue, Dijkstra's Algorithm, A* Search Algorithm
+
 ### Big Data
 
 **Category:** Data / Technology
@@ -254,6 +266,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Foundational Concept
 **Description:** A high-speed data storage layer that stores a subset of data, typically transient, so future requests for that data can be served faster. Caching reduces database load and improves application response times.
 **Related Terms:** Redis, CDN, Caching Strategies
+
+### Cache Eviction
+
+**Category:** System Design / Performance
+**Description:** The process of removing entries from a cache when it reaches capacity to make room for new data. Common eviction policies include LRU (Least Recently Used), LFU (Least Frequently Used), FIFO (First In First Out), and TTL (Time To Live). Choosing the right eviction strategy impacts cache hit rates and application performance.
+**Related Terms:** Cache, LRU, Cache Invalidation, Redis, Caching Strategies
 
 ### Cache Invalidation
 
@@ -447,6 +465,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** The sequence of steps the browser takes to convert HTML, CSS, and JavaScript into pixels on the screen. Optimizing the critical rendering path improves page load performance by prioritizing the loading of essential resources.
 **Related Terms:** DOM, Virtual DOM, SSR / CSR / SSG / ISR
 
+### CRM (Customer Relationship Management)
+
+**Category:** Business / Software
+**Description:** Software systems that manage a company's interactions with current and potential customers. CRM platforms track customer data, sales pipelines, marketing campaigns, and support tickets to improve business relationships and drive sales growth. Popular examples include Salesforce, HubSpot, and Zoho CRM.
+**Related Terms:** ERP, Salesforce, Zoho, SaaS, Business Intelligence
+
 ### CSR (Client-Side Rendering)
 
 **Category:** Frontend
@@ -458,6 +482,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Frontend / Performance
 **Description:** A Core Web Vitals metric measuring visual stability by quantifying unexpected layout shifts during page load. Lower CLS scores indicate better user experience, as content doesn't unexpectedly move while users interact with the page.
 **Related Terms:** Core Web Vitals, Largest Contentful Paint, First Contentful Paint
+
+### cPanel
+
+**Category:** Hosting / Web Management
+**Description:** A popular web-based control panel for managing web hosting accounts and servers. cPanel provides a graphical interface for managing domains, email accounts, databases, file management, SSL certificates, and server configurations, making hosting management accessible to non-technical users.
+**Related Terms:** Web Hosting, DNS, VPS, Linux, Apache
 
 ### Cypress
 
@@ -523,6 +553,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A structural design pattern that allows behavior to be added to individual objects dynamically without affecting other objects of the same class. It wraps the original object and extends its functionality.
 **Related Terms:** Adapter Pattern, Observer Pattern
 
+### DFS (Depth-First Search)
+
+**Category:** Algorithm / Graph Theory
+**Description:** A graph traversal algorithm that explores as far as possible along each branch before backtracking. DFS uses a stack data structure (or recursion) and is useful for topological sorting, cycle detection, pathfinding in mazes, and solving puzzles. Unlike BFS, DFS doesn't guarantee the shortest path but uses less memory for wide graphs.
+**Related Terms:** BFS, Graph Theory, Stack, Recursion, Algorithm
+
 ### Datadog
 
 **Category:** DevOps / Monitoring
@@ -547,11 +583,23 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A design pattern where dependencies are provided to a class rather than created inside it. This promotes loose coupling, makes code more testable, and follows the Inversion of Control principle.
 **Related Terms:** SOLID Principles, Factory Pattern, Repository Pattern
 
+### DevSecOps
+
+**Category:** DevOps / Security
+**Description:** An approach that integrates security practices into every phase of the DevOps pipeline, from development through deployment. DevSecOps embeds automated security testing, vulnerability scanning, and compliance checks into CI/CD workflows, treating security as a shared responsibility rather than a final checkpoint.
+**Related Terms:** DevOps, CI/CD, Security, SAST, DAST, Cybersecurity
+
 ### DigitalOcean
 
 **Category:** Cloud / Platform
 **Description:** A cloud infrastructure provider focused on simplicity and developer experience, offering droplets (virtual machines), managed databases, Kubernetes, app platform, and storage solutions. DigitalOcean targets developers and small to medium businesses.
 **Related Terms:** AWS, Azure, Hetzner, Cloud Computing
+
+### Dijkstra's Algorithm
+
+**Category:** Algorithm / Graph Theory
+**Description:** A greedy algorithm that finds the shortest path from a source node to all other nodes in a weighted graph with non-negative edge weights. Dijkstra's algorithm uses a priority queue to efficiently select the next closest unvisited node, making it foundational for routing protocols, GPS navigation, and network optimization.
+**Related Terms:** A* Search Algorithm, Graph Theory, Greedy Algorithm, Shortest Path, BFS
 
 ### Django
 
@@ -634,6 +682,24 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Software Engineering
 **Description:** A data type consisting of a set of named constants that represent distinct values. Enums improve code readability, type safety, and maintainability by replacing magic strings and numbers with meaningful identifiers. They're essential for defining fixed sets of options.
 **Related Terms:** Single Source of Truth, Code Smells, Type Safety
+
+### Ephemeral Environments
+
+**Category:** DevOps / Infrastructure
+**Description:** Temporary, isolated environments created on-demand for development, testing, or review purposes and automatically destroyed after use. Ephemeral environments enable parallel development, safe experimentation, and consistent testing without resource contention. Common implementations include PR preview environments and feature branch deployments.
+**Related Terms:** CI/CD, Docker, Kubernetes, Infrastructure as Code, Git
+
+### ERD (Entity-Relationship Diagram)
+
+**Category:** Database / Design
+**Description:** A visual representation of entities (tables), their attributes, and the relationships between them in a database system. ERDs are fundamental tools for database design, helping developers and stakeholders understand data structures, cardinality (one-to-one, one-to-many, many-to-many), and dependencies before implementation.
+**Related Terms:** Database, SQL, Schema Design, Data Modeling, Normalization
+
+### ERP (Enterprise Resource Planning)
+
+**Category:** Business / Software
+**Description:** Integrated software systems that manage core business processes including finance, HR, manufacturing, supply chain, and procurement in a unified platform. ERP systems provide real-time visibility across departments, automate workflows, and ensure data consistency. Popular examples include SAP, Oracle, and Microsoft Dynamics.
+**Related Terms:** CRM, SAP, Business Intelligence, Database, Integration
 
 ### Ethical Hacking
 
@@ -745,6 +811,24 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A distributed version control system for tracking changes in source code during software development. Git enables multiple developers to collaborate on projects, manage branches, merge changes, and maintain complete history of modifications with features like staging, commits, and remote repositories.
 **Related Terms:** GitHub, GitLab, Bitbucket, CI/CD, Version Control
 
+### Git Cherry-Pick
+
+**Category:** DevOps / Version Control
+**Description:** A Git command that applies the changes from a specific commit to the current branch without merging the entire branch. Cherry-picking is useful for selectively backporting bug fixes or features to different branches, though overuse can lead to duplicate commits and merge complications.
+**Related Terms:** Git, Git Rebase, Version Control, Branching Strategy
+
+### Git Rebase
+
+**Category:** DevOps / Version Control
+**Description:** A Git operation that moves or combines a sequence of commits to a new base commit, creating a linear project history. Rebase is commonly used to integrate changes from one branch onto another cleanly, though it rewrites commit history and should be used carefully on shared branches.
+**Related Terms:** Git, Git Cherry-Pick, Version Control, Merge
+
+### Git Worktrees
+
+**Category:** DevOps / Version Control
+**Description:** A Git feature that allows multiple working directories to be attached to a single repository, each checking out a different branch. Worktrees enable developers to work on multiple branches simultaneously without stashing changes or creating separate clones, improving workflow efficiency.
+**Related Terms:** Git, Branching Strategy, Version Control
+
 ### GitHub
 
 **Category:** DevOps / Tools
@@ -781,11 +865,23 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An all-in-one sales and marketing platform designed for agencies, providing CRM, funnel builders, email marketing, SMS campaigns, appointment scheduling, and white-label solutions. GoHighLevel consolidates multiple marketing tools into a single platform for managing client relationships and campaigns.
 **Related Terms:** CRM, Marketing Automation, SaaS, Zapier
 
+### Gradient Descent
+
+**Category:** Algorithm / Machine Learning
+**Description:** An optimization algorithm used to minimize a function by iteratively moving in the direction of steepest descent as defined by the negative of the gradient. Gradient descent is fundamental to training machine learning models, including neural networks, with variants like Stochastic Gradient Descent (SGD), Mini-batch, Adam, and RMSprop.
+**Related Terms:** Machine Learning, Neural Networks, Deep Learning, Backpropagation, Optimization
+
 ### GraphQL
 
 **Category:** API / Query Language
 **Description:** A query language and runtime for APIs that allows clients to request exactly the data they need. GraphQL provides a complete schema, eliminates over-fetching/under-fetching, and enables powerful developer tooling.
 **Related Terms:** REST API, API Gateway, Backend Development
+
+### Graph Theory
+
+**Category:** Computer Science / Mathematics
+**Description:** A branch of mathematics studying graphs, which are structures consisting of vertices (nodes) connected by edges (links). Graph theory underpins many algorithms and data structures in computer science, including social networks, routing algorithms, dependency resolution, and database relationships.
+**Related Terms:** BFS, DFS, Dijkstra's Algorithm, A* Search Algorithm, Data Structure
 
 ### Greedy Algorithm
 
@@ -802,6 +898,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 ---
 
 ## H
+
+### Hardware
+
+**Category:** Computing / Infrastructure
+**Description:** The physical components of a computer system, including processors (CPU/GPU), memory (RAM), storage devices (SSD/HDD), motherboards, network cards, and peripherals. Understanding hardware capabilities is essential for system design, performance optimization, and infrastructure planning, as software performance is ultimately constrained by hardware limits.
+**Related Terms:** Software, CPU, Memory, Infrastructure, Server
 
 ### Hash / Hash Table
 
@@ -1112,6 +1214,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** DevOps
 **Description:** A type of performance testing that simulates expected user load to identify bottlenecks and verify system behavior under stress. Tools like JMeter, Gatling, and k6 are commonly used for load testing.
 **Related Terms:** Monitoring, Observability
+
+### LRU (Least Recently Used)
+
+**Category:** Algorithm / Caching
+**Description:** A cache eviction policy that removes the least recently accessed items first when the cache reaches capacity. LRU assumes that items accessed recently are more likely to be accessed again soon. Implementations typically use a combination of hash maps and doubly-linked lists to achieve O(1) operations.
+**Related Terms:** Cache Eviction, Cache, Caching Strategies, Data Structure, Memory
 
 ### Lua
 
@@ -1507,6 +1615,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A technique that redirects network traffic from one IP address and port combination to another. Port forwarding enables external devices to access services on private networks, commonly used for hosting game servers, remote access, and exposing local development environments to the internet.
 **Related Terms:** Networking, VPN, Firewall, NAT, DNS
 
+### Prim's Algorithm
+
+**Category:** Algorithm / Graph Theory
+**Description:** A greedy algorithm that finds the minimum spanning tree for a weighted undirected graph, connecting all vertices with the minimum total edge weight. Starting from an arbitrary vertex, Prim's algorithm grows the tree by repeatedly adding the cheapest edge that connects a tree vertex to a non-tree vertex.
+**Related Terms:** Graph Theory, Dijkstra's Algorithm, Greedy Algorithm, Data Structure
+
 ### Progressive Web App (PWA)
 
 **Category:** Frontend / Mobile
@@ -1617,6 +1731,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A technique to control the rate of requests a client can make to a service within a specified time window. Rate limiting protects services from abuse, prevents resource exhaustion, and ensures fair usage across clients.
 **Related Terms:** Throttling, API Gateway, Idempotency
 
+### Random Sampling
+
+**Category:** Algorithm / Statistics
+**Description:** A technique for selecting a representative subset of data from a larger population where each element has an equal probability of being chosen. Random sampling is fundamental to statistical analysis, A/B testing, machine learning training, and load testing. Variants include simple random, stratified, and reservoir sampling.
+**Related Terms:** Machine Learning, Data Science, Statistics, A/B Testing, Weighted Mean
+
 ### React
 
 **Category:** Framework / Frontend
@@ -1682,6 +1802,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** DevOps / Deployment
 **Description:** The process of reverting a system to a previous stable state after a failed deployment or problematic change. Rollbacks minimize downtime and customer impact by quickly restoring known-good versions.
 **Related Terms:** Hotfix, Blue-Green Deployment, CI/CD
+
+### Robots.txt
+
+**Category:** Web / SEO
+**Description:** A text file placed in a website's root directory that provides instructions to web crawlers about which pages or sections should or shouldn't be crawled and indexed. Robots.txt follows the Robots Exclusion Protocol and is essential for controlling search engine access, protecting private content, and managing crawl budget.
+**Related Terms:** SEO, Web Scraping, Sitemap, Search Engine, HTTP
+
+### Round Robin
+
+**Category:** Algorithm / System Design
+**Description:** A scheduling algorithm that assigns tasks or distributes load in circular order, giving each element an equal share of time or resources. Round robin is commonly used in load balancing, CPU scheduling, and DNS to distribute requests evenly across servers without considering their current load or capacity.
+**Related Terms:** Load Balancer, Weighted Load Balancing, Scheduling, DNS
 
 ### Ruby
 
@@ -1777,6 +1909,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A cloud-based platform for IT service management (ITSM), IT operations management, and business process automation. ServiceNow provides workflow automation, incident management, change management, and a low-code platform for building enterprise applications.
 **Related Terms:** ITSM, Salesforce, Enterprise, Automation, Ticketing
 
+### SEO (Search Engine Optimization)
+
+**Category:** Web / Marketing
+**Description:** The practice of optimizing websites to improve visibility and ranking in search engine results pages (SERPs). SEO encompasses technical optimization (site speed, mobile-friendliness, structured data), content strategy (keywords, quality), and off-page factors (backlinks, domain authority). Core techniques include optimizing meta tags, improving Core Web Vitals, and creating quality content.
+**Related Terms:** Robots.txt, Core Web Vitals, SSR, Sitemap, Analytics
+
 ### Sharding
 
 **Category:** Database / Scalability
@@ -1818,6 +1956,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Communication / Tools
 **Description:** A team collaboration platform providing channels, direct messaging, file sharing, and integrations with development tools. Slack enables real-time communication, threaded conversations, and searchable message history for distributed teams.
 **Related Terms:** Microsoft Teams, Discord, Collaboration Tools
+
+### Software
+
+**Category:** Computing / Foundational Concept
+**Description:** Programs, applications, and operating systems that run on computer hardware, consisting of instructions that tell the computer what to do. Software is categorized into system software (operating systems, drivers), application software (user programs), and middleware. Unlike hardware, software is intangible and can be modified through updates.
+**Related Terms:** Hardware, Operating System, Application, Programming Language
 
 ### SOA (Service-Oriented Architecture)
 
@@ -2117,6 +2261,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** The automated process of extracting data from websites using software tools or scripts. Web scraping involves fetching web pages, parsing HTML/XML content, and extracting structured data for analysis, aggregation, or storage. Common tools include Scrapy, BeautifulSoup, and Puppeteer.
 **Related Terms:** Scrapy, Python, API, Data Extraction, BeautifulSoup
 
+### Weighted Load Balancing
+
+**Category:** System Design / Infrastructure
+**Description:** A load balancing strategy that distributes traffic across servers based on assigned weights reflecting their capacity or performance. Unlike round robin, weighted balancing sends more requests to higher-capacity servers, optimizing resource utilization when servers have different capabilities.
+**Related Terms:** Load Balancer, Round Robin, Horizontal Scaling, Infrastructure
+
+### Weighted Mean
+
+**Category:** Algorithm / Statistics
+**Description:** An average calculation where each value contributes proportionally based on its assigned weight or importance. Weighted means are used when some data points should have more influence on the result than others, common in grade calculations, financial indices, and machine learning algorithms like gradient descent.
+**Related Terms:** Random Sampling, Data Science, Machine Learning, Statistics, Algorithm
+
 ### White Hat
 
 **Category:** Security / Hacking
@@ -2171,6 +2327,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A general-purpose programming language designed for robustness, optimality, and maintainability. Zig emphasizes compile-time code execution, manual memory management with safety checks, and C interoperability, positioning itself as a modern alternative to C.
 **Related Terms:** Rust, C, Systems Programming
 
+### Zoho
+
+**Category:** Platform / Business Software
+**Description:** A suite of cloud-based business applications offering CRM, project management, accounting, HR, and productivity tools. Zoho provides an integrated ecosystem for small to medium businesses as an alternative to enterprise solutions, with products including Zoho CRM, Zoho Projects, Zoho Books, and Zoho Workplace.
+**Related Terms:** CRM, ERP, SaaS, Salesforce, Business Software
+
 ---
 
 ## Contributing
@@ -2185,4 +2347,4 @@ To add new terms to this dictionary:
 
 ---
 
-*Last updated: December 04, 2025 00:26 PST (Asia/Manila)*
+*Last updated: December 04, 2025 00:35 PST (Asia/Manila)*
