@@ -257,11 +257,29 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A globally recognized standard providing guidelines and best practices for business analysis. BABOK defines knowledge areas including requirements elicitation, analysis, solution evaluation, and stakeholder collaboration, serving as a foundation for business analyst certifications.
 **Related Terms:** PMBOK, Project Management, Requirements Engineering, Business Analysis
 
+### Bash
+
+**Category:** Shell / Command Line
+**Description:** Bourne Again SHell is a Unix shell and command language widely used as the default login shell for most Linux distributions and older versions of macOS. Bash provides scripting capabilities, command history, job control, shell functions, and aliases. It processes commands interactively or reads them from script files, making it essential for system administration, automation, and DevOps workflows.
+**Related Terms:** ZSH, Fish, Shell Script, PowerShell, Oh My Zsh, Linux
+
+### Bash Script
+
+**Category:** Scripting / Automation
+**Description:** A text file containing a series of Bash commands that are executed sequentially as a program. Bash scripts automate repetitive tasks, system administration, deployment processes, and complex workflows. They support variables, conditionals, loops, functions, and can interact with system utilities, files, and other programs.
+**Related Terms:** Bash, Shell Script, PowerShell, Automation, DevOps, CI/CD
+
 ### BASE (Basically Available, Soft state, Eventually consistent)
 
 **Category:** Database / Distributed Systems
 **Description:** A database design philosophy that prioritizes availability and partition tolerance over immediate consistency, contrasting with ACID properties. BASE systems accept eventual consistency, allowing temporary inconsistencies that resolve over time. Common in NoSQL databases and distributed systems where high availability and horizontal scaling are critical.
 **Related Terms:** ACID, NoSQL, CAP Theorem, Eventual Consistency, Distributed Systems
+
+### bat
+
+**Category:** CLI Tools / Utilities
+**Description:** A modern replacement for the Unix cat command with syntax highlighting, Git integration, and automatic paging. bat displays file contents with line numbers, language-specific syntax highlighting, and shows Git modifications in the margin. It improves code readability in the terminal and integrates well with other CLI tools through piping.
+**Related Terms:** cat, ripgrep, fzf, CLI, Terminal, Developer Tools
 
 ### BCNF (Boyce-Codd Normal Form)
 
@@ -286,6 +304,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Data / Technology
 **Description:** Extremely large datasets that cannot be processed using traditional data processing methods due to their volume, velocity, and variety (the 3 Vs). Big data technologies like Hadoop, Spark, and cloud-based solutions enable organizations to analyze massive amounts of structured and unstructured data for insights.
 **Related Terms:** Data Lake, Data Warehouse, Data Science, Analytics, Machine Learning
+
+### btop
+
+**Category:** CLI Tools / System Monitoring
+**Description:** A modern, resource-friendly terminal-based system monitor written in C++. btop displays CPU, memory, disk, network, and process usage with a customizable interface featuring graphs, meters, and detailed statistics. It is a feature-rich alternative to htop and top, offering themes, mouse support, and filtering capabilities for efficient system monitoring.
+**Related Terms:** htop, top, CLI, Terminal, System Administration, Linux
+
+### Bug
+
+**Category:** Software Engineering / QA
+**Description:** A defect, flaw, or error in software that causes it to behave unexpectedly or produce incorrect results. Bugs can range from minor visual glitches to critical security vulnerabilities or system crashes. They arise from coding mistakes, logic errors, integration issues, or misunderstood requirements. The process of finding and fixing bugs is called debugging. Term origin is attributed to Grace Hopper, who found an actual moth causing issues in a computer.
+**Related Terms:** Debugging, QA, Testing, Hotfix, Technical Debt, Regression Testing
 
 ### Behavioral Design Patterns
 
@@ -386,6 +416,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** System Design
 **Description:** A principle stating that a distributed system can only guarantee two of three properties: Consistency (all nodes see the same data), Availability (every request receives a response), and Partition tolerance (the system continues operating despite network failures).
 **Related Terms:** Stateless vs Stateful, Event-Driven Architecture
+
+### Cardinality
+
+**Category:** Database / Data Modeling
+**Description:** The numerical relationship between entities in a database model, describing how many instances of one entity relate to instances of another. Common cardinality types include one-to-one (1:1), one-to-many (1:N), and many-to-many (M:N). Cardinality also refers to the uniqueness of data values in a column—high cardinality means mostly unique values (like email addresses), low cardinality means few distinct values (like boolean flags). Understanding cardinality is essential for database design, indexing strategies, and query optimization.
+**Related Terms:** ERD, Database Relationships, Foreign Key, Index, Normalization, Schema
 
 ### Cascade (Database)
 
@@ -494,6 +530,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Database / Transaction
 **Description:** A database operation that permanently saves all changes made during the current transaction. Once committed, changes are durable and visible to other transactions. Commit is part of ACID properties (Atomicity, Consistency, Isolation, Durability) and works in conjunction with rollback for transaction control.
 **Related Terms:** Rollback, Transaction, ACID, Database, Data Integrity
+
+### Composer
+
+**Category:** Package Manager / PHP
+**Description:** The dependency manager for PHP that handles project libraries and autoloading. Composer allows developers to declare dependencies in a composer.json file, automatically downloads and installs them from Packagist (the main repository), manages version constraints, and generates autoload files. It revolutionized PHP development by enabling modular, maintainable codebases and is essential for modern PHP frameworks like Laravel and Symfony.
+**Related Terms:** PHP, Packagist, Laravel, NPM, Dependency Management, PSR
 
 ### Compliance
 
@@ -627,6 +669,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A popular web-based control panel for managing web hosting accounts and servers. cPanel provides a graphical interface for managing domains, email accounts, databases, file management, SSL certificates, and server configurations, making hosting management accessible to non-technical users.
 **Related Terms:** Web Hosting, DNS, VPS, Linux, Apache
 
+### cp
+
+**Category:** CLI Tools / Unix Commands
+**Description:** A fundamental Unix/Linux command for copying files and directories. The cp command can duplicate single files, multiple files, or entire directory trees (with -r flag), preserving or modifying permissions, timestamps, and ownership. It's one of the most frequently used commands for file system operations in shell scripting and system administration.
+**Related Terms:** Bash, Linux, CLI, File System, Unix, mv, rm
+
+### curl
+
+**Category:** CLI Tools / Networking
+**Description:** A command-line tool and library for transferring data using various network protocols including HTTP, HTTPS, FTP, and more. curl is invaluable for testing APIs, downloading files, debugging network issues, and automating HTTP requests in scripts. It supports custom headers, authentication, cookies, and can output response details for troubleshooting.
+**Related Terms:** HTTPie, API, REST API, Bash, CLI, wget, Postman
+
 ### Cypress
 
 **Category:** Testing / Tools
@@ -672,6 +726,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Data / Infrastructure
 **Description:** A centralized repository optimized for analysis and reporting of structured data from multiple sources. Data warehouses use schemas to organize data for business intelligence, enabling fast queries on historical data through techniques like OLAP and dimensional modeling.
 **Related Terms:** Data Lake, Big Data, ETL, Analytics, SQL
+
+### Database Relationships
+
+**Category:** Database / Data Modeling
+**Description:** The logical connections between tables in a relational database that define how data in different tables relate to each other. The three primary types are: **One-to-One (1:1)** where each record in one table relates to exactly one record in another (e.g., user and profile); **One-to-Many (1:N)** where one record relates to multiple records in another table (e.g., customer and orders); and **Many-to-Many (M:N)** where multiple records in one table relate to multiple records in another, typically implemented through a junction table (e.g., students and courses). Proper relationship design is fundamental to database normalization and data integrity.
+**Related Terms:** Cardinality, ERD, Foreign Key, Primary Key, Normalization, Schema, Junction Table
 
 ### DBMS (Database Management System)
 
@@ -798,6 +858,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Database / SQL
 **Description:** A subset of SQL commands used to manipulate data within database tables. DML includes INSERT (add new records), UPDATE (modify existing records), DELETE (remove records), and SELECT (retrieve data). Unlike DDL, DML operations affect the data itself rather than the schema structure.
 **Related Terms:** DDL, DQL, DCL, SQL, CRUD, Database
+
+### Docker Compose
+
+**Category:** DevOps / Container Orchestration
+**Description:** A tool for defining and running multi-container Docker applications using a YAML configuration file (docker-compose.yml). Docker Compose allows developers to configure services, networks, and volumes in a single file, then start all services with one command. It simplifies local development environments and testing by orchestrating interdependent containers (e.g., app server, database, cache) together.
+**Related Terms:** Docker Image, Dockerfile, Containerization, Kubernetes, YAML, DevOps
+
+### Dockerfile
+
+**Category:** DevOps / Containerization
+**Description:** A text file containing instructions for building a Docker image. Dockerfiles specify the base image, dependencies, environment variables, file copies, and commands to run, enabling reproducible and automated container image creation. Common instructions include FROM, RUN, COPY, WORKDIR, EXPOSE, and CMD. Dockerfiles are fundamental to containerized application deployment and CI/CD pipelines.
+**Related Terms:** Docker Image, Docker Compose, Containerization, CI/CD, DevOps
 
 ### Docker Image
 
@@ -1017,6 +1089,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A principle where the first element added to a collection is the first one to be removed, like a queue at a store. FIFO is the fundamental behavior of queue data structures and is used in scheduling algorithms, buffer management, cache eviction policies, and message queues. The opposite of LIFO (Last In, First Out).
 **Related Terms:** Queue, Cache Eviction, Data Structure, LIFO, TTL
 
+### Fish
+
+**Category:** Shell / Command Line
+**Description:** Friendly Interactive SHell is a modern Unix shell focused on user-friendliness with features like syntax highlighting, autosuggestions based on history, tab completions, and web-based configuration. Fish provides these features out of the box without complex configuration, making it beginner-friendly while remaining powerful for advanced users. Unlike Bash and ZSH, Fish is not POSIX-compliant by design.
+**Related Terms:** Bash, ZSH, Oh My Zsh, Shell, Terminal, CLI
+
 ### Fidelity (High-Fidelity / Low-Fidelity)
 
 **Category:** Design / UX
@@ -1058,6 +1136,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Backend / PHP Runtime
 **Description:** A modern PHP application server written in Go, providing built-in support for HTTP/2, HTTP/3, automatic HTTPS, and early hints. FrankenPHP can run as a standalone server or embed PHP into any Go application, offering significant performance improvements over traditional PHP-FPM setups.
 **Related Terms:** Laravel Octane, PHP, Web Server, Performance
+
+### Functional Requirements
+
+**Category:** Software Engineering / Requirements
+**Description:** Specifications that define what a system should do—the specific behaviors, features, and functions that must be implemented. Functional requirements describe actions the system must perform, such as "users can create accounts," "the system generates reports," or "payments are processed via credit card." They are typically documented in user stories, use cases, or requirement specifications and form the basis for development and acceptance testing.
+**Related Terms:** Non-functional Requirements, User Story, Use Case, BDD, Acceptance Testing, SDLC
+
+### fzf
+
+**Category:** CLI Tools / Utilities
+**Description:** A general-purpose command-line fuzzy finder written in Go that can be used with any list of items—files, command history, processes, git branches, and more. fzf provides instant fuzzy matching with a responsive interface, integrating seamlessly with shells (Bash, ZSH, Fish) to enhance productivity through quick file navigation, history search, and directory jumping.
+**Related Terms:** bat, ripgrep, CLI, Terminal, Bash, ZSH, Developer Tools
 
 ### Functional Programming
 
@@ -1205,6 +1295,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A **hash** is a fixed-size value computed from data using a hash function. A **hash table** is a data structure that maps keys to values using hashing, providing average O(1) time complexity for insertions, deletions, and lookups.
 **Related Terms:** Data Structure, Time Complexity
 
+### Headless CMS
+
+**Category:** CMS / Architecture
+**Description:** A content management system that provides content through APIs (REST or GraphQL) without a built-in frontend presentation layer. Unlike traditional CMS platforms, headless CMS separates content management (back-end) from content delivery (front-end), enabling developers to use any technology to display content across multiple channels (websites, mobile apps, IoT devices). Examples include Strapi, Contentful, Sanity, and Directus.
+**Related Terms:** CMS, REST API, GraphQL, JAMstack, WordPress, Drupal
+
 ### Hetzner
 
 **Category:** Cloud / Platform
@@ -1241,6 +1337,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A web hosting company offering shared hosting, VPS, cloud hosting, and domain registration services at budget-friendly prices. Hostinger is popular among beginners and small businesses for its user-friendly interface, hPanel control panel, and competitive pricing.
 **Related Terms:** VPS, Namecheap, Contabo, Web Hosting
 
+### htop
+
+**Category:** CLI Tools / System Monitoring
+**Description:** An interactive process viewer and system monitor for Unix systems, providing a more user-friendly alternative to the traditional top command. htop displays CPU, memory, and swap usage in colorful meters, allows vertical and horizontal scrolling of process lists, supports mouse interaction, and enables killing or renicing processes without entering their PIDs. It's essential for system administrators and developers debugging performance issues.
+**Related Terms:** btop, top, CLI, Terminal, Linux, System Administration
+
 ### Hook (React Hooks)
 
 **Category:** Frontend / React
@@ -1264,6 +1366,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Networking / Protocol
 **Description:** The foundation protocol for data communication on the World Wide Web, defining how messages are formatted and transmitted between clients and servers. HTTP is stateless and uses methods like GET, POST, PUT, and DELETE to interact with resources identified by URLs.
 **Related Terms:** HTTPS, REST API, Web Server, DNS, Networking
+
+### HTTPie
+
+**Category:** CLI Tools / Networking
+**Description:** A user-friendly command-line HTTP client designed for testing, debugging, and interacting with APIs. HTTPie provides intuitive syntax with colorized output, built-in JSON support, sessions, and plugins. Its simple command format (http GET example.com) makes it more accessible than curl for API development and testing while supporting all HTTP methods, authentication, and file uploads.
+**Related Terms:** curl, API, REST API, Postman, CLI, Developer Tools
 
 ### HTTPS (HTTP Secure)
 
@@ -1365,6 +1473,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A level of software testing where individual units or components are combined and tested as a group to verify their interactions work correctly. Integration tests detect interface defects, data flow issues, and communication problems between modules. Approaches include big-bang (test all at once), top-down, bottom-up, and sandwich testing. Integration tests sit between unit tests and end-to-end tests in the testing pyramid.
 **Related Terms:** Unit Testing, End-to-End Testing, Testing Pyramid, API Testing, QA
 
+### Intermittent
+
+**Category:** Software Engineering / Debugging
+**Description:** Describes issues or behaviors that occur irregularly and are difficult to reproduce consistently. Intermittent bugs (also called flaky bugs or heisenbugs) appear sporadically due to timing issues, race conditions, resource contention, or external dependencies. These are among the most challenging problems to debug because they cannot be reliably reproduced, often requiring extensive logging, monitoring, and statistical analysis to identify root causes.
+**Related Terms:** Race Condition, Debugging, Bug, Flaky Test, Concurrency, Heisenbug
+
 ### Ionic
 
 **Category:** Framework / Mobile
@@ -1452,6 +1566,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** CMS / Platform
 **Description:** An open-source content management system for publishing web content, built on PHP and MySQL. Joomla offers a middle ground between WordPress's simplicity and Drupal's complexity, providing extensive customization through templates and extensions for websites, online magazines, and corporate portals.
 **Related Terms:** WordPress, Drupal, PHP, CMS, Content Management
+
+### jq
+
+**Category:** CLI Tools / Data Processing
+**Description:** A lightweight and flexible command-line JSON processor, often described as "sed for JSON." jq allows parsing, filtering, mapping, and transforming JSON data using a powerful query language. It's invaluable for working with API responses, log files, and configuration data in shell scripts and pipelines, supporting operations like field extraction, filtering, sorting, and data restructuring.
+**Related Terms:** JSON, CLI, Bash, curl, API, Data Processing
 
 ### Jotai
 
@@ -1901,6 +2021,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An open-source Airtable alternative that turns any MySQL, PostgreSQL, SQL Server, SQLite, or MariaDB database into a smart spreadsheet interface. NocoDB provides REST APIs, webhooks, and automation without coding.
 **Related Terms:** Airtable, Database, Low-Code, API
 
+### Non-functional Requirements
+
+**Category:** Software Engineering / Requirements
+**Description:** Specifications that define how a system should perform rather than what it should do—the quality attributes and constraints of a system. Non-functional requirements (NFRs) include performance (response time, throughput), scalability (handling growth), reliability (uptime, fault tolerance), security (authentication, encryption), usability (accessibility, UX), maintainability (code quality, documentation), and compliance (regulatory requirements). NFRs are often referred to as "quality attributes" or "-ilities" and significantly impact architectural decisions.
+**Related Terms:** Functional Requirements, System Design, Scalability, Performance, Security, SDLC
+
 ### Normal Forms (1NF, 2NF, 3NF)
 
 **Category:** Database / Design
@@ -1970,6 +2096,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Platform / ERP
 **Description:** An open-source suite of business applications including CRM, e-commerce, accounting, inventory, project management, and manufacturing modules. Odoo provides a modular architecture allowing organizations to start with specific apps and expand, with both community and enterprise editions.
 **Related Terms:** ERP, CRM, SaaS, Business Applications
+
+### Oh My Zsh
+
+**Category:** Shell / Framework
+**Description:** A community-driven framework for managing ZSH configuration that comes bundled with thousands of helpful functions, plugins, and themes. Oh My Zsh simplifies shell customization with features like auto-updates, alias suggestions, syntax highlighting plugins, and Git integration. It transforms ZSH into a more powerful and user-friendly shell experience without requiring deep shell scripting knowledge.
+**Related Terms:** ZSH, Bash, Fish, Shell, Terminal, CLI, Git
 
 ### Observer Pattern
 
@@ -2089,6 +2221,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A set of security standards designed to ensure that all companies accepting, processing, storing, or transmitting credit card information maintain a secure environment. PCI DSS compliance requires implementing security controls, regular assessments, and documentation for protecting cardholder data.
 **Related Terms:** Compliance, Security, HIPAA, SOC 2, Encryption
 
+### Perl
+
+**Category:** Programming Language
+**Description:** A high-level, general-purpose scripting language known for its text processing capabilities and powerful regular expression support. Perl excels at system administration, web development (CGI era), network programming, and bioinformatics. Its motto "There's more than one way to do it" (TMTOWTDI) reflects its flexible, expressive syntax, though this can also lead to cryptic code.
+**Related Terms:** Python, Ruby, Regular Expression, Bash, Scripting, LAMP Stack
+
+### PHP
+
+**Category:** Programming Language
+**Description:** A server-side scripting language designed for web development but also used as a general-purpose language. PHP powers a significant portion of the web including WordPress, Laravel, and Drupal. It embeds directly in HTML, supports object-oriented and functional programming, and has evolved significantly with modern versions (7.x, 8.x) adding features like JIT compilation, attributes, and improved type systems.
+**Related Terms:** Laravel, Symfony, WordPress, Composer, LAMP Stack, FrankenPHP
+
 ### Phoenix
 
 **Category:** Framework / Backend
@@ -2137,11 +2281,29 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An open-source backend solution in a single executable file, providing a real-time database, authentication, file storage, and admin UI. PocketBase uses SQLite under the hood and can be extended with Go or JavaScript, ideal for prototyping and small to medium applications.
 **Related Terms:** Supabase, Firebase, Backend-as-a-Service, SQLite
 
+### Pointer
+
+**Category:** Programming / Foundational Concept
+**Description:** A variable that stores the memory address of another variable rather than a value directly. Pointers enable direct memory manipulation, dynamic memory allocation, efficient array handling, and data structure implementation (linked lists, trees). Languages like C and C++ use explicit pointers, while languages like Java and Python use references (implicit pointers) that hide memory address details. Understanding pointers is fundamental for systems programming, performance optimization, and memory debugging.
+**Related Terms:** Memory, Reference, Data Structure, C, C++, Null, Memory Leak
+
 ### PostHog
 
 **Category:** Analytics / Platform
 **Description:** An open-source product analytics platform providing event tracking, user analytics, feature flags, A/B testing, session recordings, and heatmaps. PostHog can be self-hosted or cloud-hosted, offering full data ownership and integration with development workflows.
 **Related Terms:** Analytics, Datadog, Feature Flags, Observability
+
+### Postman
+
+**Category:** API / Developer Tools
+**Description:** A popular platform for building, testing, and documenting APIs. Postman provides a graphical interface for creating HTTP requests, managing collections of endpoints, setting up environments, writing tests, and generating documentation. It supports collaboration through shared workspaces, API monitoring, mock servers, and automated testing in CI/CD pipelines, making it essential for API development workflows.
+**Related Terms:** curl, HTTPie, REST API, API Testing, OpenAPI, Swagger, Insomnia
+
+### PowerShell
+
+**Category:** Shell / Scripting
+**Description:** A cross-platform task automation solution from Microsoft consisting of a command-line shell, scripting language, and configuration management framework. PowerShell is built on .NET and uses cmdlets (specialized commands) that output objects rather than text, enabling powerful data manipulation. Originally Windows-only, PowerShell Core runs on Windows, macOS, and Linux, widely used for system administration, automation, and DevOps tasks.
+**Related Terms:** Bash, ZSH, CLI, Windows, Scripting, Automation, .NET
 
 ### Polyglot Persistence
 
@@ -2355,6 +2517,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** The process by which React (or similar frameworks) compares the new Virtual DOM with the previous one to determine the minimal set of changes needed to update the actual DOM. This algorithm optimizes rendering performance.
 **Related Terms:** Virtual DOM, DOM, Hydration
 
+### Recursion
+
+**Category:** Programming / Foundational Concept
+**Description:** A programming technique where a function calls itself to solve a problem by breaking it down into smaller, similar subproblems. Recursion requires a base case (termination condition) and a recursive case that moves toward the base case. While elegant for problems like tree traversal, factorials, and divide-and-conquer algorithms, recursion can cause stack overflow if not properly bounded and may be less efficient than iterative solutions due to function call overhead.
+**Related Terms:** Dynamic Programming, Memoization, Stack, Algorithm, DFS, Base Case
+
 ### Redis
 
 **Category:** System Design
@@ -2366,6 +2534,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Database / System Design
 **Description:** The intentional or unintentional duplication of data or system components. In databases, redundancy refers to storing the same data in multiple places, which can improve read performance through denormalization but increases storage costs and risks data inconsistency. In system design, redundancy provides fault tolerance by having backup components ready to take over if primary ones fail.
 **Related Terms:** Denormalization, Data Integrity, High Availability, Master-Slave Replication, Normalization
+
+### Redoc
+
+**Category:** API / Documentation
+**Description:** An open-source tool for generating beautiful, responsive, and interactive API documentation from OpenAPI (Swagger) specifications. Redoc provides a three-panel design with navigation, documentation content, and code samples. It supports server-side rendering, can be embedded as a React component, and produces clean, searchable documentation that's easy for developers to navigate.
+**Related Terms:** OpenAPI, Swagger, API Documentation, Scalar, Postman, REST API
+
+### Regular Expression
+
+**Category:** Programming / Foundational Concept
+**Description:** A sequence of characters defining a search pattern, used for string matching, validation, and text manipulation. Regular expressions (regex or regexp) provide powerful pattern matching capabilities for tasks like email validation, data extraction, and find-and-replace operations. While syntax varies slightly between languages, core concepts include quantifiers (*,+,?), character classes ([a-z]), anchors (^,$), and groups. Mastering regex is essential for text processing, log analysis, and data parsing.
+**Related Terms:** String, Pattern Matching, Perl, JavaScript, grep, Validation
 
 ### Regression Testing
 
@@ -2415,6 +2595,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A text file placed in a website's root directory that provides instructions to web crawlers about which pages or sections should or shouldn't be crawled and indexed. Robots.txt follows the Robots Exclusion Protocol and is essential for controlling search engine access, protecting private content, and managing crawl budget.
 **Related Terms:** SEO, Web Scraping, Sitemap, Search Engine, HTTP
 
+### ripgrep
+
+**Category:** CLI Tools / Search
+**Description:** A line-oriented search tool that recursively searches directories for a regex pattern, designed as a faster alternative to grep. ripgrep (rg) respects .gitignore rules by default, uses smart case sensitivity, and leverages parallel processing for exceptional speed. It supports many encodings, compressed files, and outputs results with context. ripgrep has become essential for developers searching large codebases.
+**Related Terms:** grep, fzf, bat, CLI, Regular Expression, Developer Tools
+
 ### Round Robin
 
 **Category:** Algorithm / System Design
@@ -2442,6 +2628,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Cloud / Service Model
 **Description:** A software distribution model where applications are hosted by a service provider and made available to customers over the internet. SaaS eliminates the need for local installation, with providers handling maintenance, updates, and infrastructure.
 **Related Terms:** PaaS, IaaS, Multi-tenancy, Cloud Computing
+
+### Scalar
+
+**Category:** API / Documentation
+**Description:** A modern, beautiful API documentation tool that generates interactive documentation from OpenAPI/Swagger specifications. Scalar provides a clean, customizable interface with dark mode, request testing, code samples in multiple languages, and markdown support. It can be embedded as a web component or used as a standalone application, offering a polished alternative to traditional Swagger UI.
+**Related Terms:** OpenAPI, Swagger, Redoc, API Documentation, Postman, REST API
 
 ### S3 (Simple Storage Service)
 
@@ -2873,6 +3065,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A high-performance build system for JavaScript and TypeScript monorepos. Turborepo provides intelligent caching, parallel execution, and incremental builds to dramatically speed up CI/CD pipelines and local development. It integrates with package managers like npm, yarn, and pnpm, and offers remote caching for team environments.
 **Related Terms:** Nx, Monorepo, npm, pnpm, Build Tool, CI/CD
 
+### Two Hardest Things in Programming
+
+**Category:** Software Engineering / Culture
+**Description:** A famous programming joke attributed to Phil Karlton: "There are only two hard things in Computer Science: cache invalidation and naming things." Often extended with variations like "...and off-by-one errors." This quip highlights genuine challenges developers face: cache invalidation requires complex strategies to ensure data consistency, while naming (variables, functions, classes) significantly impacts code readability and maintainability. The joke resonates because these seemingly simple tasks create disproportionate debugging and design challenges.
+**Related Terms:** Cache Invalidation, Technical Debt, Code Smells, Best Practice, DRY, KISS
+
 ### Turso
 
 **Category:** Database / Edge
@@ -3113,6 +3311,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A small, fast, and scalable state management library for React. Zustand offers a minimalist API using hooks, avoiding the boilerplate of Redux while providing features like middleware support, devtools integration, and automatic re-render optimization. Its simplicity and TypeScript support make it popular for projects of all sizes.
 **Related Terms:** Redux, Context API, React, State Management, MobX, Jotai
 
+### ZSH
+
+**Category:** Shell / Command Line
+**Description:** Z Shell is an extended Unix shell with powerful features including advanced tab completion, spelling correction, shared command history, themeable prompts, and loadable modules. ZSH combines features from Bash, ksh, and tcsh while adding its own improvements. It's the default shell on macOS and is highly customizable through frameworks like Oh My Zsh and Prezto, making it popular among developers for its productivity enhancements.
+**Related Terms:** Bash, Fish, Oh My Zsh, Shell, Terminal, CLI, Linux, macOS
+
 ---
 
 ## Contributing
@@ -3127,4 +3331,4 @@ To add new terms to this dictionary:
 
 ---
 
-*Last updated: December 04, 2025 03:45 PST (Asia/Manila)*
+*Last updated: December 04, 2025 11:30 PST (Asia/Manila)*
