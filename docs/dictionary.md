@@ -115,6 +115,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A comprehensive platform for creating, publishing, securing, and managing APIs throughout their lifecycle. API Managers provide developer portals, analytics, monetization, versioning, and governance capabilities beyond basic API Gateway functionality.
 **Related Terms:** API Gateway, MuleSoft, OpenAPI, Rate Limiting
 
+### API Platform
+
+**Category:** Framework / Backend
+**Description:** A PHP framework for building modern API-first projects, providing automatic REST and GraphQL API generation from PHP classes. API Platform handles serialization, validation, pagination, filtering, and documentation (OpenAPI/Swagger) out of the box, integrating seamlessly with Symfony and Doctrine.
+**Related Terms:** Symfony, REST API, GraphQL, OpenAPI, PHP
+
 ### Authentication
 
 **Category:** Security / Identity
@@ -387,6 +393,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A technique that breaks JavaScript bundles into smaller chunks loaded on demand. Code splitting reduces initial load time by only loading necessary code for the current page, with additional code loaded as needed.
 **Related Terms:** Lazy Loading, Webpack, Performance Optimization
 
+### CodeIgniter
+
+**Category:** Framework / Backend
+**Description:** A lightweight PHP framework known for its small footprint and straightforward configuration. CodeIgniter follows the MVC pattern and emphasizes simplicity and performance, making it suitable for developers who prefer minimal configuration and a gentle learning curve.
+**Related Terms:** Laravel, PHP, MVC, Backend Framework
+
+### Codex
+
+**Category:** AI / Development Tool
+**Description:** An AI model developed by OpenAI that powers GitHub Copilot, trained on publicly available code to understand and generate programming code. Codex can translate natural language to code, explain existing code, and assist with debugging across multiple programming languages.
+**Related Terms:** GitHub Copilot, AI, LLM, Code Generation, OpenAI
+
 ### Compliance
 
 **Category:** Security / Governance
@@ -411,6 +429,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A German web hosting and cloud services provider offering VPS, dedicated servers, and cloud solutions at competitive prices. Contabo is known for high-resource allocations at budget-friendly rates, serving customers who prioritize value over premium support features.
 **Related Terms:** VPS, Hetzner, DigitalOcean, Hostinger, Cloud Computing
 
+### CouchDB
+
+**Category:** Database / NoSQL
+**Description:** An open-source document-oriented NoSQL database that uses JSON for documents and JavaScript for queries. CouchDB emphasizes ease of use, reliability, and seamless multi-master replication, making it ideal for offline-first applications and distributed systems that need to sync data across devices.
+**Related Terms:** MongoDB, NoSQL, JSON, Database, PouchDB
+
 ### Cryptocurrency
 
 **Category:** Technology / Finance
@@ -434,6 +458,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** DevOps / Cloud
 **Description:** A lightweight virtualization method that packages an application and its dependencies into a container. Containers share the host OS kernel, making them faster and more efficient than traditional virtual machines.
 **Related Terms:** Docker Image, Kubernetes Pod, CI/CD
+
+### Context API
+
+**Category:** Frontend / State Management
+**Description:** A React feature that enables passing data through the component tree without manually passing props at every level. Context API provides a way to share values like themes, user authentication, or language preferences globally, reducing prop drilling in deeply nested components.
+**Related Terms:** React, State Management, Zustand, Redux, Props
 
 ### CPU-bound vs I/O-bound
 
@@ -637,6 +667,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A software development principle that aims to reduce repetition of code. Every piece of knowledge should have a single, unambiguous representation in the system. DRY improves maintainability and reduces bugs.
 **Related Terms:** KISS, YAGNI, SOLID Principles
 
+### Drupal
+
+**Category:** CMS / Platform
+**Description:** An open-source content management system written in PHP, known for its flexibility and extensibility in building complex websites and applications. Drupal provides robust content modeling, user permissions, multilingual support, and a powerful module ecosystem, making it popular for enterprise websites and government portals.
+**Related Terms:** WordPress, Joomla, PHP, CMS, Content Management
+
 ### DuckDB
 
 **Category:** Database / Analytics
@@ -671,6 +707,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A distributed computing paradigm that brings computation and data storage closer to end users or data sources. Edge computing reduces latency, bandwidth usage, and dependency on centralized cloud servers by processing data at the network edge.
 **Related Terms:** CDN, Latency, Cloud Computing
 
+### ELK Stack
+
+**Category:** DevOps / Observability
+**Description:** A collection of three open-source tools—Elasticsearch (search and analytics), Logstash (data processing), and Kibana (visualization)—used for centralized logging and log analysis. The ELK Stack enables searching, analyzing, and visualizing log data in real time, commonly used for application monitoring and troubleshooting.
+**Related Terms:** Elasticsearch, Logging, Observability, Monitoring, Datadog
+
+### Eloquent
+
+**Category:** ORM / PHP
+**Description:** Laravel's built-in Object-Relational Mapping (ORM) that provides an elegant ActiveRecord implementation for database operations. Eloquent allows developers to interact with databases using PHP syntax instead of SQL, supporting relationships, eager loading, query scopes, and model events.
+**Related Terms:** Laravel, ORM, Database, PHP, Entity Framework
+
 ### Elixir
 
 **Category:** Programming Language
@@ -682,6 +730,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Software Engineering
 **Description:** A data type consisting of a set of named constants that represent distinct values. Enums improve code readability, type safety, and maintainability by replacing magic strings and numbers with meaningful identifiers. They're essential for defining fixed sets of options.
 **Related Terms:** Single Source of Truth, Code Smells, Type Safety
+
+### Entity Framework
+
+**Category:** ORM / .NET
+**Description:** Microsoft's object-relational mapping framework for .NET applications that enables developers to work with databases using .NET objects. Entity Framework supports LINQ queries, change tracking, migrations, and both database-first and code-first approaches, abstracting database interactions into intuitive C# code.
+**Related Terms:** .NET, C#, ORM, Database, Eloquent
 
 ### Ephemeral Environments
 
@@ -883,6 +937,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A branch of mathematics studying graphs, which are structures consisting of vertices (nodes) connected by edges (links). Graph theory underpins many algorithms and data structures in computer science, including social networks, routing algorithms, dependency resolution, and database relationships.
 **Related Terms:** BFS, DFS, Dijkstra's Algorithm, A* Search Algorithm, Data Structure
 
+### gRPC
+
+**Category:** API / Protocol
+**Description:** A high-performance, open-source remote procedure call (RPC) framework developed by Google. gRPC uses Protocol Buffers for serialization and HTTP/2 for transport, enabling efficient binary communication, bidirectional streaming, and automatic code generation across multiple languages. Ideal for microservices communication.
+**Related Terms:** REST API, Protocol Buffers, Microservices, HTTP/2, API
+
 ### Greedy Algorithm
 
 **Category:** Algorithm / Computer Science
@@ -922,6 +982,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Algorithm / Computer Science
 **Description:** A problem-solving approach that uses practical methods and shortcuts to produce good-enough solutions when finding optimal solutions is impractical. Heuristics sacrifice completeness or accuracy for speed, commonly used in search algorithms, AI, and optimization problems where exhaustive search is computationally expensive.
 **Related Terms:** Algorithm, Greedy Algorithm, Metaheuristics, Machine Learning
+
+### HIPAA (Health Insurance Portability and Accountability Act)
+
+**Category:** Compliance / Healthcare
+**Description:** A US federal law establishing standards for protecting sensitive patient health information. HIPAA requires healthcare providers, insurers, and their business associates to implement physical, administrative, and technical safeguards for electronic protected health information (ePHI), with significant penalties for non-compliance.
+**Related Terms:** Compliance, Security, GDPR, SOC 2, Privacy
+
+### Hono.js
+
+**Category:** Framework / Backend
+**Description:** A small, ultrafast web framework for the edge, serverless environments, and Node.js. Hono.js provides Express-like routing with exceptional performance, TypeScript support, and middleware compatibility, designed to run on Cloudflare Workers, Deno, Bun, and other modern runtimes.
+**Related Terms:** Express.js, Edge Computing, Serverless, TypeScript, Bun
 
 ### Hostinger
 
@@ -999,6 +1071,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A library that allows building single-page applications using classic server-side routing and controllers without a full client-side framework API. Inertia.js bridges the gap between server-side frameworks (Laravel, Rails) and modern JavaScript frameworks (Vue, React, Svelte), providing SPA-like experiences without building an API.
 **Related Terms:** Laravel, Vue.js, React, Livewire, SPA
 
+### IndexedDB
+
+**Category:** Web API / Storage
+**Description:** A low-level browser API for storing significant amounts of structured data, including files and blobs. IndexedDB is a transactional database system using key-value pairs, enabling offline web applications and local data caching with asynchronous access and indexing capabilities.
+**Related Terms:** Local Storage, Service Workers, PWA, Browser Storage, Offline-First
+
 ### Information Architecture
 
 **Category:** UX / Design
@@ -1035,9 +1113,21 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A rendering strategy that allows static pages to be updated incrementally after the initial build. Pages are regenerated in the background when requested, combining the benefits of static generation with dynamic content updates.
 **Related Terms:** SSR, CSR, SSG
 
+### ISO 27001
+
+**Category:** Compliance / Security
+**Description:** An international standard for information security management systems (ISMS) published by ISO and IEC. ISO 27001 provides a framework for establishing, implementing, maintaining, and continually improving information security, covering risk assessment, security controls, and organizational policies. Certification demonstrates commitment to security best practices.
+**Related Terms:** Compliance, Security, SOC 2, GDPR, Risk Management
+
 ---
 
 ## J
+
+### Java
+
+**Category:** Programming Language
+**Description:** A class-based, object-oriented programming language designed for portability across platforms through its "write once, run anywhere" philosophy. Java runs on the JVM (Java Virtual Machine) and is widely used for enterprise applications, Android development, and backend services. Known for its robust ecosystem, strong typing, and extensive libraries.
+**Related Terms:** Spring, Kotlin, JVM, Enterprise, Backend Development
 
 ### JavaScript
 
@@ -1063,6 +1153,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An open-source Java application designed for load testing and measuring performance of web applications, APIs, databases, and other services. JMeter simulates heavy loads to analyze overall performance under various conditions, supporting HTTP, JDBC, FTP, and other protocols.
 **Related Terms:** Load Testing, K6, Performance Testing, CI/CD
 
+### Joomla
+
+**Category:** CMS / Platform
+**Description:** An open-source content management system for publishing web content, built on PHP and MySQL. Joomla offers a middle ground between WordPress's simplicity and Drupal's complexity, providing extensive customization through templates and extensions for websites, online magazines, and corporate portals.
+**Related Terms:** WordPress, Drupal, PHP, CMS, Content Management
+
 ### Jotai
 
 **Category:** State Management / Frontend
@@ -1074,6 +1170,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Library / Frontend
 **Description:** A fast, small JavaScript library that simplifies HTML document traversal, event handling, animation, and Ajax interactions. While less prominent with modern frameworks, jQuery remains widely used in legacy systems and provides cross-browser compatibility for DOM manipulation.
 **Related Terms:** JavaScript, DOM, Ajax, Frontend Development, Alpine.js
+
+### JSON (JavaScript Object Notation)
+
+**Category:** Data Format / Standard
+**Description:** A lightweight, text-based data interchange format that is easy for humans to read and write and easy for machines to parse and generate. JSON uses key-value pairs and arrays to represent structured data, serving as the de facto standard for web APIs and configuration files.
+**Related Terms:** XML, YAML, REST API, API, Data Serialization
 
 ### JWT (JSON Web Token)
 
@@ -1154,6 +1256,24 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Framework / Backend Performance
 **Description:** A Laravel package that supercharges application performance by serving requests using high-powered application servers like Swoole, RoadRunner, or FrankenPHP. Octane boots the application once and keeps it in memory, dramatically reducing response times and increasing throughput.
 **Related Terms:** Laravel, FrankenPHP, Swoole, Performance, PHP
+
+### Laravel Filament
+
+**Category:** Framework / Admin Panel
+**Description:** A collection of full-stack components for accelerated Laravel development, providing a beautiful admin panel, form builder, table builder, and notification system. Filament uses TALL stack (Tailwind, Alpine.js, Laravel, Livewire) and emphasizes developer experience with minimal configuration.
+**Related Terms:** Laravel, Laravel Nova, Livewire, Admin Panel, TALL Stack
+
+### Laravel Forge
+
+**Category:** Platform / DevOps
+**Description:** A server management and deployment platform specifically designed for Laravel applications. Forge provisions and manages servers on cloud providers like DigitalOcean, AWS, and Vultr, handling server configuration, SSL certificates, deployments, and database management without requiring DevOps expertise.
+**Related Terms:** Laravel, DevOps, Deployment, Server Management, Cloud
+
+### Laravel Nova
+
+**Category:** Framework / Admin Panel
+**Description:** A premium administration panel for Laravel applications providing beautifully designed dashboards, resource management, custom tools, and metrics. Nova enables rapid development of admin interfaces with features like actions, filters, lenses, and custom fields.
+**Related Terms:** Laravel, Laravel Filament, Admin Panel, Dashboard
 
 ### Largest Contentful Paint (LCP)
 
@@ -1339,6 +1459,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** The practice of collecting, analyzing, and displaying data about system performance and health. Monitoring helps detect issues, trigger alerts, and maintain service level objectives (SLOs).
 **Related Terms:** Observability, Logs / Metrics / Traces
 
+### MongoDB
+
+**Category:** Database / NoSQL
+**Description:** A popular document-oriented NoSQL database that stores data in flexible, JSON-like documents. MongoDB offers horizontal scaling, high availability through replica sets, and powerful query capabilities. It's widely used for applications requiring flexible schemas, real-time analytics, and content management.
+**Related Terms:** NoSQL, Database, CouchDB, Mongoose, BSON
+
 ### MVC (Model-View-Controller)
 
 **Category:** Design Pattern / Architecture
@@ -1415,6 +1541,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** The practice of connecting computers and devices to share resources and communicate. Networking encompasses protocols (TCP/IP, HTTP), hardware (routers, switches), topologies, and concepts like DNS, firewalls, load balancing, and VPNs that enable modern distributed systems and internet connectivity.
 **Related Terms:** DNS, HTTP, VPN, Port Forwarding, Load Balancer
 
+### NGINX
+
+**Category:** Web Server / Infrastructure
+**Description:** A high-performance web server, reverse proxy, and load balancer known for its stability, rich feature set, and low resource consumption. NGINX handles static content, SSL termination, caching, and proxying to application servers, commonly used as the front-facing server in production environments.
+**Related Terms:** Apache, Reverse Proxy, Load Balancer, Traefik, Web Server
+
 ### Next.js
 
 **Category:** Framework / Frontend
@@ -1456,6 +1588,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Framework / Frontend
 **Description:** A Vue.js framework for building server-rendered, static, or single-page applications. Nuxt provides automatic routing, middleware, modules ecosystem, and various rendering modes (SSR, SSG, SPA) for Vue applications.
 **Related Terms:** Vue.js, Next.js, SSR, SSG
+
+### Nx
+
+**Category:** Build System / Monorepo
+**Description:** A smart, extensible build framework for managing monorepos and scaling development across multiple projects. Nx provides dependency graph visualization, incremental builds, distributed task execution, and first-class support for various frameworks (React, Angular, Node.js). Developed by Nrwl, it optimizes CI/CD pipelines for large codebases.
+**Related Terms:** Turborepo, Monorepo, CI/CD, Build Tools, Lerna
 
 ---
 
@@ -1509,6 +1647,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A UI pattern that immediately reflects changes in the interface before server confirmation, assuming the operation will succeed. Optimistic updates provide instant feedback and better perceived performance, with rollback mechanisms if the server request fails.
 **Related Terms:** Pessimistic Update, State Management, UX, API
 
+### ORM (Object-Relational Mapping)
+
+**Category:** Database / Software Pattern
+**Description:** A programming technique that converts data between incompatible type systems using object-oriented programming languages. ORMs abstract database interactions into object manipulation, handling SQL generation, relationship mapping, and query building. Popular ORMs include Eloquent (Laravel), Entity Framework (.NET), Prisma, and Hibernate (Java).
+**Related Terms:** Database, Eloquent, Entity Framework, Prisma, SQL
+
+### oRPC
+
+**Category:** API / Framework
+**Description:** A TypeScript-first RPC framework designed for building type-safe APIs with end-to-end type inference. oRPC provides a simple, lightweight alternative to tRPC with minimal runtime overhead, automatic type generation, and seamless integration with modern TypeScript frameworks.
+**Related Terms:** tRPC, gRPC, TypeScript, API, RPC
+
 ### OWASP (Open Web Application Security Project)
 
 **Category:** Security / Standards
@@ -1555,6 +1705,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A modern PHP testing framework with an elegant, expressive syntax inspired by Jest and Ruby's RSpec. Pest provides a minimal, focused API for writing tests, built on top of PHPUnit, with features like parallel testing, coverage reports, and architectural testing.
 **Related Terms:** PHPUnit, Testing, Laravel, TDD
 
+### PCI DSS (Payment Card Industry Data Security Standard)
+
+**Category:** Compliance / Security
+**Description:** A set of security standards designed to ensure that all companies accepting, processing, storing, or transmitting credit card information maintain a secure environment. PCI DSS compliance requires implementing security controls, regular assessments, and documentation for protecting cardholder data.
+**Related Terms:** Compliance, Security, HIPAA, SOC 2, Encryption
+
 ### Phoenix
 
 **Category:** Framework / Backend
@@ -1597,6 +1753,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A fast, disk-efficient package manager for JavaScript that uses a content-addressable storage system. PNPM creates a single store for all packages and uses hard links to save disk space while maintaining strict dependency isolation.
 **Related Terms:** NPM, Yarn, Bun, Node.js
 
+### PocketBase
+
+**Category:** Backend / Database
+**Description:** An open-source backend solution in a single executable file, providing a real-time database, authentication, file storage, and admin UI. PocketBase uses SQLite under the hood and can be extended with Go or JavaScript, ideal for prototyping and small to medium applications.
+**Related Terms:** Supabase, Firebase, Backend-as-a-Service, SQLite
+
 ### PostHog
 
 **Category:** Analytics / Platform
@@ -1638,6 +1800,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** UX / Design
 **Description:** The process of creating interactive or static models of a product to test concepts, gather feedback, and validate designs before full development. Prototypes range from low-fidelity wireframes to high-fidelity interactive mockups.
 **Related Terms:** Wireframing, User Journey Mapping, UX Design
+
+### Proxy
+
+**Category:** Networking / Design Pattern
+**Description:** An intermediary that sits between clients and servers, forwarding requests and responses. Proxies serve various purposes: forward proxies protect client identity, reverse proxies protect servers and distribute load, and the proxy design pattern provides a surrogate for controlling access to objects.
+**Related Terms:** Reverse Proxy, NGINX, Load Balancer, API Gateway
 
 ### PSR (PHP Standards Recommendations)
 
@@ -1903,6 +2071,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An infrastructure layer that handles service-to-service communication in microservices architectures. Service meshes provide observability, security, traffic management, and resilience features like circuit breakers and retries without changing application code.
 **Related Terms:** Microservices, API Gateway, Kubernetes, Istio
 
+### Service Workers
+
+**Category:** Web API / PWA
+**Description:** A JavaScript API that runs in the background, separate from web pages, enabling features like offline support, push notifications, and background sync. Service workers act as network proxies, intercepting requests and caching resources to enable progressive web app functionality.
+**Related Terms:** PWA, IndexedDB, Offline-First, Caching, Web API
+
 ### ServiceNow
 
 **Category:** Platform / ITSM
@@ -1926,6 +2100,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** UI Library / Frontend
 **Description:** A collection of reusable, accessible UI components built with Radix UI primitives and styled with Tailwind CSS. Unlike traditional component libraries, ShadCN UI provides copy-pasteable component code that developers own and customize, promoting full control over styling and behavior without external dependencies.
 **Related Terms:** Tailwind CSS, Radix UI, React, Component Library, Accessibility
+
+### SharePoint
+
+**Category:** Platform / Enterprise
+**Description:** Microsoft's web-based collaboration platform integrated with Microsoft 365, providing document management, intranet sites, workflow automation, and team collaboration features. SharePoint enables organizations to create internal portals, manage content, and build custom business applications with Power Platform integration.
+**Related Terms:** Microsoft Teams, Enterprise, CMS, Collaboration, OneDrive
 
 ### Single Page Application (SPA)
 
@@ -1969,6 +2149,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An architectural pattern that structures applications as a collection of loosely coupled services communicating over a network. SOA predates microservices and typically uses enterprise service buses (ESBs) and standardized protocols like SOAP.
 **Related Terms:** Microservices, Web Services, Enterprise Architecture
 
+### SOAP (Simple Object Access Protocol)
+
+**Category:** API / Protocol
+**Description:** A messaging protocol for exchanging structured information in web services using XML. SOAP provides a standardized way to encode messages, define operations, and handle errors, with built-in support for security (WS-Security) and transactions. While largely replaced by REST for new projects, SOAP remains common in enterprise systems.
+**Related Terms:** REST API, XML, Web Services, SOA, WSDL
+
+### SOC 2 (Service Organization Control 2)
+
+**Category:** Compliance / Security
+**Description:** An auditing procedure ensuring service providers securely manage data to protect client privacy. SOC 2 reports evaluate controls related to security, availability, processing integrity, confidentiality, and privacy (the Trust Services Criteria), commonly required for SaaS vendors and cloud service providers.
+**Related Terms:** Compliance, Security, ISO 27001, HIPAA, Audit
+
 ### SOHO (Small Office/Home Office)
 
 **Category:** Business / IT Infrastructure
@@ -1986,6 +2178,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Software Engineering
 **Description:** Five design principles for writing maintainable code: **S**ingle Responsibility, **O**pen/Closed, **L**iskov Substitution, **I**nterface Segregation, and **D**ependency Inversion. Following SOLID leads to flexible, extensible, and testable code.
 **Related Terms:** DRY, Dependency Injection, Anti-Patterns
+
+### SonarQube
+
+**Category:** DevOps / Code Quality
+**Description:** An open-source platform for continuous inspection of code quality, performing automatic reviews with static analysis to detect bugs, vulnerabilities, and code smells. SonarQube supports multiple languages, integrates with CI/CD pipelines, and provides quality gates to enforce coding standards.
+**Related Terms:** Static Analysis, Code Smells, CI/CD, Code Quality, Security
 
 ### SQL (Structured Query Language)
 
@@ -2107,6 +2305,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A powerful, intuitive programming language developed by Apple for iOS, macOS, watchOS, and tvOS development. Swift combines modern language features like type safety, optionals, and protocol-oriented programming with performance comparable to C. It's designed to be safe, fast, and expressive.
 **Related Terms:** iOS, Kotlin, Mobile Development, Xcode
 
+### Swoole
+
+**Category:** PHP / Extension
+**Description:** A high-performance, production-ready async programming framework for PHP. Swoole provides coroutines, async I/O, WebSocket support, and an event-driven architecture that dramatically improves PHP application performance. It's commonly used with Laravel Octane to enable persistent applications and concurrent request handling.
+**Related Terms:** PHP, Laravel, Laravel Octane, Async Programming, Coroutines, WebSocket
+
 ---
 
 ## T
@@ -2153,11 +2357,23 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** In different contexts: a unit of text processed by parsers or language models; an authentication credential (like JWT); or a representation of a security key. Tokens are fundamental to parsing, security, and modern authentication systems.
 **Related Terms:** Serialization, String
 
+### Traefik
+
+**Category:** DevOps / Reverse Proxy
+**Description:** A modern, cloud-native reverse proxy and load balancer designed for microservices and containerized environments. Traefik automatically discovers services and configures routing through integration with Docker, Kubernetes, and other orchestrators. It provides automatic HTTPS via Let's Encrypt, middleware for authentication and rate limiting, and an intuitive dashboard.
+**Related Terms:** NGINX, Load Balancer, Docker, Kubernetes, Reverse Proxy, Let's Encrypt
+
 ### Traveling Salesman Problem (TSP)
 
 **Category:** Algorithm / Optimization
 **Description:** A classic NP-hard optimization problem seeking the shortest route visiting all given cities exactly once and returning to the origin. TSP is fundamental in computer science for studying algorithmic complexity, heuristics, and metaheuristics. Real-world applications include logistics, circuit design, and DNA sequencing.
 **Related Terms:** Greedy Algorithm, Heuristic, Metaheuristics, Nearest Neighbor, Graph Theory
+
+### Turborepo
+
+**Category:** Build Tool / Monorepo
+**Description:** A high-performance build system for JavaScript and TypeScript monorepos. Turborepo provides intelligent caching, parallel execution, and incremental builds to dramatically speed up CI/CD pipelines and local development. It integrates with package managers like npm, yarn, and pnpm, and offers remote caching for team environments.
+**Related Terms:** Nx, Monorepo, npm, pnpm, Build Tool, CI/CD
 
 ### Turso
 
@@ -2209,6 +2425,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A specialized database optimized for storing, indexing, and querying high-dimensional vector embeddings. Vector databases enable semantic search, similarity matching, and retrieval-augmented generation (RAG) by finding the most similar vectors to a query using algorithms like approximate nearest neighbor (ANN). Popular examples include Pinecone, Weaviate, Milvus, and Qdrant.
 **Related Terms:** RAG, Machine Learning, AI, Embeddings, Semantic Search, PostgreSQL (pgvector)
 
+### Vercel
+
+**Category:** Platform / Deployment
+**Description:** A cloud platform optimized for frontend frameworks and serverless functions. Vercel provides automatic deployments from Git, edge network distribution, serverless functions, and built-in CI/CD. It's the company behind Next.js and offers seamless integration with React, Svelte, Vue, and other frameworks with features like preview deployments and analytics.
+**Related Terms:** Netlify, Next.js, Serverless, Edge Computing, Frontend, CI/CD
+
 ### Vibe Coding
 
 **Category:** Development Philosophy / AI
@@ -2232,6 +2454,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Programming Language
 **Description:** A Microsoft programming language featuring an event-driven paradigm and integrated development environment (IDE) designed for rapid application development. While the classic Visual Basic (VB6) is legacy, Visual Basic .NET continues as part of the .NET framework, commonly used for Windows desktop applications and Office automation.
 **Related Terms:** .NET, ASP.NET, C#, Windows, Microsoft
+
+### Vite
+
+**Category:** Build Tool / Frontend
+**Description:** A next-generation frontend build tool that provides extremely fast development server startup and hot module replacement (HMR). Vite leverages native ES modules during development and Rollup for optimized production builds, offering significant speed improvements over traditional bundlers like Webpack. Created by Evan You (Vue.js creator).
+**Related Terms:** Webpack, Rollup, esbuild, Vue, React, Vitest, Frontend
+
+### Vitest
+
+**Category:** Testing / Framework
+**Description:** A blazing-fast unit testing framework powered by Vite. Vitest provides Jest-compatible APIs, native TypeScript support, component testing, and instant watch mode with smart file caching. It shares Vite's configuration and transformation pipeline, making it ideal for Vite-based projects.
+**Related Terms:** Jest, Vite, Testing, Unit Testing, TDD, Vue
 
 ### VPS (Virtual Private Server)
 
@@ -2285,6 +2519,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** The process of creating low-fidelity visual representations of user interfaces to plan layout, structure, and functionality. Wireframes focus on content hierarchy and user flow rather than visual design, enabling rapid iteration and stakeholder feedback.
 **Related Terms:** Prototyping, UX Design, Information Architecture, User Journey Mapping
 
+### WordPress
+
+**Category:** CMS / Platform
+**Description:** The world's most popular content management system, powering over 40% of websites. WordPress offers a flexible theme and plugin ecosystem, visual editors (Gutenberg blocks), and easy content management. It supports everything from simple blogs to complex e-commerce sites (WooCommerce) and enterprise applications. Available as self-hosted (WordPress.org) or managed (WordPress.com).
+**Related Terms:** CMS, Drupal, Joomla, PHP, WooCommerce, Web Hosting
+
 ---
 
 ## X
@@ -2301,6 +2541,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** Apple's integrated development environment for building applications for macOS, iOS, iPadOS, watchOS, and tvOS. Xcode includes a code editor, debugger, Interface Builder, simulators, profiling tools, and the Swift/Objective-C compilers. It is the required tool for publishing apps to the Apple App Store.
 **Related Terms:** Swift, iOS, macOS, Apple, IDE, App Store
 
+### XML (Extensible Markup Language)
+
+**Category:** Data Format / Standard
+**Description:** A markup language designed for storing and transporting structured data in a human-readable and machine-parseable format. XML uses customizable tags to define elements and attributes, supporting schemas (XSD) for validation and namespaces for avoiding conflicts. While largely superseded by JSON for web APIs, XML remains essential in enterprise systems, SOAP services, configuration files, and document formats like SVG and RSS.
+**Related Terms:** JSON, SOAP, REST API, HTML, YAML, Data Serialization
+
 ---
 
 ## Y
@@ -2310,6 +2556,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Best Practice
 **Description:** A principle stating that developers should not add functionality until it is necessary. YAGNI prevents over-engineering by focusing on current requirements rather than anticipated future needs that may never materialize.
 **Related Terms:** KISS, DRY
+
+### YAML (YAML Ain't Markup Language)
+
+**Category:** Data Format / Configuration
+**Description:** A human-readable data serialization format commonly used for configuration files and data exchange. YAML uses indentation to represent hierarchy, supports comments, and is more readable than JSON or XML for complex configurations. Widely used in Docker Compose, Kubernetes manifests, CI/CD pipelines (GitHub Actions), and infrastructure-as-code tools like Ansible.
+**Related Terms:** JSON, XML, Docker, Kubernetes, Configuration, TOML
 
 ---
 
@@ -2333,6 +2585,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A suite of cloud-based business applications offering CRM, project management, accounting, HR, and productivity tools. Zoho provides an integrated ecosystem for small to medium businesses as an alternative to enterprise solutions, with products including Zoho CRM, Zoho Projects, Zoho Books, and Zoho Workplace.
 **Related Terms:** CRM, ERP, SaaS, Salesforce, Business Software
 
+### Zustand
+
+**Category:** State Management / React
+**Description:** A small, fast, and scalable state management library for React. Zustand offers a minimalist API using hooks, avoiding the boilerplate of Redux while providing features like middleware support, devtools integration, and automatic re-render optimization. Its simplicity and TypeScript support make it popular for projects of all sizes.
+**Related Terms:** Redux, Context API, React, State Management, MobX, Jotai
+
 ---
 
 ## Contributing
@@ -2347,4 +2605,4 @@ To add new terms to this dictionary:
 
 ---
 
-*Last updated: December 04, 2025 00:35 PST (Asia/Manila)*
+*Last updated: December 04, 2025 01:03 PST (Asia/Manila)*
