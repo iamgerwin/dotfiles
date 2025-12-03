@@ -216,3 +216,6 @@ Create: `docs/[feature-name]/[implementation|fix|improvement].md`
 7. Compact context → Prepare for next iteration
 
 **Remember**: Precision over speed. Clarity over assumptions. Alignment over automation. Think first, ask second, code third.
+
+Final checks:
+- NEVER mention AI / Claude / 🤖 Generated with [Claude Code](https://claude.com/claude-code) / on PR, comments, commit messages
