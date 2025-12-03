@@ -58,10 +58,6 @@ dotfiles/
 │   ├── setup.sh        # Automated Python/FastAPI/Django installation script
 │   └── README.md       # Python setup documentation
 ├── Brewfile            # Homebrew package definitions
-├── AGENTS.md           # AI Agent CLI tools best practices
-├── CLAUDE.md -> AGENTS.md    # Symlink to AGENTS.md
-├── CODEX.md -> AGENTS.md     # Symlink to AGENTS.md
-├── GEMINI.md -> AGENTS.md    # Symlink to AGENTS.md
 ├── AI_PROMPTS.md       # AI prompts management documentation
 ├── TEMPLATES.md        # Quick reference for all prompt templates
 ├── GIT_PROFILE_MANAGEMENT.md # Git profiles and SSH keys documentation
@@ -71,8 +67,12 @@ dotfiles/
 ├── ssh-keys/           # Organized SSH keys directory (gitignored)
 ├── docs/               # Documentation directory
 │   ├── dictionary.md   # IT Terms & Jargons Dictionary
+│   ├── ai-tools/       # AI coding workflow and CLI tools documentation
+│   │   ├── AI.md       # RPI workflow guidelines and coding standards
+│   │   ├── AI-Best-Practices.md  # CLI tools installation and best practices
+│   │   └── INSTALLATION.md       # AI tools setup guide
 │   └── best-practices/ # Comprehensive technology guides
-│       ├── ai-tools/   # AI-powered development tools
+│       ├── ai-tools/   # Tool-specific guides (Claude, Codex, Gemini CLI)
 │       ├── databases/  # Database technologies
 │       ├── mobile-frameworks/ # Mobile development platforms
 │       ├── progressive-web-apps/ # PWA and service workers
