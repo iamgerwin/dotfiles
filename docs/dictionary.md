@@ -49,17 +49,35 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** Advanced Business Application Programming is a high-level programming language created by SAP for developing business applications on the SAP platform. ABAP is used for customizing SAP modules, building reports, creating interfaces, and developing enterprise solutions within SAP ERP systems.
 **Related Terms:** SAP, ERP, Enterprise, Backend Development
 
+### Abstraction
+
+**Category:** OOP / Software Engineering
+**Description:** One of the four pillars of Object-Oriented Programming that involves hiding complex implementation details and exposing only essential features through simplified interfaces. Abstraction reduces complexity by allowing programmers to work with high-level concepts without needing to understand underlying implementation. Achieved through abstract classes and interfaces.
+**Related Terms:** Encapsulation, Inheritance, Polymorphism, OOP, Interface
+
 ### Adapter Pattern
 
 **Category:** Design Pattern
 **Description:** A structural design pattern that allows objects with incompatible interfaces to work together. It acts as a wrapper that translates one interface into another that clients expect.
 **Related Terms:** Decorator Pattern, Factory Pattern
 
+### Acceptance Testing
+
+**Category:** Testing / QA
+**Description:** A level of software testing where a system is evaluated for acceptability by end users or stakeholders. Acceptance testing verifies that the software meets business requirements and is ready for delivery. Types include User Acceptance Testing (UAT), Business Acceptance Testing (BAT), and Contract Acceptance Testing.
+**Related Terms:** Integration Testing, Unit Testing, QA, BDD, End-to-End Testing
+
+### ACID (Atomicity, Consistency, Isolation, Durability)
+
+**Category:** Database / Transaction
+**Description:** A set of properties that guarantee reliable processing of database transactions. ACID ensures that transactions are processed reliably even in the event of errors, power failures, or other issues. These properties are fundamental to relational databases and distinguish them from BASE systems.
+**Related Terms:** Transaction, Commit, Rollback, BASE, Database, Data Integrity
+
 ### Agile Methodology
 
 **Category:** Software Development / Process
 **Description:** An iterative approach to software development emphasizing flexibility, collaboration, and customer feedback. Agile breaks projects into short iterations (sprints), enabling teams to adapt to changing requirements and deliver value incrementally.
-**Related Terms:** Scrum, Kanban, Sprint, DevOps
+**Related Terms:** Scrum, Kanban, Sprint, DevOps, Extreme Programming, SDLC
 
 ### AI (Artificial Intelligence)
 
@@ -157,6 +175,24 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** Short for asynchronous, a programming paradigm that allows operations to run without blocking the execution thread. Async operations enable programs to continue executing other code while waiting for long-running tasks (I/O, network requests) to complete.
 **Related Terms:** Await, Concurrency, CPU-bound vs I/O-bound
 
+### Atomicity
+
+**Category:** Database / ACID
+**Description:** The "A" in ACID, guaranteeing that a transaction is treated as a single, indivisible unit of work. Either all operations within the transaction succeed completely, or none of them are applied—there is no partial completion. If any part fails, the entire transaction is rolled back to its original state.
+**Related Terms:** ACID, Consistency, Isolation, Durability, Transaction, Rollback
+
+### Automated Testing
+
+**Category:** Testing / QA
+**Description:** The practice of using specialized software tools to execute pre-scripted tests on software applications automatically. Automated testing increases efficiency, repeatability, and coverage compared to manual testing, especially for regression testing, CI/CD pipelines, and large-scale applications.
+**Related Terms:** Manual Testing, Unit Testing, Integration Testing, CI/CD, Jest, Selenium
+
+### AUT (Application Under Test)
+
+**Category:** Testing / QA
+**Description:** The software application or system being evaluated during testing activities. AUT refers to the target of all test cases and scenarios, whether for unit testing, integration testing, or end-to-end testing. Understanding the AUT's architecture and behavior is essential for effective test design.
+**Related Terms:** Testing, QA, Test Case, Unit Testing, Integration Testing
+
 ### Array
 
 **Category:** Data Structure / Foundational Concept
@@ -221,6 +257,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A globally recognized standard providing guidelines and best practices for business analysis. BABOK defines knowledge areas including requirements elicitation, analysis, solution evaluation, and stakeholder collaboration, serving as a foundation for business analyst certifications.
 **Related Terms:** PMBOK, Project Management, Requirements Engineering, Business Analysis
 
+### BASE (Basically Available, Soft state, Eventually consistent)
+
+**Category:** Database / Distributed Systems
+**Description:** A database design philosophy that prioritizes availability and partition tolerance over immediate consistency, contrasting with ACID properties. BASE systems accept eventual consistency, allowing temporary inconsistencies that resolve over time. Common in NoSQL databases and distributed systems where high availability and horizontal scaling are critical.
+**Related Terms:** ACID, NoSQL, CAP Theorem, Eventual Consistency, Distributed Systems
+
 ### BCNF (Boyce-Codd Normal Form)
 
 **Category:** Database / Normalization
@@ -250,6 +292,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Design Pattern / Software Engineering
 **Description:** A category of design patterns that focus on communication and interaction between objects. These patterns define how objects collaborate and distribute responsibility. Examples include Observer, Strategy, Command, State, Chain of Responsibility, Mediator, Memento, Visitor, Template Method, and Iterator patterns.
 **Related Terms:** Creational Design Patterns, Structural Design Patterns, Observer Pattern, Strategy Pattern, State Machine
+
+### Black-box Testing
+
+**Category:** Testing / QA
+**Description:** A software testing method where the tester examines functionality without knowledge of internal code structure or implementation. Tests are based on requirements, specifications, and expected behavior. Black-box testing focuses on inputs and outputs, making it ideal for functional testing, acceptance testing, and validating user-facing features.
+**Related Terms:** White-box Testing, Functional Testing, Acceptance Testing, QA, Unit Testing
 
 ### Blue-Green Deployment
 
@@ -338,6 +386,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** System Design
 **Description:** A principle stating that a distributed system can only guarantee two of three properties: Consistency (all nodes see the same data), Availability (every request receives a response), and Partition tolerance (the system continues operating despite network failures).
 **Related Terms:** Stateless vs Stateful, Event-Driven Architecture
+
+### Cascade (Database)
+
+**Category:** Database / Referential Integrity
+**Description:** A referential action that automatically propagates changes from a parent table to child tables in a database relationship. CASCADE DELETE removes child records when a parent record is deleted; CASCADE UPDATE updates foreign keys when the parent's primary key changes. Cascading helps maintain referential integrity but must be used carefully to avoid unintended data loss.
+**Related Terms:** Foreign Key, Primary Key, Referential Integrity, Database, Data Integrity, Orphan Data
 
 ### C#
 
@@ -429,6 +483,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An AI model developed by OpenAI that powers GitHub Copilot, trained on publicly available code to understand and generate programming code. Codex can translate natural language to code, explain existing code, and assist with debugging across multiple programming languages.
 **Related Terms:** GitHub Copilot, AI, LLM, Code Generation, OpenAI
 
+### Code Kata
+
+**Category:** Software Development / Practice
+**Description:** A programming exercise designed to improve coding skills through repetitive practice, similar to martial arts kata. Code katas are small, self-contained problems that developers solve repeatedly to internalize patterns, refine techniques, and build muscle memory for common algorithms and design patterns. Popular platforms include LeetCode, Codewars, and Exercism.
+**Related Terms:** LeetCode, TDD, Algorithm, Practice, Refactoring
+
 ### Commit (Database)
 
 **Category:** Database / Transaction
@@ -494,6 +554,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** DevOps / Cloud
 **Description:** A lightweight virtualization method that packages an application and its dependencies into a container. Containers share the host OS kernel, making them faster and more efficient than traditional virtual machines.
 **Related Terms:** Docker Image, Kubernetes Pod, CI/CD
+
+### Consistency (ACID)
+
+**Category:** Database / ACID
+**Description:** The "C" in ACID, ensuring that a transaction brings the database from one valid state to another valid state. Consistency guarantees that all data integrity constraints, rules, and triggers are satisfied before and after the transaction. If a transaction would violate any constraint, it is rolled back entirely.
+**Related Terms:** ACID, Atomicity, Isolation, Durability, Transaction, Data Integrity
 
 ### Context API
 
@@ -607,6 +673,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A centralized repository optimized for analysis and reporting of structured data from multiple sources. Data warehouses use schemas to organize data for business intelligence, enabling fast queries on historical data through techniques like OLAP and dimensional modeling.
 **Related Terms:** Data Lake, Big Data, ETL, Analytics, SQL
 
+### DBMS (Database Management System)
+
+**Category:** Database / Infrastructure
+**Description:** Software that provides an interface for creating, managing, and interacting with databases. A DBMS handles data storage, retrieval, security, backup, and recovery while ensuring data integrity and concurrent access. Examples include MySQL, PostgreSQL, Oracle, and SQL Server (RDBMS), as well as MongoDB and Redis (NoSQL).
+**Related Terms:** RDBMS, Database, SQL, NoSQL, Schema, Query
+
 ### Deadlock
 
 **Category:** Concurrency / Foundational Concept
@@ -624,6 +696,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Software Development / Tools
 **Description:** The process of identifying, analyzing, and fixing bugs or defects in software code. Debugging involves using tools like debuggers, logging, breakpoints, and stack traces to understand program behavior and locate the source of errors.
 **Related Terms:** Testing, IDE, Sentry, Logging, Stack Overflow
+
+### Declarative Programming
+
+**Category:** Programming Paradigm
+**Description:** A programming paradigm that expresses the logic of computation without describing its control flow. Declarative code describes what the program should accomplish rather than how to accomplish it. Examples include SQL for database queries, HTML for document structure, and functional programming languages. Contrasts with imperative programming.
+**Related Terms:** Imperative Programming, Functional Programming, SQL, Paradigm, Programming
 
 ### Decorator Pattern
 
@@ -745,6 +823,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A software development principle that aims to reduce repetition of code. Every piece of knowledge should have a single, unambiguous representation in the system. DRY improves maintainability and reduces bugs.
 **Related Terms:** KISS, YAGNI, SOLID Principles
 
+### Durability (ACID)
+
+**Category:** Database / ACID
+**Description:** The "D" in ACID, guaranteeing that once a transaction is committed, it will remain committed even in the event of system failure, power loss, or crashes. Durability is typically achieved through transaction logs, write-ahead logging (WAL), and persistent storage mechanisms that survive system restarts.
+**Related Terms:** ACID, Atomicity, Consistency, Isolation, Transaction, Write-Ahead Log
+
 ### Drupal
 
 **Category:** CMS / Platform
@@ -756,6 +840,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Database / Analytics
 **Description:** An in-process analytical database management system designed for fast analytical queries. DuckDB is embeddable, runs queries in parallel, and excels at OLAP workloads without requiring a separate server process.
 **Related Terms:** SQLite, Database, Analytics, OLAP
+
+### Dynamic Programming
+
+**Category:** Algorithm / Computer Science
+**Description:** An algorithmic technique that solves complex problems by breaking them into simpler overlapping subproblems and storing their solutions to avoid redundant computation. Dynamic programming uses either memoization (top-down) or tabulation (bottom-up) approaches. Classic examples include Fibonacci sequence, knapsack problem, and longest common subsequence.
+**Related Terms:** Memoization, Tabulation, Algorithm, Recursion, Time Complexity, LeetCode
 
 ### DynamoDB
 
@@ -808,6 +898,24 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Programming Language
 **Description:** A dynamic, functional programming language built on the Erlang VM (BEAM) designed for building scalable, maintainable applications. Elixir features immutability, pattern matching, powerful metaprogramming, and excellent concurrency support through lightweight processes.
 **Related Terms:** Phoenix, Ash, Erlang, Functional Programming
+
+### Encapsulation
+
+**Category:** OOP / Software Engineering
+**Description:** One of the four pillars of Object-Oriented Programming that bundles data (attributes) and methods (functions) that operate on that data within a single unit (class), while restricting direct access to some components. Encapsulation hides internal implementation details and exposes only necessary interfaces, protecting data integrity and reducing coupling.
+**Related Terms:** Abstraction, Inheritance, Polymorphism, OOP, Information Hiding
+
+### End-to-End Testing (E2E)
+
+**Category:** Testing / QA
+**Description:** A testing methodology that validates the entire application flow from start to finish, simulating real user scenarios. E2E tests verify that all integrated components work together correctly, including frontend, backend, databases, and external services. Tools like Cypress, Playwright, and Selenium are commonly used for E2E testing.
+**Related Terms:** Integration Testing, Acceptance Testing, Selenium, Cypress, Playwright, QA
+
+### Enzyme
+
+**Category:** Testing / React
+**Description:** A JavaScript testing utility for React developed by Airbnb that makes it easier to test React components' output. Enzyme provides shallow rendering, full DOM rendering, and static rendering capabilities. While still widely used in legacy projects, React Testing Library has become the recommended alternative for new projects due to its focus on testing user behavior.
+**Related Terms:** Jest, React, Unit Testing, React Testing Library, Storybook
 
 ### Enum (Enumeration)
 
@@ -863,6 +971,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A minimal and flexible Node.js web application framework providing robust features for building web and mobile applications. Express.js offers routing, middleware support, template engines, and HTTP utilities, serving as the de facto standard for Node.js backend development and the "E" in the MEAN/MERN stack.
 **Related Terms:** Node.js, JavaScript, REST API, Middleware, MEAN Stack, Hono.js
 
+### Extreme Programming (XP)
+
+**Category:** Methodology / Agile
+**Description:** An Agile software development methodology emphasizing customer satisfaction through continuous delivery of working software in short iterations. XP practices include pair programming, test-driven development (TDD), continuous integration, collective code ownership, simple design, and frequent releases. Created by Kent Beck, XP focuses on adaptability and responsiveness to changing requirements.
+**Related Terms:** Agile, TDD, Pair Programming, CI/CD, Scrum, Kanban
+
 ---
 
 ## F
@@ -878,6 +992,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** DevOps / Software Engineering
 **Description:** Conditional toggles that enable or disable features in production without code deployment. Feature flags facilitate A/B testing, gradual rollouts, canary releases, and quick rollback of problematic features, reducing deployment risk.
 **Related Terms:** CI/CD, Deployment Strategies, Testing
+
+### FDD (Feature-Driven Development)
+
+**Category:** Methodology / Agile
+**Description:** An iterative and incremental software development methodology that organizes work around making progress on client-valued features. FDD consists of five main activities: develop overall model, build feature list, plan by feature, design by feature, and build by feature. It emphasizes domain modeling, frequent builds, and inspections, making it suitable for larger teams.
+**Related Terms:** Agile, Scrum, Kanban, Extreme Programming, SDLC
 
 ### FastAPI
 
@@ -896,6 +1016,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Data Structure / Algorithm
 **Description:** A principle where the first element added to a collection is the first one to be removed, like a queue at a store. FIFO is the fundamental behavior of queue data structures and is used in scheduling algorithms, buffer management, cache eviction policies, and message queues. The opposite of LIFO (Last In, First Out).
 **Related Terms:** Queue, Cache Eviction, Data Structure, LIFO, TTL
+
+### Fidelity (High-Fidelity / Low-Fidelity)
+
+**Category:** Design / UX
+**Description:** The level of detail and functionality in design prototypes and mockups. Low-fidelity (lo-fi) designs are quick, rough sketches or wireframes used for early concept validation and brainstorming, often using paper or simple tools. High-fidelity (hi-fi) designs are polished, detailed prototypes that closely resemble the final product, including actual content, colors, typography, and interactions. The choice between fidelity levels depends on the design phase and feedback needs.
+**Related Terms:** Prototyping, Wireframe, Mockup, UX Design, RAD
 
 ### Firebase
 
@@ -932,6 +1058,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Backend / PHP Runtime
 **Description:** A modern PHP application server written in Go, providing built-in support for HTTP/2, HTTP/3, automatic HTTPS, and early hints. FrankenPHP can run as a standalone server or embed PHP into any Go application, offering significant performance improvements over traditional PHP-FPM setups.
 **Related Terms:** Laravel Octane, PHP, Web Server, Performance
+
+### Functional Programming
+
+**Category:** Programming Paradigm / Computer Science
+**Description:** A programming paradigm that treats computation as the evaluation of mathematical functions and avoids changing state and mutable data. Key concepts include pure functions (no side effects), immutability, first-class functions, higher-order functions, and declarative code. Languages like Haskell and Elixir are purely functional, while JavaScript, Python, and others support functional techniques. Functional programming promotes predictability, testability, and concurrent execution.
+**Related Terms:** Declarative Programming, Imperative Programming, Pure Function, Immutability, Lambda, OOP
 
 ---
 
@@ -1091,6 +1223,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A US federal law establishing standards for protecting sensitive patient health information. HIPAA requires healthcare providers, insurers, and their business associates to implement physical, administrative, and technical safeguards for electronic protected health information (ePHI), with significant penalties for non-compliance.
 **Related Terms:** Compliance, Security, GDPR, SOC 2, Privacy
 
+### Historical Data
+
+**Category:** Database / Data Management
+**Description:** Data that represents past states, transactions, or events and is preserved for analysis, auditing, compliance, or recovery purposes. Historical data enables trend analysis, business intelligence, regulatory compliance, and system recovery. Strategies for managing historical data include archiving, data warehousing, event sourcing, and implementing soft deletes. Proper retention policies balance storage costs with business and legal requirements.
+**Related Terms:** Data Warehouse, Event Sourcing, Audit Trail, Archive, Data Retention
+
 ### Hono.js
 
 **Category:** Framework / Backend
@@ -1155,6 +1293,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A cloud computing model providing virtualized computing resources over the internet. IaaS offers servers, storage, networking, and operating systems on-demand, allowing users to avoid physical infrastructure management.
 **Related Terms:** PaaS, SaaS, AWS, Azure, Cloud Computing
 
+### Imperative Programming
+
+**Category:** Programming Paradigm / Computer Science
+**Description:** A programming paradigm that uses statements to change a program's state through explicit instructions that describe how to achieve a result step by step. Imperative programs consist of commands for the computer to perform, using control flow structures like loops and conditionals. C, Java, and Python (when used procedurally) are examples. Contrast with declarative programming, which focuses on what to achieve rather than how.
+**Related Terms:** Declarative Programming, Procedural Programming, Functional Programming, OOP, Paradigm
+
 ### IAM (Identity and Access Management)
 
 **Category:** Security / Cloud
@@ -1185,6 +1329,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A data structure that improves the speed of data retrieval operations on a database table at the cost of additional storage and write overhead. Indexes work like a book's index, allowing the database to find rows without scanning the entire table. Common types include B-tree, hash, and composite indexes. Proper indexing is crucial for query optimization.
 **Related Terms:** Primary Key, Foreign Key, Database, Query Optimization, B-tree, Performance
 
+### Inheritance
+
+**Category:** OOP / Software Engineering
+**Description:** One of the four pillars of Object-Oriented Programming that allows a class (child/subclass) to inherit properties and methods from another class (parent/superclass). Inheritance promotes code reuse, establishes hierarchical relationships, and enables polymorphism. Types include single inheritance (one parent), multiple inheritance (multiple parents), and multilevel inheritance (chain of inheritance). While powerful, excessive inheritance can lead to tight coupling; composition is often preferred.
+**Related Terms:** Encapsulation, Polymorphism, Abstraction, OOP, Composition, Class
+
 ### IndexedDB
 
 **Category:** Web API / Storage
@@ -1209,6 +1359,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A Core Web Vitals metric replacing First Input Delay (FID) that measures responsiveness by observing the latency of all user interactions throughout the page lifecycle. Lower INP values indicate a more responsive user experience.
 **Related Terms:** Core Web Vitals, First Contentful Paint, Cumulative Layout Shift
 
+### Integration Testing
+
+**Category:** Testing / QA
+**Description:** A level of software testing where individual units or components are combined and tested as a group to verify their interactions work correctly. Integration tests detect interface defects, data flow issues, and communication problems between modules. Approaches include big-bang (test all at once), top-down, bottom-up, and sandwich testing. Integration tests sit between unit tests and end-to-end tests in the testing pyramid.
+**Related Terms:** Unit Testing, End-to-End Testing, Testing Pyramid, API Testing, QA
+
 ### Ionic
 
 **Category:** Framework / Mobile
@@ -1220,6 +1376,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Frontend / Architecture
 **Description:** A web architecture pattern where interactive components (islands) are hydrated independently on an otherwise static page. This approach minimizes JavaScript overhead by only loading interactivity where needed, improving performance.
 **Related Terms:** SSR, Hydration, Partial Hydration
+
+### IoT (Internet of Things)
+
+**Category:** Technology / Infrastructure
+**Description:** A network of interconnected physical devices, vehicles, appliances, and other objects embedded with sensors, software, and connectivity that enables them to collect and exchange data. IoT applications span smart homes, industrial automation, healthcare monitoring, agriculture, and smart cities. Key considerations include device security, data management, connectivity protocols (MQTT, CoAP), and edge computing for local processing.
+**Related Terms:** Edge Computing, MQTT, Embedded Systems, Sensors, Smart Devices
+
+### Isolation (ACID)
+
+**Category:** Database / Transaction
+**Description:** One of the four ACID properties that ensures concurrent transactions execute independently without interfering with each other. Isolation prevents dirty reads, non-repeatable reads, and phantom reads through various isolation levels: Read Uncommitted, Read Committed, Repeatable Read, and Serializable. Higher isolation levels provide stronger guarantees but may reduce concurrency and performance.
+**Related Terms:** ACID, Transaction, Concurrency, Database, Atomicity, Consistency, Durability
 
 ### ISR (Incremental Static Regeneration)
 
@@ -1254,6 +1422,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** DevOps / CI/CD
 **Description:** An open-source automation server for building, testing, and deploying software through continuous integration and delivery pipelines. Jenkins supports hundreds of plugins for integrating with version control, build tools, and deployment platforms, enabling customizable automation workflows.
 **Related Terms:** CI/CD, GitLab, GitHub Actions, Pipeline, DevOps
+
+### Jest
+
+**Category:** Testing / JavaScript
+**Description:** A delightful JavaScript testing framework by Facebook/Meta with a focus on simplicity. Jest provides zero-configuration setup, snapshot testing, built-in mocking, code coverage reporting, and parallel test execution. It's the default testing framework for React applications and widely used for testing Node.js applications, offering features like watch mode and clear error messages.
+**Related Terms:** Unit Testing, React, Enzyme, React Testing Library, Mocha, Vitest
 
 ### JIRA
 
@@ -1425,6 +1599,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A systematic approach to eliminating waste and maximizing value in processes, originating from Toyota's manufacturing practices. In software development, Lean principles focus on delivering value, eliminating waste, building quality in, deferring decisions, and optimizing the whole system.
 **Related Terms:** Agile Methodology, Six Sigma, Kanban, Project Management
 
+### LeetCode
+
+**Category:** Platform / Learning
+**Description:** A popular online platform for practicing coding interview questions and improving algorithmic problem-solving skills. LeetCode provides thousands of problems across various difficulty levels (Easy, Medium, Hard) covering data structures, algorithms, databases, and system design. It's widely used for technical interview preparation at top tech companies and features contest competitions, discussion forums, and premium content.
+**Related Terms:** Data Structure, Algorithm, Dynamic Programming, Memoization, Code Kata, HackerRank
+
 ### Linked List
 
 **Category:** Foundational Concept
@@ -1489,11 +1669,23 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. Machine learning uses algorithms to identify patterns in data, make predictions, and automate decision-making through techniques like supervised, unsupervised, and reinforcement learning.
 **Related Terms:** AI, Deep Learning, Data Science, Neural Networks, Python
 
+### Manual Testing
+
+**Category:** Testing / QA
+**Description:** Software testing performed by human testers without the use of automation tools or scripts. Manual testing involves executing test cases, exploring application functionality, and verifying expected behaviors through direct interaction. While time-consuming and prone to human error, manual testing excels at exploratory testing, usability evaluation, and scenarios requiring human judgment. It complements automated testing in a comprehensive QA strategy.
+**Related Terms:** Automated Testing, Exploratory Testing, QA, Usability Testing, Acceptance Testing
+
 ### Master-Slave Replication
 
 **Category:** Database / Architecture
 **Description:** A database replication pattern where one server (master/primary) handles all write operations while one or more servers (slaves/replicas) receive copies of the data for read operations. This architecture improves read scalability and provides data redundancy, though write operations remain a single point of bottleneck. Modern terminology often uses "primary-replica" instead.
 **Related Terms:** Database, Read/Write Performance, Redundancy, Horizontal Scaling, High Availability
+
+### Memoization
+
+**Category:** Algorithm / Optimization
+**Description:** An optimization technique that stores the results of expensive function calls and returns the cached result when the same inputs occur again. Memoization is a top-down approach to dynamic programming, using recursion with caching to avoid redundant computations. It trades memory for speed and is particularly effective for functions with overlapping subproblems, such as computing Fibonacci numbers or solving recursive tree problems.
+**Related Terms:** Dynamic Programming, Tabulation, Cache, Recursion, Time Complexity, LeetCode
 
 ### Memory
 
@@ -1512,6 +1704,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Database / Cloud
 **Description:** Amazon's Redis-compatible, durable, in-memory database service offering microsecond read and single-digit millisecond write latency. MemoryDB provides Multi-AZ durability, automatic failover, and seamless scaling for ultra-fast applications.
 **Related Terms:** Redis, AWS, DynamoDB, In-Memory Database
+
+### Mermaid
+
+**Category:** Documentation / Diagramming
+**Description:** A JavaScript-based diagramming and charting tool that generates diagrams from text-based definitions. Mermaid supports flowcharts, sequence diagrams, class diagrams, state diagrams, entity-relationship diagrams, Gantt charts, and more. It integrates with markdown documentation, GitHub, GitLab, and many IDEs, enabling version-controlled diagrams that live alongside code.
+**Related Terms:** ERD, Documentation, PlantUML, Markdown, Architecture Diagram
 
 ### Message Queue
 
@@ -1797,6 +1995,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An authentication protocol that allows users to be authenticated by cooperating sites (identity providers) using a third-party service. OpenID Connect (OIDC) builds on OAuth 2.0 to provide identity layer functionality.
 **Related Terms:** OAuth2, JWT, Authentication, SSO
 
+### OOP (Object-Oriented Programming)
+
+**Category:** Programming Paradigm / Computer Science
+**Description:** A programming paradigm based on the concept of objects that contain data (attributes) and code (methods). OOP is built on four fundamental pillars: Encapsulation (bundling data and methods, hiding implementation), Inheritance (creating class hierarchies for code reuse), Polymorphism (treating objects of different types uniformly), and Abstraction (hiding complexity behind simple interfaces). OOP promotes modularity, reusability, and maintainability, and is the foundation of languages like Java, C++, Python, and C#.
+**Related Terms:** Encapsulation, Inheritance, Polymorphism, Abstraction, Class, Object, Paradigm
+
 ### Optimistic Update
 
 **Category:** Frontend / UX Pattern
@@ -1814,6 +2018,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** API / Framework
 **Description:** A TypeScript-first RPC framework designed for building type-safe APIs with end-to-end type inference. oRPC provides a simple, lightweight alternative to tRPC with minimal runtime overhead, automatic type generation, and seamless integration with modern TypeScript frameworks.
 **Related Terms:** tRPC, gRPC, TypeScript, API, RPC
+
+### Orphan Data
+
+**Category:** Database / Data Management
+**Description:** Records in a database that reference non-existent parent records due to broken foreign key relationships or incomplete data operations. Orphan data can result from cascading delete failures, application bugs, data migrations, or manual database modifications. It leads to data integrity issues, query errors, and wasted storage. Prevention strategies include enforcing referential integrity, using foreign key constraints with CASCADE or SET NULL options, and implementing proper transaction handling.
+**Related Terms:** Data Integrity, Foreign Key, Cascade, Referential Integrity, Database Normalization
 
 ### OWASP (Open Web Application Security Project)
 
@@ -1843,11 +2053,23 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A technique for dividing large datasets into smaller, manageable chunks (pages) that can be loaded incrementally. Pagination reduces memory usage, improves response times, and enhances user experience when dealing with large data sets.
 **Related Terms:** Lazy Loading, API Gateway
 
+### Paradigm (Programming)
+
+**Category:** Computer Science / Software Engineering
+**Description:** A fundamental style or approach to programming that provides a way of thinking about and structuring code. Major paradigms include Imperative (step-by-step instructions), Declarative (describing what to achieve), Object-Oriented (organizing code around objects), Functional (treating computation as function evaluation), and Event-Driven (responding to events). Most modern languages support multiple paradigms (multi-paradigm), allowing developers to choose the best approach for each problem.
+**Related Terms:** OOP, Functional Programming, Imperative Programming, Declarative Programming, Procedural Programming
+
 ### Parallelism
 
 **Category:** Foundational Concept
 **Description:** The simultaneous execution of multiple tasks or processes at the same time, typically on multiple CPU cores. Unlike concurrency, parallelism requires multiple processing units to achieve true simultaneous execution.
 **Related Terms:** Concurrency, CPU-bound vs I/O-bound
+
+### Performance Testing
+
+**Category:** Testing / QA
+**Description:** A type of software testing that evaluates system behavior under various conditions to ensure it meets performance requirements. Performance testing includes load testing (expected load), stress testing (beyond normal capacity), endurance testing (sustained load over time), and spike testing (sudden load increases). It measures response times, throughput, resource utilization, and identifies bottlenecks. Tools like JMeter, K6, and Gatling are commonly used.
+**Related Terms:** Load Testing, Stress Testing, JMeter, K6, QA, Scalability
 
 ### Pessimistic Update
 
@@ -1951,6 +2173,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A greedy algorithm that finds the minimum spanning tree for a weighted undirected graph, connecting all vertices with the minimum total edge weight. Starting from an arbitrary vertex, Prim's algorithm grows the tree by repeatedly adding the cheapest edge that connects a tree vertex to a non-tree vertex.
 **Related Terms:** Graph Theory, Dijkstra's Algorithm, Greedy Algorithm, Data Structure
 
+### Procedural Programming
+
+**Category:** Programming Paradigm / Computer Science
+**Description:** A programming paradigm derived from structured programming that organizes code into procedures (functions or subroutines) that perform specific tasks. Procedural programming follows a top-down approach, executing statements sequentially with control structures like loops and conditionals. C, Pascal, and BASIC are classic procedural languages. While simpler than OOP, procedural code can become difficult to maintain in large systems due to tight coupling between procedures and data.
+**Related Terms:** Imperative Programming, OOP, Structured Programming, Functional Programming, Paradigm
+
 ### Progressive Web App (PWA)
 
 **Category:** Frontend / Mobile
@@ -1987,6 +2215,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A messaging pattern where senders (publishers) send messages to a topic without knowledge of receivers (subscribers). Subscribers express interest in topics and receive relevant messages. This decouples producers from consumers.
 **Related Terms:** Message Queue, Event-Driven Architecture
 
+### Puppeteer
+
+**Category:** Testing / Automation
+**Description:** A Node.js library developed by Google that provides a high-level API to control headless Chrome or Chromium browsers. Puppeteer enables automated browser testing, web scraping, screenshot generation, PDF creation, and performance monitoring. It supports full browser capabilities including JavaScript execution, form submission, and network interception.
+**Related Terms:** End-to-End Testing, Selenium, Playwright, Jest, Headless Browser, Web Scraping
+
 ### Pydantic
 
 **Category:** Library / Python
@@ -2002,6 +2236,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 ---
 
 ## Q
+
+### QA (Quality Assurance)
+
+**Category:** Testing / Software Engineering
+**Description:** A systematic process of ensuring that software products meet specified quality standards and requirements. QA encompasses the entire software development lifecycle, including process improvement, testing methodologies, documentation standards, and defect prevention. QA engineers define testing strategies, create test plans, perform various testing types (functional, performance, security), and work to improve overall software quality. It differs from QC (Quality Control), which focuses specifically on identifying defects in finished products.
+**Related Terms:** Testing, Unit Testing, Integration Testing, Manual Testing, Automated Testing, SDLC, Bug
 
 ### Queue
 
@@ -2031,6 +2271,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An open-source message broker that implements AMQP and other messaging protocols. RabbitMQ facilitates reliable message delivery between distributed systems through queues, exchanges, and routing, supporting various messaging patterns.
 **Related Terms:** Kafka, Message Queue, Event-Driven Architecture
 
+### RAD (Rapid Application Development)
+
+**Category:** Methodology / Software Engineering
+**Description:** A software development methodology emphasizing rapid prototyping and iterative delivery over lengthy planning phases. RAD focuses on quickly building working prototypes, gathering user feedback, and refining the application through successive iterations. It uses visual development tools, reusable components, and close collaboration with end-users to reduce development time while maintaining quality.
+**Related Terms:** Agile, Prototyping, SDLC, Fidelity, Iterative Development
+
 ### RAG (Retrieval-Augmented Generation)
 
 **Category:** AI / Machine Learning
@@ -2042,6 +2288,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Security / Access Control
 **Description:** An authorization model that restricts system access based on roles assigned to users rather than individual permissions. RBAC simplifies permission management by grouping permissions into roles (admin, editor, viewer) that can be assigned to users, providing scalable and maintainable access control in enterprise applications.
 **Related Terms:** Authorization, Authentication, Security, Multi-tenancy
+
+### RDBMS (Relational Database Management System)
+
+**Category:** Database / Software
+**Description:** A database management system based on the relational model that stores data in tables with rows and columns, using structured query language (SQL) for data manipulation. RDBMS enforces data integrity through constraints, supports ACID transactions, and manages relationships between tables via keys. Examples include MySQL, PostgreSQL, Oracle, SQL Server, and SQLite. RDBMS is ideal for structured data with complex relationships and transactions.
+**Related Terms:** DBMS, SQL, Database, ACID, Normalization, Schema, Primary Key, Foreign Key
 
 ### RDS (Relational Database Service)
 
@@ -2114,6 +2366,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Database / System Design
 **Description:** The intentional or unintentional duplication of data or system components. In databases, redundancy refers to storing the same data in multiple places, which can improve read performance through denormalization but increases storage costs and risks data inconsistency. In system design, redundancy provides fault tolerance by having backup components ready to take over if primary ones fail.
 **Related Terms:** Denormalization, Data Integrity, High Availability, Master-Slave Replication, Normalization
+
+### Regression Testing
+
+**Category:** Testing / QA
+**Description:** A type of software testing that verifies that previously working functionality still works correctly after code changes, bug fixes, or new feature additions. Regression tests ensure that modifications haven't introduced new defects or broken existing features. Regression testing is typically automated due to its repetitive nature and is essential for maintaining software quality during iterative development.
+**Related Terms:** Unit Testing, Automated Testing, CI/CD, Test Suite, QA, Smoke Testing
 
 ### Repository Pattern
 
@@ -2203,6 +2461,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A multinational software corporation specializing in enterprise resource planning (ERP) software. SAP provides comprehensive business solutions for finance, supply chain, human resources, and operations, with SAP S/4HANA as its next-generation intelligent ERP suite.
 **Related Terms:** ERP, Enterprise, Odoo, Business Applications
 
+### Sanity Testing
+
+**Category:** Testing / QA
+**Description:** A quick, focused subset of regression testing performed after receiving a software build to verify that specific functionality or bug fixes work as expected. Sanity testing is narrower than smoke testing, targeting particular areas of the application rather than overall stability. It helps determine whether a build is stable enough for more comprehensive testing, saving time by identifying obvious issues early.
+**Related Terms:** Smoke Testing, Regression Testing, QA, Build Verification
+
 ### Saga Pattern
 
 **Category:** Design Pattern / Distributed Systems
@@ -2214,6 +2478,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Database / Design
 **Description:** The structure or blueprint of a database that defines how data is organized, including tables, columns, data types, constraints, relationships, and indexes. Database schemas can be logical (abstract structure) or physical (storage implementation). Schema design is fundamental to data modeling and directly impacts application performance, data integrity, and maintainability.
 **Related Terms:** Database, DDL, Normalization, ERD, Primary Key, Foreign Key, Index
+
+### SDLC (Software Development Life Cycle)
+
+**Category:** Methodology / Software Engineering
+**Description:** A structured process that defines the stages involved in developing software from initial conception to deployment and maintenance. SDLC phases typically include planning, requirements analysis, design, implementation, testing, deployment, and maintenance. Various models implement SDLC differently: Waterfall (sequential), Agile (iterative), Spiral (risk-driven), and V-Model (verification/validation). SDLC provides a framework for delivering quality software on time and budget.
+**Related Terms:** Agile, Waterfall, Scrum, QA, Requirements, Project Management
 
 ### Scrum
 
@@ -2232,6 +2502,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Software Engineering / Best Practice
 **Description:** A versioning scheme using MAJOR.MINOR.PATCH format. Increment MAJOR for incompatible API changes, MINOR for backward-compatible functionality, and PATCH for backward-compatible bug fixes. Semantic versioning communicates the nature of changes to consumers.
 **Related Terms:** Release Management, Dependency Management
+
+### Security Testing
+
+**Category:** Testing / QA
+**Description:** A type of software testing that identifies vulnerabilities, threats, and risks in applications and infrastructure. Security testing includes penetration testing (simulating attacks), vulnerability scanning, security audits, and compliance verification. Common focus areas include authentication, authorization, data protection, input validation, and OWASP Top 10 vulnerabilities. Tools include OWASP ZAP, Burp Suite, and various static/dynamic analysis tools.
+**Related Terms:** OWASP, Penetration Testing, Vulnerability, Authentication, QA, Ethical Hacking
 
 ### Serialization / Deserialization
 
@@ -2274,6 +2550,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Web / Marketing
 **Description:** The practice of optimizing websites to improve visibility and ranking in search engine results pages (SERPs). SEO encompasses technical optimization (site speed, mobile-friendliness, structured data), content strategy (keywords, quality), and off-page factors (backlinks, domain authority). Core techniques include optimizing meta tags, improving Core Web Vitals, and creating quality content.
 **Related Terms:** Robots.txt, Core Web Vitals, SSR, Sitemap, Analytics
+
+### Selenium
+
+**Category:** Testing / Automation
+**Description:** An open-source framework for automating web browser interactions, primarily used for end-to-end testing of web applications. Selenium WebDriver provides APIs to control browsers programmatically, supporting multiple browsers (Chrome, Firefox, Safari, Edge) and programming languages (Java, Python, JavaScript, C#). Selenium Grid enables parallel test execution across multiple machines and browsers, making it industry-standard for web automation testing.
+**Related Terms:** End-to-End Testing, Playwright, Cypress, Puppeteer, WebDriver, QA
 
 ### Sharding
 
@@ -2322,6 +2604,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Communication / Tools
 **Description:** A team collaboration platform providing channels, direct messaging, file sharing, and integrations with development tools. Slack enables real-time communication, threaded conversations, and searchable message history for distributed teams.
 **Related Terms:** Microsoft Teams, Discord, Collaboration Tools
+
+### Smoke Testing
+
+**Category:** Testing / QA
+**Description:** A preliminary level of testing performed on a new software build to verify that the most critical functions work before proceeding with more rigorous testing. Smoke tests (also called build verification tests) answer the question "Does the build run at all?" by checking basic functionality like application startup, user login, and core features. If smoke tests fail, the build is rejected without further testing, saving time and resources.
+**Related Terms:** Sanity Testing, Regression Testing, Build Verification, QA, CI/CD
 
 ### Software
 
@@ -2449,6 +2737,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** **Stateless** services do not store client session data between requests; each request contains all necessary information. **Stateful** services maintain client session data. Stateless services are easier to scale horizontally.
 **Related Terms:** Horizontal Scaling, Load Balancer
 
+### Storybook
+
+**Category:** Development Tools / Frontend
+**Description:** An open-source tool for developing, testing, and documenting UI components in isolation. Storybook provides a sandbox environment where developers can build components independently of the main application, write stories (use cases) for each component state, and generate visual documentation. It supports React, Vue, Angular, and other frameworks, and integrates with testing tools for visual regression, accessibility, and interaction testing.
+**Related Terms:** Component-Based Architecture, React, Vue, Unit Testing, Design System, Chromatic
+
 ### Strategy Pattern
 
 **Category:** Design Pattern
@@ -2466,6 +2760,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Design Pattern / Software Engineering
 **Description:** A category of design patterns that focus on how classes and objects are composed to form larger structures. These patterns simplify design by identifying simple ways to realize relationships between entities. Examples include Adapter, Bridge, Composite, Decorator, Facade, Flyweight, and Proxy patterns.
 **Related Terms:** Creational Design Patterns, Behavioral Design Patterns, Adapter Pattern, Decorator Pattern, Facade Pattern
+
+### Structured Programming
+
+**Category:** Programming Paradigm / Computer Science
+**Description:** A programming paradigm aimed at improving code clarity and quality by using control structures like sequence (executing statements in order), selection (if-then-else), and iteration (loops), while avoiding unstructured jumps like goto. Structured programming promotes top-down design, modular code, and single entry/exit points for functions. It emerged in the 1960s as a reaction to "spaghetti code" and influenced modern programming practices.
+**Related Terms:** Procedural Programming, Imperative Programming, OOP, Paradigm, Modular Programming
 
 ### Supabase
 
@@ -2500,6 +2800,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 ---
 
 ## T
+
+### Tabulation
+
+**Category:** Algorithm / Computer Science
+**Description:** A bottom-up approach to dynamic programming that solves problems by filling up a table (usually an array) iteratively, starting from the smallest subproblems and building up to the final solution. Unlike memoization (top-down), tabulation avoids recursion overhead and explicitly computes all subproblem solutions in a specific order. It typically uses less stack space but may compute unnecessary subproblems. Common in solutions for problems like Fibonacci, coin change, and longest common subsequence.
+**Related Terms:** Dynamic Programming, Memoization, Algorithm, Time Complexity, Space Complexity
 
 ### TanStack
 
@@ -2582,6 +2888,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 ---
 
 ## U
+
+### Unit Testing
+
+**Category:** Testing / QA
+**Description:** A software testing methodology where individual units or components of code (functions, methods, classes) are tested in isolation to verify they work correctly. Unit tests are typically written by developers, run quickly, and form the foundation of the testing pyramid. They test small pieces of code with known inputs and expected outputs, enabling rapid feedback, easier debugging, and confident refactoring. Common frameworks include Jest, JUnit, pytest, and PHPUnit.
+**Related Terms:** Integration Testing, TDD, Jest, PHPUnit, Testing Pyramid, Mocking
+
+### Usability Testing
+
+**Category:** Testing / UX
+**Description:** A user-centered evaluation technique where real users perform tasks on a product to identify usability issues and measure ease of use. Usability testing observes user behavior, collects qualitative and quantitative feedback, and validates design decisions. Methods include moderated (facilitator present) and unmoderated testing, A/B testing, and think-aloud protocols. Results inform UX improvements before and after release.
+**Related Terms:** UX Design, User Experience, A/B Testing, Manual Testing, QA, Accessibility
 
 ### User Journey Mapping
 
@@ -2675,6 +2993,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 
 ## W
 
+### Waterfall
+
+**Category:** Methodology / Software Engineering
+**Description:** A sequential software development methodology where each phase (requirements, design, implementation, testing, deployment, maintenance) must be completed before the next begins, flowing downward like a waterfall. Waterfall emphasizes extensive upfront planning, documentation, and formal sign-offs at each stage. While providing structure and predictability, its rigidity makes adapting to changing requirements difficult. It's best suited for projects with well-defined, stable requirements.
+**Related Terms:** SDLC, Agile, Scrum, Project Management, V-Model
+
 ### Web Hosting
 
 **Category:** Infrastructure / Services
@@ -2698,6 +3022,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Algorithm / Statistics
 **Description:** An average calculation where each value contributes proportionally based on its assigned weight or importance. Weighted means are used when some data points should have more influence on the result than others, common in grade calculations, financial indices, and machine learning algorithms like gradient descent.
 **Related Terms:** Random Sampling, Data Science, Machine Learning, Statistics, Algorithm
+
+### White-box Testing
+
+**Category:** Testing / QA
+**Description:** A testing technique where testers have full knowledge of the internal code structure, logic, and implementation details. White-box testing examines code paths, branches, statements, and internal data flows to verify correctness and identify issues. Techniques include statement coverage, branch coverage, path coverage, and condition testing. It's primarily performed by developers and contrasts with black-box testing (testing without internal knowledge). Also called clear-box, glass-box, or structural testing.
+**Related Terms:** Black-box Testing, Unit Testing, Code Coverage, TDD, QA, Static Analysis
 
 ### White Hat
 
@@ -2797,4 +3127,4 @@ To add new terms to this dictionary:
 
 ---
 
-*Last updated: December 04, 2025 01:20 PST (Asia/Manila)*
+*Last updated: December 04, 2025 03:45 PST (Asia/Manila)*
