@@ -29,6 +29,7 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 - [U](#u)
 - [V](#v)
 - [W](#w)
+- [X](#x)
 - [Y](#y)
 - [Z](#z)
 
@@ -41,6 +42,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Frontend / UX
 **Description:** The practice of designing and developing software that can be used by people with disabilities. A11y includes considerations for screen readers, keyboard navigation, color contrast, and other assistive technologies. The abbreviation "A11y" comes from the 11 letters between "A" and "y" in "Accessibility."
 **Related Terms:** DOM, SSR
+
+### ABAP
+
+**Category:** Programming Language
+**Description:** Advanced Business Application Programming is a high-level programming language created by SAP for developing business applications on the SAP platform. ABAP is used for customizing SAP modules, building reports, creating interfaces, and developing enterprise solutions within SAP ERP systems.
+**Related Terms:** SAP, ERP, Enterprise, Backend Development
 
 ### Adapter Pattern
 
@@ -59,6 +66,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Technology / Machine Learning
 **Description:** The simulation of human intelligence in machines programmed to think, learn, and solve problems. AI encompasses machine learning, deep learning, natural language processing, computer vision, and other technologies that enable computers to perform tasks requiring human-like intelligence.
 **Related Terms:** LLM, Machine Learning, ChatGPT, Claude
+
+### Alpine.js
+
+**Category:** Framework / Frontend
+**Description:** A lightweight JavaScript framework for composing behavior directly in HTML markup. Alpine.js provides reactive and declarative nature similar to Vue or React but with minimal overhead, making it ideal for adding interactivity to server-rendered pages without a full build step.
+**Related Terms:** JavaScript, Vue.js, Livewire, HTMX, jQuery
 
 ### Angular
 
@@ -126,6 +139,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A declarative resource-based framework for Elixir that provides a unified API for building robust, maintainable applications. Ash offers features like authorization, calculations, aggregations, and automatic API generation with strong type safety.
 **Related Terms:** Elixir, Phoenix, Backend Framework
 
+### ASP.NET
+
+**Category:** Framework / Backend
+**Description:** A web application framework developed by Microsoft for building dynamic websites, APIs, and web services. ASP.NET runs on the .NET platform and supports multiple programming models including MVC, Web API, and Razor Pages, offering high performance, security, and cross-platform capabilities with ASP.NET Core.
+**Related Terms:** .NET Core, C#, Blazor, Minimal API, MVC
+
 ### Await
 
 **Category:** Foundational Concept
@@ -154,6 +173,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A flow control mechanism that prevents overwhelming downstream systems by signaling when they cannot handle more requests. Backpressure helps maintain system stability by allowing producers to slow down when consumers are overloaded.
 **Related Terms:** Rate Limiting, Throttling, Message Queue
 
+### Back Office
+
+**Category:** Business / IT
+**Description:** The internal administrative and support functions of an organization that don't interact directly with customers. In IT, back office systems handle operations like data management, HR, accounting, compliance, and internal processes. These systems support front-office operations and are critical for business continuity.
+**Related Terms:** ERP, CRM, Business Applications, Enterprise
+
 ### Bandwidth
 
 **Category:** Foundational Concept
@@ -172,6 +197,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A software development approach that extends TDD by writing tests in natural language describing system behavior from the user's perspective. BDD encourages collaboration between developers, QA, and non-technical stakeholders using tools like Cucumber or SpecFlow.
 **Related Terms:** TDD, Testing, Agile Methodology
 
+### Big Data
+
+**Category:** Data / Technology
+**Description:** Extremely large datasets that cannot be processed using traditional data processing methods due to their volume, velocity, and variety (the 3 Vs). Big data technologies like Hadoop, Spark, and cloud-based solutions enable organizations to analyze massive amounts of structured and unstructured data for insights.
+**Related Terms:** Data Lake, Data Warehouse, Data Science, Analytics, Machine Learning
+
 ### Behavioral Design Patterns
 
 **Category:** Design Pattern / Software Engineering
@@ -184,11 +215,23 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A deployment strategy that maintains two identical production environments (blue and green). New releases deploy to the inactive environment, and traffic switches over after validation, enabling instant rollback and zero-downtime deployments.
 **Related Terms:** Canary Releases, CI/CD, Rollback
 
+### Bitbucket
+
+**Category:** DevOps / Version Control
+**Description:** A Git-based source code repository hosting service owned by Atlassian. Bitbucket provides code collaboration features including pull requests, branch permissions, and CI/CD pipelines (Bitbucket Pipelines), with strong integration with Jira and other Atlassian products.
+**Related Terms:** Git, GitHub, GitLab, CI/CD, JIRA
+
 ### Blazor
 
 **Category:** Framework / Frontend
 **Description:** A Microsoft framework for building interactive web UIs using C# instead of JavaScript. Blazor supports both server-side rendering (Blazor Server) and client-side WebAssembly execution (Blazor WebAssembly), enabling .NET developers to build full-stack web applications with shared code.
 **Related Terms:** C#, .NET Core, WebAssembly, ASP.NET, Frontend Framework
+
+### Bootstrap
+
+**Category:** Framework / Frontend
+**Description:** A popular open-source CSS framework for building responsive, mobile-first websites. Bootstrap provides pre-built components, a grid system, JavaScript plugins, and utility classes that accelerate web development while ensuring cross-browser compatibility.
+**Related Terms:** CSS, Responsive Design, Tailwind CSS, ShadCN UI, Frontend Framework
 
 ### Bulkhead Isolation
 
@@ -235,6 +278,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** DevOps / Deployment
 **Description:** A deployment strategy that gradually rolls out changes to a small subset of users before full deployment. Named after canaries in coal mines, this approach detects problems early with minimal user impact and allows quick rollback if issues arise.
 **Related Terms:** Blue-Green Deployment, Feature Flags, CI/CD
+
+### CAG (Cache-Augmented Generation)
+
+**Category:** AI / Machine Learning
+**Description:** An AI architecture pattern that enhances language model inference by pre-loading relevant context into an extended KV cache, eliminating real-time retrieval during generation. Unlike RAG which fetches documents at query time, CAG precomputes and caches relevant knowledge, reducing latency and improving response consistency for domain-specific applications.
+**Related Terms:** RAG, LLM, KAG, Vector Database, AI, Machine Learning
 
 ### CAP Theorem
 
@@ -432,6 +481,24 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A way of organizing and storing data that enables efficient access and modification. Common data structures include arrays, linked lists, stacks, queues, trees, and hash tables. Choosing the right data structure is crucial for performance.
 **Related Terms:** Hash Table, Stack, Queue, Linked List
 
+### Data Lake
+
+**Category:** Data / Infrastructure
+**Description:** A centralized repository that stores vast amounts of raw data in its native format until needed for analysis. Unlike data warehouses, data lakes can store structured, semi-structured, and unstructured data, making them flexible for big data analytics and machine learning workloads.
+**Related Terms:** Data Warehouse, Big Data, Data Science, Analytics, ETL
+
+### Data Science
+
+**Category:** Technology / Analytics
+**Description:** An interdisciplinary field that uses scientific methods, algorithms, and systems to extract insights from structured and unstructured data. Data science combines statistics, machine learning, data analysis, and domain expertise to solve complex problems and inform decision-making.
+**Related Terms:** Machine Learning, Big Data, Python, R, Analytics
+
+### Data Warehouse
+
+**Category:** Data / Infrastructure
+**Description:** A centralized repository optimized for analysis and reporting of structured data from multiple sources. Data warehouses use schemas to organize data for business intelligence, enabling fast queries on historical data through techniques like OLAP and dimensional modeling.
+**Related Terms:** Data Lake, Big Data, ETL, Analytics, SQL
+
 ### Deadlock
 
 **Category:** Concurrency / Foundational Concept
@@ -443,6 +510,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Software Architecture
 **Description:** An approach to software development that emphasizes collaboration between technical and domain experts to create a shared understanding of the business domain. DDD uses ubiquitous language, bounded contexts, entities, value objects, and aggregates to model complex business logic.
 **Related Terms:** Microservices, Repository Pattern, SOLID Principles
+
+### Debugging
+
+**Category:** Software Development / Tools
+**Description:** The process of identifying, analyzing, and fixing bugs or defects in software code. Debugging involves using tools like debuggers, logging, breakpoints, and stack traces to understand program behavior and locate the source of errors.
+**Related Terms:** Testing, IDE, Sentry, Logging, Stack Overflow
 
 ### Decorator Pattern
 
@@ -485,6 +558,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Framework / Backend
 **Description:** A high-level Python web framework that encourages rapid development and clean, pragmatic design. Django follows the "batteries included" philosophy, providing ORM, authentication, admin interface, URL routing, and templating out of the box. Known for its "Don't Repeat Yourself" (DRY) principle and emphasis on security.
 **Related Terms:** Python, Flask, FastAPI, MVC, Backend Framework
+
+### DNS (Domain Name System)
+
+**Category:** Networking / Infrastructure
+**Description:** A hierarchical naming system that translates human-readable domain names (like example.com) into IP addresses that computers use to identify each other. DNS is essential for internet navigation, acting as the phonebook of the internet with records for routing email, load balancing, and service discovery.
+**Related Terms:** Networking, HTTP, Web Hosting, CDN, IP Address
 
 ### DMAIC
 
@@ -531,6 +610,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Hardware / Infrastructure
 **Description:** A type of computer memory that detects and corrects common internal data corruption, improving system reliability for servers and workstations. ECC RAM prevents single-bit memory errors from causing crashes or data corruption, making it essential for mission-critical systems and databases.
 **Related Terms:** Memory, Infrastructure, Server, Database
+
+### ECMAScript
+
+**Category:** Programming Language / Standard
+**Description:** The standardized scripting language specification that JavaScript implements. ECMAScript is maintained by ECMA International and defines the core features of JavaScript including syntax, types, and built-in objects. ES6 (ECMAScript 2015) introduced major features like classes, modules, arrow functions, and promises.
+**Related Terms:** JavaScript, TypeScript, Node.js, Frontend Development
 
 ### Edge Computing
 
@@ -654,11 +739,23 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** Google's family of large language models designed for multimodal understanding (text, images, audio, video). Gemini powers various Google services and provides API access for developers to build AI-powered applications.
 **Related Terms:** ChatGPT, Claude, LLM, AI, Google
 
+### Git
+
+**Category:** DevOps / Version Control
+**Description:** A distributed version control system for tracking changes in source code during software development. Git enables multiple developers to collaborate on projects, manage branches, merge changes, and maintain complete history of modifications with features like staging, commits, and remote repositories.
+**Related Terms:** GitHub, GitLab, Bitbucket, CI/CD, Version Control
+
 ### GitHub
 
 **Category:** DevOps / Tools
 **Description:** A web-based platform for version control and collaboration using Git. GitHub provides repository hosting, pull requests, code review, issue tracking, GitHub Actions for CI/CD, and project management features for software development teams.
 **Related Terms:** Git, CI/CD, Pipeline
+
+### GitLab
+
+**Category:** DevOps / Platform
+**Description:** A complete DevOps platform delivered as a single application, providing source code management, CI/CD pipelines, issue tracking, and monitoring. GitLab offers both cloud-hosted and self-hosted options, enabling teams to manage the entire software development lifecycle.
+**Related Terms:** Git, GitHub, Bitbucket, CI/CD, DevOps
 
 ### GitOps
 
@@ -672,6 +769,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A statically typed, compiled programming language designed by Google emphasizing simplicity, concurrency, and performance. Go features garbage collection, built-in concurrency primitives (goroutines and channels), and fast compilation times.
 **Related Terms:** Rust, Concurrency, Microservices
 
+### God Object
+
+**Category:** Anti-Pattern / Software Engineering
+**Description:** A code smell where a single class or module knows too much or does too much, violating the single responsibility principle. God objects are difficult to maintain, test, and understand, and they create tight coupling throughout the codebase. Refactoring typically involves breaking them into smaller, focused components.
+**Related Terms:** Anti-Patterns, Code Smells, SOLID Principles, Single Responsibility
+
 ### GoHighLevel
 
 **Category:** Platform / Marketing Automation
@@ -683,6 +786,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** API / Query Language
 **Description:** A query language and runtime for APIs that allows clients to request exactly the data they need. GraphQL provides a complete schema, eliminates over-fetching/under-fetching, and enables powerful developer tooling.
 **Related Terms:** REST API, API Gateway, Backend Development
+
+### Greedy Algorithm
+
+**Category:** Algorithm / Computer Science
+**Description:** An algorithmic paradigm that makes the locally optimal choice at each step with the hope of finding a global optimum. Greedy algorithms are simple and efficient but don't always produce the best solution for all problems. Common examples include Dijkstra's shortest path, Huffman coding, and activity selection.
+**Related Terms:** Algorithm, Heuristic, Traveling Salesman Problem, Dynamic Programming
+
+### GSAP (GreenSock Animation Platform)
+
+**Category:** Library / Frontend
+**Description:** A professional-grade JavaScript animation library for creating high-performance animations on the web. GSAP provides precise control over animations with features like timeline sequencing, ScrollTrigger, morphing, and physics-based motion, widely used for interactive websites and web applications.
+**Related Terms:** JavaScript, Animation, Frontend Development, CSS
 
 ---
 
@@ -699,6 +814,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Cloud / Platform
 **Description:** A German cloud hosting provider offering dedicated servers, virtual private servers (VPS), cloud servers, and storage solutions. Hetzner is known for competitive pricing, high-performance hardware, and European data centers.
 **Related Terms:** DigitalOcean, AWS, Cloud Computing, VPS
+
+### Heuristic
+
+**Category:** Algorithm / Computer Science
+**Description:** A problem-solving approach that uses practical methods and shortcuts to produce good-enough solutions when finding optimal solutions is impractical. Heuristics sacrifice completeness or accuracy for speed, commonly used in search algorithms, AI, and optimization problems where exhaustive search is computationally expensive.
+**Related Terms:** Algorithm, Greedy Algorithm, Metaheuristics, Machine Learning
 
 ### Hostinger
 
@@ -723,6 +844,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** DevOps / Software Engineering
 **Description:** An urgent patch applied to production systems to fix critical bugs or security vulnerabilities. Hotfixes bypass normal development cycles and require careful testing and documentation to prevent introducing new issues.
 **Related Terms:** Rollback, CI/CD, Deployment
+
+### HTTP (Hypertext Transfer Protocol)
+
+**Category:** Networking / Protocol
+**Description:** The foundation protocol for data communication on the World Wide Web, defining how messages are formatted and transmitted between clients and servers. HTTP is stateless and uses methods like GET, POST, PUT, and DELETE to interact with resources identified by URLs.
+**Related Terms:** HTTPS, REST API, Web Server, DNS, Networking
+
+### HTTPS (HTTP Secure)
+
+**Category:** Networking / Security
+**Description:** The secure version of HTTP that encrypts data transmitted between client and server using TLS/SSL. HTTPS protects sensitive information from interception, verifies server identity through certificates, and is now standard for all web traffic, required by browsers and search engines.
+**Related Terms:** HTTP, TLS/SSL, Security, Cryptography, Web Hosting
 
 ### Hydration
 
@@ -782,6 +915,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A Core Web Vitals metric replacing First Input Delay (FID) that measures responsiveness by observing the latency of all user interactions throughout the page lifecycle. Lower INP values indicate a more responsive user experience.
 **Related Terms:** Core Web Vitals, First Contentful Paint, Cumulative Layout Shift
 
+### Ionic
+
+**Category:** Framework / Mobile
+**Description:** An open-source UI toolkit for building high-quality cross-platform mobile, desktop, and web applications using web technologies (HTML, CSS, JavaScript). Ionic integrates with popular frameworks like Angular, React, and Vue, and uses Capacitor or Cordova to access native device features.
+**Related Terms:** React Native, Flutter, Xamarin, Mobile Development, Capacitor
+
 ### Island Architecture
 
 **Category:** Frontend / Architecture
@@ -797,6 +936,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 ---
 
 ## J
+
+### JavaScript
+
+**Category:** Programming Language
+**Description:** A dynamic, interpreted programming language that is one of the core technologies of the web alongside HTML and CSS. JavaScript enables interactive web pages, runs in browsers and on servers (Node.js), and supports object-oriented, functional, and event-driven programming paradigms.
+**Related Terms:** TypeScript, ECMAScript, Node.js, React, Vue.js
+
+### Jenkins
+
+**Category:** DevOps / CI/CD
+**Description:** An open-source automation server for building, testing, and deploying software through continuous integration and delivery pipelines. Jenkins supports hundreds of plugins for integrating with version control, build tools, and deployment platforms, enabling customizable automation workflows.
+**Related Terms:** CI/CD, GitLab, GitHub Actions, Pipeline, DevOps
 
 ### JIRA
 
@@ -815,6 +966,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** State Management / Frontend
 **Description:** A primitive and flexible state management library for React using atomic state patterns. Jotai provides a bottom-up approach with minimal boilerplate, automatic optimization, and TypeScript support for managing application state.
 **Related Terms:** State Management, React, Zustand, Recoil
+
+### jQuery
+
+**Category:** Library / Frontend
+**Description:** A fast, small JavaScript library that simplifies HTML document traversal, event handling, animation, and Ajax interactions. While less prominent with modern frameworks, jQuery remains widely used in legacy systems and provides cross-browser compatibility for DOM manipulation.
+**Related Terms:** JavaScript, DOM, Ajax, Frontend Development, Alpine.js
 
 ### JWT (JSON Web Token)
 
@@ -837,6 +994,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** System Design / Messaging
 **Description:** A distributed event streaming platform designed for high-throughput, fault-tolerant message processing. Kafka provides publish-subscribe messaging, stream processing, and durable storage, commonly used for building real-time data pipelines and event-driven architectures.
 **Related Terms:** RabbitMQ, Message Queue, Event-Driven Architecture, Pub/Sub
+
+### KAG (Knowledge-Augmented Generation)
+
+**Category:** AI / Machine Learning
+**Description:** An advanced AI framework that enhances language model outputs by integrating structured knowledge graphs with retrieval-augmented generation. KAG combines the relational reasoning of knowledge graphs with LLM capabilities, enabling more accurate, explainable, and contextually grounded responses through explicit knowledge representation and logical inference.
+**Related Terms:** RAG, CAG, Knowledge Graph, LLM, AI, Machine Learning
 
 ### Kali Linux
 
@@ -950,6 +1113,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A type of performance testing that simulates expected user load to identify bottlenecks and verify system behavior under stress. Tools like JMeter, Gatling, and k6 are commonly used for load testing.
 **Related Terms:** Monitoring, Observability
 
+### Lua
+
+**Category:** Programming Language
+**Description:** A lightweight, high-level scripting language designed for embedded use in applications. Lua is known for its simple syntax, fast execution, and small footprint, making it popular for game development (Roblox, World of Warcraft), configuration, and extending applications like Neovim and Redis.
+**Related Terms:** Neovim, Scripting, Game Development, Embedded Systems
+
 ### Logs / Metrics / Traces
 
 **Category:** DevOps
@@ -959,6 +1128,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 ---
 
 ## M
+
+### Machine Learning
+
+**Category:** Technology / AI
+**Description:** A subset of artificial intelligence that enables systems to learn and improve from experience without being explicitly programmed. Machine learning uses algorithms to identify patterns in data, make predictions, and automate decision-making through techniques like supervised, unsupervised, and reinforcement learning.
+**Related Terms:** AI, Deep Learning, Data Science, Neural Networks, Python
 
 ### Memory
 
@@ -989,6 +1164,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Framework / Full-Stack
 **Description:** A full-stack JavaScript platform for building real-time web and mobile applications. Meteor provides an integrated ecosystem with database integration, real-time data synchronization, hot code push, and built-in user accounts.
 **Related Terms:** Node.js, Real-time, Full-Stack, WebSockets
+
+### Metaheuristics
+
+**Category:** Algorithm / Optimization
+**Description:** High-level problem-solving strategies that guide the search process to find near-optimal solutions for complex optimization problems. Metaheuristics include genetic algorithms, simulated annealing, ant colony optimization, and particle swarm optimization, often used when exact methods are impractical.
+**Related Terms:** Heuristic, Greedy Algorithm, Algorithm, Traveling Salesman Problem
 
 ### Microservices
 
@@ -1096,17 +1277,35 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A domain registrar and web hosting company offering domain registration, SSL certificates, hosting, and privacy protection services. Namecheap is known for competitive pricing, user-friendly interface, and strong domain privacy features.
 **Related Terms:** Hostinger, Web Hosting, DNS, Domain
 
+### Nearest Neighbor
+
+**Category:** Algorithm / Machine Learning
+**Description:** A family of algorithms used for classification and regression that predict based on the closest training examples in the feature space. K-Nearest Neighbors (KNN) is a simple but effective algorithm where the output is determined by the majority vote or average of the k nearest data points.
+**Related Terms:** Machine Learning, Algorithm, Classification, Vector Database
+
 ### NeonDB
 
 **Category:** Database / Serverless
 **Description:** A fully managed serverless PostgreSQL platform offering automatic scaling, branching for development workflows, and pay-per-use pricing. Neon separates storage and compute, enabling instant database provisioning, point-in-time recovery, and cost-effective scaling for modern applications.
 **Related Terms:** PostgreSQL, Serverless, Supabase, Turso, Database
 
+### Neovim
+
+**Category:** Tools / Editor
+**Description:** A hyperextensible text editor that is a refactored and modernized fork of Vim. Neovim focuses on extensibility, usability, and modern features including built-in LSP support, Lua scripting, async plugins, and better defaults while maintaining Vim compatibility.
+**Related Terms:** Vim, Lua, IDE, Text Editor, Developer Tools
+
 ### Nest.js
 
 **Category:** Framework / Backend
 **Description:** A progressive Node.js framework for building efficient, scalable server-side applications using TypeScript. Nest.js provides an opinionated architecture inspired by Angular, with decorators, dependency injection, and modular organization.
 **Related Terms:** Node.js, TypeScript, Express, Backend Framework
+
+### Networking
+
+**Category:** Infrastructure / Foundational Concept
+**Description:** The practice of connecting computers and devices to share resources and communicate. Networking encompasses protocols (TCP/IP, HTTP), hardware (routers, switches), topologies, and concepts like DNS, firewalls, load balancing, and VPNs that enable modern distributed systems and internet connectivity.
+**Related Terms:** DNS, HTTP, VPN, Port Forwarding, Load Balancer
 
 ### Next.js
 
@@ -1125,6 +1324,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Database / Tools
 **Description:** An open-source Airtable alternative that turns any MySQL, PostgreSQL, SQL Server, SQLite, or MariaDB database into a smart spreadsheet interface. NocoDB provides REST APIs, webhooks, and automation without coding.
 **Related Terms:** Airtable, Database, Low-Code, API
+
+### NoSQL
+
+**Category:** Database / Architecture
+**Description:** A category of database management systems that do not use the traditional relational table model. NoSQL databases include document stores (MongoDB), key-value stores (Redis), column-family stores (Cassandra), and graph databases (Neo4j), offering flexibility, horizontal scaling, and high performance for specific use cases.
+**Related Terms:** SQL, MongoDB, Redis, DynamoDB, Database
 
 ### Notion
 
@@ -1248,6 +1453,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A web framework for Elixir inspired by Ruby on Rails, built on the Erlang VM for high performance and fault tolerance. Phoenix provides channels for real-time communication, LiveView for interactive UIs without JavaScript, and excellent developer productivity.
 **Related Terms:** Elixir, Ash, Rails, Web Framework
 
+### PHPStan
+
+**Category:** Tools / Static Analysis
+**Description:** A static analysis tool for PHP that finds bugs in code without running it. PHPStan analyzes code paths, checks types, and identifies potential errors through progressive strictness levels, helping developers catch issues early and improve code quality in PHP projects.
+**Related Terms:** PHP, Laravel, Static Analysis, Code Quality, PSR
+
 ### Pipeline
 
 **Category:** DevOps / CI/CD
@@ -1290,6 +1501,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An approach that uses different database technologies for different data storage needs within the same application. Polyglot persistence matches each data type with the most suitable database (SQL, NoSQL, graph, etc.) rather than using one-size-fits-all.
 **Related Terms:** Microservices, Database Design, System Architecture
 
+### Port Forwarding
+
+**Category:** Networking / Infrastructure
+**Description:** A technique that redirects network traffic from one IP address and port combination to another. Port forwarding enables external devices to access services on private networks, commonly used for hosting game servers, remote access, and exposing local development environments to the internet.
+**Related Terms:** Networking, VPN, Firewall, NAT, DNS
+
 ### Progressive Web App (PWA)
 
 **Category:** Frontend / Mobile
@@ -1307,6 +1524,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** UX / Design
 **Description:** The process of creating interactive or static models of a product to test concepts, gather feedback, and validate designs before full development. Prototypes range from low-fidelity wireframes to high-fidelity interactive mockups.
 **Related Terms:** Wireframing, User Journey Mapping, UX Design
+
+### PSR (PHP Standards Recommendations)
+
+**Category:** Standards / PHP
+**Description:** A collection of PHP coding standards and specifications developed by the PHP Framework Interop Group (PHP-FIG). PSR standards cover autoloading (PSR-4), coding style (PSR-12), HTTP interfaces (PSR-7), and logging (PSR-3), promoting interoperability between PHP frameworks and libraries.
+**Related Terms:** PHP, Laravel, PHPStan, Coding Standards, Packagist
 
 ### Pub/Sub (Publish/Subscribe)
 
@@ -1358,11 +1581,23 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An open-source message broker that implements AMQP and other messaging protocols. RabbitMQ facilitates reliable message delivery between distributed systems through queues, exchanges, and routing, supporting various messaging patterns.
 **Related Terms:** Kafka, Message Queue, Event-Driven Architecture
 
+### RAG (Retrieval-Augmented Generation)
+
+**Category:** AI / Machine Learning
+**Description:** An AI framework that enhances large language model outputs by retrieving relevant information from external knowledge sources before generating responses. RAG combines the power of LLMs with up-to-date, domain-specific data to produce more accurate and contextually relevant answers.
+**Related Terms:** LLM, Vector Database, AI, Machine Learning, Embeddings
+
 ### RBAC (Role-Based Access Control)
 
 **Category:** Security / Access Control
 **Description:** An authorization model that restricts system access based on roles assigned to users rather than individual permissions. RBAC simplifies permission management by grouping permissions into roles (admin, editor, viewer) that can be assigned to users, providing scalable and maintainable access control in enterprise applications.
 **Related Terms:** Authorization, Authentication, Security, Multi-tenancy
+
+### RDS (Relational Database Service)
+
+**Category:** Cloud / Database
+**Description:** A managed relational database service offered by cloud providers (AWS, Azure, GCP) that handles database administration tasks like provisioning, patching, backups, and scaling. RDS supports multiple database engines including MySQL, PostgreSQL, SQL Server, and Oracle, allowing developers to focus on application logic.
+**Related Terms:** AWS, Database, SQL, PostgreSQL, Cloud Computing
 
 ### Red Hat
 
@@ -1548,6 +1783,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A database architecture pattern that splits data across multiple database instances (shards) based on a shard key. Sharding enables horizontal scaling by distributing load and storage requirements across multiple servers.
 **Related Terms:** Horizontal Scaling, Database Partitioning, Scalability
 
+### ShadCN UI
+
+**Category:** UI Library / Frontend
+**Description:** A collection of reusable, accessible UI components built with Radix UI primitives and styled with Tailwind CSS. Unlike traditional component libraries, ShadCN UI provides copy-pasteable component code that developers own and customize, promoting full control over styling and behavior without external dependencies.
+**Related Terms:** Tailwind CSS, Radix UI, React, Component Library, Accessibility
+
 ### Single Page Application (SPA)
 
 **Category:** Frontend / Architecture
@@ -1584,6 +1825,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An architectural pattern that structures applications as a collection of loosely coupled services communicating over a network. SOA predates microservices and typically uses enterprise service buses (ESBs) and standardized protocols like SOAP.
 **Related Terms:** Microservices, Web Services, Enterprise Architecture
 
+### SOHO (Small Office/Home Office)
+
+**Category:** Business / IT Infrastructure
+**Description:** A term describing small businesses or remote work environments with minimal IT infrastructure needs. SOHO setups typically involve consumer-grade networking equipment, cloud services, and personal devices, requiring different security and support considerations than enterprise environments.
+**Related Terms:** Networking, VPN, Remote Work, Cloud Services
+
 ### Solid.js
 
 **Category:** Framework / Frontend
@@ -1595,6 +1842,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Software Engineering
 **Description:** Five design principles for writing maintainable code: **S**ingle Responsibility, **O**pen/Closed, **L**iskov Substitution, **I**nterface Segregation, and **D**ependency Inversion. Following SOLID leads to flexible, extensible, and testable code.
 **Related Terms:** DRY, Dependency Injection, Anti-Patterns
+
+### SQL (Structured Query Language)
+
+**Category:** Database / Programming Language
+**Description:** A domain-specific language used for managing and manipulating relational databases. SQL provides commands for querying data (SELECT), modifying records (INSERT, UPDATE, DELETE), and defining database structures (CREATE, ALTER). It remains the standard language for RDBMS systems like PostgreSQL, MySQL, and SQL Server.
+**Related Terms:** Database, PostgreSQL, MySQL, NoSQL, ORM, Query Optimization
 
 ### SQLite
 
@@ -1756,11 +2009,23 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** In different contexts: a unit of text processed by parsers or language models; an authentication credential (like JWT); or a representation of a security key. Tokens are fundamental to parsing, security, and modern authentication systems.
 **Related Terms:** Serialization, String
 
+### Traveling Salesman Problem (TSP)
+
+**Category:** Algorithm / Optimization
+**Description:** A classic NP-hard optimization problem seeking the shortest route visiting all given cities exactly once and returning to the origin. TSP is fundamental in computer science for studying algorithmic complexity, heuristics, and metaheuristics. Real-world applications include logistics, circuit design, and DNA sequencing.
+**Related Terms:** Greedy Algorithm, Heuristic, Metaheuristics, Nearest Neighbor, Graph Theory
+
 ### Turso
 
 **Category:** Database / Edge
 **Description:** A SQLite-based edge database platform providing globally distributed, low-latency data access. Turso uses libSQL (SQLite fork) and enables embedding databases at the edge while syncing with a primary database, ideal for applications requiring local-first data access.
 **Related Terms:** SQLite, NeonDB, Edge Computing, Database
+
+### TypeScript
+
+**Category:** Programming Language
+**Description:** A strongly-typed superset of JavaScript developed by Microsoft that compiles to plain JavaScript. TypeScript adds static type checking, interfaces, generics, and enhanced IDE support, enabling developers to catch errors at compile time and build more maintainable large-scale applications.
+**Related Terms:** JavaScript, ECMAScript, Node.js, Angular, Type Safety
 
 ---
 
@@ -1794,11 +2059,23 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 
 ## V
 
+### Vector Database
+
+**Category:** Database / AI
+**Description:** A specialized database optimized for storing, indexing, and querying high-dimensional vector embeddings. Vector databases enable semantic search, similarity matching, and retrieval-augmented generation (RAG) by finding the most similar vectors to a query using algorithms like approximate nearest neighbor (ANN). Popular examples include Pinecone, Weaviate, Milvus, and Qdrant.
+**Related Terms:** RAG, Machine Learning, AI, Embeddings, Semantic Search, PostgreSQL (pgvector)
+
 ### Vibe Coding
 
 **Category:** Development Philosophy / AI
 **Description:** A development approach that emphasizes rapid iteration, experimentation, and creative flow aided by AI tools. Vibe coding prioritizes developer intuition and momentum over rigid planning, leveraging AI assistants for quick prototyping and problem-solving.
 **Related Terms:** AI, LLM, Rapid Prototyping, Developer Experience
+
+### Vim
+
+**Category:** Text Editor / Development Tool
+**Description:** A highly configurable, modal text editor built for efficient text manipulation. Vim's philosophy centers on keeping hands on the keyboard through command mode for navigation and editing, and insert mode for typing. Its modal approach and extensive keyboard shortcuts enable exceptionally fast editing for experienced users.
+**Related Terms:** Neovim, IDE, Terminal, Linux, Text Editor
 
 ### Virtual DOM
 
@@ -1806,15 +2083,33 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A lightweight, in-memory representation of the actual DOM. Frameworks like React use the Virtual DOM to batch and optimize updates, comparing new and old trees to compute the minimal changes needed (reconciliation).
 **Related Terms:** DOM, Reconciliation, Hydration
 
+### Visual Basic
+
+**Category:** Programming Language
+**Description:** A Microsoft programming language featuring an event-driven paradigm and integrated development environment (IDE) designed for rapid application development. While the classic Visual Basic (VB6) is legacy, Visual Basic .NET continues as part of the .NET framework, commonly used for Windows desktop applications and Office automation.
+**Related Terms:** .NET, ASP.NET, C#, Windows, Microsoft
+
 ### VPS (Virtual Private Server)
 
 **Category:** Infrastructure / Hosting
 **Description:** A virtualized server environment that mimics dedicated server functionality within a shared hosting infrastructure. VPS provides isolated resources, root access, and greater control than shared hosting at a lower cost than dedicated servers. Popular for development environments, small applications, and cost-effective hosting.
 **Related Terms:** Cloud Computing, Containerization, Linux, Ubuntu, Contabo, Hostinger, DigitalOcean
 
+### VPN (Virtual Private Network)
+
+**Category:** Networking / Security
+**Description:** A technology that creates an encrypted tunnel between a device and a network, protecting data in transit and masking the user's IP address. VPNs are used for secure remote access to corporate networks, privacy protection, and bypassing geographic restrictions. Common protocols include WireGuard, OpenVPN, and IPSec.
+**Related Terms:** Networking, Security, Encryption, Remote Work, SOHO
+
 ---
 
 ## W
+
+### Web Hosting
+
+**Category:** Infrastructure / Services
+**Description:** Services that provide server space and resources for websites and web applications to be accessible on the internet. Web hosting ranges from shared hosting (multiple sites on one server) to dedicated servers, VPS, and cloud hosting. Providers handle server maintenance, security, and connectivity while customers manage their content and applications.
+**Related Terms:** VPS, Cloud Computing, Domain, DNS, Server, DigitalOcean, AWS
 
 ### Web Scraping
 
@@ -1833,6 +2128,22 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** UX / Design
 **Description:** The process of creating low-fidelity visual representations of user interfaces to plan layout, structure, and functionality. Wireframes focus on content hierarchy and user flow rather than visual design, enabling rapid iteration and stakeholder feedback.
 **Related Terms:** Prototyping, UX Design, Information Architecture, User Journey Mapping
+
+---
+
+## X
+
+### Xamarin
+
+**Category:** Framework / Mobile Development
+**Description:** A Microsoft framework for building cross-platform mobile applications using C# and .NET. Xamarin allows developers to share code across iOS, Android, and Windows while accessing native platform APIs. Although being superseded by .NET MAUI, Xamarin remains in production use and was foundational in establishing C# as a mobile development option.
+**Related Terms:** .NET MAUI, C#, .NET, Mobile Development, Cross-Platform, Ionic
+
+### Xcode
+
+**Category:** IDE / Development Tool
+**Description:** Apple's integrated development environment for building applications for macOS, iOS, iPadOS, watchOS, and tvOS. Xcode includes a code editor, debugger, Interface Builder, simulators, profiling tools, and the Swift/Objective-C compilers. It is the required tool for publishing apps to the Apple App Store.
+**Related Terms:** Swift, iOS, macOS, Apple, IDE, App Store
 
 ---
 
@@ -1874,4 +2185,4 @@ To add new terms to this dictionary:
 
 ---
 
-*Last updated: December 2025*
+*Last updated: December 04, 2025 00:26 PST (Asia/Manila)*
