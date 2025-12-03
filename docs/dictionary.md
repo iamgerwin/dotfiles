@@ -96,6 +96,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A comprehensive platform for creating, publishing, securing, and managing APIs throughout their lifecycle. API Managers provide developer portals, analytics, monetization, versioning, and governance capabilities beyond basic API Gateway functionality.
 **Related Terms:** API Gateway, MuleSoft, OpenAPI, Rate Limiting
 
+### Authentication
+
+**Category:** Security / Identity
+**Description:** The process of verifying the identity of a user, system, or entity attempting to access a resource. Authentication answers "who are you?" through credentials like passwords, tokens, biometrics, or certificates. Common methods include OAuth2, SAML, and multi-factor authentication (MFA).
+**Related Terms:** Authorization, OAuth2, JWT, OpenID, SSO
+
+### Authorization
+
+**Category:** Security / Access Control
+**Description:** The process of determining what actions or resources an authenticated user is permitted to access. Authorization answers "what can you do?" and is typically implemented through roles, permissions, or policies. Often confused with authentication, which verifies identity.
+**Related Terms:** Authentication, RBAC, OAuth2, JWT
+
 ### Autoscaling
 
 **Category:** DevOps / Cloud
@@ -160,11 +172,23 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A software development approach that extends TDD by writing tests in natural language describing system behavior from the user's perspective. BDD encourages collaboration between developers, QA, and non-technical stakeholders using tools like Cucumber or SpecFlow.
 **Related Terms:** TDD, Testing, Agile Methodology
 
+### Behavioral Design Patterns
+
+**Category:** Design Pattern / Software Engineering
+**Description:** A category of design patterns that focus on communication and interaction between objects. These patterns define how objects collaborate and distribute responsibility. Examples include Observer, Strategy, Command, State, Chain of Responsibility, Mediator, Memento, Visitor, Template Method, and Iterator patterns.
+**Related Terms:** Creational Design Patterns, Structural Design Patterns, Observer Pattern, Strategy Pattern, State Machine
+
 ### Blue-Green Deployment
 
 **Category:** DevOps / Deployment
 **Description:** A deployment strategy that maintains two identical production environments (blue and green). New releases deploy to the inactive environment, and traffic switches over after validation, enabling instant rollback and zero-downtime deployments.
 **Related Terms:** Canary Releases, CI/CD, Rollback
+
+### Blazor
+
+**Category:** Framework / Frontend
+**Description:** A Microsoft framework for building interactive web UIs using C# instead of JavaScript. Blazor supports both server-side rendering (Blazor Server) and client-side WebAssembly execution (Blazor WebAssembly), enabling .NET developers to build full-stack web applications with shared code.
+**Related Terms:** C#, .NET Core, WebAssembly, ASP.NET, Frontend Framework
 
 ### Bulkhead Isolation
 
@@ -217,6 +241,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** System Design
 **Description:** A principle stating that a distributed system can only guarantee two of three properties: Consistency (all nodes see the same data), Availability (every request receives a response), and Partition tolerance (the system continues operating despite network failures).
 **Related Terms:** Stateless vs Stateful, Event-Driven Architecture
+
+### C#
+
+**Category:** Programming Language
+**Description:** A modern, object-oriented programming language developed by Microsoft as part of the .NET ecosystem. C# combines the power of C++ with the simplicity of Visual Basic, supporting features like LINQ, async/await, pattern matching, and nullable reference types. Widely used for Windows applications, web development (ASP.NET), game development (Unity), and cross-platform mobile apps (.NET MAUI).
+**Related Terms:** .NET Core, .NET MAUI, Blazor, ASP.NET, Unity
 
 ### CCNA (Cisco Certified Network Associate)
 
@@ -350,6 +380,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An architectural pattern that separates read operations (queries) from write operations (commands) using different models. CQRS enables independent scaling, optimization, and evolution of read and write workloads, often paired with Event Sourcing.
 **Related Terms:** Event Sourcing, DDD, Microservices, Saga Pattern
 
+### Creational Design Patterns
+
+**Category:** Design Pattern / Software Engineering
+**Description:** A category of design patterns that deal with object creation mechanisms, trying to create objects in a manner suitable to the situation. These patterns abstract the instantiation process and help make a system independent of how its objects are created. Examples include Singleton, Factory Method, Abstract Factory, Builder, and Prototype patterns.
+**Related Terms:** Structural Design Patterns, Behavioral Design Patterns, Singleton, Factory Pattern, Dependency Injection
+
 ### Core Web Vitals
 
 **Category:** Frontend / Performance
@@ -444,6 +480,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A cloud infrastructure provider focused on simplicity and developer experience, offering droplets (virtual machines), managed databases, Kubernetes, app platform, and storage solutions. DigitalOcean targets developers and small to medium businesses.
 **Related Terms:** AWS, Azure, Hetzner, Cloud Computing
 
+### Django
+
+**Category:** Framework / Backend
+**Description:** A high-level Python web framework that encourages rapid development and clean, pragmatic design. Django follows the "batteries included" philosophy, providing ORM, authentication, admin interface, URL routing, and templating out of the box. Known for its "Don't Repeat Yourself" (DRY) principle and emphasis on security.
+**Related Terms:** Python, Flask, FastAPI, MVC, Backend Framework
+
+### DMAIC
+
+**Category:** Project Management / Quality
+**Description:** A data-driven quality strategy used for improving processes, standing for Define, Measure, Analyze, Improve, and Control. DMAIC is the core methodology of Six Sigma, providing a structured approach to problem-solving and process optimization through statistical analysis and root cause identification.
+**Related Terms:** Six Sigma, Lean, Project Management, Process Improvement
+
 ### Docker Image
 
 **Category:** DevOps / Cloud
@@ -536,6 +584,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** Conditional toggles that enable or disable features in production without code deployment. Feature flags facilitate A/B testing, gradual rollouts, canary releases, and quick rollback of problematic features, reducing deployment risk.
 **Related Terms:** CI/CD, Deployment Strategies, Testing
 
+### FastAPI
+
+**Category:** Framework / Backend
+**Description:** A modern, high-performance Python web framework for building APIs based on standard Python type hints. FastAPI leverages Pydantic for data validation, automatic OpenAPI documentation generation, and async support. Known for being one of the fastest Python frameworks available.
+**Related Terms:** Python, Flask, Django, Pydantic, REST API, OpenAPI
+
 ### Fedora
 
 **Category:** Operating System / Linux
@@ -553,6 +607,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Frontend / Performance
 **Description:** A performance metric measuring the time from navigation start to when the browser renders the first piece of DOM content. FCP indicates when users first see visual feedback that the page is loading.
 **Related Terms:** Core Web Vitals, Largest Contentful Paint, Critical Rendering Path
+
+### Flask
+
+**Category:** Framework / Backend
+**Description:** A lightweight, flexible Python micro-framework for building web applications and APIs. Flask provides essential tools like routing, request handling, and templating (Jinja2) while leaving architectural decisions to developers. Popular for its simplicity and extensive ecosystem of extensions.
+**Related Terms:** Python, Django, FastAPI, Backend Framework, Jinja2
 
 ### Flutter
 
@@ -697,6 +757,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** DevOps / Infrastructure
 **Description:** An approach where servers are never modified after deployment. Instead of updating existing servers, new servers are deployed with changes and old ones are destroyed. This eliminates configuration drift and simplifies rollbacks.
 **Related Terms:** Infrastructure as Code, Containerization, GitOps
+
+### Inertia.js
+
+**Category:** Framework / Frontend
+**Description:** A library that allows building single-page applications using classic server-side routing and controllers without a full client-side framework API. Inertia.js bridges the gap between server-side frameworks (Laravel, Rails) and modern JavaScript frameworks (Vue, React, Svelte), providing SPA-like experiences without building an API.
+**Related Terms:** Laravel, Vue.js, React, Livewire, SPA
 
 ### Information Architecture
 
@@ -860,6 +926,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An open-source Unix-like operating system kernel that powers servers, desktops, mobile devices (Android), and embedded systems. Linux distributions (Ubuntu, Fedora, Red Hat, Debian) provide the foundation for most web servers, cloud infrastructure, and containerized applications.
 **Related Terms:** Ubuntu, Fedora, Red Hat, Kali Linux, Operating System
 
+### Livewire
+
+**Category:** Framework / Frontend
+**Description:** A full-stack framework for Laravel that enables building dynamic, reactive interfaces using PHP instead of JavaScript. Livewire components update the DOM in real-time through AJAX requests, allowing developers to create interactive UIs while staying in the Laravel ecosystem.
+**Related Terms:** Laravel, Inertia.js, PHP, Blazor, Alpine.js
+
 ### LLM (Large Language Model)
 
 **Category:** AI / Machine Learning
@@ -930,6 +1002,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** Software components that sit between applications or services to facilitate communication, data transformation, authentication, or logging. Middleware handles cross-cutting concerns and decouples different parts of the system.
 **Related Terms:** API Gateway, Backend Development, Service Architecture
 
+### Minimal API
+
+**Category:** Framework / Backend
+**Description:** A simplified approach to building HTTP APIs in ASP.NET Core with minimal code and configuration. Minimal APIs reduce boilerplate by allowing endpoint definitions directly in Program.cs without controllers, making them ideal for microservices, small APIs, and rapid prototyping while maintaining full access to ASP.NET Core features.
+**Related Terms:** ASP.NET, .NET Core, C#, REST API, FastAPI
+
 ### Mobile-First Design
 
 **Category:** Frontend / UX
@@ -987,6 +1065,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 ---
 
 ## N
+
+### .NET Core
+
+**Category:** Framework / Platform
+**Description:** A cross-platform, open-source framework developed by Microsoft for building modern applications. .NET Core (now unified as .NET 5+) supports Windows, macOS, and Linux, enabling development of web applications, APIs, microservices, and cloud-native solutions with C#, F#, or Visual Basic.
+**Related Terms:** C#, ASP.NET, .NET MAUI, Blazor, Minimal API
+
+### .NET MAUI
+
+**Category:** Framework / Mobile
+**Description:** .NET Multi-platform App UI is Microsoft's cross-platform framework for creating native mobile and desktop apps with C# and XAML. MAUI is the evolution of Xamarin.Forms, enabling single-codebase development for Android, iOS, macOS, and Windows applications.
+**Related Terms:** C#, .NET Core, Xamarin, Flutter, React Native
 
 ### N+1 Query Problem
 
@@ -1224,6 +1314,18 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A messaging pattern where senders (publishers) send messages to a topic without knowledge of receivers (subscribers). Subscribers express interest in topics and receive relevant messages. This decouples producers from consumers.
 **Related Terms:** Message Queue, Event-Driven Architecture
 
+### Pydantic
+
+**Category:** Library / Python
+**Description:** A Python library for data validation and settings management using Python type annotations. Pydantic enforces type hints at runtime, providing automatic data parsing, validation, and serialization. It's the foundation for FastAPI's request/response handling and widely used for configuration management.
+**Related Terms:** Python, FastAPI, Type Safety, Data Validation
+
+### Python
+
+**Category:** Programming Language
+**Description:** A high-level, interpreted programming language emphasizing code readability and simplicity. Python's extensive standard library and ecosystem support web development (Django, Flask, FastAPI), data science, machine learning, automation, and scripting. Known for its "batteries included" philosophy and beginner-friendly syntax.
+**Related Terms:** Django, Flask, FastAPI, Pydantic, Scrapy
+
 ---
 
 ## Q
@@ -1238,6 +1340,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 
 ## R
 
+### R
+
+**Category:** Programming Language
+**Description:** A programming language and environment designed for statistical computing and data visualization. R provides extensive statistical and graphical techniques including linear and nonlinear modeling, time-series analysis, classification, and clustering. Widely used in data science, bioinformatics, and academic research.
+**Related Terms:** Python, Data Science, Statistics, Machine Learning
+
 ### Race Condition
 
 **Category:** Concurrency / Foundational Concept
@@ -1249,6 +1357,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** System Design / Messaging
 **Description:** An open-source message broker that implements AMQP and other messaging protocols. RabbitMQ facilitates reliable message delivery between distributed systems through queues, exchanges, and routing, supporting various messaging patterns.
 **Related Terms:** Kafka, Message Queue, Event-Driven Architecture
+
+### RBAC (Role-Based Access Control)
+
+**Category:** Security / Access Control
+**Description:** An authorization model that restricts system access based on roles assigned to users rather than individual permissions. RBAC simplifies permission management by grouping permissions into roles (admin, editor, viewer) that can be assigned to users, providing scalable and maintainable access control in enterprise applications.
+**Related Terms:** Authorization, Authentication, Security, Multi-tenancy
 
 ### Red Hat
 
@@ -1386,6 +1500,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An agile framework that organizes work into time-boxed iterations called sprints (typically 2-4 weeks). Scrum defines roles (Product Owner, Scrum Master, Development Team), ceremonies (daily standups, sprint planning, retrospectives), and artifacts (product backlog, sprint backlog).
 **Related Terms:** Agile Methodology, Kanban, Sprint, JIRA
 
+### Scrapy
+
+**Category:** Framework / Python
+**Description:** An open-source Python framework for web scraping and crawling. Scrapy provides tools for extracting data from websites, processing it, and storing it in various formats. It handles requests, follows links, respects robots.txt, and supports middleware for customization.
+**Related Terms:** Python, Web Scraping, BeautifulSoup, Data Extraction
+
 ### Semantic Versioning
 
 **Category:** Software Engineering / Best Practice
@@ -1397,6 +1517,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Foundational Concept
 **Description:** **Serialization** converts an object into a format (JSON, XML, binary) that can be stored or transmitted. **Deserialization** is the reverse process of reconstructing the object from its serialized form.
 **Related Terms:** Token, Data Structure
+
+### Sentry
+
+**Category:** DevOps / Monitoring
+**Description:** An open-source application monitoring and error tracking platform that helps developers identify, triage, and resolve crashes in real-time. Sentry provides stack traces, breadcrumbs, release tracking, and performance monitoring across web, mobile, and backend applications.
+**Related Terms:** Observability, Monitoring, Datadog, Error Tracking, Debugging
 
 ### Serverless Architecture
 
@@ -1554,6 +1680,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A sequence of characters used to represent text. Strings are immutable in many languages and support operations like concatenation, slicing, searching, and pattern matching. String handling is fundamental to most applications.
 **Related Terms:** Token, Data Structure
 
+### Structural Design Patterns
+
+**Category:** Design Pattern / Software Engineering
+**Description:** A category of design patterns that focus on how classes and objects are composed to form larger structures. These patterns simplify design by identifying simple ways to realize relationships between entities. Examples include Adapter, Bridge, Composite, Decorator, Facade, Flyweight, and Proxy patterns.
+**Related Terms:** Creational Design Patterns, Behavioral Design Patterns, Adapter Pattern, Decorator Pattern, Facade Pattern
+
 ### Supabase
 
 **Category:** Backend / Platform
@@ -1571,6 +1703,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** API / Tools
 **Description:** A suite of tools for designing, building, documenting, and consuming RESTful APIs. Swagger uses the OpenAPI Specification to generate interactive API documentation, enable API testing, and create client SDKs automatically.
 **Related Terms:** OpenAPI, REST API, API Documentation
+
+### Swift
+
+**Category:** Programming Language
+**Description:** A powerful, intuitive programming language developed by Apple for iOS, macOS, watchOS, and tvOS development. Swift combines modern language features like type safety, optionals, and protocol-oriented programming with performance comparable to C. It's designed to be safe, fast, and expressive.
+**Related Terms:** iOS, Kotlin, Mobile Development, Xcode
 
 ---
 
@@ -1677,6 +1815,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 ---
 
 ## W
+
+### Web Scraping
+
+**Category:** Technique / Data Extraction
+**Description:** The automated process of extracting data from websites using software tools or scripts. Web scraping involves fetching web pages, parsing HTML/XML content, and extracting structured data for analysis, aggregation, or storage. Common tools include Scrapy, BeautifulSoup, and Puppeteer.
+**Related Terms:** Scrapy, Python, API, Data Extraction, BeautifulSoup
 
 ### White Hat
 
