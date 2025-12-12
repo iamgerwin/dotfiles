@@ -97,6 +97,7 @@ dotfiles/
 │       ├── version-control/ # Git workflows and best practices
 │       └── programming-principles/ # Core programming principles and patterns
 ├── ai-prompts/         # AI prompts management system
+│   └── skills/         # Claude Skills (reusable skill packages)
 └── scripts/
     ├── install-brew.sh # Homebrew installation script
     ├── setup-tmux.sh   # Tmux setup and configuration script
@@ -111,6 +112,7 @@ dotfiles/
     ├── git-profile-manager # Full git profile CRUD operations
     ├── ssh-key-manager     # SSH key organization and migration
     ├── import-git-profiles # Import existing Git config and SSH keys
+    ├── sync-skills.sh  # Sync Claude Skills to local directory
     └── clickup/        # ClickUp API integration scripts
         ├── clickup-api.sh      # Main ClickUp API wrapper
         ├── clickup-download.sh # File download utility
@@ -729,6 +731,30 @@ ai-prompt copy development/code-review
 ```
 
 See [AI_PROMPTS.md](AI_PROMPTS.md) for complete documentation.
+
+### Claude Skills
+
+Skills are reusable, versioned packages that extend Claude's capabilities with project-specific knowledge, scripts, and templates. Skills live in `ai-prompts/skills/` and can be synced to your local Claude skills directory.
+
+**Available Skills:**
+
+| Skill | Description |
+|-------|-------------|
+| `project-bootstrap` | Initialize new Laravel/Next.js projects with opinionated defaults |
+| `code-review-checklist` | Comprehensive code review checklists for backend and frontend |
+
+```bash
+# Sync skills to your local Claude directory
+~/dotfiles/scripts/sync-skills.sh
+
+# Preview what would be synced
+~/dotfiles/scripts/sync-skills.sh --dry-run
+
+# Custom target directory
+~/dotfiles/scripts/sync-skills.sh --target ~/my-skills/
+```
+
+Each Skill has a `SKILL.md` file with documentation, optional `scripts/`, `templates/`, and `assets/` directories. See [ai-prompts/README.md](ai-prompts/README.md) for the complete Skill convention and how to create new Skills.
 
 ### SSH Connection Management
 
