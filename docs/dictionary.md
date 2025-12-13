@@ -1131,6 +1131,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A performance metric measuring the time from navigation start to when the browser renders the first piece of DOM content. FCP indicates when users first see visual feedback that the page is loading.
 **Related Terms:** Core Web Vitals, Largest Contentful Paint, Critical Rendering Path
 
+### Flaky Test
+
+**Category:** Testing / QA
+**Description:** A test that produces inconsistent results—sometimes passing and sometimes failing—without any changes to the code being tested. Flaky tests are caused by race conditions, timing dependencies, shared state, external service dependencies, or non-deterministic behavior. They undermine confidence in test suites, slow down CI/CD pipelines, and can lead to teams ignoring test failures. Addressing flaky tests requires identifying root causes through isolation, adding proper waits/retries, mocking external dependencies, and ensuring test independence. Also known as non-deterministic tests.
+**Related Terms:** Unit Testing, Integration Testing, CI/CD, Race Condition, Intermittent, Regression Testing, Automated Testing
+
 ### Flask
 
 **Category:** Framework / Backend
@@ -1212,6 +1218,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** DevOps / Version Control
 **Description:** A Git command that applies the changes from a specific commit to the current branch without merging the entire branch. Cherry-picking is useful for selectively backporting bug fixes or features to different branches, though overuse can lead to duplicate commits and merge complications.
 **Related Terms:** Git, Git Rebase, Version Control, Branching Strategy
+
+### GitFlow
+
+**Category:** DevOps / Version Control
+**Description:** A branching model for Git that defines a strict branching structure around project releases. GitFlow uses dedicated branches for features (feature/*), releases (release/*), hotfixes (hotfix/*), development (develop), and production (main/master). It provides a robust framework for managing larger projects with scheduled release cycles but can be overly complex for continuous delivery environments. Created by Vincent Driessen in 2010, it contrasts with simpler strategies like trunk-based development and GitHub Flow.
+**Related Terms:** Git, Trunk-Based Development, CI/CD, Version Control, Branching Strategy, DevOps
 
 ### Git Rebase
 
@@ -3403,4 +3415,4 @@ To add new terms to this dictionary:
 
 ---
 
-*Last updated: December 12, 2025 (Asia/Manila)*
+*Last updated: December 14, 2025 03:44 (Asia/Manila)*
