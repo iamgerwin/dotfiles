@@ -739,6 +739,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** Software that provides an interface for creating, managing, and interacting with databases. A DBMS handles data storage, retrieval, security, backup, and recovery while ensuring data integrity and concurrent access. Examples include MySQL, PostgreSQL, Oracle, and SQL Server (RDBMS), as well as MongoDB and Redis (NoSQL).
 **Related Terms:** RDBMS, Database, SQL, NoSQL, Schema, Query
 
+### Dead Code
+
+**Category:** Software Engineering / Code Quality
+**Description:** Source code that exists in a codebase but is never executed during runtime. Dead code includes unreachable code paths, unused functions, deprecated features that were never removed, and commented-out code blocks. It increases maintenance burden, confuses developers, bloats bundle sizes, and can introduce security vulnerabilities if left unpatched. Static analysis tools, tree shaking, and code coverage reports help identify and eliminate dead code.
+**Related Terms:** Code Smells, Technical Debt, Static Analysis, Tree Shaking, Refactoring
+
 ### Deadlock
 
 **Category:** Concurrency / Foundational Concept
@@ -816,6 +822,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Software Engineering
 **Description:** A design pattern where dependencies are provided to a class rather than created inside it. This promotes loose coupling, makes code more testable, and follows the Inversion of Control principle.
 **Related Terms:** SOLID Principles, Factory Pattern, Repository Pattern
+
+### Developer Experience (DX)
+
+**Category:** Software Engineering / Culture
+**Description:** The overall experience developers have when using tools, libraries, APIs, SDKs, or platforms. Good DX encompasses clear documentation, intuitive APIs, helpful error messages, fast feedback loops, streamlined onboarding, and minimal friction in daily workflows. Organizations invest in DX through internal developer portals, standardized toolchains, and platform engineering to improve productivity, reduce cognitive load, and increase developer satisfaction.
+**Related Terms:** Platform Engineering, DevOps, API, SDK, Documentation, Tooling
 
 ### DevSecOps
 
@@ -1367,6 +1379,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An urgent patch applied to production systems to fix critical bugs or security vulnerabilities. Hotfixes bypass normal development cycles and require careful testing and documentation to prevent introducing new issues.
 **Related Terms:** Rollback, CI/CD, Deployment
 
+### Hot Path / Cold Path
+
+**Category:** Performance / System Design
+**Description:** Terms describing code execution frequency and optimization priority. The **hot path** refers to code sections executed frequently during normal operation, where performance optimizations have the greatest impact. The **cold path** refers to rarely executed code such as error handling, initialization, or edge cases. Performance engineering focuses on optimizing hot paths while keeping cold paths simple and maintainable. Profiling tools identify hot paths by measuring execution frequency and duration.
+**Related Terms:** Performance, Profiling, Optimization, Time Complexity, Caching
+
 ### HTTP (Hypertext Transfer Protocol)
 
 **Category:** Networking / Protocol
@@ -1472,6 +1490,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Frontend / Performance
 **Description:** A Core Web Vitals metric replacing First Input Delay (FID) that measures responsiveness by observing the latency of all user interactions throughout the page lifecycle. Lower INP values indicate a more responsive user experience.
 **Related Terms:** Core Web Vitals, First Contentful Paint, Cumulative Layout Shift
+
+### Inner Loop / Outer Loop
+
+**Category:** DevOps / Developer Workflow
+**Description:** Terms describing the two primary cycles in software development workflows. The **inner loop** encompasses activities developers perform locally and repeatedly—writing code, building, running tests, and debugging—where fast feedback is critical for productivity. The **outer loop** covers activities that occur after code is pushed—CI/CD pipelines, integration testing, staging deployments, and production releases. Optimizing the inner loop reduces friction in daily development, while streamlining the outer loop accelerates delivery. Tools like hot reloading, local Kubernetes environments, and incremental builds improve inner loop speed.
+**Related Terms:** CI/CD, Developer Experience (DX), Hot Module Replacement, DevOps, Feedback Loop
 
 ### Integration Testing
 
@@ -2133,6 +2157,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** An authentication protocol that allows users to be authenticated by cooperating sites (identity providers) using a third-party service. OpenID Connect (OIDC) builds on OAuth 2.0 to provide identity layer functionality.
 **Related Terms:** OAuth2, JWT, Authentication, SSO
 
+### OpenTelemetry (OTEL)
+
+**Category:** Observability / DevOps
+**Description:** A vendor-neutral, open-source observability framework for generating, collecting, and exporting telemetry data (traces, metrics, and logs). OpenTelemetry provides standardized APIs, SDKs, and tools that integrate with various backends like Jaeger, Prometheus, and commercial APM solutions. It emerged from merging OpenTracing and OpenCensus projects and is now a CNCF incubating project. OTEL enables consistent instrumentation across polyglot microservices architectures without vendor lock-in.
+**Related Terms:** Observability, Logs / Metrics / Traces, Distributed Tracing, Prometheus, Jaeger, APM
+
 ### OOP (Object-Oriented Programming)
 
 **Category:** Programming Paradigm / Computer Science
@@ -2262,6 +2292,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Testing / Tools
 **Description:** A modern end-to-end testing framework developed by Microsoft that supports multiple browsers (Chromium, Firefox, WebKit). Playwright offers reliable testing with auto-wait, powerful selectors, network interception, and parallel execution capabilities.
 **Related Terms:** Cypress, Testing, Automation
+
+### Platform Engineering
+
+**Category:** DevOps / Infrastructure
+**Description:** A discipline focused on designing and building internal developer platforms (IDPs) that enable self-service capabilities for software engineering teams. Platform engineering creates golden paths—standardized, well-supported workflows for common development tasks like provisioning infrastructure, deploying applications, and managing services. It reduces cognitive load on developers by abstracting infrastructure complexity while maintaining flexibility. Platform teams build toolchains, templates, and automation that improve developer experience and organizational efficiency.
+**Related Terms:** Developer Experience (DX), DevOps, Infrastructure as Code, GitOps, Internal Developer Portal
 
 ### PMBOK (Project Management Body of Knowledge)
 
@@ -2659,6 +2695,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A multinational software corporation specializing in enterprise resource planning (ERP) software. SAP provides comprehensive business solutions for finance, supply chain, human resources, and operations, with SAP S/4HANA as its next-generation intelligent ERP suite.
 **Related Terms:** ERP, Enterprise, Odoo, Business Applications
 
+### SBOM (Software Bill of Materials)
+
+**Category:** Security / Supply Chain
+**Description:** A formal, machine-readable inventory of all components, libraries, and dependencies that comprise a software application. SBOMs enable organizations to track what software components are used, identify known vulnerabilities (CVEs), ensure license compliance, and respond quickly to security incidents affecting specific packages. Required by many government and enterprise security policies, SBOMs are generated using tools like Syft, CycloneDX, and SPDX formats.
+**Related Terms:** DevSecOps, Dependency Management, CVE, Security, Supply Chain Security, npm, Package Manager
+
 ### Sanity Testing
 
 **Category:** Testing / QA
@@ -2760,6 +2802,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Database / Scalability
 **Description:** A database architecture pattern that splits data across multiple database instances (shards) based on a shard key. Sharding enables horizontal scaling by distributing load and storage requirements across multiple servers.
 **Related Terms:** Horizontal Scaling, Database Partitioning, Scalability
+
+### Shift-Left Testing
+
+**Category:** Testing / DevOps
+**Description:** A practice of moving testing activities earlier in the software development lifecycle to detect defects sooner when they are cheaper and easier to fix. Shift-left encompasses writing unit tests during development, integrating static analysis in IDEs, performing security scans before deployment, and involving QA in requirements gathering. The approach reduces the cost of bugs (which increases exponentially the later they're found) and improves software quality by making testing a continuous activity rather than a phase.
+**Related Terms:** CI/CD, Unit Testing, Static Analysis, TDD, DevSecOps, Quality Assurance
 
 ### ShadCN UI
 
@@ -3071,6 +3119,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A mechanism that specifies how long a piece of data, record, or network packet should exist before being discarded or refreshed. TTL is used in DNS records to control caching duration, in cache systems to automatically expire stale data, in databases for automatic record deletion, and in network protocols to prevent infinite packet routing. Lower TTL means fresher data but more overhead; higher TTL improves performance but risks staleness.
 **Related Terms:** Cache, Cache Eviction, FIFO, DNS, Redis, Cache Invalidation
 
+### Trunk-Based Development
+
+**Category:** Version Control / Methodology
+**Description:** A source control branching strategy where developers integrate small, frequent changes directly into a single main branch (trunk). Short-lived feature branches (if used) are merged within hours or a day, avoiding long-lived branches that cause merge conflicts. Trunk-based development enables continuous integration, faster feedback cycles, and is considered essential for high-performing DevOps teams. It contrasts with GitFlow's multiple long-lived branches.
+**Related Terms:** Git, GitFlow, CI/CD, Feature Flags, Version Control, DevOps, Continuous Integration
+
 ### Turborepo
 
 **Category:** Build Tool / Monorepo
@@ -3257,6 +3311,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** The world's most popular content management system, powering over 40% of websites. WordPress offers a flexible theme and plugin ecosystem, visual editors (Gutenberg blocks), and easy content management. It supports everything from simple blogs to complex e-commerce sites (WooCommerce) and enterprise applications. Available as self-hosted (WordPress.org) or managed (WordPress.com).
 **Related Terms:** CMS, Drupal, Joomla, PHP, WooCommerce, Web Hosting
 
+### WebSocket
+
+**Category:** Networking / Protocol
+**Description:** A communication protocol providing full-duplex, bidirectional communication channels over a single TCP connection. Unlike HTTP's request-response model, WebSocket enables persistent connections where both client and server can send messages independently at any time. This makes it ideal for real-time applications like chat systems, live notifications, collaborative editing, gaming, and financial tickers. The protocol starts with an HTTP handshake that upgrades to WebSocket, typically using ws:// or wss:// (secure) URLs.
+**Related Terms:** HTTP, REST API, Server-Sent Events, Real-Time, TCP, Socket.io, Pub/Sub
+
 ---
 
 ## X
@@ -3343,4 +3403,4 @@ To add new terms to this dictionary:
 
 ---
 
-*Last updated: December 04, 2025 11:30 PST (Asia/Manila)*
+*Last updated: December 12, 2025 (Asia/Manila)*

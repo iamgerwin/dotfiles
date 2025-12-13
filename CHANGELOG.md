@@ -8,6 +8,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Claude Skills directory (`ai-prompts/skills/`) for reusable skill packages
+  - Skills are versioned, reusable packages that extend Claude's capabilities
+  - Consistent SKILL.md convention with YAML frontmatter for metadata
+  - Support for scripts, templates, and assets within each skill
+- `project-bootstrap` Skill for initializing new projects
+  - Laravel initialization script with Pest, Pint, and standard directory structure
+  - Next.js initialization script with TypeScript, Tailwind CSS, and ESLint
+  - README and PR template files
+- `code-review-checklist` Skill for consistent code reviews
+  - Backend checklist covering security, performance, testing, and Laravel-specific checks
+  - Frontend checklist covering TypeScript, accessibility, performance, and React patterns
+- `scripts/sync-skills.sh` for syncing Skills to local Claude skills directory
+  - Supports dry-run mode for previewing changes
+  - Configurable target directory via `--target` flag or `CLAUDE_SKILLS_DIR` env var
+- Updated `ai-prompts/README.md` with comprehensive Skills documentation
+- Updated root `README.md` with Claude Skills section
+
 - IT Terms & Jargons Dictionary (`docs/dictionary.md`)
   - Comprehensive glossary with 50+ IT terminology entries
   - Covers foundational concepts, system design, design patterns, and best practices

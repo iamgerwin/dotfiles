@@ -24,6 +24,14 @@ This system provides:
 │   ├── refactoring/       # Code improvement plans
 │   │── reviews/           # Code review checklists
 │   └── documentation/     # Doc generation templates
+├── skills/                # Claude Skills (reusable skill packages)
+│   ├── project-bootstrap/ # Initialize new projects with defaults
+│   │   ├── SKILL.md      # Skill definition and documentation
+│   │   ├── scripts/      # Initialization scripts
+│   │   └── templates/    # Project templates
+│   └── code-review-checklist/  # Code review standards
+│       ├── SKILL.md      # Skill definition and documentation
+│       └── templates/    # Review checklists
 ├── projects/              # Project-specific content
 │   ├── [project-name]/   # Your project folders
 │   └── template/         # Template for new projects
@@ -118,6 +126,88 @@ ai-prompt share create-ticket myproject
 # Share workflow template
 ai-prompt share laravel-backend myproject
 ```
+
+## Claude Skills
+
+Skills are reusable, versioned packages that extend Claude's capabilities with project-specific knowledge, scripts, and templates.
+
+### Available Skills
+
+| Skill | Description |
+|-------|-------------|
+| `project-bootstrap` | Initialize new Laravel/Next.js projects with opinionated defaults |
+| `code-review-checklist` | Comprehensive code review checklists for backend and frontend |
+
+### Skill Structure
+
+Each Skill follows a consistent structure:
+
+```
+skills/<skill-name>/
+├── SKILL.md           # Skill definition with frontmatter
+├── scripts/           # Optional automation scripts
+├── templates/         # Optional template files
+└── assets/            # Optional images or other assets
+```
+
+### SKILL.md Convention
+
+Every Skill has a `SKILL.md` file with YAML frontmatter:
+
+```markdown
+---
+name: skill-name
+description: Brief description of what this Skill does.
+tags:
+  - relevant
+  - tags
+---
+
+# Skill Name
+
+## Purpose
+When and why to use this Skill.
+
+## How this Skill works
+- What scripts/templates it uses
+- Required tools, env vars, assumptions
+
+## Example invocation
+- Example shell commands
+- Example instructions for Claude
+```
+
+### Syncing Skills
+
+To sync Skills to your local Claude skills directory:
+
+```bash
+# Sync to default location (~/.claude/skills)
+~/dotfiles/scripts/sync-skills.sh
+
+# Preview what would be synced
+~/dotfiles/scripts/sync-skills.sh --dry-run
+
+# Sync to custom directory
+~/dotfiles/scripts/sync-skills.sh --target ~/my-skills/
+
+# Or use environment variable
+export CLAUDE_SKILLS_DIR=~/my-skills
+~/dotfiles/scripts/sync-skills.sh
+```
+
+### Creating New Skills
+
+1. Create a new directory under `skills/`:
+```bash
+mkdir -p skills/my-new-skill/{scripts,templates}
+```
+
+2. Create the `SKILL.md` file with the standard convention
+
+3. Add any scripts, templates, or assets
+
+4. Sync to your local Claude skills directory
 
 ## Organization Guidelines
 
