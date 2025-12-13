@@ -889,6 +889,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A subset of SQL focused specifically on querying and retrieving data from databases. While often considered part of DML, DQL is sometimes classified separately and consists primarily of the SELECT statement along with its clauses (WHERE, JOIN, GROUP BY, ORDER BY, HAVING) for filtering, sorting, and aggregating data.
 **Related Terms:** DDL, DML, DCL, SQL, Join, Database
 
+### Drizzle ORM
+
+**Category:** ORM / Database
+**Description:** A lightweight, TypeScript-first ORM that provides type-safe database access with a SQL-like query builder. Drizzle defines schema in TypeScript, offers strong inference, and keeps runtime overhead minimal while supporting modern deployment targets.
+**Related Terms:** TypeScript, ORM (Object-Relational Mapping), SQL (Structured Query Language), SQLite, Edge Computing
+
 ### DRY (Don't Repeat Yourself)
 
 **Category:** Best Practice
@@ -3052,6 +3058,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Algorithm / Optimization
 **Description:** A classic NP-hard optimization problem seeking the shortest route visiting all given cities exactly once and returning to the origin. TSP is fundamental in computer science for studying algorithmic complexity, heuristics, and metaheuristics. Real-world applications include logistics, circuit design, and DNA sequencing.
 **Related Terms:** Greedy Algorithm, Heuristic, Metaheuristics, Nearest Neighbor, Graph Theory
+
+### tRPC
+
+**Category:** API / Full-Stack
+**Description:** A TypeScript framework for building end-to-end type-safe APIs without code generation. tRPC lets clients call backend procedures directly with full TypeScript inference, often used in full-stack apps and monorepos.
+**Related Terms:** REST API (Representational State Transfer), GraphQL, TypeScript, Next.js, Monorepo, TanStack
 
 ### TTL (Time To Live)
 
