@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Categories: Frontend, Backend, DevOps, Software Engineering, System Design
   - Alphabetically organized with table of contents for quick navigation
   - Includes related terms cross-references for deeper understanding
+  - Added modern TypeScript terms: Drizzle ORM, tRPC
   - Ready for continuous expansion by contributors
 
 ### Fixed

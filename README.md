@@ -850,6 +850,7 @@ The configuration includes:
 ### IT Terms & Jargons Dictionary
 
 A comprehensive glossary of IT terminology for developers, designers, PMs, QA engineers, and stakeholders:
+Includes modern TypeScript ecosystem terms like Drizzle ORM and tRPC.
 
 ```bash
 # View the dictionary
