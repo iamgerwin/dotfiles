@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Added modern web development terms to IT Dictionary:
+  - **Astro** - Modern static site builder using Island Architecture
+  - **HTMX** - Library for building modern UIs with HTML attributes
+  - **React Server Components (RSC)** - Server-side component rendering paradigm in React
 - Claude Skills directory (`ai-prompts/skills/`) for reusable skill packages
   - Skills are versioned, reusable packages that extend Claude's capabilities
   - Consistent SKILL.md convention with YAML frontmatter for metadata
