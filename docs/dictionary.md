@@ -211,6 +211,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A web application framework developed by Microsoft for building dynamic websites, APIs, and web services. ASP.NET runs on the .NET platform and supports multiple programming models including MVC, Web API, and Razor Pages, offering high performance, security, and cross-platform capabilities with ASP.NET Core.
 **Related Terms:** .NET Core, C#, Blazor, Minimal API, MVC
 
+### Astro
+
+**Category:** Framework / Frontend
+**Description:** A modern static site builder using Island Architecture for content-focused websites. Astro ships zero JavaScript by default, only hydrating interactive components when needed. It supports multiple UI frameworks (React, Vue, Svelte) in the same project and generates highly optimized static HTML, making it ideal for blogs, documentation sites, and marketing pages prioritizing performance and SEO.
+**Related Terms:** Island Architecture, Next.js, SSG, Static Site Generator, React, Vue
+
 ### Await
 
 **Category:** Foundational Concept
@@ -1415,6 +1421,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** The secure version of HTTP that encrypts data transmitted between client and server using TLS/SSL. HTTPS protects sensitive information from interception, verifies server identity through certificates, and is now standard for all web traffic, required by browsers and search engines.
 **Related Terms:** HTTP, TLS/SSL, Security, Cryptography, Web Hosting
 
+### HTMX
+
+**Category:** Library / Frontend
+**Description:** A JavaScript library enabling modern user interfaces with HTML attributes instead of writing JavaScript. HTMX extends HTML with attributes like hx-get, hx-post, and hx-swap to make AJAX requests, update DOM elements, and handle WebSocket/SSE connections declaratively. It represents the HTML-first approach to building interactive web applications, reducing complexity and JavaScript bundle sizes while maintaining rich interactivity.
+**Related Terms:** Alpine.js, Livewire, Turbo, JavaScript, Hypermedia, Progressive Enhancement
+
 ### Hydration
 
 **Category:** Frontend
@@ -2552,6 +2564,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Mobile / Framework
 **Description:** A framework for building native mobile applications using React and JavaScript. React Native allows code sharing between iOS and Android while rendering to native platform components, enabling faster development than traditional native approaches.
 **Related Terms:** React, Flutter, Mobile Development
+
+### React Server Components (RSC)
+
+**Category:** Framework / Frontend
+**Description:** A server-side component rendering paradigm in React that allows components to run exclusively on the server, reducing client-side JavaScript and improving initial page load performance. RSCs enable direct database access, server-only dependencies, and automatic code splitting while seamlessly integrating with client components. Fundamental to Next.js 13+ App Router and the modern React architecture.
+**Related Terms:** React, Next.js, Server-Side Rendering, SSR, Hydration, App Router
 
 ### Read/Write Performance
 
