@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- OpenCode terminal-based AI coding assistant to Brewfile
+  - Added `brew "opencode"` to AI Development Tools section
+  - Updated `docs/ai-tools/INSTALLATION.md` with OpenCode setup instructions
+  - OpenCode supports multiple providers (Anthropic, OpenAI, Google)
+  - Configuration via `~/.config/opencode/config.json`
+
 - Added modern web development terms to IT Dictionary:
   - **Astro** - Modern static site builder using Island Architecture
   - **HTMX** - Library for building modern UIs with HTML attributes

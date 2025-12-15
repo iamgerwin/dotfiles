@@ -1,6 +1,6 @@
 # AI CLI Tools Installation Guide
 
-This guide will help you install and configure Claude, Gemini, and Codex CLI tools on your system.
+This guide will help you install and configure Claude, Gemini, Codex, and OpenCode CLI tools on your system.
 
 ## Quick Installation
 
@@ -14,7 +14,7 @@ Run the Homebrew installation script which includes an option to install AI tool
 
 The script will:
 1. Install or update Homebrew
-2. Prompt you to install AI CLI tools (Claude, Gemini, Codex)
+2. Prompt you to install AI CLI tools (Claude, Gemini, Codex, OpenCode)
 3. Optionally configure API keys immediately
 
 ### Option 2: Manual Installation
@@ -30,6 +30,9 @@ brew install gemini-cli
 
 # Install Codex (as a cask application)
 brew install --cask codex
+
+# Install OpenCode (terminal-based AI coding assistant)
+brew install opencode
 ```
 
 Then configure API keys:
@@ -72,6 +75,16 @@ Then run the setup script to configure API keys:
 2. Sign up or log in
 3. Create a new secret key
 4. Save the key immediately (it won't be shown again)
+
+### OpenCode
+OpenCode supports multiple providers. Configure the API key for your preferred provider:
+- **Anthropic**: Use `ANTHROPIC_API_KEY` (same as Claude)
+- **OpenAI**: Use `OPENAI_API_KEY` (same as Codex)
+- **Google**: Use `GEMINI_API_KEY` (same as Gemini)
+
+Configuration file: `~/.config/opencode/config.json`
+
+For more details, visit: https://opencode.ai/docs
 
 ## Configuration
 
@@ -120,11 +133,13 @@ Test your installation:
 command -v claude && echo "Claude: ✓" || echo "Claude: ✗"
 command -v gemini && echo "Gemini: ✓" || echo "Gemini: ✗"
 command -v codex && echo "Codex: ✓" || echo "Codex: ✗"
+command -v opencode && echo "OpenCode: ✓" || echo "OpenCode: ✗"
 
 # Check versions
 claude --version
 gemini --version
 codex --version
+opencode --version
 ```
 
 ## Troubleshooting
@@ -172,6 +187,7 @@ brew update && brew upgrade
 brew upgrade --cask claude-code
 brew upgrade gemini-cli
 brew upgrade --cask codex
+brew upgrade opencode
 ```
 
 ## Uninstallation
@@ -182,6 +198,7 @@ Remove AI tools:
 brew uninstall --cask claude-code
 brew uninstall gemini-cli
 brew uninstall --cask codex
+brew uninstall opencode
 ```
 
 Remove API keys from `~/.zshrc.private`:
