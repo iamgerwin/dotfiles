@@ -79,10 +79,11 @@ brew "oven-sh/bun/bun" # Fast all-in-one JavaScript runtime
 
 # AI Development Tools
 # Note: These require API keys to be set in your environment
-# See docs/ai-tools/AI.md for setup instructions
+# See docs/ai-tools/INSTALLATION.md for setup instructions
 cask "claude-code" # Claude Code - AI pair programming by Anthropic
 brew "gemini-cli" # Google Gemini CLI
 cask "codex" # OpenAI Codex application
+brew "opencode" # OpenCode - Terminal-based AI coding assistant
 
 # macOS Applications
 cask "aldente" # macOS battery charge limiter
