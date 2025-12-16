@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Obsidian knowledge management application to Brewfile
+  - Added `cask "obsidian"` to macOS Applications section
+  - Local-first Markdown-based knowledge base
+  - Complements existing productivity tools (Notion, AppFlowy)
+
 - OpenCode terminal-based AI coding assistant to Brewfile
   - Added `brew "opencode"` to AI Development Tools section
   - Updated `docs/ai-tools/INSTALLATION.md` with OpenCode setup instructions

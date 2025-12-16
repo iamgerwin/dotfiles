@@ -122,6 +122,7 @@ cask "lastpass" # Password manager
 cask "logi-options+" # Software for Logitech devices (new version)
 cask "macs-fan-control" # Control fans on Apple computers
 cask "notion" # All-in-one workspace for notes and collaboration
+cask "obsidian" # Knowledge base that works on local Markdown files
 cask "opera" # Web browser with built-in VPN
 cask "postman" # API development and testing platform
 cask "rustdesk" # Remote desktop software
