@@ -61,6 +61,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A structural design pattern that allows objects with incompatible interfaces to work together. It acts as a wrapper that translates one interface into another that clients expect.
 **Related Terms:** Decorator Pattern, Factory Pattern
 
+### ADR (Architecture Decision Record)
+
+**Category:** Software Architecture / Documentation
+**Description:** A document that captures an important architectural decision made along with its context and consequences. ADRs provide a structured format for recording why specific technical choices were made, including the problem being addressed, considered alternatives, decision rationale, and anticipated trade-offs. They serve as institutional memory, helping current and future team members understand the reasoning behind architecture choices. ADRs are typically stored in version control alongside code, often in a docs/decisions or docs/adr directory, using lightweight templates like Michael Nygard's original format or MADR (Markdown Any Decision Records).
+**Related Terms:** Technical Debt, DDD, System Design, Documentation, Software Architecture, SDLC
+
 ### Acceptance Testing
 
 **Category:** Testing / QA
@@ -1278,6 +1284,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Programming Language
 **Description:** A statically typed, compiled programming language designed by Google emphasizing simplicity, concurrency, and performance. Go features garbage collection, built-in concurrency primitives (goroutines and channels), and fast compilation times.
 **Related Terms:** Rust, Concurrency, Microservices
+
+### Golden Path
+
+**Category:** Platform Engineering / DevOps
+**Description:** A well-documented, standardized, and supported way to accomplish common development tasks within an organization, providing an opinionated but flexible approach that reduces cognitive load and accelerates delivery. Golden paths (also called "paved roads" or "golden routes") represent the recommended way to build, deploy, and operate services—not mandatory constraints, but paths of least resistance with built-in best practices, security controls, and observability. Platform engineering teams create golden paths for activities like creating new services, setting up CI/CD pipelines, provisioning infrastructure, and configuring monitoring. Developers can deviate when necessary but benefit from reduced friction and guaranteed support when following the golden path.
+**Related Terms:** Platform Engineering, Developer Experience (DX), DevOps, Internal Developer Portal, GitOps, Infrastructure as Code
 
 ### God Object
 
