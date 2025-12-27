@@ -205,6 +205,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Description:** A fundamental data structure that stores elements of the same type in contiguous memory locations, accessible by index. Arrays provide O(1) random access but O(n) insertion/deletion. They form the basis for many other data structures and are essential for efficient data manipulation in programming.
 **Related Terms:** Data Structure, Linked List, Hash Table, Index, Time Complexity
 
+### Architecture Decision Records (ADR)
+
+**Category:** Software Architecture / Documentation
+**Description:** A lightweight document format for capturing important architectural decisions and their context. ADRs document decisions like why a specific technology was chosen, architectural trade-offs considered, and the reasoning behind significant design choices. They provide historical context for new team members, enable informed future discussions, and prevent repeated debates over already-resolved decisions. Common in modern software teams, ADRs typically follow a template including status (proposed, accepted, rejected, deprecated), context, decision, and consequences.
+**Related Terms:** Documentation, Software Architecture, Design Decision, Technical Documentation, Software Engineering
+
 ### Ash
 
 **Category:** Framework / Backend
@@ -858,6 +864,12 @@ A comprehensive glossary of IT terminology for developers, designers, PMs, QA en
 **Category:** Algorithm / Graph Theory
 **Description:** A greedy algorithm that finds the shortest path from a source node to all other nodes in a weighted graph with non-negative edge weights. Dijkstra's algorithm uses a priority queue to efficiently select the next closest unvisited node, making it foundational for routing protocols, GPS navigation, and network optimization.
 **Related Terms:** A* Search Algorithm, Graph Theory, Greedy Algorithm, Shortest Path, BFS
+
+### DORA Metrics
+
+**Category:** DevOps / Research
+**Description:** Four key metrics established by DevOps Research and Assessment (DORA) to measure software delivery and operational performance. The metrics are: **Deployment Frequency** (how often code is deployed), **Lead Time for Changes** (time from commit to deployment), **Mean Time to Restore (MTTR)** (time to restore service after failure), and **Change Failure Rate** (percentage of deployments causing failures in production). High-performing teams optimize these metrics to achieve faster, more reliable software delivery. DORA metrics are industry-standard benchmarks for DevOps maturity and continuous improvement.
+**Related Terms:** DevOps, CI/CD, Lead Time, Deployment, MTTR, Continuous Delivery, SRE
 
 ### Django
 
@@ -3445,4 +3457,4 @@ To add new terms to this dictionary:
 
 ---
 
-*Last updated: December 19, 2025 16:45 (Asia/Manila)*
+*Last updated: December 28, 2025 18:10 (Asia/Manila)*
