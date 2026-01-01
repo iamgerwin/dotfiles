@@ -92,6 +92,7 @@ cask "appflowy" # Open-source alternative to Notion
 cask "arc" # Recursively search directories for a regex pattern
 cask "discord" # Voice and text chat for communities
 cask "docker-desktop" # Application for building and sharing containerized applications
+cask "orbstack" # Fast, lightweight alternative to Docker Desktop
 cask "dotnet-runtime" # Microsoft .NET runtime
 cask "firefox@developer-edition" # Web browser for developers
 cask "flutter" # UI toolkit for building natively compiled applications

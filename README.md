@@ -710,7 +710,7 @@ dotnet --version            # Check .NET version
 - Configures the shell environment for .NET development.
 - Optional script to install and trust development certificates for HTTPS.
 
-**Note:** For local development environments previously using MAMP or XAMPP, consider using Laravel Herd for PHP development or Docker containers for full-stack applications.
+**Note:** For local development environments previously using MAMP or XAMPP, consider using Laravel Herd for PHP development or Docker containers (Docker Desktop or OrbStack) for full-stack applications. OrbStack is recommended for better performance and lower resource usage.
 
 ### AI Prompts Management
 
