@@ -101,7 +101,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Migration Notes
 **For MAMP/XAMPP users:**
 - Consider using **Laravel Herd** for PHP development (already installed)
-- Alternative: Use **Docker Desktop** (already installed) for full-stack environments
+- Alternative: Use **Docker Desktop** or **OrbStack** (both installed) for full-stack environments
+- OrbStack is faster and more lightweight than Docker Desktop
 - Herd provides better performance and modern PHP version management
 
 **For Python version management:**
