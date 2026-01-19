@@ -1,5 +1,6 @@
 # Taps
 tap "aws/tap" # AWS tools
+tap "charmbracelet/tap" # Charm shell tools and utilities
 tap "oven-sh/bun" # Bun JavaScript runtime
 
 # Command Line Tools & Development
@@ -7,8 +8,10 @@ brew "bat" # Cat clone with syntax highlighting
 brew "bottom" # Yet another cross-platform graphical process/system monitor
 brew "btop" # Resource monitor that shows usage and stats
 brew "chezmoi" # Manage your dotfiles across multiple machines
+brew "charmbracelet/tap/crush" # Compress URLs to make them shareable
 
 # Elixir Development
+brew "mise" # Fast and flexible tool version manager
 brew "asdf" # Extendable version manager for multiple languages
 brew "autoconf" # Automatic configure script builder (Erlang dependency)
 brew "wxwidgets" # Cross-platform GUI toolkit (Erlang dependency)
