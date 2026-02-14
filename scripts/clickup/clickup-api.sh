@@ -312,7 +312,7 @@ validate_json() {
 show_usage() {
     cat << EOF
 ${CYAN}ClickUp API Script - Enterprise Edition${NC}
-Version: 2.1.0
+Version: 2.2.0
 
 ${YELLOW}Usage:${NC} $0 [command] [args]
 
@@ -366,6 +366,10 @@ ${YELLOW}Custom Fields:${NC}
 ${YELLOW}Comments & Attachments:${NC}
   get-comments TASK_ID                - Get comments with replies
   add-comment TASK_ID TEXT            - Add comment
+  resolve-comment COMMENT_ID          - Mark comment as resolved
+  unresolve-comment COMMENT_ID        - Mark comment as unresolved
+  assign-comment COMMENT_ID USER_ID   - Assign comment to user
+  unassign-comment COMMENT_ID         - Unassign comment from user
   get-attachments TASK_ID             - List attachments
   download-attachment TASK_ID ATT_ID  - Download attachment
   auto-download-images TASK_ID        - Download all images
@@ -429,6 +433,43 @@ case "${1:-}" in
         response=$(make_request "POST" "/task/$2/comment" "$data")
         echo "$response" | jq '.'
         success_msg "Comment added successfully"
+        ;;
+
+    "resolve-comment")
+        [[ -z "${2:-}" ]] && error_exit "COMMENT_ID required. Usage: $0 resolve-comment COMMENT_ID"
+
+        data=$(jq -n '{resolved: true}')
+        response=$(make_request "PUT" "/comment/$2" "$data")
+        echo "$response" | jq '.'
+        success_msg "Comment marked as resolved"
+        ;;
+
+    "unresolve-comment")
+        [[ -z "${2:-}" ]] && error_exit "COMMENT_ID required. Usage: $0 unresolve-comment COMMENT_ID"
+
+        data=$(jq -n '{resolved: false}')
+        response=$(make_request "PUT" "/comment/$2" "$data")
+        echo "$response" | jq '.'
+        success_msg "Comment marked as unresolved"
+        ;;
+
+    "assign-comment")
+        [[ -z "${2:-}" ]] && error_exit "COMMENT_ID required. Usage: $0 assign-comment COMMENT_ID USER_ID"
+        [[ -z "${3:-}" ]] && error_exit "USER_ID required"
+
+        data=$(jq -n --arg user "$3" '{assignee: ($user | tonumber)}')
+        response=$(make_request "PUT" "/comment/$2" "$data")
+        echo "$response" | jq '.'
+        success_msg "Comment assigned to user $3"
+        ;;
+
+    "unassign-comment")
+        [[ -z "${2:-}" ]] && error_exit "COMMENT_ID required. Usage: $0 unassign-comment COMMENT_ID"
+
+        data=$(jq -n '{assignee: null}')
+        response=$(make_request "PUT" "/comment/$2" "$data")
+        echo "$response" | jq '.'
+        success_msg "Comment unassigned"
         ;;
 
     "get-attachments")
