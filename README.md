@@ -67,6 +67,7 @@ dotfiles/
 ├── ssh-keys/           # Organized SSH keys directory (gitignored)
 ├── docs/               # Documentation directory
 │   ├── dictionary.md   # IT Terms & Jargons Dictionary
+│   ├── RAYCAST.md      # Raycast setup and usage guide
 │   ├── ai-tools/       # AI coding workflow and CLI tools documentation
 │   │   ├── AI.md       # RPI workflow guidelines and coding standards
 │   │   ├── AI-Best-Practices.md  # CLI tools installation and best practices
@@ -872,6 +873,33 @@ The configuration includes:
 - **tmux-notify** for desktop notifications
 - **tmux-powerline** for powerline status bar
 - **Custom scripts** for development workflows
+
+### Raycast Productivity Launcher
+
+Raycast is a productivity launcher that replaces Spotlight with a more powerful command palette:
+
+```bash
+# Install via Homebrew (included in Brewfile)
+brew install --cask raycast
+
+# Or install with full dotfiles setup
+brew bundle install
+```
+
+**Quick Setup:**
+1. Set hotkey: `^ ^` (Control twice) or `⌘ + Space`
+2. Configure Clipboard History: `⇧ + ⌘ + V`
+3. Set up Quick Links for frequently used URLs
+4. Install recommended extensions from Raycast Store
+
+**Recommended Extensions:**
+- UUID Generator - Generate random IDs for testing
+- GitHub - Manage repositories and PRs
+- Visual Studio Code - Open recent projects
+- Docker - Manage containers
+- Homebrew - Search and install packages
+
+See [docs/RAYCAST.md](docs/RAYCAST.md) for complete setup guide, AI commands, and extension recommendations.
 
 ### IT Terms & Jargons Dictionary
 
