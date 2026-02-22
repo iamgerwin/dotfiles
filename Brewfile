@@ -129,6 +129,7 @@ cask "notion" # All-in-one workspace for notes and collaboration
 cask "obsidian" # Knowledge base that works on local Markdown files
 cask "opera" # Web browser with built-in VPN
 cask "postman" # API development and testing platform
+cask "raycast" # Productivity launcher and command palette for macOS
 cask "rustdesk" # Remote desktop software
 cask "sourcetree" # Git GUI client
 cask "tableplus" # Modern, native database management tool

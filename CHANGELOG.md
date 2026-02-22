@@ -8,6 +8,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Raycast productivity launcher to Brewfile and documentation
+  - Added `cask "raycast"` to macOS Applications section
+  - Created `docs/RAYCAST.md` with comprehensive setup guide
+  - Includes initial setup, hotkey configuration, Quick Links, and AI commands
+  - Documented recommended extensions (UUID Generator, GitHub, VS Code, Docker)
+  - Updated README.md with Raycast section and directory structure
+
 - Obsidian knowledge management application to Brewfile
   - Added `cask "obsidian"` to macOS Applications section
   - Local-first Markdown-based knowledge base
