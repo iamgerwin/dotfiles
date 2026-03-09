@@ -33,6 +33,7 @@
 
 # Add your ignored casks below:
 # -----------------------------
+opera            # Gets stuck during upgrade
 skype
 alt-tab          # App source missing error
 arc              # App source missing error

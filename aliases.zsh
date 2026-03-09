@@ -127,6 +127,7 @@ alias port='lsof -i -P -n | grep LISTEN'
 # Custom tools
 alias clauded='SHELL=/bin/bash claude --dangerously-skip-permissions'
 alias claude='SHELL=/bin/bash claude'
+alias codex='nocorrect codex'
 
 # AI Prompts Management
 alias aip='ai-prompt'
