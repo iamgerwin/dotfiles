@@ -66,6 +66,12 @@ if [[ -d "$HOME/.rbenv" ]]; then
     export PATH="$HOME/.rbenv/bin:$PATH"
 fi
 
+# Mise (Version Manager)
+export MISE_DIR="$HOME/.local/share/mise"
+if [[ -d "$MISE_DIR" ]]; then
+    export PATH="$MISE_DIR/shims:$PATH"
+fi
+
 # Go
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"

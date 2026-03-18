@@ -68,24 +68,6 @@ DOTFILES_DIR="$HOME/dotfiles"
 # Performance profiling (uncomment to debug slow startup)
 # zprof
 
-# Herd injected PHP 8.4 configuration.
-export HERD_PHP_84_INI_SCAN_DIR="/Users/gerwin/Library/Application Support/Herd/config/php/84/"
+# Herd injected PHP configuration.
+export HERD_PHP_INI_SCAN_DIR="$HOME/Library/Application Support/Herd/config/php/"
 
-
-# Herd injected PHP 8.3 configuration.
-export HERD_PHP_83_INI_SCAN_DIR="/Users/gerwin/Library/Application Support/Herd/config/php/83/"
-
-
-# Herd injected PHP 8.2 configuration.
-export HERD_PHP_82_INI_SCAN_DIR="/Users/gerwin/Library/Application Support/Herd/config/php/82/"
-
-
-# Herd injected PHP 8.1 configuration.
-export HERD_PHP_81_INI_SCAN_DIR="/Users/gerwin/Library/Application Support/Herd/config/php/81/"
-
-
-# Herd injected PHP 8.5 configuration.
-export HERD_PHP_85_INI_SCAN_DIR="/Users/gerwin/Library/Application Support/Herd/config/php/85/"
-
-# Added by Antigravity
-export PATH="/Users/gerwin/.antigravity/antigravity/bin:$PATH"
