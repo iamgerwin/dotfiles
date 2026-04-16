@@ -455,7 +455,6 @@ remediate_problem_casks() {
 
     # Known problematic casks observed in CI/local runs
     local candidates=(
-        alt-tab
         arc
         firefox@developer-edition
         vivaldi

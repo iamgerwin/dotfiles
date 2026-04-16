@@ -83,7 +83,6 @@ arc                        # App source missing
 opera                      # Caskroom conflicts
 firefox@developer-edition  # Version management issues
 vivaldi                    # App source path issues
-alt-tab                    # Occasional conflicts
 ```
 
 ## 🔍 What Gets Logged

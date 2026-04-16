@@ -29,13 +29,10 @@
 # opera                      # Caskroom conflicts
 # firefox@developer-edition  # Version management issues
 # vivaldi                    # App source path issues
-# alt-tab                    # Occasional conflicts
-
 # Add your ignored casks below:
 # -----------------------------
 opera            # Gets stuck during upgrade
 skype
-alt-tab          # App source missing error
 arc              # App source missing error
 opera-air        # App source missing error
 whatsapp         # Already an App conflict
