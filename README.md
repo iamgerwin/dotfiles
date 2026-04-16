@@ -233,7 +233,6 @@ cat .dotfiles-cask-ignore
 **Format** (inline comments supported):
 ```
 skype
-alt-tab          # App source missing error
 arc              # App source missing error
 logitech-options # Requires password prompt then fails
 ```

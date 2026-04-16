@@ -89,9 +89,6 @@ cask "codex" # OpenAI Codex application
 brew "opencode" # OpenCode - Terminal-based AI coding assistant
 
 # macOS Applications
-cask "aldente" # macOS battery charge limiter
-cask "alt-tab" # Windows alt-tab on macOS
-cask "appflowy" # Open-source alternative to Notion
 cask "arc" # Recursively search directories for a regex pattern
 cask "discord" # Voice and text chat for communities
 cask "docker-desktop" # Application for building and sharing containerized applications
@@ -119,7 +116,6 @@ cask "google-chrome@canary" # Experimental version of Chrome
 cask "herd" # Laravel and PHP development environment
 cask "iina" # Modern media player for macOS
 cask "iterm2" # Terminal emulator for macOS
-cask "jetbrains-toolbox" # JetBrains IDE manager
 cask "jiggler" # Prevents sleep by jiggling the mouse
 cask "keyboardcleantool" # Temporarily disable keyboard for cleaning
 cask "lastpass" # Password manager

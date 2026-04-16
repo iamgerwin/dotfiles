@@ -60,9 +60,6 @@ brew "zsh"                                 # UNIX shell (command interpreter)
 brew "oven-sh/bun/bun"                     # Fast all-in-one JavaScript runtime
 
 # macOS Applications
-cask "aldente"                             # macOS battery charge limiter
-cask "alt-tab"                             # Windows alt-tab on macOS
-cask "appflowy"                            # Open-source alternative to Notion
 cask "arc"                                 # The internet computer browser
 cask "discord"                             # Voice and text chat for communities
 cask "docker-desktop"                      # Application for building and sharing containerized applications
@@ -89,8 +86,6 @@ cask "google-chrome@canary"                # Experimental version of Chrome
 cask "herd"                                # Laravel and PHP development environment
 cask "iina"                                # Modern media player for macOS
 cask "iterm2"                              # Terminal emulator for macOS
-cask "jetbrains-toolbox"                   # JetBrains IDE manager
-
 # Utilities
 cask "jiggler"                             # Prevents sleep by jiggling the mouse
 cask "keyboardcleantool"                   # Temporarily disable keyboard for cleaning
