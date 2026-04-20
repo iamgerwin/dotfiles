@@ -1,6 +1,7 @@
 # Taps
 tap "aws/tap" # AWS tools
 tap "charmbracelet/tap" # Charm shell tools and utilities
+tap "manaflow-ai/cmux" # Cmux - Terminal multiplexer with AI assistance
 tap "oven-sh/bun" # Bun JavaScript runtime
 
 # Command Line Tools & Development
@@ -87,6 +88,7 @@ cask "claude-code" # Claude Code - AI pair programming by Anthropic
 brew "gemini-cli" # Google Gemini CLI
 cask "codex" # OpenAI Codex application
 brew "opencode" # OpenCode - Terminal-based AI coding assistant
+cask "cmux" # Terminal multiplexer with AI assistance
 
 # macOS Applications
 cask "arc" # Recursively search directories for a regex pattern
