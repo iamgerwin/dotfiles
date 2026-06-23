@@ -51,6 +51,7 @@ declare -a CASK_IGNORE_LIST=()
 DEFAULT_TIMEOUT=300
 BREW_UPDATE_TIMEOUT=60
 BREW_UPGRADE_TIMEOUT=600
+BREW_CASK_TIMEOUT=180
 NPM_TIMEOUT=300
 PIP_TIMEOUT=300
 GEM_TIMEOUT=300
@@ -534,7 +535,7 @@ update_homebrew() {
         # Pre-emptively exclude ignored casks from upgrade
         preemptively_exclude_ignored_casks
         
-        log_info "Upgrading Homebrew casks (non-interactive)..."
+        log_info "Upgrading Homebrew casks (non-interactive, ${BREW_CASK_TIMEOUT}s timeout per cask)..."
         
         # Get filtered list of casks to upgrade
         local casks_to_upgrade
@@ -555,18 +556,24 @@ update_homebrew() {
 
                 # Capture output and track exit code separately
                 if $VERBOSE; then
-                    output=$(run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy $cask 2>&1")
+                    output=$(run_with_timeout $BREW_CASK_TIMEOUT "brew upgrade --cask --greedy $cask 2>&1")
                     upgrade_rc=$?
                     echo "$output"
                 else
-                    output=$(run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy $cask 2>&1")
+                    output=$(run_with_timeout $BREW_CASK_TIMEOUT "brew upgrade --cask --greedy $cask 2>&1")
                     upgrade_rc=$?
                 fi
 
                 # Handle timeout (exit code 124 indicates timeout)
                 if [[ $upgrade_rc -eq 124 ]]; then
-                    log_warning "$cask: Upgrade timed out (timeout after ${BREW_UPGRADE_TIMEOUT}s) - adding to ignore list to prevent recurrence"
+                    log_warning "$cask: Upgrade timed out after ${BREW_CASK_TIMEOUT}s; skipping and continuing with remaining casks"
                     CASK_IGNORE_LIST+=("$cask")
+                    failed_casks+=("$cask")
+                    upgrade_failed=true
+                    continue
+                fi
+                if [[ $upgrade_rc -ne 0 ]]; then
+                    log_warning "$cask: Upgrade exited with status $upgrade_rc; skipping and continuing with remaining casks"
                     failed_casks+=("$cask")
                     upgrade_failed=true
                     continue
@@ -574,10 +581,10 @@ update_homebrew() {
 
                 # Check if output contains error messages
                 if echo "$output" | grep -q "^Error:"; then
-                    has_error=true
                     log_warning "Failed to upgrade $cask (detected error in output)"
                     failed_casks+=("$cask")
                     upgrade_failed=true
+                    continue
                 fi
 
                 # Check for common failure patterns
