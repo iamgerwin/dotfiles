@@ -26,6 +26,7 @@ This repository contains my personal dotfiles configuration, designed with modul
 - **SSH Key Organization**: Centralized SSH key management with migration and backup capabilities
 - **AI Prompts Management**: Organized system for managing AI prompts and context scripts by company/project
 - **AI Agent CLI Tools**: Support for Gemini, Claude, and Codex CLI tools with co-existence strategy
+- **Terminal Multiplexer with AI**: Cmux - AI-assisted terminal multiplexer for enhanced productivity
 - **Best Practices Documentation**: Comprehensive guides for modern development technologies and frameworks
 
 ## Structure
@@ -307,6 +308,7 @@ The dotfiles now include comprehensive terminal setup tools for an enhanced deve
 #### Terminal Multiplexers
 - **Tmux**: Terminal multiplexer for managing multiple sessions
 - **Zellij**: Modern terminal workspace with built-in layouts and plugins
+- **Cmux**: AI-assisted terminal multiplexer with intelligent session management
 
 #### Shell Enhancements
 - **Starship**: Cross-shell prompt customization with minimal, blazing-fast design
@@ -872,6 +874,30 @@ The configuration includes:
 - **tmux-notify** for desktop notifications
 - **tmux-powerline** for powerline status bar
 - **Custom scripts** for development workflows
+
+### Cmux - AI-Assisted Terminal Multiplexer
+
+Cmux is an AI-assisted terminal multiplexer that enhances productivity with intelligent session management and AI-powered features:
+
+```bash
+# Install via Homebrew (included in Brewfile)
+brew tap manaflow-ai/cmux
+brew install --cask cmux
+```
+
+**Features:**
+- **AI-Powered Assistance**: Integrated AI assistance for terminal commands and workflows
+- **Smart Session Management**: Intelligent session persistence and organization
+- **Seamless Integration**: Works alongside Tmux and other terminal tools
+- **Enhanced Productivity**: AI suggestions for common terminal tasks
+
+**Usage:**
+After installation, launch cmux from your terminal:
+```bash
+cmux
+```
+
+For more information, visit: https://github.com/manaflow-ai/cmux
 
 ### Raycast Productivity Launcher
 
