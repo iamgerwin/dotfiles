@@ -550,14 +550,26 @@ update_homebrew() {
             for cask in $casks_to_upgrade; do
                 log_info "Upgrading: $cask"
                 local output
+                local upgrade_rc
                 local has_error=false
 
-                # Capture output and check for errors
+                # Capture output and track exit code separately
                 if $VERBOSE; then
-                    output=$(run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy $cask 2>&1" || true)
+                    output=$(run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy $cask 2>&1")
+                    upgrade_rc=$?
                     echo "$output"
                 else
-                    output=$(run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy $cask 2>&1" || true)
+                    output=$(run_with_timeout $BREW_UPGRADE_TIMEOUT "brew upgrade --cask --greedy $cask 2>&1")
+                    upgrade_rc=$?
+                fi
+
+                # Handle timeout (exit code 124 indicates timeout)
+                if [[ $upgrade_rc -eq 124 ]]; then
+                    log_warning "$cask: Upgrade timed out (timeout after ${BREW_UPGRADE_TIMEOUT}s) - adding to ignore list to prevent recurrence"
+                    CASK_IGNORE_LIST+=("$cask")
+                    failed_casks+=("$cask")
+                    upgrade_failed=true
+                    continue
                 fi
 
                 # Check if output contains error messages
