@@ -25,7 +25,7 @@ This repository contains my personal dotfiles configuration, designed with modul
 - **Git Profile Management**: Manage multiple Git identities (personal, work) with SSH keys and GitHub CLI integration
 - **SSH Key Organization**: Centralized SSH key management with migration and backup capabilities
 - **AI Prompts Management**: Organized system for managing AI prompts and context scripts by company/project
-- **AI Agent CLI Tools**: Support for Gemini, Claude, and Codex CLI tools with co-existence strategy
+- **AI Agent CLI Tools**: Support for Gemini, Claude, Codex, and OpenCode CLI tools with co-existence strategy, plus `rtk-ai` (token optimization proxy) and `gh-stack` (stacked PRs) — see [docs/ai-tools/INSTALLATION.md](docs/ai-tools/INSTALLATION.md)
 - **Best Practices Documentation**: Comprehensive guides for modern development technologies and frameworks
 
 ## Structure
@@ -387,7 +387,7 @@ brew bundle dump --force --file=~/dotfiles/Brewfile
 
 ### Updating AI/LLM CLI Tools
 
-The dotfiles include automated updates for AI CLI tools like `gemini-cli`, `codex`, and `claude-code`:
+The dotfiles include automated updates for AI CLI tools like `gemini-cli`, `codex`, and `claude-code`, as well as the supporting `rtk` and `gh-stack` CLI extensions (see [docs/ai-tools/INSTALLATION.md](docs/ai-tools/INSTALLATION.md) for install/update/uninstall details):
 
 ```bash
 # Update AI tools as part of full system update

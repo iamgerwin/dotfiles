@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- rtk-ai token optimization proxy and gh-stack CLI tools (#114)
+  - Added `brew "rtk"` to Brewfile
+  - Created `scripts/setup-rtk.sh` to install rtk and wire it into Claude Code, Codex, and OpenCode globally
+  - Created `scripts/setup-gh-stack.sh` to install the gh-stack extension and its agent skill (user scope) for Claude Code, Codex, and OpenCode
+  - Documented both in `docs/ai-tools/INSTALLATION.md` and README.md
+
 - Raycast productivity launcher to Brewfile and documentation
   - Added `cask "raycast"` to macOS Applications section
   - Created `docs/RAYCAST.md` with comprehensive setup guide

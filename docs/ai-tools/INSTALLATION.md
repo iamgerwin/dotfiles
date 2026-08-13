@@ -1,6 +1,6 @@
 # AI CLI Tools Installation Guide
 
-This guide will help you install and configure Claude, Gemini, Codex, and OpenCode CLI tools on your system.
+This guide will help you install and configure Claude, Gemini, Codex, and OpenCode CLI tools on your system, plus the supporting `rtk-ai` and `gh-stack` CLI extensions.
 
 ## Quick Installation
 
@@ -54,6 +54,74 @@ Then run the setup script to configure API keys:
 
 ```bash
 ~/dotfiles/scripts/setup-ai-tools.sh
+```
+
+## Installing rtk-ai (Token Optimization Proxy)
+
+[rtk-ai](https://github.com/rtk-ai/rtk) is a token-optimized CLI proxy that filters and summarizes command output (git, find, grep, test runners, etc.) before it reaches an assistant's context, cutting token usage by up to ~90% on common commands.
+
+### Automated Installation (Recommended)
+
+```bash
+~/dotfiles/scripts/setup-rtk.sh
+```
+
+The script will:
+1. Install `rtk` globally via Homebrew (also included in the Brewfile — `brew bundle install` installs it too)
+2. Wire it into Claude Code (`rtk init -g --auto-patch`) — registers a `PreToolUse` Bash hook in `~/.claude/settings.json`
+3. Wire it into Codex CLI (`rtk init --codex -g`) — adds `~/.codex/RTK.md` and references it from `~/.codex/AGENTS.md`
+4. Wire it into OpenCode (`rtk init --opencode -g --auto-patch`) — installs `~/.config/opencode/plugins/rtk.ts`
+5. Skip any tool that isn't installed
+
+### Manual Installation
+
+```bash
+# Install globally
+brew install rtk
+
+# Wire into each assistant CLI you use
+rtk init -g --auto-patch          # Claude Code
+rtk init --codex -g               # Codex CLI
+rtk init --opencode -g --auto-patch  # OpenCode
+```
+
+### Verification
+
+```bash
+rtk --version
+rtk gain
+which rtk
+```
+
+## Installing gh-stack (Stacked PRs)
+
+[gh-stack](https://github.com/github/gh-stack) is a `gh` CLI extension for managing stacked branches and dependent pull requests, with an accompanying agent skill for creating/rebasing/syncing stacks from Claude Code, Codex, and OpenCode.
+
+### Automated Installation (Recommended)
+
+```bash
+~/dotfiles/scripts/setup-gh-stack.sh
+```
+
+The script will:
+1. Install the extension: `gh extension install github/gh-stack`
+2. Install the agent skill at user (global) scope for Claude Code, Codex, and OpenCode via `gh skill install github/gh-stack --agent <agent> --scope user`
+
+### Manual Installation
+
+```bash
+gh extension install github/gh-stack
+gh skill install github/gh-stack --agent claude-code --scope user
+gh skill install github/gh-stack --agent codex --scope user
+gh skill install github/gh-stack --agent opencode --scope user
+```
+
+### Verification
+
+```bash
+gh extension list
+gh skill list
+gh stack --help
 ```
 
 ## Getting API Keys
@@ -134,12 +202,15 @@ command -v claude && echo "Claude: ✓" || echo "Claude: ✗"
 command -v gemini && echo "Gemini: ✓" || echo "Gemini: ✗"
 command -v codex && echo "Codex: ✓" || echo "Codex: ✗"
 command -v opencode && echo "OpenCode: ✓" || echo "OpenCode: ✗"
+command -v rtk && echo "rtk: ✓" || echo "rtk: ✗"
+gh extension list | grep -q gh-stack && echo "gh-stack: ✓" || echo "gh-stack: ✗"
 
 # Check versions
 claude --version
 gemini --version
 codex --version
 opencode --version
+rtk --version
 ```
 
 ## Troubleshooting
@@ -188,6 +259,9 @@ brew upgrade --cask claude-code
 brew upgrade gemini-cli
 brew upgrade --cask codex
 brew upgrade opencode
+brew upgrade rtk
+gh extension upgrade github/gh-stack
+gh skill update --all
 ```
 
 ## Uninstallation
@@ -199,7 +273,11 @@ brew uninstall --cask claude-code
 brew uninstall gemini-cli
 brew uninstall --cask codex
 brew uninstall opencode
+brew uninstall rtk
+gh extension remove github/gh-stack
 ```
+
+To remove rtk's per-tool wiring: `rtk init -g --uninstall`, `rtk init --codex -g --uninstall`, `rtk init --opencode -g --uninstall`.
 
 Remove API keys from `~/.zshrc.private`:
 
@@ -220,6 +298,8 @@ nano ~/.zshrc.private
 - Main Documentation: `~/dotfiles/docs/ai-tools/AI.md`
 - Homebrew Issues: `brew doctor`
 - API Key Issues: Check provider's documentation
-- Script Issues: Review `~/dotfiles/scripts/setup-ai-tools.sh`
+- Script Issues: Review `~/dotfiles/scripts/setup-ai-tools.sh`, `~/dotfiles/scripts/setup-rtk.sh`, `~/dotfiles/scripts/setup-gh-stack.sh`
+- rtk-ai: https://github.com/rtk-ai/rtk
+- gh-stack: https://github.com/github/gh-stack
 
 For more information, see the main AI tools documentation or the AGENTS.md rule file in your dotfiles.
