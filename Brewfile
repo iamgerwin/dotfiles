@@ -87,6 +87,7 @@ cask "claude-code" # Claude Code - AI pair programming by Anthropic
 brew "gemini-cli" # Google Gemini CLI
 cask "codex" # OpenAI Codex application
 brew "opencode" # OpenCode - Terminal-based AI coding assistant
+brew "rtk" # rtk-ai - Token-optimized CLI proxy for Claude Code, Codex, and OpenCode
 
 # macOS Applications
 cask "arc" # Recursively search directories for a regex pattern
