@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+- `docker-completion` Homebrew formula (#116)
+  - Deprecated upstream and scheduled for removal on 2027-05-31
+  - Removed from `Brewfile` and `Brewfile.lock.commented`
+  - The `docker` formula already installed via Brewfile provides the CLI (and its completions), so no replacement package is needed
+
 ### Added
 - rtk-ai token optimization proxy and gh-stack CLI tools (#114)
   - Added `brew "rtk"` to Brewfile
