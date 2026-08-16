@@ -14,8 +14,7 @@ brew "cocoapods"                           # Dependency manager for Swift and Ob
 brew "composer"                            # Dependency manager for PHP
 brew "coreutils"                           # GNU core utilities (adds gdate, gls, etc.)
 brew "couchdb", restart_service: :changed  # Document-oriented NoSQL database
-brew "docker-completion"                   # Docker bash completion
-brew "docker"                              # Container platform
+brew "docker"                              # Container platform (docker-completion deprecated upstream; completions ship with docker)
 brew "docker-compose"                      # Define and run multi-container applications
 brew "dust"                                # More intuitive version of du written in Rust
 brew "duti"                                # Set default applications for document types on macOS
