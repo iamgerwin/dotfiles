@@ -68,6 +68,7 @@ brew "stow" # Symlink farm manager
 brew "tealdeer" # Fast tldr client written in Rust
 brew "tmux" # Terminal multiplexer
 brew "zellij" # Modern terminal workspace with layouts and plugins
+brew "herdr" # Agent multiplexer that lives in your terminal
 brew "tokei" # Count code, quickly
 brew "turso" # Edge SQLite database CLI
 brew "watchman" # Watch files and record when they change
