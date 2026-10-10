@@ -25,7 +25,7 @@ Comprehensive bash scripts for interacting with the ClickUp API, providing task 
 ## Features
 
 - **Comprehensive Task Management**: Create, update, search, and batch manage tasks
-- **Comment System**: Add comments and retrieve full conversation threads with replies
+- **Comment System**: Add comments, retrieve threads with replies, resolve/unresolve comments, and assign comments to users
 - **Attachment Handling**: Download individual attachments or batch download all images
 - **Secure Configuration**: Environment-based API key management
 - **Error Handling**: Robust error detection with informative messages
@@ -214,6 +214,18 @@ Priority levels:
 ./clickup-api.sh add-comment TASK_ID "Found root cause:
 - Database connection timeout
 - Need to increase connection pool size"
+
+# Mark a comment as resolved (acknowledged/completed)
+./clickup-api.sh resolve-comment COMMENT_ID
+
+# Mark a comment as unresolved (reopen for discussion)
+./clickup-api.sh unresolve-comment COMMENT_ID
+
+# Assign a comment to a team member for follow-up
+./clickup-api.sh assign-comment COMMENT_ID USER_ID
+
+# Unassign a comment
+./clickup-api.sh unassign-comment COMMENT_ID
 ```
 
 ### Attachments
@@ -314,6 +326,10 @@ Priority levels:
 |---------|-------------|---------|
 | `get-comments` | Get all comments with replies | `./clickup-api.sh get-comments TASK_ID` |
 | `add-comment` | Add comment to task | `./clickup-api.sh add-comment TASK_ID "text"` |
+| `resolve-comment` | Mark comment as resolved | `./clickup-api.sh resolve-comment COMMENT_ID` |
+| `unresolve-comment` | Mark comment as unresolved | `./clickup-api.sh unresolve-comment COMMENT_ID` |
+| `assign-comment` | Assign comment to user | `./clickup-api.sh assign-comment COMMENT_ID USER_ID` |
+| `unassign-comment` | Unassign comment from user | `./clickup-api.sh unassign-comment COMMENT_ID` |
 | `get-attachments` | List task attachments | `./clickup-api.sh get-attachments TASK_ID` |
 | `download-attachment` | Download specific attachment | `./clickup-api.sh download-attachment TASK_ID ATTACH_ID` |
 | `auto-download-images` | Download all image attachments | `./clickup-api.sh auto-download-images TASK_ID` |
