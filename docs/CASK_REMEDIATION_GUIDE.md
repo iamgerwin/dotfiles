@@ -82,7 +82,6 @@ grep '^cask' ~/dotfiles/Brewfile
 arc                        # App source missing
 opera                      # Caskroom conflicts
 firefox@developer-edition  # Version management issues
-vivaldi                    # App source path issues
 ```
 
 ## 🔍 What Gets Logged
@@ -92,10 +91,7 @@ vivaldi                    # App source path issues
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Pre-emptive Cask Health Check
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠ vivaldi: App source '/Applications/Vivaldi.app' is missing
-ℹ Found 1 cask(s) with potential issues
-ℹ Pre-emptively fixing: vivaldi
-✓ vivaldi reinstalled
+✓ All casks health check passed
 ```
 
 ### Pre-emptive Exclusion
@@ -117,10 +113,10 @@ vivaldi                    # App source path issues
 
 ### Failures
 ```
-⚠ Failed to upgrade vivaldi
-ℹ Reinstalling cask: vivaldi (attempt 1)
-⚠ vivaldi reinstall failed; trying uninstall + install
-⚠ Failed to remediate vivaldi after 2 attempts; adding to ignore list for this session
+⚠ Failed to upgrade some-cask
+ℹ Reinstalling cask: some-cask (attempt 1)
+⚠ some-cask reinstall failed; trying uninstall + install
+⚠ Failed to remediate some-cask after 2 attempts; adding to ignore list for this session
 ```
 
 ## 🛠️ Troubleshooting
@@ -207,7 +203,6 @@ vivaldi                    # App source path issues
 cat > ~/my-cask-ignore <<EOF
 arc
 opera
-vivaldi
 EOF
 
 # Use it

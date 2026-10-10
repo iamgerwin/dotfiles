@@ -13,7 +13,6 @@ Error: Problems with multiple casks:
 arc: It seems the App source '/Applications/Arc.app' is not there.
 firefox@developer-edition: It seems the App source '/Applications/Firefox Developer Edition.app' is not there.
 opera: It seems there is already an App at '/opt/homebrew/Caskroom/opera/118.0.5461.60/Opera.app'.
-vivaldi: It seems the App source '/Applications/Vivaldi.app' is not there.
 ```
 
 ## Likely Causes
@@ -32,17 +31,15 @@ vivaldi: It seems the App source '/Applications/Vivaldi.app' is not there.
   - Provide a configurable ignore/remove list via env or config file (e.g., `.dotfiles-update.yml`).
 - Audit and reconcile `Brewfile` cask tokens and intent:
   - Replace `google-chrome@canary` with `google-chrome-canary`.
-  - Review whether both `logi-options+` and `logitech-options` are needed (the latter is deprecated).
   - Verify `firefox@developer-edition` token is current; if renamed, update accordingly.
   - Remove casks that are no longer needed or supported to avoid recurring failures.
 - Optionally add `--no-quarantine` for casks known to trip Gatekeeper, behind a flag.
 
 ## Candidates To Review (remove/rename/skip)
 
-- `arc`, `vivaldi`, `firefox@developer-edition` — re-check tokens and reinstall behavior.
+- `arc`, `firefox@developer-edition` — re-check tokens and reinstall behavior.
 - `opera` — clean uninstall/reinstall to fix Caskroom conflict.
 - `google-chrome@canary` → `google-chrome-canary` (rename).
-- `logitech-options` — likely removable in favor of `logi-options+`.
 
 ## New Additions
 
