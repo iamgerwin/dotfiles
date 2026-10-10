@@ -55,10 +55,10 @@ Copy the relevant checklist content when reviewing a PR:
 
 ```bash
 # Copy backend checklist to clipboard
-cat ai-prompts/skills/code-review-checklist/templates/backend-checklist.md | pbcopy
+cat skills/code-review-checklist/templates/backend-checklist.md | pbcopy
 
 # Or for frontend
-cat ai-prompts/skills/code-review-checklist/templates/frontend-checklist.md | pbcopy
+cat skills/code-review-checklist/templates/frontend-checklist.md | pbcopy
 ```
 
 ### Using with Claude

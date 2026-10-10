@@ -13,7 +13,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DOTFILES_DIR="$(dirname "$SCRIPT_DIR")"
-SOURCE_DIR="$DOTFILES_DIR/ai-prompts/skills"
+SOURCE_DIR="$DOTFILES_DIR/skills"
 TARGET_DIR="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
 
 DRY_RUN=false
@@ -57,7 +57,7 @@ done
 # Verify source directory exists
 if [[ ! -d "$SOURCE_DIR" ]]; then
     echo "Error: Source directory not found: $SOURCE_DIR"
-    echo "Make sure ai-prompts/skills/ exists in your dotfiles."
+    echo "Make sure skills/ exists in your dotfiles."
     exit 1
 fi
 
