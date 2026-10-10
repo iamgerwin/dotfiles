@@ -23,7 +23,7 @@ Install AI tools via Homebrew:
 
 ```bash
 # Install Claude Code (AI pair programming)
-brew install --cask claude-code
+brew install --cask claude-code@latest
 
 # Install Gemini CLI
 brew install gemini-cli
@@ -261,7 +261,7 @@ Update AI tools via Homebrew:
 brew update && brew upgrade
 
 # Or update specific tools
-brew upgrade --cask claude-code
+brew upgrade --cask claude-code@latest
 brew upgrade gemini-cli
 brew upgrade --cask codex
 brew upgrade opencode
@@ -275,7 +275,7 @@ gh skill update --all
 Remove AI tools:
 
 ```bash
-brew uninstall --cask claude-code
+brew uninstall --cask claude-code@latest
 brew uninstall gemini-cli
 brew uninstall --cask codex
 brew uninstall opencode
