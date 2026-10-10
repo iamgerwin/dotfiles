@@ -307,6 +307,7 @@ The dotfiles now include comprehensive terminal setup tools for an enhanced deve
 #### Terminal Multiplexers
 - **Tmux**: Terminal multiplexer for managing multiple sessions
 - **Zellij**: Modern terminal workspace with built-in layouts and plugins
+- **Herdr**: Agent multiplexer that keeps coding agent sessions alive in your terminal ([herdr.dev](https://herdr.dev/docs/install/))
 
 #### Shell Enhancements
 - **Starship**: Cross-shell prompt customization with minimal, blazing-fast design

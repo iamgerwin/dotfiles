@@ -14,6 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - The `docker` formula already installed via Brewfile provides the CLI (and its completions), so no replacement package is needed
 
 ### Added
+- Herdr agent multiplexer to Brewfile and documentation (#113)
+  - Added `brew "herdr"` to Brewfile, alongside Tmux and Zellij
+  - Documented Herdr under the Terminal Multiplexers section in README.md
+
 - rtk-ai token optimization proxy and gh-stack CLI tools (#114)
   - Added `brew "rtk"` to Brewfile
   - Created `scripts/setup-rtk.sh` to install rtk and wire it into Claude Code, Codex, and OpenCode globally
