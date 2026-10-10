@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Skills consolidated under a top-level `skills/` directory (#129)
+  - Moved `project-bootstrap` and `code-review-checklist` from `ai-prompts/skills/` to `skills/`
+  - Renamed each skill's `templates/` folder to `assets/`, matching the `SKILL.md` + `scripts/` + `references/` + `assets/` layout
+  - `scripts/sync-skills.sh` now reads from `skills/`
+  - Skills documentation moved to `skills/README.md`; `ai-prompts/README.md` now links to it
+
+### Fixed
+- `scripts/sync-skills.sh` deleted unmanaged skills in `~/.claude/skills` (#129)
+  - Syncs each skill folder separately, so skills installed from other sources are kept
+  - Skips loose files such as `skills/README.md`
+  - Dry run now shows each skill's actual description
+
 ### Removed
 - `docker-completion` Homebrew formula (#116)
   - Deprecated upstream and scheduled for removal on 2027-05-31
@@ -14,6 +27,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - The `docker` formula already installed via Brewfile provides the CLI (and its completions), so no replacement package is needed
 
 ### Added
+- `quick-address-issue` skill for resolving GitHub issues end to end (#129)
+  - Invoke with `/quick-address-issue <issue-url> [base-branch]`
+  - Covers the account check, clone or fork, branching, granular commits, tests, doc alignment, PR, and issue comment
+  - Bundles `scripts/parse-issue-url.sh`, commit and PR checklists in `references/`, and PR, comment, and limitation templates in `assets/`
+- Skill tests in `tests/skills/`
+  - `validate-skills.sh` checks every skill's layout, frontmatter, and referenced files
+  - `parse-issue-url.test.sh` covers the issue reference parser
+
 - Herdr agent multiplexer to Brewfile and documentation (#113)
   - Added `brew "herdr"` to Brewfile, alongside Tmux and Zellij
   - Documented Herdr under the Terminal Multiplexers section in README.md
