@@ -269,7 +269,7 @@ This reduces noise from vendor issues and prevents blocking operations.
   - Herd PHP configuration (multiple PHP versions)
   - NVM (Node Version Manager)
   - Pyenv (Python Version Manager)
-  - Windsurf, Homebrew, and other tools
+  - Homebrew and other tools
 - **functions.zsh**: Reusable shell functions for productivity
 - **options.zsh**: Zsh behavior settings (history, completion, etc.)
 - **plugins.zsh**: Configurations for:
