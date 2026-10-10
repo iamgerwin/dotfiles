@@ -897,14 +897,14 @@ update_ai_tools() {
         log_section "Updating AI CLI Tools"
 
         local tools_updated=false
-        local ai_tools=("gemini-cli" "codex" "claude-code")
+        local ai_tools=("gemini-cli" "codex" "claude-code@latest")
         local installed_tools=()
 
         # Check which AI CLI tools are installed
         for tool in "${ai_tools[@]}"; do
-            if [[ "$tool" == "claude-code" ]]; then
-                # claude-code is a cask
-                if brew list --cask --versions claude-code >/dev/null 2>&1; then
+            if [[ "$tool" == "claude-code@latest" ]]; then
+                # claude-code@latest is a cask
+                if brew list --cask --versions claude-code@latest >/dev/null 2>&1; then
                     installed_tools+=("$tool")
                 fi
             else
@@ -920,7 +920,7 @@ update_ai_tools() {
             log_info "Available tools:"
             log_info "  • brew install gemini-cli"
             log_info "  • brew install codex"
-            log_info "  • brew install --cask claude-code"
+            log_info "  • brew install --cask claude-code@latest"
             return 0
         fi
 
@@ -928,7 +928,7 @@ update_ai_tools() {
 
         # Update each installed tool
         for tool in "${installed_tools[@]}"; do
-            if [[ "$tool" == "claude-code" ]]; then
+            if [[ "$tool" == "claude-code@latest" ]]; then
                 # Update cask
                 log_info "Checking for $tool updates..."
                 if $VERBOSE; then

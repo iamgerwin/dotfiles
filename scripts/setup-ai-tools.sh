@@ -61,7 +61,7 @@ if command -v claude &> /dev/null; then
     CLAUDE_INSTALLED=true
     print_success "Claude Code is installed"
 else
-    print_info "Claude Code is not installed (run: brew install --cask claude-code)"
+    print_info "Claude Code is not installed (run: brew install --cask claude-code@latest)"
 fi
 
 if command -v gemini &> /dev/null || command -v gemini-cli &> /dev/null; then

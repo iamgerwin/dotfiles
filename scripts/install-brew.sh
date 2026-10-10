@@ -130,7 +130,7 @@ if command -v brew &> /dev/null; then
         print_info "Installing AI CLI tools..."
         
         # Install AI tools
-        brew install --cask claude-code
+        brew install --cask claude-code@latest
         brew install gemini-cli
         brew install --cask codex
         

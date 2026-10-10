@@ -61,7 +61,7 @@ if command -v claude &> /dev/null; then
     print_success "rtk hook installed for Claude Code (global)"
     echo
 else
-    print_info "Claude Code not installed, skipping (run: brew install --cask claude-code)"
+    print_info "Claude Code not installed, skipping (run: brew install --cask claude-code@latest)"
 fi
 
 if command -v codex &> /dev/null; then
