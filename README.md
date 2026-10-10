@@ -26,6 +26,7 @@ This repository contains my personal dotfiles configuration, designed with modul
 - **SSH Key Organization**: Centralized SSH key management with migration and backup capabilities
 - **AI Prompts Management**: Organized system for managing AI prompts and context scripts by company/project
 - **AI Agent CLI Tools**: Support for Gemini, Claude, Codex, OpenCode, Orca, and Headroom with co-existence strategy, plus `rtk-ai` (token optimization proxy) and `gh-stack` (stacked PRs) — see [docs/ai-tools/INSTALLATION.md](docs/ai-tools/INSTALLATION.md)
+- **Agent Skills**: Reusable Claude skills (`SKILL.md` + scripts, references, assets) such as `/quick-address-issue <issue-url>`, synced to `~/.claude/skills` — see [skills/README.md](skills/README.md)
 - **Best Practices Documentation**: Comprehensive guides for modern development technologies and frameworks
 
 ## Structure
@@ -65,6 +66,17 @@ dotfiles/
 ├── config/             # Configuration files
 │   └── git-profiles/   # Git profile configurations (gitignored)
 ├── ssh-keys/           # Organized SSH keys directory (gitignored)
+├── skills/             # Agent Skills, one folder per skill (see skills/README.md)
+│   ├── README.md       # Skill layout, conventions, and install guide
+│   ├── quick-address-issue/   # Resolve a GitHub issue end to end
+│   │   ├── SKILL.md    # Frontmatter + core instructions
+│   │   ├── scripts/    # Executable helpers
+│   │   ├── references/ # Checklists loaded on demand
+│   │   └── assets/     # PR, comment, and limitation templates
+│   ├── code-review-checklist/ # Backend/frontend review checklists
+│   └── project-bootstrap/     # Laravel/Next.js project scaffolding
+├── tests/
+│   └── skills/         # Skill layout validation and script tests
 ├── docs/               # Documentation directory
 │   ├── dictionary.md   # IT Terms & Jargons Dictionary
 │   ├── RAYCAST.md      # Raycast setup and usage guide
@@ -98,7 +110,6 @@ dotfiles/
 │       ├── version-control/ # Git workflows and best practices
 │       └── programming-principles/ # Core programming principles and patterns
 ├── ai-prompts/         # AI prompts management system
-│   └── skills/         # Claude Skills (reusable skill packages)
 └── scripts/
     ├── install-brew.sh # Homebrew installation script
     ├── setup-tmux.sh   # Tmux setup and configuration script
@@ -735,17 +746,18 @@ See [AI_PROMPTS.md](AI_PROMPTS.md) for complete documentation.
 
 ### Claude Skills
 
-Skills are reusable, versioned packages that extend Claude's capabilities with project-specific knowledge, scripts, and templates. Skills live in `ai-prompts/skills/` and can be synced to your local Claude skills directory.
+Skills are reusable packages that extend Claude with task-specific instructions, scripts, references, and templates. Skills live in [`skills/`](skills/README.md), one folder per skill, and are synced to `~/.claude/skills`.
 
 **Available Skills:**
 
 | Skill | Description |
 |-------|-------------|
+| `quick-address-issue` | `/quick-address-issue <issue-url> [base-branch]`: resolve a GitHub issue end to end (branch, granular commits, tests, docs, PR, issue comment) |
 | `project-bootstrap` | Initialize new Laravel/Next.js projects with opinionated defaults |
 | `code-review-checklist` | Comprehensive code review checklists for backend and frontend |
 
 ```bash
-# Sync skills to your local Claude directory
+# Sync skills to your local Claude directory (per skill; other installed skills are kept)
 ~/dotfiles/scripts/sync-skills.sh
 
 # Preview what would be synced
@@ -755,7 +767,7 @@ Skills are reusable, versioned packages that extend Claude's capabilities with p
 ~/dotfiles/scripts/sync-skills.sh --target ~/my-skills/
 ```
 
-Each Skill has a `SKILL.md` file with documentation, optional `scripts/`, `templates/`, and `assets/` directories. See [ai-prompts/README.md](ai-prompts/README.md) for the complete Skill convention and how to create new Skills.
+Each skill has a required `SKILL.md` plus optional `scripts/`, `references/`, and `assets/` directories. Validate them with `tests/skills/validate-skills.sh`. See [skills/README.md](skills/README.md) for the full convention and how to create new skills.
 
 ### SSH Connection Management
 

@@ -26,8 +26,8 @@ This Skill provides:
 
 | Template | Description |
 |----------|-------------|
-| `templates/backend-checklist.md` | Checklist for Laravel/PHP backend code |
-| `templates/frontend-checklist.md` | Checklist for React/TypeScript frontend code |
+| `assets/backend-checklist.md` | Checklist for Laravel/PHP backend code |
+| `assets/frontend-checklist.md` | Checklist for React/TypeScript frontend code |
 
 ### Categories Covered
 
@@ -55,10 +55,10 @@ Copy the relevant checklist content when reviewing a PR:
 
 ```bash
 # Copy backend checklist to clipboard
-cat ai-prompts/skills/code-review-checklist/templates/backend-checklist.md | pbcopy
+cat skills/code-review-checklist/assets/backend-checklist.md | pbcopy
 
 # Or for frontend
-cat ai-prompts/skills/code-review-checklist/templates/frontend-checklist.md | pbcopy
+cat skills/code-review-checklist/assets/frontend-checklist.md | pbcopy
 ```
 
 ### Using with Claude
@@ -73,7 +73,7 @@ When working with Claude for code reviews:
 
 To adapt these checklists for your team:
 
-1. Edit templates in `templates/` to add team-specific checks
+1. Edit templates in `assets/` to add team-specific checks
 2. Create additional checklists for other technologies (e.g., `api-checklist.md`)
 3. Remove checks that don't apply to your projects
 
