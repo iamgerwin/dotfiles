@@ -9,6 +9,7 @@ brew "bottom" # Yet another cross-platform graphical process/system monitor
 brew "btop" # Resource monitor that shows usage and stats
 brew "chezmoi" # Manage your dotfiles across multiple machines
 brew "charmbracelet/tap/crush" # Compress URLs to make them shareable
+brew "mole" # Deep clean and optimize your Mac
 
 # Elixir Development
 brew "mise" # Fast and flexible tool version manager

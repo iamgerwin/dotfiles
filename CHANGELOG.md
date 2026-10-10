@@ -27,6 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - The `docker` formula already installed via Brewfile provides the CLI (and its completions), so no replacement package is needed
 
 ### Added
+- `mole` Homebrew formula to Brewfile (#131)
+  - Deep clean and optimize tool for macOS; the CLI is run as `mo`
 - `quick-address-issue` skill for resolving GitHub issues end to end (#129)
   - Invoke with `/quick-address-issue <issue-url> [base-branch]`
   - Covers the account check, clone or fork, branching, granular commits, tests, doc alignment, PR, and issue comment
