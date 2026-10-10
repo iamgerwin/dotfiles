@@ -1,6 +1,6 @@
 # AI CLI Tools Installation Guide
 
-This guide will help you install and configure Claude, Gemini, Codex, and OpenCode CLI tools on your system, plus the supporting `rtk-ai` and `gh-stack` CLI extensions.
+This guide will help you install and configure Claude, Gemini, Codex, OpenCode, Orca, and Headroom CLI tools on your system, plus the supporting `rtk-ai` and `gh-stack` CLI extensions.
 
 ## Quick Installation
 
@@ -14,7 +14,7 @@ Run the Homebrew installation script which includes an option to install AI tool
 
 The script will:
 1. Install or update Homebrew
-2. Prompt you to install AI CLI tools (Claude, Gemini, Codex, OpenCode)
+2. Prompt you to install AI CLI tools (Claude, Gemini, Codex, OpenCode, Orca, Headroom)
 3. Optionally configure API keys immediately
 
 ### Option 2: Manual Installation
@@ -33,6 +33,12 @@ brew install --cask codex
 
 # Install OpenCode (terminal-based AI coding assistant)
 brew install opencode
+
+# Install Orca (AI-powered development tools)
+brew install orca
+
+# Install Headroom (AI assistant for terminal and development)
+brew install headroom
 ```
 
 Then configure API keys:
