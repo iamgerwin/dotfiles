@@ -60,7 +60,7 @@ mkdir -p src/types
 
 # Copy templates if available
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TEMPLATE_DIR="$SCRIPT_DIR/../templates"
+TEMPLATE_DIR="$SCRIPT_DIR/../assets"
 
 if [[ -f "$TEMPLATE_DIR/README.template.md" ]]; then
     echo "==> Copying README template..."

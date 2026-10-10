@@ -32,8 +32,8 @@ This Skill provides:
 
 | Template | Description |
 |----------|-------------|
-| `templates/README.template.md` | Standard README structure for new projects |
-| `templates/PR_TEMPLATE.template.md` | Pull request template with checklist |
+| `assets/README.template.md` | Standard README structure for new projects |
+| `assets/PR_TEMPLATE.template.md` | Pull request template with checklist |
 
 ### Requirements
 
@@ -80,7 +80,7 @@ When working with Claude, you can reference this Skill:
 To adapt these scripts for your team:
 
 1. Edit the scripts in `scripts/` to match your conventions
-2. Update templates in `templates/` with your project structure
+2. Update templates in `assets/` with your project structure
 3. Add additional scripts for other frameworks (Rails, Django, etc.)
 
 ## Related Skills
