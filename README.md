@@ -26,6 +26,7 @@ This repository contains my personal dotfiles configuration, designed with modul
 - **SSH Key Organization**: Centralized SSH key management with migration and backup capabilities
 - **AI Prompts Management**: Organized system for managing AI prompts and context scripts by company/project
 - **AI Agent CLI Tools**: Support for Gemini, Claude, Codex, OpenCode, Orca, and Headroom with co-existence strategy, plus `rtk-ai` (token optimization proxy) and `gh-stack` (stacked PRs) — see [docs/ai-tools/INSTALLATION.md](docs/ai-tools/INSTALLATION.md)
+- **Reusable AI Skills**: Parameterized workflow templates for common development tasks following Claude's skill framework — see [skills/README.md](skills/README.md)
 - **Best Practices Documentation**: Comprehensive guides for modern development technologies and frameworks
 
 ## Structure
@@ -65,6 +66,9 @@ dotfiles/
 ├── config/             # Configuration files
 │   └── git-profiles/   # Git profile configurations (gitignored)
 ├── ssh-keys/           # Organized SSH keys directory (gitignored)
+├── skills/             # Reusable AI skills and workflows for agentic development
+│   ├── README.md       # AI skills overview and usage guide
+│   └── quick-address-issue.md # Workflow for addressing GitHub issues
 ├── docs/               # Documentation directory
 │   ├── dictionary.md   # IT Terms & Jargons Dictionary
 │   ├── RAYCAST.md      # Raycast setup and usage guide
