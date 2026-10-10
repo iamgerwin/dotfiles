@@ -61,30 +61,32 @@ if [[ ! -d "$SOURCE_DIR" ]]; then
     exit 1
 fi
 
-# Count skills
-SKILL_COUNT=$(find "$SOURCE_DIR" -maxdepth 1 -type d | wc -l)
-SKILL_COUNT=$((SKILL_COUNT - 1))  # Exclude the source dir itself
+# Only directories containing a SKILL.md are skills; loose files such as
+# skills/README.md are documentation and are not synced.
+SKILL_DIRS=()
+for skill_dir in "$SOURCE_DIR"/*/; do
+    [[ -f "$skill_dir/SKILL.md" ]] && SKILL_DIRS+=("${skill_dir%/}")
+done
 
 echo "==> Claude Skills Sync"
 echo "    Source: $SOURCE_DIR"
 echo "    Target: $TARGET_DIR"
-echo "    Skills: $SKILL_COUNT skill(s) found"
+echo "    Skills: ${#SKILL_DIRS[@]} skill(s) found"
 echo ""
+
+if [[ ${#SKILL_DIRS[@]} -eq 0 ]]; then
+    echo "Nothing to sync."
+    exit 0
+fi
 
 if [[ "$DRY_RUN" == "true" ]]; then
     echo "[DRY RUN] Would sync the following skills:"
     echo ""
-    for skill_dir in "$SOURCE_DIR"/*/; do
-        if [[ -d "$skill_dir" ]]; then
-            skill_name=$(basename "$skill_dir")
-            echo "  - $skill_name/"
-            if [[ -f "$skill_dir/SKILL.md" ]]; then
-                # Extract description from frontmatter
-                desc=$(grep -A1 "^description:" "$skill_dir/SKILL.md" 2>/dev/null | tail -1 | sed 's/^[[:space:]]*//')
-                if [[ -n "$desc" && "$desc" != "description:"* ]]; then
-                    echo "    $desc"
-                fi
-            fi
+    for skill_dir in "${SKILL_DIRS[@]}"; do
+        echo "  - $(basename "$skill_dir")/"
+        desc=$(sed -n 's/^description:[[:space:]]*//p' "$skill_dir/SKILL.md" | head -1)
+        if [[ -n "$desc" ]]; then
+            echo "    $desc"
         fi
     done
     echo ""
@@ -92,13 +94,16 @@ if [[ "$DRY_RUN" == "true" ]]; then
     exit 0
 fi
 
-# Create target directory
 echo "==> Creating target directory..."
 mkdir -p "$TARGET_DIR"
 
-# Sync skills
+# Sync per skill so --delete only prunes files inside skills managed here;
+# skills installed into TARGET_DIR from other sources are left untouched.
 echo "==> Syncing skills..."
-rsync -av --delete "$SOURCE_DIR/" "$TARGET_DIR/"
+for skill_dir in "${SKILL_DIRS[@]}"; do
+    rsync -a --delete "$skill_dir/" "$TARGET_DIR/$(basename "$skill_dir")/"
+    echo "    synced $(basename "$skill_dir")"
+done
 
 echo ""
 echo "==> Skills synced successfully!"
