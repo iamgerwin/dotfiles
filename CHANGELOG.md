@@ -27,6 +27,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - The `docker` formula already installed via Brewfile provides the CLI (and its completions), so no replacement package is needed
 
 ### Added
+- `ubuntu/` directory with a one-shot Ubuntu VPS bootstrap
+  - `ubuntu/vps-setup.sh` installs apt, snap, npm, cargo, and uv tools, plus Claude Code, herdr, and rtk
+  - Sets up fish with Fisher, Tide (prompt settings included), fzf.fish, autopair.fish, eza aliases, and zoxide as `cd`
+  - `ubuntu/README.md` covers usage and every component
 - `mole` Homebrew formula to Brewfile (#131)
   - Deep clean and optimize tool for macOS; the CLI is run as `mo`
 - `quick-address-issue` skill for resolving GitHub issues end to end (#129)
