@@ -130,6 +130,55 @@ gh skill list
 gh stack --help
 ```
 
+## Claude Code Status Line
+
+A powerline-style status line for Claude Code that mirrors the first line of the fish [Tide](https://github.com/IlanCosman/tide) prompt, plus model and context usage:
+
+```
+ os  ~/path/to/project   branch +1 !2 ?3   Model   42% used · 116k left
+```
+
+- **os**: Apple icon on macOS, Ubuntu icon on Linux
+- **pwd**: current folder with `~` for home; a lock icon when it is not writable
+- **git**: branch and staged `+N`, modified `!N`, untracked `?N` counts; green when clean, yellow when dirty
+- **model**: the model's display name
+- **context**: percentage of the context window used and tokens left; green below 50%, yellow from 50% to 80%, red above 80%. Hidden until the first response reports usage
+
+### Automated Installation (Recommended)
+
+```bash
+~/dotfiles/scripts/setup-claude-statusline.sh
+```
+
+The script will:
+1. Symlink `~/.claude/statusline-command.sh` to `config/claude/statusline-command.sh` (an existing regular file is backed up first)
+2. Set `statusLine` in `~/.claude/settings.json` with `jq`, keeping every other setting and backing up the previous file
+3. Honor `CLAUDE_CONFIG_DIR` if you keep Claude Code's config elsewhere
+
+Requires `jq` and a [Nerd Font](https://www.nerdfonts.com/) in your terminal. Restart Claude Code afterwards.
+
+### Manual Installation
+
+```bash
+ln -s ~/dotfiles/config/claude/statusline-command.sh ~/.claude/statusline-command.sh
+```
+
+Then add to `~/.claude/settings.json`:
+
+```json
+"statusLine": {
+  "type": "command",
+  "command": "bash ~/.claude/statusline-command.sh"
+}
+```
+
+### Verification
+
+```bash
+bash ~/dotfiles/tests/claude/statusline.test.sh
+echo '{"cwd":"'"$PWD"'","model":{"display_name":"Opus"}}' | bash ~/.claude/statusline-command.sh
+```
+
 ## Getting API Keys
 
 ### Claude (Anthropic)

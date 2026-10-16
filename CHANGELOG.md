@@ -27,6 +27,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - The `docker` formula already installed via Brewfile provides the CLI (and its completions), so no replacement package is needed
 
 ### Added
+- Claude Code status line mirroring the fish Tide prompt
+  - `config/claude/statusline-command.sh` renders os, folder, and git segments, plus the model name and context usage (percentage used and tokens left, colored by usage)
+  - `scripts/setup-claude-statusline.sh` links the script into `~/.claude` and sets `statusLine` in `settings.json` with `jq`, keeping other settings and backing up the previous file
+  - Tests in `tests/claude/statusline.test.sh`
 - `mole` Homebrew formula to Brewfile (#131)
   - Deep clean and optimize tool for macOS; the CLI is run as `mo`
 - `quick-address-issue` skill for resolving GitHub issues end to end (#129)
