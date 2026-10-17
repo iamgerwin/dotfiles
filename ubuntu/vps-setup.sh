@@ -14,7 +14,7 @@ step "apt packages"
 sudo apt update
 sudo apt install -y \
   fish eza zoxide fzf fd-find bat ripgrep \
-  git gh curl wget vim \
+  git gh curl wget vim jq \
   btop glances \
   cargo npm python3-pip python3-venv \
   fail2ban openssh-server locales-all
@@ -54,6 +54,28 @@ curl -fsSL https://herdr.dev/install.sh | sh
 
 step "rtk"
 curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/refs/heads/master/install.sh | sh
+
+# ---------------------------------------------------------------- Claude Code status line
+step "dotfiles repo"
+# Use the checkout this script runs from; with curl | bash there is none, so clone one
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]:-.}")" 2>/dev/null && pwd || true)"
+if [ -f "$script_dir/../scripts/setup-claude-statusline.sh" ]; then
+  DOTFILES_DIR="$(cd "$script_dir/.." && pwd)"
+else
+  DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
+  if [ -d "$DOTFILES_DIR/.git" ]; then
+    git -C "$DOTFILES_DIR" pull --ff-only
+  else
+    git clone https://github.com/iamgerwin/dotfiles.git "$DOTFILES_DIR"
+  fi
+fi
+
+step "Claude Code status line"
+if [ -f "$DOTFILES_DIR/scripts/setup-claude-statusline.sh" ]; then
+  bash "$DOTFILES_DIR/scripts/setup-claude-statusline.sh"
+else
+  echo "Skipped: $DOTFILES_DIR/scripts/setup-claude-statusline.sh not found." >&2
+fi
 
 # ---------------------------------------------------------------- fish config
 step "fish config"

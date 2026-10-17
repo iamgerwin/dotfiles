@@ -1,6 +1,6 @@
 # Ubuntu VPS bootstrap
 
-One script that turns a fresh Ubuntu VPS into a ready-to-use dev box: fish shell with a Powerlevel10k-style prompt, modern CLI tools, and AI coding agents.
+One script that turns a fresh Ubuntu VPS into a ready-to-use dev box: fish shell with a Powerlevel10k-style prompt, modern CLI tools, AI coding agents, and a matching Claude Code status line.
 
 It was captured from a working Ubuntu 26.04 VPS, so a new server ends up with the same packages, shell config, and prompt.
 
@@ -41,7 +41,7 @@ When it finishes:
 | Group | Packages |
 |---|---|
 | Shell and CLI | `fish` `eza` `zoxide` `fzf` `fd-find` `bat` `ripgrep` |
-| Dev tools | `git` `gh` `curl` `wget` `vim` |
+| Dev tools | `git` `gh` `curl` `wget` `vim` `jq` |
 | Monitoring | `btop` `glances` |
 | Languages | `cargo` `npm` `python3-pip` `python3-venv` |
 | Server basics | `fail2ban` `openssh-server` `locales-all` |
@@ -80,6 +80,17 @@ Ubuntu installs `fd` and `bat` as `fdfind` and `batcat`. The script links them a
 
 The script also adds `~/.local/bin`, `~/.npm-global/bin`, and `~/.cargo/bin` to fish's PATH (and `~/.npm-global/bin` to bash's), and sets fish as your login shell.
 
+### Claude Code status line
+
+The script runs [`scripts/setup-claude-statusline.sh`](../scripts/setup-claude-statusline.sh), which links `~/.claude/statusline-command.sh` to `config/claude/statusline-command.sh` and sets `statusLine` in `~/.claude/settings.json` (other settings are kept and the old file is backed up). See [the status line docs](../docs/ai-tools/INSTALLATION.md#claude-code-status-line) for what each segment shows.
+
+The link needs a copy of this repo on the VPS:
+
+- Run from a checkout (`bash ubuntu/vps-setup.sh`), it uses that checkout.
+- Run with `curl | bash`, it clones the repo to `~/dotfiles`, or updates it with `git pull --ff-only` if it is already there. Set `DOTFILES_DIR` to use another path.
+
+Keep `~/dotfiles` after setup: deleting it breaks the status line link. If the setup script is not found, this step is skipped with a warning and the rest of the bootstrap continues.
+
 ## Order of steps
 
 1. apt packages and the `fd` / `bat` links
@@ -88,21 +99,22 @@ The script also adds `~/.local/bin`, `~/.npm-global/bin`, and `~/.cargo/bin` to 
 4. cargo crates
 5. uv tools
 6. Claude Code, herdr, rtk
-7. fish config, Fisher and plugins, Tide prompt settings
-8. Set fish as the login shell
+7. Dotfiles checkout and Claude Code status line
+8. fish config, Fisher and plugins, Tide prompt settings
+9. Set fish as the login shell
 
 Fish becomes the login shell only at the end, after everything else has installed.
 
 ## Notes
 
-- **Fonts are set on your computer, not the VPS.** Tide's icons need a [Nerd Font](https://www.nerdfonts.com/) selected in your local terminal app.
+- **Fonts are set on your computer, not the VPS.** Tide's and the status line's icons need a [Nerd Font](https://www.nerdfonts.com/) selected in your local terminal app.
 - **Existing config is overwritten.** The script replaces `~/.config/fish/config.fish` and resets npm's global prefix to `~/.npm-global`. Back up anything you want to keep first.
 - **`--color=always` on `ls`** keeps color codes when piping (e.g. `ls | grep`). Change it to `--color=auto` in `config.fish` if that gets in the way.
 - **Not included:** SSH keys, git config, and tool logins. Set those up per machine.
 
 ## Customizing
 
-Edit `vps-setup.sh` directly. Each section is marked with a `# ----` header (apt, snaps, npm, cargo, uv, curl installers, fish config). Remove a line to skip a tool, or add packages to the lists.
+Edit `vps-setup.sh` directly. Each section is marked with a `# ----` header (apt, snaps, npm, cargo, uv, curl installers, Claude Code status line, fish config). Remove a line to skip a tool, or add packages to the lists.
 
 The Tide settings are the block between `TIDE_EOF` markers. To replace them with your own, run `tide configure` on a machine, then regenerate the block in fish:
 

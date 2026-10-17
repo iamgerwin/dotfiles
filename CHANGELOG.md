@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `ubuntu/` directory with a one-shot Ubuntu VPS bootstrap
   - `ubuntu/vps-setup.sh` installs apt, snap, npm, cargo, and uv tools, plus Claude Code, herdr, and rtk
   - Sets up fish with Fisher, Tide (prompt settings included), fzf.fish, autopair.fish, eza aliases, and zoxide as `cd`
+  - Runs `scripts/setup-claude-statusline.sh`, cloning the repo to `~/dotfiles` when run via `curl | bash`
   - `ubuntu/README.md` covers usage and every component
 - `mole` Homebrew formula to Brewfile (#131)
   - Deep clean and optimize tool for macOS; the CLI is run as `mo`
