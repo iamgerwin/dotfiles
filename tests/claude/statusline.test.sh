@@ -51,20 +51,38 @@ expect_contains "shows cwd" "{$base}" "$dir"
 expect_contains "shows model" "{$base}" "Opus"
 expect_contains "uses used_percentage" \
     "{$base,\"context_window\":{\"context_window_size\":200000,\"used_percentage\":42,\"current_usage\":{\"input_tokens\":84000}}}" \
-    "42% used · 116k left"
+    "ctx 42%"
 expect_contains "computes percentage from current_usage" \
     "{$base,\"context_window\":{\"context_window_size\":1000000,\"current_usage\":{\"input_tokens\":800000,\"cache_read_input_tokens\":50000}}}" \
-    "85% used · 150k left"
-expect_contains "formats millions" \
-    "{$base,\"context_window\":{\"context_window_size\":2000000,\"current_usage\":{\"input_tokens\":500000}}}" \
-    "1.5M left"
+    "ctx 85%"
+expect_missing "no tokens-left text" \
+    "{$base,\"context_window\":{\"context_window_size\":200000,\"used_percentage\":42}}" \
+    "left"
 expect_missing "hides context before first call" \
     "{$base,\"context_window\":{\"context_window_size\":200000,\"current_usage\":null,\"used_percentage\":null}}" \
-    "used"
-expect_missing "hides context without context_window" "{$base}" "used"
+    "ctx"
+expect_missing "hides context without context_window" "{$base}" "ctx"
 expect_color "green under 50%" "{$base,\"context_window\":{\"context_window_size\":200000,\"used_percentage\":10}}" "78;154;6"
 expect_color "yellow from 50%" "{$base,\"context_window\":{\"context_window_size\":200000,\"used_percentage\":60}}" "196;160;0"
 expect_color "red above 80%" "{$base,\"context_window\":{\"context_window_size\":200000,\"used_percentage\":90}}" "204;0;0"
+
+expect_contains "shows effort" "{$base,\"effort\":{\"level\":\"medium\"}}" "medium"
+if [[ "$(render "{$base,\"effort\":{\"level\":\"medium\"}}")" == *Opus*medium* ]]; then
+    echo "ok   effort comes after model"
+else
+    echo "FAIL effort comes after model"
+    failures=$((failures + 1))
+fi
+expect_missing "hides effort when absent" "{$base}" "medium"
+
+limits='"rate_limits":{"five_hour":{"used_percentage":4},"seven_day":{"used_percentage":55.7}}'
+expect_contains "shows 5h bar" "{$base,$limits}" "5h ▍░░░░░░░░░ 4%"
+expect_contains "shows weekly bar, floors percent" "{$base,$limits}" "week █████▌░░░░ 55%"
+expect_contains "full bar at 100%" "{$base,\"rate_limits\":{\"five_hour\":{\"used_percentage\":100}}}" "5h ██████████ 100%"
+expect_contains "empty bar at 0%" "{$base,\"rate_limits\":{\"five_hour\":{\"used_percentage\":0}}}" "5h ░░░░░░░░░░ 0%"
+expect_missing "hides limits without rate_limits" "{$base}" "5h"
+expect_missing "hides weekly when only 5h is reported" "{$base,\"rate_limits\":{\"five_hour\":{\"used_percentage\":4}}}" "week"
+expect_color "limit red above 80%" "{$base,\"rate_limits\":{\"five_hour\":{\"used_percentage\":95}}}" "204;0;0"
 
 git -C "$dir" init -q -b demo
 expect_contains "shows git branch" "{$base}" "demo"
