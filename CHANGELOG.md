@@ -31,6 +31,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `config/claude/statusline-command.sh` renders os, folder, and git segments, plus the model name, effort level, 5-hour and weekly plan usage bars, and context usage (each usage segment colored by usage)
   - `scripts/setup-claude-statusline.sh` links the script into `~/.claude` and sets `statusLine` in `settings.json` with `jq`, keeping other settings and backing up the previous file
   - Tests in `tests/claude/statusline.test.sh`
+- `ubuntu/` directory with a one-shot Ubuntu VPS bootstrap
+  - `ubuntu/vps-setup.sh` installs apt, snap, npm, cargo, and uv tools, plus Claude Code, herdr, and rtk
+  - Sets up fish with Fisher, Tide (prompt settings included), fzf.fish, autopair.fish, eza aliases, and zoxide as `cd`
+  - Runs `scripts/setup-claude-statusline.sh`, cloning the repo to `~/dotfiles` when run via `curl | bash`
+  - `ubuntu/README.md` covers usage and every component
 - `mole` Homebrew formula to Brewfile (#131)
   - Deep clean and optimize tool for macOS; the CLI is run as `mo`
 - `quick-address-issue` skill for resolving GitHub issues end to end (#129)
