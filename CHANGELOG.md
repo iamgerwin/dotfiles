@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-19
+
+### Added
+- Opt-in `update-all --setup-touchid` using the local `mo` helper, with active PAM
+  checks, repeat-safe setup, and verification; package updates are not run by setup.
+- Foreground macOS sudo validation before interactive Homebrew updates, reusing
+  cached credentials and native Touch ID/password fallback; `--no-auth` opt-out.
+- Linux/macOS PR and main CI: shell syntax, ShellCheck errors, workflow lint,
+  maintained documentation links, release metadata, and existing/new regressions.
+- Mocked authentication/setup, package-manager isolation, cask-ignore, timeout,
+  and release validation tests; shared `scripts/check.sh` runner.
+- Stable SemVer `VERSION` and validated main-only GitHub release workflow for
+  `v0.1.0`, using the changelog for notes and read-only PR workflow permissions.
+- Living `learnings/dump.md`, root agent guidance, and PR documentation checklist.
+- Main branch protection requiring all three CI checks and up-to-date branches,
+  including administrator enforcement (configured in GitHub, not by workflows).
+
+### Fixed
+- Update-all's test sandbox intercepts the actual `cargo install-update` dispatcher,
+  isolates inherited Cargo/Rustup directories, and tests a deliberately broken
+  source guard without allowing real package updates.
+
+### Changed
+- Sourcing `scripts/update-all.sh` now exposes functions without starting updates.
+- Authentication failure stops updates before they start. CI, noninteractive
+  sessions, non-macOS systems, and non-Homebrew-only modes skip upfront sudo.
+- README documents setup, password fallback, limitations, rollback, regression
+  checks, branch protection requirements, and the post-merge release procedure.
+- Physical Mac acceptance recorded from the repository owner: Touch ID succeeded
+  without a password prompt; release authorized on 2026-10-19.
+- This initial SemVer release includes the previously unreleased changes below;
+  older dated entries are retained as historical notes.
+
 ### Changed
 - Skills consolidated under a top-level `skills/` directory (#129)
   - Moved `project-bootstrap` and `code-review-checklist` from `ai-prompts/skills/` to `skills/`

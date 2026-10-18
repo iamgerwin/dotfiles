@@ -25,6 +25,8 @@ Thumbs.db
 *.tmp
 *.bak
 *.backup
+__pycache__/
+*.pyc
 
 # Local planning/PR notes
 docs/plans/

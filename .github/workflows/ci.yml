@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  regression:
+    name: Regression (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Install Linux test dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y jq zsh
+      - name: Run syntax, documentation, release, and regression checks
+        shell: bash
+        run: /bin/bash scripts/check.sh
+
+  lint:
+    name: Shell and workflow lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Install linters
+        run: sudo apt-get update && sudo apt-get install -y shellcheck zsh
+      - name: Lint shell scripts
+        run: python3 scripts/check-repo.py --lint
+      - name: Install pinned actionlint
+        env:
+          GOBIN: ${{ runner.temp }}/actionlint-bin
+        run: go install github.com/rhysd/actionlint/cmd/actionlint@v1.7.7
+      - name: Validate GitHub workflows
+        run: '"$RUNNER_TEMP/actionlint-bin/actionlint" -color'
