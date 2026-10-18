@@ -10,6 +10,8 @@
 #     --pip-only      Only update pip packages
 #     --no-cleanup    Skip cleanup operations
 #     --verbose       Show detailed output
+#     --setup-touchid Enable macOS sudo Touch ID via Mole (no updates)
+#     --no-auth       Skip upfront sudo authentication
 
 # Allow script to continue on errors but track them
 set -uo pipefail
@@ -39,6 +41,8 @@ UPDATE_TMUX=true
 UPDATE_NEOVIM=true
 UPDATE_MACOS=true
 REMEDIATE_CASKS=true
+SETUP_TOUCHID=false
+AUTHENTICATE=true
 
 # Cask remediation configuration
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -131,6 +135,14 @@ while [[ $# -gt 0 ]]; do
             VERBOSE=true
             shift
             ;;
+        --setup-touchid)
+            SETUP_TOUCHID=true
+            shift
+            ;;
+        --no-auth)
+            AUTHENTICATE=false
+            shift
+            ;;
         --help)
             echo "Usage: $0 [options]"
             echo "Options:"
@@ -141,6 +153,8 @@ while [[ $# -gt 0 ]]; do
             echo "  --no-cleanup    Skip cleanup operations"
             echo "  --cask-no-remediation  Skip cask remediation logic"
             echo "  --verbose       Show detailed output"
+            echo "  --setup-touchid Enable sudo Touch ID via Mole; do not run updates"
+            echo "  --no-auth       Skip upfront sudo authentication"
             exit 0
             ;;
         *)
@@ -213,6 +227,75 @@ run_with_timeout() {
 # Check if command exists
 command_exists() {
     command -v "$1" >/dev/null 2>&1
+}
+
+# Match active PAM rules only; commented examples do not enable Touch ID.
+touchid_configured() {
+    local sudo_file="${1:-/etc/pam.d/sudo}"
+    local local_file="${2:-/etc/pam.d/sudo_local}"
+    local tid_rule='^[[:space:]]*auth[[:space:]]+sufficient[[:space:]]+([^[:space:]]*/)?pam_tid\.so([[:space:]]|$)'
+
+    grep -Eq "$tid_rule" "$sudo_file" 2>/dev/null && return 0
+    # sudo_local is effective only when the main sudo policy includes it.
+    if grep -Eq '^[[:space:]]*auth[[:space:]]+include[[:space:]]+sudo_local([[:space:]]|$)' "$sudo_file" 2>/dev/null; then
+        grep -Eq "$tid_rule" "$local_file" 2>/dev/null && return 0
+    fi
+    return 1
+}
+
+interactive_auth_available() {
+    [[ -t 0 && -t 1 && -z "${CI:-}" ]]
+}
+
+setup_touchid() {
+    if [[ "$(uname -s)" != Darwin ]]; then
+        log_error "Touch ID setup is available only on macOS."
+        return 1
+    fi
+    if ! interactive_auth_available; then
+        log_error "Touch ID setup requires an interactive terminal outside CI."
+        return 1
+    fi
+    # The bare mo touchid command toggles; check first and request enable only.
+    if touchid_configured; then
+        log_success "Touch ID is already configured for sudo."
+        return 0
+    fi
+    if ! command_exists mo; then
+        log_error "Install Mole first: brew install mole; then run update-all --setup-touchid (or mo touchid)."
+        return 1
+    fi
+    log_info "Mole will ask you to enable sudo Touch ID and authorize the change with your password."
+    if ! mo touchid enable; then
+        log_error "Touch ID setup failed or was cancelled; password authentication remains available."
+        return 1
+    fi
+    if ! touchid_configured; then
+        log_error "Touch ID was not enabled. Run mo touchid and choose Enable to try again."
+        return 1
+    fi
+    log_success "sudo can now use Touch ID, with the macOS password fallback."
+}
+
+prepare_update_auth() {
+    # Only Homebrew/casks may need elevation. Never run Homebrew itself as root.
+    [[ "$AUTHENTICATE" == true && "$UPDATE_BREW" == true ]] || return 0
+    [[ "$(uname -s)" == Darwin ]] || return 0
+    command_exists brew && command_exists sudo || return 0
+    interactive_auth_available || return 0
+
+    if ! touchid_configured; then
+        log_info "Optional Touch ID setup: update-all --setup-touchid (uses mo touchid)."
+    fi
+    # Reuse a valid timestamp without forcing an unnecessary biometric prompt.
+    sudo -n -v 2>/dev/null && return 0
+    log_info "Authorize Homebrew installers: use Touch ID if offered, or your password."
+    # Foreground, before captured/timeout commands: PAM owns biometric selection,
+    # cancellation and password fallback. Never read or store the password here.
+    if ! sudo -v; then
+        log_error "Administrator authentication failed; updates were not started. Retry or use --no-auth."
+        return 1
+    fi
 }
 
 # Load ignore list for problematic casks
@@ -1082,6 +1165,12 @@ update_neovim_plugins() {
 
 # Main execution
 main() {
+    if [[ "$SETUP_TOUCHID" == true ]]; then
+        setup_touchid
+        return $?
+    fi
+    prepare_update_auth || return 1
+
     echo -e "${CYAN}"
     echo "╔════════════════════════════════════════════════════════════╗"
     echo "║                   Package Update Manager                   ║"
@@ -1138,5 +1227,7 @@ main() {
     fi
 }
 
-# Run main function
-main
+# Sourcing exposes functions for focused tests without running package updates.
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+    main
+fi
