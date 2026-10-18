@@ -2,6 +2,8 @@
 
 A modular, maintainable approach to managing shell configurations and development environment across multiple macOS machines.
 
+**Current version: 0.1.0** — see [CHANGELOG.md](CHANGELOG.md) for release notes.
+
 ## Overview
 
 This repository contains my personal dotfiles configuration, designed with modularity and maintainability in mind. The configuration is split into logical components, making it easy to understand, modify, and sync across different workstations.
@@ -14,6 +16,7 @@ This repository contains my personal dotfiles configuration, designed with modul
 - **Cross-Machine Sync**: Easy synchronization between personal and work computers
 - **Automated Setup**: One-command installation for new machines
 - **Package Management**: Centralized Homebrew package management via Brewfile
+- **Touch ID for Updates**: Opt-in Mole setup for macOS sudo, with native password fallback
 - **Version Control**: All configurations tracked in Git for easy rollback and history
 - **Oh My Zsh Integration**: Pre-configured with useful plugins and Powerlevel10k theme
 - **Neovim Configuration**: Modern IDE-like setup with LSP, Treesitter, and productivity plugins
@@ -397,6 +400,43 @@ brew bundle dump --force --file=~/dotfiles/Brewfile
 ~/dotfiles/scripts/update-all.sh --ai-tools-only
 ```
 
+#### Touch ID and password authentication (macOS)
+
+Set up sudo Touch ID once, using [Mole](https://github.com/tw93/mole):
+
+```bash
+brew install mole  # already listed in this repository's Brewfile
+~/dotfiles/scripts/update-all.sh --setup-touchid
+# Equivalent first-time setup: mo touchid; choose Enable and enter your password.
+```
+
+The setup command performs no package updates. It checks active PAM rules first,
+uses `mo touchid enable` (rather than Mole's bare toggle), then verifies setup.
+Repeating setup leaves Touch ID enabled. If an older Mole version does not support
+`enable`, update Mole or run `mo touchid` manually. Setup is explicit because it
+changes system-wide sudo authentication.
+
+On subsequent interactive macOS runs that include Homebrew, `update-all` validates
+sudo **before** captured or timed installer output. A valid sudo timestamp is
+reused; otherwise macOS offers Touch ID when available and retains its normal
+password fallback (including unavailable hardware, lockout, or cancelled Touch ID).
+No passwords are read or stored by this script, and Homebrew never runs as root.
+Without Mole or configured Touch ID, normal password authentication still works.
+
+`--npm-only`, `--pip-only`, and `--ai-tools-only` do not pre-authenticate. CI and
+redirected/noninteractive runs skip the upfront prompt; downstream installers can
+still require credentials. Use `--no-auth` to opt out of pre-authentication for a
+Homebrew run. No sudo keepalive is installed; long updates may prompt again after
+the normal sudo timestamp expires. Authentication failure stops the run before
+updates start.
+
+Touch ID requires supported hardware, enrolled fingerprints, and a compatible
+local terminal session. macOS/PAM decides availability; this does not replace
+password dialogs owned by apps or guarantee biometrics over SSH, in tmux, or with
+a closed laptop lid. Use your password when Touch ID is unavailable. To undo the
+system setting, run `mo touchid` and choose Disable; reverting this PR alone does
+not undo previously enabled PAM settings.
+
 ### Updating AI/LLM CLI Tools
 
 The dotfiles include automated updates for AI CLI tools like `gemini-cli`, `codex`, `orca`, `headroom`, and `claude-code`, as well as the supporting `rtk` and `gh-stack` CLI extensions (see [docs/ai-tools/INSTALLATION.md](docs/ai-tools/INSTALLATION.md) for install/update/uninstall details):
@@ -411,8 +451,10 @@ The dotfiles include automated updates for AI CLI tools like `gemini-cli`, `code
 # Update only AI tools (alternative method)
 source ~/dotfiles/scripts/update-all.sh && update_ai_tools
 
-# Skip AI tools during system update
-UPDATE_AI_TOOLS=false ~/dotfiles/scripts/update-all.sh
+# Source without starting updates; disable a manager before calling main
+source ~/dotfiles/scripts/update-all.sh
+UPDATE_AI_TOOLS=false
+main
 
 # Manual update of individual tools
 brew upgrade gemini-cli codex          # Formula-based tools
@@ -425,6 +467,67 @@ brew upgrade --cask claude-code        # Cask-based tools
 - Helpful installation messages for missing tools
 - Integrated with package manager isolation flags
 - Non-blocking: failures on one tool don't prevent updates to others
+
+## Contributing and regression checks
+
+Read [AGENTS.md](AGENTS.md) and [learnings/dump.md](learnings/dump.md) before changes.
+Keep this README (usage), CHANGELOG (user-visible history), and the lessons (causes
+and prevention) current in the same PR. Add behavior tests for each regression.
+
+```bash
+# macOS test dependencies (Linux CI installs jq and zsh with apt)
+brew install jq
+bash scripts/check.sh
+
+# Optional local lint; CI always runs it
+brew install shellcheck zsh
+python3 scripts/check-repo.py --lint
+```
+
+Python 3, Git, jq, and Zsh are required. The runner checks repository shell syntax,
+local links in the four maintained docs, VERSION/README/changelog consistency,
+mocked update/authentication and release validation tests, and existing statusline
+and skill tests. ShellCheck errors and actionlint workflow validation run in CI.
+External links and the entire historical documentation library are not link-checked.
+Every PR (including forks) and main push runs Linux and macOS checks with system
+`/bin/bash`, including macOS Bash 3.2. Tests never invoke real sudo, Mole, or package
+updates. Hosted runners cannot verify a physical fingerprint sensor.
+
+Before merging an authentication change, manually check on a Touch ID Mac:
+
+1. Run `update-all --setup-touchid` and authorize Mole's change with a password.
+2. Run `sudo -k`, then `update-all --brew-only --no-cleanup`; confirm Touch ID is
+   offered before package operations. **This command performs real updates.**
+3. Repeat with Touch ID cancelled/unavailable and confirm password fallback.
+4. Repeat setup; confirm it leaves Touch ID enabled. Test `--no-auth` as needed.
+
+The repository's main branch protection requires `Regression (ubuntu-latest)`,
+`Regression (macos-latest)`, and `Shell and workflow lint`, with up-to-date branches
+and enforcement for administrators. Approval requirements are unchanged. These
+are GitHub repository settings, not applied by workflows; configure the same
+requirements separately for forks or a replacement repository.
+
+## Releases and semantic versioning
+
+`VERSION` is the stable release source of truth (currently `0.1.0`); tags use
+`vX.Y.Z`. Before `1.0.0`, minor versions may introduce incompatible changes and
+patch versions contain backward-compatible fixes. At/after `1.0.0`, use standard
+SemVer: major for breaking changes, minor for features, patch for fixes.
+
+1. Prepare a PR updating VERSION, the current version above, and a dated changelog
+   section. Keep an Unreleased section for future work. Update relevant lessons.
+2. Merge only after PR checks pass and any required hardware verification is done.
+3. From **main**, dispatch the Release workflow with `v0.1.0` for this release:
+   `gh workflow run release.yml --ref main -f version=v0.1.0`.
+   Alternatively push a `vX.Y.Z` tag pointing to a validated main commit.
+4. The pipeline reruns the full CI suite, checks SemVer, matching metadata and
+   main ancestry, then creates the tag (for dispatch) and GitHub release using
+   that version's changelog notes. GitHub provides source archives automatically.
+
+Releases are never published from unmerged PR branches, existing tags must point
+to the selected commit, and existing releases are not overwritten. Release jobs
+alone receive `contents: write`; PR checks have read-only permissions and no
+secrets. `0.1.0` is prepared here and is published after merge, not from this PR.
 
 ## Customization
 
