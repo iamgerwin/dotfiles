@@ -74,5 +74,8 @@ README owns usage and release instructions; CHANGELOG owns user-visible history.
 - **Prevention:** Record physical Mac checklist results before merging/releasing
   authentication changes. Report unverified behavior explicitly; user approval to
   run CI is not evidence of a completed hardware check.
-- **Evidence:** The owner chose to hold PR #135 and v0.1.0 for recorded testing;
-  README contains the checklist and an authentication-only, no-update test command.
+- **Evidence:** After initially holding PR #135, the owner confirmed local physical
+  Mac testing on 2026-10-19: Touch ID succeeded without a password prompt, and
+  release was authorized. Record this as owner-reported evidence; do not infer
+  unreported OS/terminal details or individual fallback outcomes. README retains
+  the checklist and an authentication-only, no-update test command.

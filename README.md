@@ -408,8 +408,9 @@ Enable sudo Touch ID once from your terminal:
 ~/dotfiles/scripts/update-all.sh --setup-touchid
 ```
 
-Authorize setup with your password when prompted. The command checks existing
-configuration, enables Touch ID, and verifies the result without updating packages.
+Authorize setup when prompted; macOS may accept Touch ID or request your password.
+The command checks existing configuration, enables Touch ID, and verifies the
+result without updating packages.
 Repeating setup leaves Touch ID enabled. It requires a current local `mo` helper;
 missing-helper errors include setup guidance. This is opt-in because it
 changes system-wide sudo authentication.
@@ -493,7 +494,7 @@ or package updates. Hosted runners cannot verify a physical fingerprint sensor.
 
 Before merging an authentication change, manually check on a Touch ID Mac:
 
-1. Run `update-all --setup-touchid` and authorize the change with a password.
+1. Run `update-all --setup-touchid` and authorize the change if requested.
 2. Run `sudo -k`, then `update-all --brew-only --no-cleanup`; confirm Touch ID is
    offered before package operations. **This command performs real updates.**
 3. Repeat with Touch ID cancelled/unavailable and confirm password fallback.
@@ -523,9 +524,12 @@ requirements separately for forks or a replacement repository.
 patch versions contain backward-compatible fixes. At/after `1.0.0`, use standard
 SemVer: major for breaking changes, minor for features, patch for fixes.
 
-**0.1.0 readiness:** Prepared but unpublished. [PR #135](https://github.com/iamgerwin/dotfiles/pull/135)
-is on hold for recorded physical Mac authentication results; merge, tagging, and
-release publication must wait for the checklist above to be completed.
+**0.1.0 acceptance:** On 2026-10-19, the repository owner confirmed local physical
+Mac testing: Touch ID authentication succeeded without requesting a password, and
+release was authorized. This is owner-reported hardware evidence, separate from
+automated CI. See [PR #135](https://github.com/iamgerwin/dotfiles/pull/135) and
+[releases](https://github.com/iamgerwin/dotfiles/releases) for the acceptance and
+publication records.
 
 1. Prepare a PR updating VERSION, the current version above, and a dated changelog
    section. Keep an Unreleased section for future work. Update relevant lessons.
@@ -540,7 +544,7 @@ release publication must wait for the checklist above to be completed.
 Releases are never published from unmerged PR branches, existing tags must point
 to the selected commit, and existing releases are not overwritten. Release jobs
 alone receive `contents: write`; PR checks have read-only permissions and no
-secrets. `0.1.0` is prepared here and is published after merge, not from this PR.
+secrets. Publish tags and releases only after the corresponding PR has merged.
 
 ## Customization
 

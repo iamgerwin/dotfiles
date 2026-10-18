@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.0] - 2026-10-18
+## [0.1.0] - 2026-10-19
 
 ### Added
 - Opt-in `update-all --setup-touchid` using the local `mo` helper, with active PAM
@@ -35,6 +35,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   sessions, non-macOS systems, and non-Homebrew-only modes skip upfront sudo.
 - README documents setup, password fallback, limitations, rollback, regression
   checks, branch protection requirements, and the post-merge release procedure.
+- Physical Mac acceptance recorded from the repository owner: Touch ID succeeded
+  without a password prompt; release authorized on 2026-10-19.
 - This initial SemVer release includes the previously unreleased changes below;
   older dated entries are retained as historical notes.
 
