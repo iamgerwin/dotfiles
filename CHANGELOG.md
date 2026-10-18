@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2026-10-18
 
 ### Added
-- Opt-in `update-all --setup-touchid` using Mole's `mo touchid`, with active PAM
+- Opt-in `update-all --setup-touchid` using the local `mo` helper, with active PAM
   checks, repeat-safe setup, and verification; package updates are not run by setup.
 - Foreground macOS sudo validation before interactive Homebrew updates, reusing
   cached credentials and native Touch ID/password fallback; `--no-auth` opt-out.
@@ -23,6 +23,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Living `learnings/dump.md`, root agent guidance, and PR documentation checklist.
 - Main branch protection requiring all three CI checks and up-to-date branches,
   including administrator enforcement (configured in GitHub, not by workflows).
+
+### Fixed
+- Update-all's test sandbox intercepts the actual `cargo install-update` dispatcher,
+  isolates inherited Cargo/Rustup directories, and tests a deliberately broken
+  source guard without allowing real package updates.
 
 ### Changed
 - Sourcing `scripts/update-all.sh` now exposes functions without starting updates.

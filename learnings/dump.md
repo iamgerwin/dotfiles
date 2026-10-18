@@ -21,13 +21,15 @@ README owns usage and release instructions; CHANGELOG owns user-visible history.
 - **Symptom:** Repeating setup can turn off working Touch ID.
 - **Cause:** `mo touchid` is a toggle, and commented PAM examples are not active
   configuration. A sudo_local rule is ineffective without its sudo include.
-- **Prevention:** Check active rules and the include before invoking Mole's explicit
+- **Prevention:** Check active rules and the include before invoking the helper's explicit
   `mo touchid enable`, not its bare toggle. Use `update-all --setup-touchid` only
-  from a terminal; verify setup afterward. Mole
+  from a terminal; verify setup afterward. The helper
   owns privileged configuration and its password prompt; update-all writes no PAM
   files. Password fallback and hardware availability remain macOS responsibilities.
 - **Evidence:** `tests/update_all_test.py` tests active, commented, missing, and
-  legacy policies; setup success, cancellation, missing Mole, and repeated setup.
+  legacy policies; setup success, cancellation, missing helper, and repeated setup.
+- **Documentation:** Lead with this repository's `update-all --setup-touchid`;
+  mention external helpers only for prerequisites and troubleshooting.
 
 ## Compatibility and release evidence must be reproducible
 
@@ -50,3 +52,27 @@ README owns usage and release instructions; CHANGELOG owns user-visible history.
 - **Prevention:** Drain PTY output concurrently and close/reap terminal resources.
 - **Evidence:** The full-main authentication-order regression in
   `tests/update_all_test.py` exercises this test harness on both CI platforms.
+
+## Mock the actual dispatcher, not just its plugin executable
+
+- **Symptom:** A broken source guard could escape the package-update sandbox.
+- **Cause:** The updater checks for `cargo-install-update` but executes
+  `cargo install-update -a`; mocking only the plugin leaves `cargo` reachable.
+  Inherited `CARGO_HOME`/`RUSTUP_HOME` can also point outside a temporary HOME.
+- **Prevention:** Export mocks for both executable names, isolate toolchain homes,
+  and force the failure path in a throwaway script. Use a harmless PATH decoy to
+  detect escapes without ever invoking a real installer.
+- **Evidence:** `tests/update_all_test.py` verifies unexpected main execution and
+  inherited toolchain-home isolation. Both regressions failed safely before the
+  fix and passed afterward. Standards and spec reviews independently found this.
+
+## Hardware acceptance is separate from CI
+
+- **Symptom:** Green CI can be mistaken for proof that physical Touch ID works.
+- **Cause:** Hosted runners and mocked sudo do not exercise a fingerprint sensor
+  or native cancellation/password fallback.
+- **Prevention:** Record physical Mac checklist results before merging/releasing
+  authentication changes. Report unverified behavior explicitly; user approval to
+  run CI is not evidence of a completed hardware check.
+- **Evidence:** The owner chose to hold PR #135 and v0.1.0 for recorded testing;
+  README contains the checklist and an authentication-only, no-update test command.

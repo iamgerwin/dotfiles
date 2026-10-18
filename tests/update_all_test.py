@@ -7,6 +7,7 @@ import subprocess
 import tempfile
 import threading
 import unittest
+from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,7 +17,7 @@ SCRIPT = ROOT / "scripts/update-all.sh"
 # Install a safety net BEFORE sourcing. Even a regression in the source guard
 # must not reach a developer's real package managers, sudo, or home directory.
 SANDBOX = r'''
-for test_command in sudo mo brew npm pip3 gem rustup composer cargo-install-update go nvim tmux softwareupdate; do
+for test_command in sudo mo brew npm pip3 gem rustup cargo composer cargo-install-update go nvim tmux softwareupdate; do
     eval "$test_command() { printf 'UNEXPECTED: $test_command\\n' >> \"\$CALL_LOG\"; return 99; }"
     export -f "$test_command"
 done
@@ -65,6 +66,8 @@ class UpdateAllTests(unittest.TestCase):
         environment.update(
             CALL_LOG=str(self.log), AUTH_STATE=str(self.state), SCRIPT=str(SCRIPT),
             HOME=self.temp.name,
+            CARGO_HOME=str(Path(self.temp.name) / "cargo"),
+            RUSTUP_HOME=str(Path(self.temp.name) / "rustup"),
         )
         environment.update(env)
         program = SANDBOX + 'source "$SCRIPT" "$@"\n' + (MOCKS if mocks else "") + body
@@ -112,6 +115,46 @@ class UpdateAllTests(unittest.TestCase):
         self.assert_ok(result)
         self.assertEqual(result.stdout, "sourced\n")
         self.assertEqual(self.calls(), [])
+
+    def test_unexpected_main_cannot_escape_package_sandbox(self):
+        # Mutate a throwaway copy to simulate the source guard regressing. A
+        # harmless PATH decoy records escapes; it never executes real Cargo.
+        directory = Path(self.temp.name)
+        bin_dir = directory / "bin"
+        bin_dir.mkdir()
+        cargo = bin_dir / "cargo"
+        cargo.write_text('#!/bin/bash\nprintf "ESCAPED cargo %s\\n" "$*" >> "$CALL_LOG"\nexit 99\n')
+        cargo.chmod(0o755)
+        footer = 'if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then\n    main\nfi'
+        source = SCRIPT.read_text()
+        self.assertIn(footer, source)
+        mutated = directory / "update-all.sh"
+        mutated.write_text(source.replace(
+            footer,
+            # The watchdog is unrelated to this safety test. Avoid spawning
+            # sleeping watchers while exercising the actual update functions.
+            'run_with_timeout() { shift; bash -c "$*"; }\nmain',
+        ))
+        result = self.run_shell(
+            ':', mocks=False, SCRIPT=str(mutated),
+            PATH=str(bin_dir) + os.pathsep + os.environ["PATH"],
+        )
+        self.assert_ok(result)
+        self.assertIn("UNEXPECTED: rustup", self.calls())
+        self.assertIn("UNEXPECTED: cargo", self.calls())
+        self.assertFalse(any(line.startswith("ESCAPED") for line in self.calls()), self.calls())
+
+    def test_toolchain_homes_are_isolated_from_inherited_environment(self):
+        with mock.patch.dict(os.environ, {
+            "CARGO_HOME": "/must-not-use-inherited-cargo",
+            "RUSTUP_HOME": "/must-not-use-inherited-rustup",
+        }):
+            result = self.run_shell('printf "%s\\n" "$CARGO_HOME" "$RUSTUP_HOME"', mocks=False)
+        self.assert_ok(result)
+        self.assertEqual(result.stdout.splitlines(), [
+            str(Path(self.temp.name) / "cargo"),
+            str(Path(self.temp.name) / "rustup"),
+        ])
 
     def test_help_and_unknown_options(self):
         result = self.run_shell("", args=("--help",))
