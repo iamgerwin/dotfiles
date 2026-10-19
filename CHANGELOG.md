@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `bash` (modern Homebrew Bash) to the Brewfile for monitoring tools such as g3rm0n
+- g3rm0n live terminal dashboard recommendation in README and INSTALLATION
+  (`brew install bash jq && curl -fsSL https://raw.githubusercontent.com/iamgerwin/g3rm0n/main/install.sh | bash`)
+- `tests/brewfile_test.py` regression for the Brewfile Bash entry
+
 ## [0.1.0] - 2026-10-19
 
 ### Added

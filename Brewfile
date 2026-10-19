@@ -4,6 +4,7 @@ tap "charmbracelet/tap" # Charm shell tools and utilities
 tap "oven-sh/bun" # Bun JavaScript runtime
 
 # Command Line Tools & Development
+brew "bash" # Modern Bash for monitoring tools such as g3rm0n (macOS ships Bash 3.2)
 brew "bat" # Cat clone with syntax highlighting
 brew "bottom" # Yet another cross-platform graphical process/system monitor
 brew "btop" # Resource monitor that shows usage and stats
