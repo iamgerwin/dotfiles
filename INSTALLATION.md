@@ -106,13 +106,18 @@ Each backup includes:
 - Tmux with Tmux Plugin Manager (TPM)
 - Tmux plugins (resurrect, continuum, vim-navigator)
 - AI CLI tools (Claude, Gemini, Codex) - optional, requires API keys
+- Recommended extra: **g3rm0n** live monitoring dashboard (optional, installs to `~/.local`, no root)
+  ```bash
+  brew install bash jq && curl -fsSL https://raw.githubusercontent.com/iamgerwin/g3rm0n/main/install.sh | bash
+  ```
 
 ### Final Configuration Steps
 After installation completes, you'll need to:
 1. Install the MesloLGS NF font and configure your terminal
 2. Run `p10k configure` to customize your prompt theme
 3. (Optional) Run `~/dotfiles/scripts/setup-ai-tools.sh` to configure AI CLI tools
-4. Restart your terminal to activate all changes
+4. (Optional) Install the g3rm0n monitoring dashboard (see Dependencies Installed)
+5. Restart your terminal to activate all changes
 
 ## Verification Steps
 

@@ -337,6 +337,15 @@ The dotfiles now include comprehensive terminal setup tools for an enhanced deve
 - **Fd**: Simple, fast alternative to `find`
 - **Dust**: More intuitive version of `du` written in Rust
 
+#### Monitoring
+- **g3rm0n**: Live terminal dashboard for system and AI usage (CPU, memory, disk, network + Claude/Codex/Z.ai limits)
+
+Install it with the one-liner below. `bash` and `jq` already come from the Brewfile; the command installs them if missing and then installs g3rm0n into `~/.local`:
+
+```bash
+brew install bash jq && curl -fsSL https://raw.githubusercontent.com/iamgerwin/g3rm0n/main/install.sh | bash
+```
+
 #### Fonts
 The setup includes JetBrains Mono and other Nerd Fonts for proper icon display in terminals.
 
