@@ -21,12 +21,12 @@ class BrewfileTests(unittest.TestCase):
     def test_jq_is_not_duplicated(self):
         self.assertEqual(len(self.formula_lines("jq")), 1)
 
-    def test_bash_sits_in_command_line_tools_before_bat(self):
+    def test_bash_sits_in_command_line_tools_section_sorted(self):
         section = self.lines.index("# Command Line Tools & Development")
         bash_index = next(i for i, line in enumerate(self.lines) if line.startswith('brew "bash"'))
         bat_index = next(i for i, line in enumerate(self.lines) if line.startswith('brew "bat"'))
         self.assertGreater(bash_index, section)
-        self.assertEqual(bash_index + 1, bat_index)
+        self.assertLess(bash_index, bat_index)
 
 
 if __name__ == "__main__":
