@@ -117,19 +117,32 @@ most_used() {
 }
 
 # Repo-specific gh account: pick the gh login from the origin remote's SSH host alias.
-# Add a pair per alias in ~/.ssh/config. An explicit GH_TOKEN always wins.
+# Add a pair per alias in ~/.ssh/config (or in custom.zsh: GH_HOST_ACCOUNTS[alias]=login).
+# An explicit GH_TOKEN, GH_REPO or -R/--repo skips the mapping and uses the active account.
 typeset -gA GH_HOST_ACCOUNTS=(
     github.com-iamgerwin iamgerwin
 )
 gh() {
-    if [[ -z "$GH_TOKEN" ]]; then
+    # Keep the token out of xtrace/verbose output; options revert when the function returns.
+    setopt localoptions noxtrace noverbose
+    local arg
+    for arg in "$@"; do
+        if [[ $arg == -R || $arg == --repo || $arg == --repo=* || $arg == -R?* ]]; then
+            command gh "$@"
+            return
+        fi
+    done
+    if [[ -z "${GH_TOKEN:-}${GH_REPO:-}" ]]; then
         local url host user token
         url=$(command git remote get-url origin 2>/dev/null)
         host=${url#*://}; host=${host#*@}; host=${host%%[:/]*}
-        user=${GH_HOST_ACCOUNTS[$host]}
-        if [[ -n "$user" ]] && token=$(command gh auth token -u "$user" 2>/dev/null) && [[ -n "$token" ]]; then
-            GH_TOKEN="$token" command gh "$@"
-            return
+        user=${GH_HOST_ACCOUNTS[$host]:-}
+        if [[ -n "$user" ]]; then
+            if token=$(command gh auth token -u "$user" 2>/dev/null) && [[ -n "$token" ]]; then
+                GH_TOKEN="$token" command gh "$@"
+                return
+            fi
+            print -u2 -- "gh: no token for $user (gh auth login); using the active account"
         fi
     fi
     command gh "$@"
