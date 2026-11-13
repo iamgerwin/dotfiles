@@ -79,3 +79,24 @@ README owns usage and release instructions; CHANGELOG owns user-visible history.
   release was authorized. Record this as owner-reported evidence; do not infer
   unreported OS/terminal details or individual fallback outcomes. README retains
   the checklist and an authentication-only, no-update test command.
+
+## Shell wrappers that inject credentials must survive caller options
+
+- **Symptom:** The `gh` account wrapper failed every call under `setopt nounset`,
+  printed the token under `setopt xtrace`, and used the mapped account even when
+  `-R`/`GH_REPO` targeted another repository.
+- **Cause:** Functions in `functions.zsh` run with the caller's shell options, and
+  the wrapper assumed a default shell and a repository taken from the cwd.
+- **Prevention:** Start credential-handling functions with
+  `setopt localoptions noxtrace noverbose`, default-expand optional variables
+  (`${VAR:-}`), defer to explicit targets the wrapped tool already honours, and
+  fail closed (error, exit 1) rather than silently using another identity.
+- **Second-round trap:** scanning argv for `-R`/`--repo` also matched free text
+  (`--body "--repo"`, `--title "-Rebase"`, arguments after `--`). Stop at `--`,
+  skip the values of text-taking flags, guard the map's type before indexing
+  (`${(t)MAP} == association*`), and lowercase host names. Never type the loop
+  variable as an integer (`local -i`); it breaks the string matching.
+- **Evidence:** `tests/gh_wrapper_test.py` covers nounset, xtrace, `-R`/`--repo`,
+  `GH_REPO`, flag values and `--`, an unset or scalar map, mixed-case hosts, the
+  fail-closed path, the `custom.zsh` mapping, and restored caller options. Each
+  round's new cases failed against the previous head (PR #137, two review rounds).

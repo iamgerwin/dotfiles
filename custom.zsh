@@ -1,6 +1,11 @@
 #!/usr/bin/env zsh
 # Custom configurations and machine-specific settings
 
+# Repo-specific gh accounts (functions.zsh): ~/.ssh/config host alias -> gh login, keys lowercase.
+# Personal aliases you do not want in git can go in ~/.zshrc.local instead (loaded next).
+[[ ${(t)GH_HOST_ACCOUNTS} == association* ]] || typeset -gA GH_HOST_ACCOUNTS
+GH_HOST_ACCOUNTS[github.com-iamgerwin]=iamgerwin
+
 # Load local machine-specific configurations if they exist
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 

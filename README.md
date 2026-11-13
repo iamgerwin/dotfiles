@@ -663,6 +663,28 @@ ght                     # gh auth token
 
 These aliases work seamlessly with the Git Profile Management system for managing multiple GitHub accounts.
 
+#### Repo-specific accounts
+
+`gh` picks its account from the repository's `origin` remote. When the remote uses an SSH host alias listed in `GH_HOST_ACCOUNTS`, `gh` runs with that account's token; everywhere else it uses the active account. The global active account never changes.
+
+`functions.zsh` ships an empty map; add mappings in `custom.zsh`, which loads after it. `custom.zsh` is tracked, so for aliases you want to keep out of git, use `~/.zshrc.local` instead (`custom.zsh` loads it next).
+
+```bash
+# custom.zsh: ~/.ssh/config host alias -> gh login (keys lowercase)
+GH_HOST_ACCOUNTS[github.com-iamgerwin]=iamgerwin
+
+git clone git@github.com-iamgerwin:iamgerwin/repo.git   # gh in this clone runs as iamgerwin
+GH_TOKEN=... gh pr list                                  # an explicit token always wins
+```
+
+Each mapped account must be logged in once (`gh auth login`).
+
+- `-R`/`--repo` or `GH_REPO` targeting another repository skips the mapping and uses the active account. Values of text flags such as `--body`, `--title` and `--jq`, and arguments after `--`, are not read as `-R`/`--repo`.
+- If a mapped account has no token, `gh` fails closed: it prints an error and exits 1 instead of using the active account. Set `GH_TOKEN` to override.
+- Inside a mapped repository, `gh auth switch` has no effect, because the mapped token takes precedence.
+- Host aliases match case-insensitively. The token is not printed under `set -x`/`setopt xtrace`.
+- Trust: the account is chosen from the repository's own remote, so any clone whose `origin` uses a mapped alias gets that account's token for every `gh` call, including git hooks and scripts that run `gh`. Map only aliases you use for your own repositories.
+
 ### Elixir, Phoenix, and Ash Development
 
 Automated Elixir and Phoenix setup with asdf for version management, targeting Phoenix and Ash framework development:
