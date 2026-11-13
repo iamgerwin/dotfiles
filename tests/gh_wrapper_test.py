@@ -6,7 +6,11 @@ import tempfile
 import unittest
 
 
-FUNCTIONS = Path(__file__).resolve().parents[1] / "functions.zsh"
+ROOT = Path(__file__).resolve().parents[1]
+FUNCTIONS = ROOT / "functions.zsh"
+CUSTOM = ROOT / "custom.zsh"
+# Tests own their mapping, so they do not depend on what custom.zsh ships.
+MAP = "GH_HOST_ACCOUNTS[github.com-iamgerwin]=iamgerwin;"
 FAKE_GH = """#!/bin/sh
 if [ "$1" = auth ] && [ "$2" = token ]; then
     [ "$4" = missing ] && exit 1
@@ -37,24 +41,29 @@ class GhWrapperTests(unittest.TestCase):
             subprocess.run(["git", "-C", str(path), "remote", "add", "origin", remote], check=True)
         return path
 
-    def run_gh(self, cwd, *args, env=None, setup=""):
-        script = f'source "{FUNCTIONS}"; {setup} gh "$@"'
+    def zsh(self, cwd, script, *args, env=None):
         return subprocess.run(
             ["zsh", "-f", "-c", script, "zsh", *args],
-            cwd=cwd, env={**self.env, **(env or {})}, capture_output=True, text=True, check=True,
+            cwd=cwd, env={**self.env, **(env or {})}, capture_output=True, text=True,
         )
 
+    def run_gh(self, cwd, *args, env=None, setup=""):
+        return self.zsh(cwd, f'source "{FUNCTIONS}"; {MAP} {setup} gh "$@"', *args, env=env)
+
     def gh(self, cwd, *args, env=None, setup=""):
-        return self.run_gh(cwd, *args, env=env, setup=setup).stdout.strip()
+        result = self.run_gh(cwd, *args, env=env, setup=setup)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        return result.stdout.strip()
 
     def personal(self, name="personal"):
         return self.repo(name, "git@github.com-iamgerwin:iamgerwin/repo.git")
 
     def test_mapped_alias_uses_its_account(self):
-        for remote in ("git@github.com-iamgerwin:iamgerwin/repo.git",
-                       "ssh://git@github.com-iamgerwin/iamgerwin/repo.git"):
+        for i, remote in enumerate(("git@github.com-iamgerwin:iamgerwin/repo.git",
+                                    "ssh://git@github.com-iamgerwin/iamgerwin/repo.git",
+                                    "git@GitHub.com-IamGerwin:iamgerwin/repo.git")):
             with self.subTest(remote=remote):
-                path = self.repo(remote.replace("/", "_").replace(":", "_"), remote)
+                path = self.repo(f"mapped-{i}", remote)
                 self.assertEqual(self.gh(path, "pr", "list"), "token=token-iamgerwin args=pr list")
 
     def test_unmapped_remote_uses_active_account(self):
@@ -65,15 +74,15 @@ class GhWrapperTests(unittest.TestCase):
         self.assertEqual(self.gh(self.root, "api", "user"), "token=none args=api user")
 
     def test_explicit_token_wins(self):
-        path = self.repo("personal", "git@github.com-iamgerwin:iamgerwin/repo.git")
+        path = self.personal()
         self.assertEqual(self.gh(path, "api", "user", env={"GH_TOKEN": "mine"}),
                          "token=mine args=api user")
 
-    def test_account_without_token_falls_back_with_a_warning(self):
+    def test_account_without_token_fails_closed(self):
         path = self.repo("other", "git@github.com-other:someone/repo.git")
-        setup = "GH_HOST_ACCOUNTS[github.com-other]=missing;"
-        result = self.run_gh(path, "api", "user", setup=setup)
-        self.assertEqual(result.stdout.strip(), "token=none args=api user")
+        result = self.run_gh(path, "pr", "create", setup="GH_HOST_ACCOUNTS[github.com-other]=missing;")
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(result.stdout, "")
         self.assertIn("no token for missing", result.stderr)
 
     def test_unmapped_remote_is_silent(self):
@@ -87,10 +96,37 @@ class GhWrapperTests(unittest.TestCase):
                 self.assertEqual(self.gh(path, *args, "pr", "list"),
                                  f"token=none args={' '.join(args)} pr list")
 
+    def test_flag_values_and_positionals_keep_the_mapping(self):
+        path = self.personal()
+        for args in (("issue", "comment", "5", "--body", "--repo"),
+                     ("pr", "create", "--title", "-Rebase cleanup"),
+                     ("api", "user", "--jq", "--repo"),
+                     ("api", "-f", "q=-Rx", "graphql"),
+                     ("api", "--", "-R")):
+            with self.subTest(args=args):
+                self.assertEqual(self.gh(path, *args), f"token=token-iamgerwin args={' '.join(args)}")
+
     def test_gh_repo_skips_the_mapping(self):
         path = self.personal()
         self.assertEqual(self.gh(path, "pr", "list", env={"GH_REPO": "other/x"}),
                          "token=none args=pr list")
+
+    def test_missing_or_scalar_map_falls_back_without_crashing(self):
+        path = self.personal()
+        for setup in ("unset GH_HOST_ACCOUNTS;", "unset GH_HOST_ACCOUNTS; GH_HOST_ACCOUNTS=scalar;"):
+            with self.subTest(setup=setup):
+                self.assertEqual(self.gh(path, "api", "user", setup=setup), "token=none args=api user")
+
+    def test_empty_map_by_default(self):
+        path = self.personal()
+        result = self.zsh(path, f'source "{FUNCTIONS}"; gh api user')
+        self.assertEqual(result.stdout.strip(), "token=none args=api user")
+
+    def test_custom_zsh_mapping_applies_after_functions(self):
+        path = self.personal()
+        result = self.zsh(path, f'source "{FUNCTIONS}"; source "{CUSTOM}"; gh api user')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(result.stdout.strip(), "token=token-iamgerwin args=api user")
 
     def test_works_under_nounset(self):
         for name, remote, token in (("mapped", "git@github.com-iamgerwin:iamgerwin/repo.git", "token-iamgerwin"),
@@ -108,16 +144,14 @@ class GhWrapperTests(unittest.TestCase):
 
     def test_caller_options_are_restored(self):
         path = self.personal()
-        script = f'source "{FUNCTIONS}"; setopt xtrace; gh api user >/dev/null 2>&1; [[ -o xtrace ]] && print on'
-        result = subprocess.run(["zsh", "-f", "-c", script], cwd=path, env=self.env,
-                                capture_output=True, text=True, check=True)
+        result = self.zsh(path, f'source "{FUNCTIONS}"; {MAP} setopt xtrace; '
+                                'gh api user >/dev/null 2>&1; [[ -o xtrace ]] && print on')
         self.assertEqual(result.stdout.strip(), "on")
 
     def test_token_does_not_leak_into_the_shell(self):
-        path = self.repo("leak", "git@github.com-iamgerwin:iamgerwin/repo.git")
-        script = f'source "{FUNCTIONS}"; gh api user >/dev/null; print -r -- "${{GH_TOKEN:-unset}}"'
-        result = subprocess.run(["zsh", "-f", "-c", script], cwd=path, env=self.env,
-                                capture_output=True, text=True, check=True)
+        path = self.personal()
+        result = self.zsh(path, f'source "{FUNCTIONS}"; {MAP} gh api user >/dev/null; '
+                                'print -r -- "${GH_TOKEN:-unset}"')
         self.assertEqual(result.stdout.strip(), "unset")
 
 
