@@ -9,10 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - `gh` wrapper in `functions.zsh` that picks the account from the origin remote's
-  SSH host alias (`GH_HOST_ACCOUNTS`), so personal repositories use their own
-  account without `gh auth switch`; an explicit `GH_TOKEN`, `GH_REPO` or
-  `-R/--repo` keeps the active account. Works under `nounset`, never traces the
-  token, and warns when a mapped account has no token.
+  SSH host alias (`GH_HOST_ACCOUNTS`, mapped in `custom.zsh`), so personal
+  repositories use their own account without `gh auth switch`. An explicit
+  `GH_TOKEN`, `GH_REPO` or `-R/--repo` keeps the active account; text flag values
+  and arguments after `--` are not mistaken for `-R/--repo`. A mapped account
+  without a token fails closed. Works under `nounset`, never traces the token,
+  and matches host aliases case-insensitively.
 
 ## [0.1.0] - 2026-10-19
 
