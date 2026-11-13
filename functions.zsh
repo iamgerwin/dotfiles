@@ -117,32 +117,37 @@ most_used() {
 }
 
 # Repo-specific gh account: pick the gh login from the origin remote's SSH host alias.
-# Add a pair per alias in ~/.ssh/config (or in custom.zsh: GH_HOST_ACCOUNTS[alias]=login).
+# Mappings live in custom.zsh (loaded last), one per ~/.ssh/config alias, keys lowercase:
+#   GH_HOST_ACCOUNTS[github.com-me]=me
 # An explicit GH_TOKEN, GH_REPO or -R/--repo skips the mapping and uses the active account.
-typeset -gA GH_HOST_ACCOUNTS=(
-    github.com-iamgerwin iamgerwin
-)
+# A mapped alias whose account has no token fails closed instead of using another identity.
+[[ ${(t)GH_HOST_ACCOUNTS} == association* ]] || typeset -gA GH_HOST_ACCOUNTS
 gh() {
     # Keep the token out of xtrace/verbose output; options revert when the function returns.
     setopt localoptions noxtrace noverbose
-    local arg
+    # Values of these flags are free text, so never read them as -R/--repo. The list is a
+    # heuristic: add any other text-taking flag whose value could start with -R or --repo.
+    local arg skip=0
     for arg in "$@"; do
-        if [[ $arg == -R || $arg == --repo || $arg == --repo=* || $arg == -R?* ]]; then
-            command gh "$@"
-            return
-        fi
+        if (( skip )); then skip=0; continue; fi
+        case $arg in
+            --) break ;;
+            -R|--repo|-R?*|--repo=*) command gh "$@"; return ;;
+            -b|--body|-t|--title|-F|--body-file|-q|--jq|-f|--field|--raw-field|-H|--header|-X|--method|-m|--message|-l|--label|-a|--assignee|--template) skip=1 ;;
+        esac
     done
-    if [[ -z "${GH_TOKEN:-}${GH_REPO:-}" ]]; then
+    if [[ -z "${GH_TOKEN:-}${GH_REPO:-}" ]] && [[ ${(t)GH_HOST_ACCOUNTS} == association* ]]; then
         local url host user token
         url=$(command git remote get-url origin 2>/dev/null)
-        host=${url#*://}; host=${host#*@}; host=${host%%[:/]*}
+        host=${url#*://}; host=${host#*@}; host=${host%%[:/]*}; host=${host:l}
         user=${GH_HOST_ACCOUNTS[$host]:-}
         if [[ -n "$user" ]]; then
             if token=$(command gh auth token -u "$user" 2>/dev/null) && [[ -n "$token" ]]; then
                 GH_TOKEN="$token" command gh "$@"
                 return
             fi
-            print -u2 -- "gh: no token for $user (gh auth login); using the active account"
+            print -u2 -- "gh: no token for $user, which $host maps to; run: gh auth login (or set GH_TOKEN to override)"
+            return 1
         fi
     fi
     command gh "$@"
