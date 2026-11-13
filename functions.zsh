@@ -115,3 +115,22 @@ serve() {
 most_used() {
     history | awk '{print $2}' | sort | uniq -c | sort -rn | head -20
 }
+
+# Repo-specific gh account: pick the gh login from the origin remote's SSH host alias.
+# Add a pair per alias in ~/.ssh/config. An explicit GH_TOKEN always wins.
+typeset -gA GH_HOST_ACCOUNTS=(
+    github.com-iamgerwin iamgerwin
+)
+gh() {
+    if [[ -z "$GH_TOKEN" ]]; then
+        local url host user token
+        url=$(command git remote get-url origin 2>/dev/null)
+        host=${url#*://}; host=${host#*@}; host=${host%%[:/]*}
+        user=${GH_HOST_ACCOUNTS[$host]}
+        if [[ -n "$user" ]] && token=$(command gh auth token -u "$user" 2>/dev/null) && [[ -n "$token" ]]; then
+            GH_TOKEN="$token" command gh "$@"
+            return
+        fi
+    fi
+    command gh "$@"
+}
