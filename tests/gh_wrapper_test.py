@@ -1,6 +1,5 @@
 """gh wrapper tests use a fake gh on PATH and throwaway repositories, never real tokens."""
 
-import os
 from pathlib import Path
 import subprocess
 import tempfile
@@ -38,13 +37,18 @@ class GhWrapperTests(unittest.TestCase):
             subprocess.run(["git", "-C", str(path), "remote", "add", "origin", remote], check=True)
         return path
 
-    def gh(self, cwd, *args, env=None, setup=""):
+    def run_gh(self, cwd, *args, env=None, setup=""):
         script = f'source "{FUNCTIONS}"; {setup} gh "$@"'
-        result = subprocess.run(
+        return subprocess.run(
             ["zsh", "-f", "-c", script, "zsh", *args],
             cwd=cwd, env={**self.env, **(env or {})}, capture_output=True, text=True, check=True,
         )
-        return result.stdout.strip()
+
+    def gh(self, cwd, *args, env=None, setup=""):
+        return self.run_gh(cwd, *args, env=env, setup=setup).stdout.strip()
+
+    def personal(self, name="personal"):
+        return self.repo(name, "git@github.com-iamgerwin:iamgerwin/repo.git")
 
     def test_mapped_alias_uses_its_account(self):
         for remote in ("git@github.com-iamgerwin:iamgerwin/repo.git",
@@ -65,10 +69,49 @@ class GhWrapperTests(unittest.TestCase):
         self.assertEqual(self.gh(path, "api", "user", env={"GH_TOKEN": "mine"}),
                          "token=mine args=api user")
 
-    def test_account_without_token_falls_back(self):
+    def test_account_without_token_falls_back_with_a_warning(self):
         path = self.repo("other", "git@github.com-other:someone/repo.git")
         setup = "GH_HOST_ACCOUNTS[github.com-other]=missing;"
-        self.assertEqual(self.gh(path, "api", "user", setup=setup), "token=none args=api user")
+        result = self.run_gh(path, "api", "user", setup=setup)
+        self.assertEqual(result.stdout.strip(), "token=none args=api user")
+        self.assertIn("no token for missing", result.stderr)
+
+    def test_unmapped_remote_is_silent(self):
+        path = self.repo("quiet", "git@gh-shakewell:shakewellagency/repo.git")
+        self.assertEqual(self.run_gh(path, "api", "user").stderr, "")
+
+    def test_explicit_repo_skips_the_mapping(self):
+        path = self.personal()
+        for args in (("-R", "other/x"), ("--repo", "other/x"), ("--repo=other/x",), ("-Rother/x",)):
+            with self.subTest(args=args):
+                self.assertEqual(self.gh(path, *args, "pr", "list"),
+                                 f"token=none args={' '.join(args)} pr list")
+
+    def test_gh_repo_skips_the_mapping(self):
+        path = self.personal()
+        self.assertEqual(self.gh(path, "pr", "list", env={"GH_REPO": "other/x"}),
+                         "token=none args=pr list")
+
+    def test_works_under_nounset(self):
+        for name, remote, token in (("mapped", "git@github.com-iamgerwin:iamgerwin/repo.git", "token-iamgerwin"),
+                                    ("unmapped", "git@gh-shakewell:shakewellagency/repo.git", "none")):
+            with self.subTest(remote=name):
+                path = self.repo(f"nounset-{name}", remote)
+                self.assertEqual(self.gh(path, "api", "user", setup="setopt nounset;"),
+                                 f"token={token} args=api user")
+
+    def test_xtrace_does_not_print_the_token(self):
+        path = self.personal()
+        result = self.run_gh(path, "api", "user", setup="setopt xtrace;")
+        self.assertEqual(result.stdout.strip(), "token=token-iamgerwin args=api user")
+        self.assertNotIn("token-iamgerwin", result.stderr)
+
+    def test_caller_options_are_restored(self):
+        path = self.personal()
+        script = f'source "{FUNCTIONS}"; setopt xtrace; gh api user >/dev/null 2>&1; [[ -o xtrace ]] && print on'
+        result = subprocess.run(["zsh", "-f", "-c", script], cwd=path, env=self.env,
+                                capture_output=True, text=True, check=True)
+        self.assertEqual(result.stdout.strip(), "on")
 
     def test_token_does_not_leak_into_the_shell(self):
         path = self.repo("leak", "git@github.com-iamgerwin:iamgerwin/repo.git")
