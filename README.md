@@ -663,6 +663,22 @@ ght                     # gh auth token
 
 These aliases work seamlessly with the Git Profile Management system for managing multiple GitHub accounts.
 
+#### Repo-specific accounts
+
+`gh` picks its account from the repository's `origin` remote. When the remote uses an SSH host alias listed in `GH_HOST_ACCOUNTS` (in `functions.zsh`), `gh` runs with that account's token; everywhere else it uses the active account. The global active account never changes.
+
+```bash
+# ~/.ssh/config alias -> gh account
+typeset -gA GH_HOST_ACCOUNTS=(
+    github.com-iamgerwin iamgerwin
+)
+
+git clone git@github.com-iamgerwin:iamgerwin/repo.git   # gh in this clone runs as iamgerwin
+GH_TOKEN=... gh pr list                                  # an explicit token always wins
+```
+
+Both accounts must be logged in once (`gh auth login`). Add one pair per SSH alias.
+
 ### Elixir, Phoenix, and Ash Development
 
 Automated Elixir and Phoenix setup with asdf for version management, targeting Phoenix and Ash framework development:

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `gh` wrapper in `functions.zsh` that picks the account from the origin remote's
+  SSH host alias (`GH_HOST_ACCOUNTS`), so personal repositories use their own
+  account without `gh auth switch`; an explicit `GH_TOKEN` still wins.
+
 ## [0.1.0] - 2026-10-19
 
 ### Added
