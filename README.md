@@ -677,7 +677,12 @@ git clone git@github.com-iamgerwin:iamgerwin/repo.git   # gh in this clone runs 
 GH_TOKEN=... gh pr list                                  # an explicit token always wins
 ```
 
-Both accounts must be logged in once (`gh auth login`). Add one pair per SSH alias.
+Both accounts must be logged in once (`gh auth login`). Add one pair per SSH alias; to keep personal aliases out of this repository, add them in `custom.zsh` instead (`GH_HOST_ACCOUNTS[github.com-me]=me`), which loads after `functions.zsh`.
+
+- `-R`/`--repo` or `GH_REPO` targeting another repository skips the mapping and uses the active account.
+- Inside a mapped repository, `gh auth switch` has no effect, because the mapped token takes precedence.
+- If a mapped account has no token, `gh` warns on stderr and falls back to the active account.
+- The token is not printed under `set -x`/`setopt xtrace`.
 
 ### Elixir, Phoenix, and Ash Development
 
